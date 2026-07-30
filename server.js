@@ -9,26 +9,6 @@ const ROOT = __dirname;
 const RSS_URL = process.env.RSS_URL || 'https://app.trysoro.com/api/rss/4bf8bb35-204c-4ff2-8667-8720cfb5ca54';
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
 
-const GATE_PASSWORD = 'nofomo';
-const GATE_TOKEN = 'antiphono_access_v1';
-
-function parseCookies(header) {
-  const out = {};
-  if (!header) return out;
-  header.split(';').forEach(pair => {
-    const idx = pair.indexOf('=');
-    if (idx < 0) return;
-    const k = pair.slice(0, idx).trim();
-    const v = pair.slice(idx + 1).trim();
-    try { out[k] = decodeURIComponent(v); } catch { out[k] = v; }
-  });
-  return out;
-}
-
-function isAuthenticated(req) {
-  return parseCookies(req.headers.cookie)['antiphono_access'] === GATE_TOKEN;
-}
-
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -215,48 +195,6 @@ function safeJoin(root, requestPath) {
 
 http.createServer((req, res) => {
   const urlPath = decodeURIComponent(req.url.split('?')[0]);
-
-  // POST /auth — password gate
-  if (req.method === 'POST' && urlPath === '/auth') {
-    let body = '';
-    req.on('data', c => { body += c; });
-    req.on('end', () => {
-      const p = new URLSearchParams(body);
-      const to = p.get('to') || '/';
-      if (p.get('password') === GATE_PASSWORD) {
-        res.writeHead(302, {
-          'Set-Cookie': `antiphono_access=${GATE_TOKEN}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${60 * 60 * 24 * 30}`,
-          'Location': to,
-        });
-      } else {
-        res.writeHead(302, { 'Location': `/auth-error?to=${encodeURIComponent(to)}` });
-      }
-      res.end();
-    });
-    return;
-  }
-
-  // GET /auth-error — redirect back to gate with error flag
-  if (urlPath === '/auth-error') {
-    const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
-    const p = new URLSearchParams(qs);
-    const to = p.get('to') || '/';
-    res.writeHead(302, { 'Location': `${to}?gate_error=1&to=${encodeURIComponent(to)}` });
-    res.end();
-    return;
-  }
-
-  // Gate: serve holding page for all HTML requests from unauthenticated visitors
-  const isHtmlRequest = !path.extname(urlPath) || path.extname(urlPath) === '.html';
-  if (isHtmlRequest && !isAuthenticated(req)) {
-    const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
-    const gateFile = path.join(ROOT, 'gate.html');
-    fs.readFile(gateFile, (err, data) => {
-      res.writeHead(200, { 'Content-Type': MIME['.html'] });
-      res.end(err ? '<p>Coming soon.</p>' : data);
-    });
-    return;
-  }
 
   // /api/articles — serve RSS articles as JSON
   if (urlPath === '/api/articles') {
