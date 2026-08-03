@@ -2120,17 +2120,6 @@ body.nav-open { overflow: hidden; }
 .aid-card .aid-foot b { color: var(--grey-light); font-weight: 500; }
 .section--light .aid-card .aid-foot b { color: var(--black); }
 
-/* Round initials avatar — placeholder until a real photo is supplied */
-.aid-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--dark-surface); border: 1px solid var(--line);
-  font-family: var(--font); font-size: 15px; font-weight: 600; letter-spacing: 0.02em;
-  color: var(--grey-light); margin-bottom: 16px; overflow: hidden;
-}
-.aid-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.section--light .aid-avatar { background: var(--white); border-color: var(--line-dark); color: var(--grey-mid); }
-
 /* Flow — sequential steps joined by arrows, wraps to stacked on mobile */
 .aid-flow {
   display: grid;
