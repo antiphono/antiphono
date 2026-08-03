@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NGW9ECMLKT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NGW9ECMLKT');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Enabled Design — Antiphono</title>
+<meta name="description" content="BT Digital is becoming Antiphono. One governed pipeline from an idea to a measured result — Design, Development, Testing and Knowledge, and why the change is happening now.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<header class="topnav" id="topnav">
+  <a href="/" class="brand-mark">
+    <svg class="brand-logo" viewBox="0 0 700 126" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M167.88 76.91C167.88 65.96 175.54 58.06 189.65 57.08L208.14 55.86V55.13C208.14 49.17 202.67 42.36 192.69 42.36C184.23 42.36 179.73 47.17 177.69 51.47C177.26 52.39 176.16 52.76 175.25 52.3L168.86 49.06C168.01 48.63 167.63 47.61 168.01 46.73C171.25 39.34 178.96 31.4 192.8 31.4C210.56 31.4 220.17 43.69 220.17 55.61V93.34C220.17 94.34 219.36 95.15 218.36 95.15H209.93C208.93 95.15 208.12 94.34 208.12 93.34V92.6C208.12 91.06 206.34 90.25 205.15 91.23C201.33 94.38 195.63 96.37 189.51 96.37C176.98 96.37 167.86 88.34 167.86 76.91H167.88ZM190.75 85.67C201.82 85.67 208.39 78.13 208.39 69.98V68.02C208.39 66.97 207.5 66.15 206.46 66.22L190.51 67.31C184.55 67.68 180.05 70.72 180.05 76.68C180.05 82.28 184.67 85.68 190.75 85.68V85.67Z"/><path d="M234.47 32.51H243.01C244.01 32.51 244.82 33.32 244.82 34.32V35.33C244.82 36.88 246.68 37.75 247.82 36.7C251.35 33.47 256.44 31.41 262.82 31.41C276.69 31.41 286.42 41.75 286.42 55.25V93.34C286.42 94.34 285.61 95.15 284.61 95.15H276.07C275.07 95.15 274.26 94.34 274.26 93.34V58.17C274.26 48.44 267.81 42.84 259.54 42.84C251.27 42.84 244.82 48.92 244.82 58.17V93.34C244.82 94.34 244.01 95.15 243.01 95.15H234.47C233.47 95.15 232.66 94.34 232.66 93.34V34.32C232.66 33.32 233.47 32.51 234.47 32.51Z"/><path d="M301.21 43.22H293.67C292.66 43.22 291.85 42.4 291.85 41.4V34.34C291.85 33.33 292.67 32.52 293.67 32.52H301.58C302.59 32.52 303.4 31.7 303.4 30.7V18.17C303.4 17.16 304.22 16.35 305.22 16.35H313.37C314.38 16.35 315.19 17.17 315.19 18.17V30.7C315.19 31.71 316.01 32.52 317.01 32.52H329.54C330.55 32.52 331.36 33.34 331.36 34.34V41.4C331.36 42.41 330.54 43.22 329.54 43.22H317.01C316 43.22 315.19 44.04 315.19 45.04V81.9C315.19 82.91 316.01 83.72 317.01 83.72H329.52C330.53 83.72 331.34 84.54 331.34 85.54V93.33C331.34 94.34 330.52 95.15 329.52 95.15H304.85C303.84 95.15 303.03 94.33 303.03 93.33V45.04C303.03 44.03 302.21 43.22 301.21 43.22Z"/><path d="M344.9 4.53C351 3.59 355.92 8.24 355.23 14.38C354.73 18.84 351.14 22.18 346.41 22.18C341.3 22.18 337.53 18.29 337.53 13.3C337.53 8.71 340.57 5.2 344.9 4.53ZM341 32.51H351.82C352.19 32.51 352.49 32.81 352.49 33.18V94.48C352.49 94.85 352.19 95.15 351.82 95.15H341C340.63 95.15 340.33 94.85 340.33 94.48V33.18C340.33 32.81 340.63 32.51 341 32.51Z"/><path d="M367.74 32.51H376.3C377.3 32.51 378.1 33.32 378.1 34.31V36.03C378.1 37.55 379.88 38.41 381.04 37.42C385.32 33.78 391.6 31.41 399.02 31.41C416.05 31.41 429.55 43.57 429.55 63.89C429.55 82.74 416.29 96.25 399.02 96.25C391.7 96.25 385.26 93.8 381.06 90.17C379.9 89.17 378.1 90 378.1 91.54V121.21C378.1 122.21 377.29 123.01 376.3 123.01H367.74C366.74 123.01 365.94 122.2 365.94 121.21V34.32C365.94 33.32 366.75 32.52 367.74 32.52V32.51ZM397.56 84.94C409.72 84.94 417.27 75.45 417.27 63.9C417.27 52.35 409.73 42.73 397.56 42.73C385.39 42.73 377.85 52.34 377.85 63.9C377.85 75.46 385.39 84.94 397.56 84.94Z"/><path d="M439.58 5.15H448.14C449.14 5.15 449.94 5.96 449.94 6.95V35.44C449.94 37 451.79 37.83 452.94 36.78C456.58 33.45 461.72 31.42 468.19 31.42C482.06 31.42 491.55 41.76 491.55 55.26V93.35C491.55 94.35 490.74 95.15 489.75 95.15H481.19C480.19 95.15 479.39 94.34 479.39 93.35V58.17C479.39 48.44 472.94 42.84 464.67 42.84C456.4 42.84 449.95 48.92 449.95 58.17V93.35C449.95 94.35 449.14 95.15 448.15 95.15H439.59C438.59 95.15 437.79 94.34 437.79 93.35V6.95C437.79 5.95 438.6 5.15 439.59 5.15H439.58Z"/><path d="M498.54 63.9C498.54 45.17 512.41 31.42 531.5 31.42C550.59 31.42 564.46 45.17 564.46 63.9C564.46 82.63 550.71 96.26 531.5 96.26C512.29 96.26 498.54 82.64 498.54 63.9ZM531.5 85.07C543.18 85.07 552.18 76.31 552.18 63.9C552.18 51.49 543.18 42.73 531.5 42.73C519.82 42.73 510.82 51.49 510.82 63.9C510.82 76.31 519.94 85.07 531.5 85.07Z"/><path d="M574.5 32.51H583.04C584.04 32.51 584.85 33.32 584.85 34.32V35.32C584.85 36.88 586.71 37.74 587.85 36.69C591.38 33.46 596.46 31.41 602.85 31.41C616.72 31.41 626.45 41.75 626.45 55.25V93.33C626.45 94.33 625.64 95.14 624.64 95.14H616.1C615.1 95.14 614.29 94.33 614.29 93.33V58.17C614.29 48.44 607.84 42.84 599.57 42.84C591.3 42.84 584.85 48.92 584.85 58.17V93.33C584.85 94.33 584.04 95.14 583.04 95.14H574.5C573.5 95.14 572.69 94.33 572.69 93.33V34.31C572.69 33.31 573.5 32.5 574.5 32.5V32.51Z"/><path d="M633.45 63.9C633.45 45.17 647.32 31.42 666.41 31.42C685.5 31.42 699.37 45.17 699.37 63.9C699.37 82.63 685.62 96.26 666.41 96.26C647.2 96.26 633.45 82.64 633.45 63.9ZM666.41 85.07C678.09 85.07 687.09 76.31 687.09 63.9C687.09 51.49 678.09 42.73 666.41 42.73C654.73 42.73 645.73 51.49 645.73 63.9C645.73 76.31 654.85 85.07 666.41 85.07Z"/><path d="M88.33 0H56.83C55.35 0 53.98 .79 53.23 2.08L39.89 25.2C38.29 27.97 40.29 31.43 43.49 31.43H70.19C71.67 31.43 73.04 32.22 73.79 33.51L105.26 88.05C106.86 90.82 104.86 94.28 101.66 94.28H79.78C76.58 94.28 74.59 97.74 76.18 100.51L89.52 123.63C90.26 124.92 91.63 125.71 93.12 125.71H124.62C126.1 125.71 127.47 124.92 128.22 123.63L143.96 96.36C144.7 95.08 144.7 93.49 143.96 92.21L91.93 2.08C91.19 .8 89.82 0 88.33 0Z"/><path d="M16.32 64.82L.560005 92.09C-.179995 93.37-.179995 94.96.560005 96.24L13.93 119.37C15.53 122.13 19.52 122.13 21.12 119.37L34.46 96.24C35.2 94.96 36.57 94.16 38.05 94.16H64.76C67.95 94.16 69.95 90.7 68.35 87.94L54.98 64.81C54.24 63.53 52.87 62.74 51.39 62.74H19.91C18.43 62.74 17.06 63.53 16.32 64.81V64.82Z"/></g><defs><clipPath id="a"><rect width="699.38" height="125.69"/></clipPath></defs></svg>
+  </a>
+  <nav class="topnav__links" aria-label="Primary">
+    <a href="/work">Work</a>
+    <a href="/articles">Thinking</a>
+    <a href="/reports">Research</a>
+    <a href="/ai-enabled-design" class="is-current">AI-Enabled Design</a>
+    <a href="/#book">Contact</a>
+  </nav>
+  <div class="topnav__cta">
+    <a href="/#book" class="btn-lime">Book a call</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-menu__links" aria-label="Mobile">
+    <a href="/work">Work</a>
+    <a href="/articles">Thinking</a>
+    <a href="/reports">Research</a>
+    <a href="/ai-enabled-design" class="is-current">AI-Enabled Design</a>
+    <a href="/#book">Contact</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="page-hero__inner">
+      <span class="page-hero__label">AI-Enabled Design</span>
+      <h1 class="page-hero__title">
+        <span class="text-reveal"><span>BT Digital is</span></span>
+        <span class="text-reveal"><span><em>becoming Antiphono.</em></span></span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Section tabs -->
+  <nav class="aid-tabbar" aria-label="AI-Enabled Design sections">
+    <div class="aid-tabbar__inner">
+      <a href="#antiphono" class="aid-tab" data-aid-tab="antiphono">Why Antiphono</a>
+      <a href="#overview" class="aid-tab" data-aid-tab="overview">Overview</a>
+      <a href="#design" class="aid-tab" data-aid-tab="design">01 Design</a>
+      <a href="#development" class="aid-tab" data-aid-tab="development">02 Development</a>
+      <a href="#testing" class="aid-tab" data-aid-tab="testing">03 Testing</a>
+      <a href="#knowledge" class="aid-tab" data-aid-tab="knowledge">04 Knowledge</a>
+      <a href="#team" class="aid-tab" data-aid-tab="team">Team</a>
+    </div>
+  </nav>
+
+  <!-- ============ WHY ANTIPHONO ============ -->
+  <div class="aid-panel" data-aid-panel="antiphono">
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">A letter to our clients</span>
+          <span class="aid-note">Why the name changed</span>
+        </div>
+        <p class="aid-lede" style="max-width:900px;">We've spent over a decade building digital products that put people first. That work — and the relationships behind it — isn't changing. What's changing is the full scope of what we can offer, and why now is exactly the right moment to do it.</p>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-head-split">
+          <div>
+            <span class="row-index">Why Antiphono</span>
+            <h2 class="section__title" style="font-size:clamp(1.75rem,3.5vw,3.25rem);margin-top:16px;margin-bottom:0;">Two voices, in constant dialogue.</h2>
+          </div>
+          <div>
+            <p>Antiphony is a musical term for call and response — two voices in dialogue, each one shaping and improving the other. It's the exact shape of the relationship between human intelligence and AI, and between every product and the people who use it.</p>
+            <p style="margin-top:16px;">That cycle — listening, responding, improving, repeating — is not a feature of what we do. It is the whole method.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-head-split" style="margin-bottom:40px;">
+          <div>
+            <span class="row-index">Why now</span>
+            <h2 class="section__title" style="font-size:clamp(1.75rem,3.5vw,3.25rem);margin-top:16px;margin-bottom:0;">The tools changed. The judgement didn't.</h2>
+          </div>
+          <p class="aid-body">Design, research and development have all shifted fundamentally in the past two years. Ideas can be prototyped in hours, not weeks; tested with real users at a scale that was previously unaffordable; and refined continuously rather than in slow, expensive cycles. AI handles the repetitive and the generative — humans bring judgement, strategy and a real understanding of what people need.</p>
+        </div>
+        <div class="cta-banner" style="display:block;">
+          <p style="font-size:clamp(1.1rem,2vw,1.4rem);font-weight:400;line-height:1.35;">Design is not becoming less human. It is becoming faster, smarter, and more responsive to real people — and that is exactly what Antiphono is built to deliver.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">What this means for you</span>
+          <span class="aid-note">Same core, wider reach</span>
+        </div>
+        <div class="aid-columns">
+          <div>
+            <h4>What stays</h4>
+            <p class="aid-body">Our traditional services — UX design, research, strategy and prototyping — remain at the core of everything we do. Clients who've worked with us continue to get the same rigour, the same craft, and the same commitment to outcomes over outputs.</p>
+          </div>
+          <div>
+            <h4>What's new</h4>
+            <p class="aid-body">We're not just working AI-first ourselves — we're bringing that same evolution to our clients: embedding AI-powered tools and thinking into your team's own processes, prototyping and testing at a pace that was previously out of reach, and building the kind of continuous intelligence loop that compounds in value over time.</p>
+          </div>
+        </div>
+        <p class="section__title" style="font-size:clamp(1.3rem,2.4vw,2rem);margin-top:48px;margin-bottom:0;">The work we do for you improves. The way your team works improves alongside it.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-card-grid">
+          <div class="aid-card"><span class="aid-note">01</span><h4>Faster prototyping</h4><p>Concepts go from idea to something testable in days, not weeks.</p></div>
+          <div class="aid-card"><span class="aid-note">02</span><h4>Testing at scale</h4><p>Real behaviour from real users, continuously — not just periodic research rounds.</p></div>
+          <div class="aid-card"><span class="aid-note">03</span><h4>Team enablement</h4><p>AI tools and workflows embedded into your own product processes.</p></div>
+          <div class="aid-card"><span class="aid-note">04</span><h4>Design governance</h4><p>Consistency maintained across products and teams without proportional headcount.</p></div>
+          <div class="aid-card"><span class="aid-note">05</span><h4>Better value</h4><p>Less budget on routine tasks. More on the decisions that actually shape the product.</p></div>
+        </div>
+        <p class="aid-body" style="margin-top:24px;max-width:640px;">The aim isn't to make you more dependent on an external partner. It's to make your team more capable.</p>
+      </div>
+    </section>
+
+    <section class="section section--light" style="text-align:center;">
+      <div class="section__inner">
+        <p style="font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;line-height:1.3;max-width:900px;margin:0 auto;">"The work we have done together remains the foundation. We are not starting over — we are building forward with <span class="aid-em">the full capability of what is now available.</span>"</p>
+      </div>
+    </section>
+
+    <div class="aid-continue">
+      <a href="#overview" data-aid-tab="overview" class="section-link-arrow">See how the process works <span>&#8594;</span></a>
+    </div>
+
+  </div>
+
+  <!-- ============ OVERVIEW ============ -->
+  <div class="aid-panel" data-aid-panel="overview" hidden>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">Why the industry is changing</span>
+          <span class="aid-note">Context</span>
+        </div>
+        <div class="aid-head-split">
+          <h2 class="section__title" style="margin-bottom:0;">The stages haven't changed. What moves between them has.</h2>
+          <p class="aid-body">Design used to hand over drawings for somebody else to interpret and rebuild. Now the design stage produces working software — and that single change is what makes everything after it affordable.</p>
+        </div>
+        <div class="aid-columns" style="margin-top:48px;">
+          <div>
+            <h4>Before</h4>
+            <p class="aid-body">Static mocks and a spec to interpret. Every option redrawn and re-estimated, so teams tested one safe idea and hoped in production.</p>
+          </div>
+          <div>
+            <h4>Now</h4>
+            <p style="font-size:15px;line-height:1.7;">Working prototypes made of production components. An option costs a prompt and a branch, so teams compare several and let real behaviour decide.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">What this process covers</span>
+          <span class="aid-note">Four sections</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">One process, end to end.</h2>
+        <p class="aid-body" style="max-width:760px;margin-bottom:40px;">Most organisations run a design process and a development process that meet awkwardly in the middle. Antiphono runs one continuous pipeline, so you can see where your team, tools and governance slot in.</p>
+
+        <ul class="capabilities-list">
+          <li class="capability" data-aid-tab="design" style="cursor:pointer;">
+            <span class="capability__num">01</span>
+            <span class="capability__name">Design</span>
+            <span class="capability__arrow">&#8594;</span>
+          </li>
+          <li class="capability" data-aid-tab="development" style="cursor:pointer;">
+            <span class="capability__num">02</span>
+            <span class="capability__name">Development</span>
+            <span class="capability__arrow">&#8594;</span>
+          </li>
+          <li class="capability" data-aid-tab="testing" style="cursor:pointer;">
+            <span class="capability__num">03</span>
+            <span class="capability__name">Testing</span>
+            <span class="capability__arrow">&#8594;</span>
+          </li>
+          <li class="capability" data-aid-tab="knowledge" style="cursor:pointer;">
+            <span class="capability__num">04</span>
+            <span class="capability__name">Knowledge</span>
+            <span class="capability__arrow">&#8594;</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">The whole process</span>
+          <span class="aid-note">A loop, not a line</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">At a glance.</h2>
+
+        <div class="cta-banner" style="display:block;margin-bottom:24px;">
+          <span class="aid-note" style="display:block;margin-bottom:10px;">Freestanding · its own repo</span>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+            <h4 style="font-size:1.2rem;font-weight:400;margin:0;">Design system</h4>
+            <div style="display:flex;align-items:center;gap:14px;font-size:13px;color:var(--grey-mid);flex-wrap:wrap;">
+              <span>Authored in Figma</span><span>&#8594;</span><span>Sync &amp; API check agents</span><span>&#8594;</span><span>Live component library</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="aid-lane"><span>01 Design</span><a href="#design" data-aid-tab="design" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">01</span><h4>Brief or problem</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">02</span><h4>Research</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">03</span><h4>Prototype directions</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">04</span><h4>Present, iterate, sign off</h4></div>
+        </div>
+
+        <div class="aid-lane" style="margin-top:40px;"><span>02 Development</span><a href="#development" data-aid-tab="development" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">01</span><h4>Branch, build, instrument</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">02</span><h4>Pull request &amp; review</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">03</span><h4>Merge to dev &#8594; sandbox</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">04</span><h4>Promote to staging</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">05</span><h4>Merge to main &#8594; live</h4></div>
+        </div>
+
+        <div class="aid-lane" style="margin-top:40px;"><span>03 Testing</span><a href="#testing" data-aid-tab="testing" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">Local</span><h4>Internal walkthrough</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">Dev</span><h4>Sandbox review</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">Staging</span><h4>QA, a11y &amp; user testing</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">Live</span><h4>Behaviour in real traffic</h4></div>
+        </div>
+
+        <div class="aid-lane" style="margin-top:40px;"><span>04 Knowledge</span><a href="#knowledge" data-aid-tab="knowledge" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">Capture</span><h4>Written as the work happens</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">Store</span><h4>knowledge/ in the repo</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">Reuse</span><h4>Loaded by every session</h4></div>
+          <div class="aid-flow__step"><span class="aid-note">Apply</span><h4>Interrogated in plain language</h4></div>
+        </div>
+
+        <div class="aid-note-box" style="margin-top:32px;">
+          <span>&#8635;</span>
+          <span>The loop closes — the next brief starts from accumulated evidence rather than memory.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="aid-continue">
+      <a href="#design" data-aid-tab="design" class="section-link-arrow">Start with Design <span>&#8594;</span></a>
+    </div>
+
+  </div>
+
+  <!-- ============ 01 DESIGN ============ -->
+  <div class="aid-panel" data-aid-panel="design" hidden>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">Section 01 — Design</span>
+          <span class="aid-note">Time efficient</span>
+        </div>
+        <h2 class="section__title">Decide what to build. Make it real enough to judge.</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line);">
+          <p class="aid-body">A brief describes a problem. The team researches it, then builds clickable options from the company's real components.</p>
+          <p class="aid-body">Product features, marketing pages and simple assets each take an appropriate route — all arriving at the same sign-off.</p>
+          <div><span class="aid-note" style="display:block;margin-bottom:8px;">Outcome</span><p style="font-size:15px;line-height:1.6;">A signed-off, interactive prototype — not a mock that still needs interpreting.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">1.1 The foundation</span>
+          <span class="aid-note">Set up once</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">One source of truth.</h2>
+        <p class="aid-body" style="max-width:760px;margin-bottom:40px;">Authored once by design, synced and checked by agents, versioned in its own repo, and inherited by every session that follows.</p>
+
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">Authored by design</span><h4>Figma design system</h4><p>Components, tokens, type and brand language are authored in one place by the design system owner. This is the only file edited by hand.</p><div class="aid-foot"><b>Owner</b> Design system owner</div></div>
+          <div class="aid-flow__step"><span class="aid-note">Agents</span><h4>Sync &amp; API check</h4><p>The sync agent converts Figma changes into code. The API check agent validates them against the codebase: naming, prop contracts, breaking changes, accessibility rules.</p><div class="aid-foot"><b>Platform</b> Claude Code agents</div></div>
+          <div class="aid-flow__step"><span class="aid-note">Source of truth</span><h4>Live design system</h4><p>A maintained, versioned component and token library sitting in your codebase. A live changelog shows every team what changed and when.</p><div class="aid-foot"><b>Location</b> Its own repo, versioned</div></div>
+          <div class="aid-flow__step"><span class="aid-note">Inherited, not rebuilt</span><h4>Every new session</h4><p>Each project starts a session that loads the live system, so prototypes and production code are brand-consistent by default.</p><div class="aid-foot"><b>Used by</b> UX, dev, product</div></div>
+        </div>
+
+        <div class="aid-benefit-grid" style="grid-template-columns:repeat(3,1fr);margin-top:56px;padding-top:32px;border-top:1px solid var(--line-dark);">
+          <div class="aid-benefit"><span class="aid-note">Consistency</span><h4>Inherited, not policed</h4><p>Every session starts knowing the brand, so drift never gets a chance to start.</p></div>
+          <div class="aid-benefit"><span class="aid-note">Speed</span><h4>Nothing is redrawn</h4><p>Components already exist in code, so a prototype is assembly rather than illustration.</p></div>
+          <div class="aid-benefit"><span class="aid-note">Governance</span><h4>Readable changelog</h4><p>Every team can see what changed and when — nothing lands unannounced.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">1.2 Brief to sign-off</span>
+          <span class="aid-note">One brief, four routes, one gate</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">How it gets made.</h2>
+
+        <div class="aid-flow" style="grid-template-columns:1fr 1fr;">
+          <div class="aid-flow__step"><span class="aid-note">D1</span><h4>Brief or problem statement</h4><p>A problem to solve, not a solution to build.</p><div class="aid-foot"><b>Owner</b> Product owner</div></div>
+          <div class="aid-flow__step"><span class="aid-note">D2</span><h4>Research the problem</h4><p>Existing behaviour, prior findings. Hours rather than weeks — the judgement stays human.</p><div class="aid-foot"><b>Owner</b> UX lead · Claude</div></div>
+        </div>
+
+        <div class="aid-note-box" style="justify-content:center;text-align:center;margin-top:24px;">Fans out into four parallel routes, chosen by what's being made &#8595;</div>
+
+        <div class="aid-card-grid" style="grid-template-columns:repeat(4,1fr);margin-top:24px;">
+          <div class="aid-card"><span class="aid-note">Route A · Claude Code</span><h4>Coded prototype</h4><p>User-facing product work — working, clickable directions, usually several in parallel.</p><div class="aid-foot">Bound to the live design system; measurement events implemented in the prototype itself.</div></div>
+          <div class="aid-card"><span class="aid-note">Route B · Claude</span><h4>Claude design</h4><p>Marketing pages and campaign assets that need real layout thinking.</p><div class="aid-foot">Anything shipping inside the product re-enters the pipeline at Development.</div></div>
+          <div class="aid-card"><span class="aid-note">Route C · Canva / Adobe Express</span><h4>Templated assets</h4><p>Social, email and simple collateral produced at volume.</p><div class="aid-foot">Brand-locked templates; marketing self-serves variants without a design request.</div></div>
+          <div class="aid-card"><span class="aid-note">Route D · Figma</span><h4>Direct in Figma</h4><p>Complex or one-off visual design, and new design system components.</p><div class="aid-foot">New patterns are synced into code for everyone.</div></div>
+        </div>
+
+        <div class="aid-note-box" style="justify-content:center;text-align:center;margin-top:24px;">All four routes converge &#8595;</div>
+
+        <div class="aid-flow" style="grid-template-columns:1fr 1fr;margin-top:24px;">
+          <div class="aid-flow__step"><span class="aid-note">D4</span><h4>Present &amp; iterate</h4><p>The team walks the work itself. Review becomes a working session rather than a hand-back.</p><div class="aid-foot"><b>Owner</b> UX lead &#8594; product owner</div></div>
+          <div class="aid-flow__step"><span class="aid-note">D5</span><h4>Sign off</h4><p>One decision gate before engineering effort is committed.</p><div class="aid-foot"><b>Owner</b> Product owner</div></div>
+        </div>
+
+        <div class="cta-banner" style="margin-top:24px;">
+          <p style="font-size:15px;max-width:620px;">Only work that ships inside the product carries on into development and testing. Marketing routes finish at sign-off.</p>
+          <span class="aid-note" style="text-align:right;">Continues at 02 &#8594;</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="aid-continue">
+      <a href="#development" data-aid-tab="development" class="section-link-arrow">Continue to Development <span>&#8594;</span></a>
+    </div>
+
+  </div>
+
+  <!-- ============ 02 DEVELOPMENT ============ -->
+  <div class="aid-panel" data-aid-panel="development" hidden>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">Section 02 — Development</span>
+          <span class="aid-note">Agile and safe</span>
+        </div>
+        <h2 class="section__title">Get it live without holding your breath.</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line);">
+          <p class="aid-body">Work starts in a folder on someone's machine and mirrors up to your shared repository.</p>
+          <p class="aid-body">It moves through reviewed environments: a private preview, an internal link, a rehearsal, then live.</p>
+          <div><span class="aid-note" style="display:block;margin-bottom:8px;">Outcome</span><p style="font-size:15px;line-height:1.6;">Reviewed, versioned and reversible. Nothing promotes itself.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">2.1 How work moves</span>
+          <span class="aid-note">Interchangeable platforms</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">Local to live.</h2>
+
+        <div class="aid-lane"><span>Local — on each team member's machine</span></div>
+        <div class="aid-flow" style="grid-template-columns:repeat(3,1fr);">
+          <div class="aid-flow__step"><span class="aid-note">Step 01</span><h4>Open the project folder</h4><p>A session per build project. CLAUDE.md supplies your environment URLs, naming and coding conventions.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Step 02</span><h4>Branch off dev</h4><p>A new sub-folder for new work; a branch inside the existing folder for a variation.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Step 03</span><h4>Build &amp; instrument</h4><p>Assembled from live design system components, with tracking wired in as it is written.</p></div>
+        </div>
+
+        <div class="aid-lane" style="margin-top:40px;"><span>Online repo — shared by the whole team</span></div>
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">Step 04</span><h4>Pull request</h4><p>Claude writes the plain-language change summary; a second pair of eyes approves.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Step 05</span><h4>Merge to dev</h4><p>The shared integration branch — deploys itself.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Step 06</span><h4>Promote to staging</h4><p>Release candidate, checked in production-like conditions.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Step 07</span><h4>Merge to main</h4><p>A separate, deliberate gate — the only route to live.</p></div>
+        </div>
+
+        <div class="aid-lane" style="margin-top:40px;"><span>Environments — where the code actually runs</span></div>
+        <div class="aid-flow">
+          <div class="aid-flow__step"><span class="aid-note">Automatic</span><h4>Local preview</h4><p>Only you see it. Nothing shared, nothing at risk.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Automatic</span><h4>Sandbox URL</h4><p>Shareable link for internal review, deployed on merge.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">On promotion</span><h4>Staging / UAT</h4><p>Per region where you operate — e.g. EU and US.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">On release</span><h4>Production</h4><p>Region deploys, parallel /v2 pages, admin-portal switching.</p></div>
+        </div>
+
+        <div class="aid-note-box" style="margin-top:32px;"><span>&#8635;</span><span>Findings return — fixes are re-prompted in the same local session.</span></div>
+
+        <div class="aid-benefit-grid" style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line-dark);">
+          <div><span class="aid-note" style="display:block;margin-bottom:12px;">Tailor it · Online repo</span><p style="font-size:13.5px;line-height:1.6;color:var(--grey-mid);">GitHub, Azure DevOps, GitLab or Bitbucket. Branch names and approval rules follow whatever your organisation already audits.</p></div>
+          <div><span class="aid-note" style="display:block;margin-bottom:12px;">Tailor it · Deployment</span><p style="font-size:13.5px;line-height:1.6;color:var(--grey-mid);">Azure Pipelines, GitHub Actions, Vercel or Netlify. Staging is optional for small changes, essential for structural ones.</p></div>
+          <div><span class="aid-note" style="display:block;margin-bottom:12px;">Tailor it · Switching</span><p style="font-size:13.5px;line-height:1.6;color:var(--grey-mid);">An admin portal, CMS configuration or feature flags decides which version is served.</p></div>
+          <div><span class="aid-note" style="display:block;margin-bottom:12px;color:var(--grey);">What stays fixed</span><p style="font-size:13.5px;line-height:1.6;color:var(--grey-mid);">Review before dev, a separate gate before live, and versions never overwritten.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">2.2 Folder structure &amp; naming</span>
+          <span class="aid-note">What Claude creates, and where</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:16px;">Identical on every machine, and in the repo.</h2>
+        <p class="aid-body" style="max-width:760px;margin-bottom:40px;">A convention Claude keeps to every time, so a new feature is filed the same way whoever starts it — and the repo stays navigable for non-technical team members.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+          <div>
+            <span class="aid-note" style="display:block;margin-bottom:14px;">&lt;angle brackets&gt; are placeholders you replace with your own names</span>
+            <div class="aid-code">design-system/                      <span class="aid-cmt">— its own repo</span>
+  CLAUDE.md   tokens/   components/   CHANGELOG.md
+
+&lt;product&gt;/                          <span class="aid-cmt">— the project root, its own repo</span>
+  CLAUDE.md                         <span class="aid-cmt">— env URLs, conventions, guardrails</span>
+  knowledge/                        <span class="aid-cmt">— decisions/ research/ tests/ conventions/</span>
+  features/
+    <span class="aid-hl">&lt;feature-name&gt;/</span>                 <span class="aid-cmt">— one folder per feature</span>
+      v1/   v2/                     <span class="aid-cmt">— one folder per live version</span>
+        <span class="aid-hl">&lt;feature-name&gt;/</span>               <span class="aid-cmt">— and one per feature after that</span>
+  brands/                           <span class="aid-cmt">— &lt;brand-name&gt;/ per brand</span>
+  shared/                           <span class="aid-cmt">— anything two features both use</span></div>
+            <p style="font-size:13px;color:var(--grey);margin-top:16px;">Claude creates these folders itself and keeps to the convention every time.</p>
+          </div>
+          <div>
+            <span class="aid-note" style="display:block;margin-bottom:14px;">Naming conventions — adapt the patterns, keep the discipline</span>
+            <table class="aid-table">
+              <tr><th>Name</th><th>Pattern</th><th>Description</th></tr>
+              <tr><td><strong>New feature branch</strong></td><td class="aid-mono">feature/&lt;feature-name&gt;</td><td>Branched from dev. Folder and branch names always match.</td></tr>
+              <tr><td><strong>Variation of existing work</strong></td><td class="aid-mono">variation/&lt;feature-name&gt;-v2</td><td>Ships as a parallel /v2 page.</td></tr>
+              <tr><td><strong>Fix or refinement</strong></td><td class="aid-mono">fix/&lt;short-description&gt;</td><td>Small, single-purpose branches.</td></tr>
+              <tr><td><strong>Release to live</strong></td><td class="aid-mono">release/&lt;yyyy-mm-dd&gt;</td><td>What was promoted to main, and when.</td></tr>
+              <tr><td><strong>Knowledge record</strong></td><td class="aid-mono">yyyy-mm-dd-&lt;slug&gt;.md</td><td>Sorts chronologically next to its evidence.</td></tr>
+              <tr><td><strong>Design system release</strong></td><td class="aid-mono">v&lt;major.minor.patch&gt;</td><td>Product repos consume a version.</td></tr>
+            </table>
+            <p style="font-size:13px;color:var(--grey);margin-top:16px;">Folder and branch names are kebab-case, declared in CLAUDE.md.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">2.3 Practices that make this work</span>
+          <span class="aid-note">Adapt to your own governance</span>
+        </div>
+        <div class="aid-benefit-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="aid-benefit"><h4>CLAUDE.md as the contract</h4><p>Environment URLs, naming conventions and guardrails live in the repo, picked up automatically by every session.</p></div>
+          <div class="aid-benefit"><h4>One session per related area</h4><p>Keep closely related work in a single session to preserve context and reduce cost.</p></div>
+          <div class="aid-benefit"><h4>Measurement is part of the build</h4><p>Tracking events are written and verified in the prototype, then carried through the build.</p></div>
+          <div class="aid-benefit"><h4>Design system released, not edited</h4><p>Component changes flow Figma &#8594; agents &#8594; versioned release with a changelog.</p></div>
+          <div class="aid-benefit"><h4>Never overwrite, always version</h4><p>New directions ship alongside the original on their own URL.</p></div>
+          <div class="aid-benefit"><h4>Interchangeable by design</h4><p>Repo host, CI/CD, analytics and testing tools are all replaceable.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="aid-continue">
+      <a href="#testing" data-aid-tab="testing" class="section-link-arrow">Continue to Testing <span>&#8594;</span></a>
+    </div>
+
+  </div>
+
+  <!-- ============ 03 TESTING ============ -->
+  <div class="aid-panel" data-aid-panel="testing" hidden>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">Section 03 — Testing</span>
+          <span class="aid-note">User intelligent</span>
+        </div>
+        <h2 class="section__title">Check it four times. Only the last one involves customers.</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line);">
+          <p class="aid-body">Three internal stages decide what gets deployed and prove the release is safe.</p>
+          <p class="aid-body">Then a version goes live to real people, and the numbers settle the argument.</p>
+          <div><span class="aid-note" style="display:block;margin-bottom:8px;">Outcome</span><p style="font-size:15px;line-height:1.6;">Because versions run side by side, testing live becomes a measurement, not a risk.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">3.1 Four stages</span>
+          <span class="aid-note">Pre-production, then live</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:16px;">Three gates, then real people.</h2>
+        <p class="aid-body" style="margin-bottom:32px;">Three internal stages decide what deploys and prove the release is safe. Only stage four involves customers.</p>
+
+        <span class="aid-note" style="display:block;margin-bottom:16px;">Pre-production — three internal stages to a release</span>
+        <div class="aid-stage-grid">
+          <div class="aid-stage-card">
+            <div class="aid-stage-card__num">01</div>
+            <h4>Local preview<br>Internal walkthrough</h4>
+            <div class="aid-field"><span>Objective</span><p>Decide which direction is worth building at all, before any engineering effort is committed.</p></div>
+            <div class="aid-field"><span>We capture</span><p>Team reactions, comprehension problems, and the reasons a direction was dropped.</p></div>
+            <div class="aid-field"><span>How it's used</span><p>Weak directions are cut here; the reasoning is written down so it is not re-argued later.</p></div>
+          </div>
+          <div class="aid-stage-card">
+            <div class="aid-stage-card__num">02</div>
+            <h4>Dev / sandbox<br>Internal review</h4>
+            <div class="aid-field"><span>Objective</span><p>Confirm the built feature does what was signed off. Internal only — no external participants.</p></div>
+            <div class="aid-field"><span>We capture</span><p>Review notes and change requests, plus a check that tracking events fire correctly.</p></div>
+            <div class="aid-field"><span>How it's used</span><p>Fixes are re-prompted in the same session and redeployed the same day.</p></div>
+          </div>
+          <div class="aid-stage-card">
+            <div class="aid-stage-card__num">03</div>
+            <h4>Staging / UAT<br>Quality assurance</h4>
+            <div class="aid-field"><span>Objective</span><p>Prove the release is safe: nothing else broke, and it is formally accepted.</p></div>
+            <div class="aid-field"><span>We capture</span><p>Regression, accessibility findings, device coverage, and stakeholder sign-off.</p></div>
+            <div class="aid-field"><span>How it's used</span><p>Blocking issues go back to development; a clean pass authorises the merge to main.</p></div>
+          </div>
+        </div>
+
+        <span class="aid-note" style="display:block;margin:40px 0 16px;">Live — the only stage that involves real users</span>
+        <div class="aid-stage-card" style="border:1px solid var(--line-dark);">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:28px;">
+            <div><div class="aid-stage-card__num">04</div><h4 style="margin-bottom:0;">Production<br>Live testing with real users</h4></div>
+            <div class="aid-field"><span>Objective</span><p>Find out whether the change actually alters what people do, using customers with genuine intent.</p></div>
+            <div class="aid-field"><span>We capture</span><p>Behavioural and conversion data per version: A/B comparisons, session replay, funnel drop-off.</p></div>
+            <div class="aid-field"><span>How it's used</span><p>Settles whether the version stays, is switched back, or becomes the new default.</p></div>
+          </div>
+        </div>
+
+        <div style="margin-top:48px;">
+          <span class="aid-note" style="display:block;margin-bottom:16px;">What makes it measurable</span>
+          <p class="aid-body" style="max-width:820px;">Live testing only produces evidence if the measurement already exists. Tracking is implemented and verified back at the prototype stage and carried through the build — nothing is retro-fitted once the question has been asked.</p>
+          <div class="aid-chip-row" style="margin-top:20px;">
+            <span class="aid-chip">Google Tag Manager</span><span class="aid-chip">GA4</span><span class="aid-chip">Custom tracking events</span><span class="aid-chip">Contentsquare</span><span class="aid-chip">Session replay &amp; heatmaps</span><span class="aid-chip">Feature flags</span><span class="aid-chip">Your own data warehouse</span>
+          </div>
+        </div>
+
+        <div style="margin-top:48px;">
+          <span class="aid-note" style="display:block;margin-bottom:16px;">What happens to a live result</span>
+          <table class="aid-table">
+            <tr><th style="width:180px;">Outcome</th><th>What happens</th></tr>
+            <tr><td><strong>It worked</strong></td><td>The version becomes the default in the admin portal, and the pattern is promoted into the design system.</td></tr>
+            <tr><td><strong>It didn't</strong></td><td>The portal repoints to the previous version. No deploy, no incident, no lost work.</td></tr>
+            <tr><td><strong>It's close</strong></td><td>A refinement is re-prompted and ships as a further version alongside, so the comparison continues.</td></tr>
+            <tr><td><strong>Either way</strong></td><td>The outcome is appended to the decision that predicted it.</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <div class="aid-continue">
+      <a href="#knowledge" data-aid-tab="knowledge" class="section-link-arrow">Continue to Knowledge <span>&#8594;</span></a>
+    </div>
+
+  </div>
+
+  <!-- ============ 04 KNOWLEDGE ============ -->
+  <div class="aid-panel" data-aid-panel="knowledge" hidden>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">Section 04 — Compounding knowledge</span>
+          <span class="aid-note">Business intelligent</span>
+        </div>
+        <h2 class="section__title">Most teams cannot explain their own product a year later.</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line);">
+          <p class="aid-body">Research, the reasoning behind each decision and the result it produced are written down as they happen.</p>
+          <p class="aid-body">By the session doing the work, in the same submission as the change — not written up at the end.</p>
+          <div><span class="aid-note" style="display:block;margin-bottom:8px;">Outcome</span><p style="font-size:15px;line-height:1.6;">A record you can ask questions of: why this way, what was the evidence, did it work?</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">4.1 The intelligence cycle</span>
+          <span class="aid-note">Captured once, useful forever</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">Every stage feeds it.</h2>
+
+        <div class="aid-card-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="aid-card"><span class="aid-note">Source · 01 Design</span><h4>What the design stage produces</h4><p>Problem statements, research findings, options considered and why they were rejected, sign-off rationale.</p></div>
+          <div class="aid-card"><span class="aid-note">Source · 02 Development</span><h4>What the build produces</h4><p>Auto-written PR summaries, design system releases and changelogs, what shipped where and when.</p></div>
+          <div class="aid-card"><span class="aid-note">Source · 03 Testing</span><h4>What testing produces</h4><p>Internal review notes, QA and accessibility results, live behavioural and conversion data.</p></div>
+        </div>
+
+        <div class="aid-note-box" style="justify-content:center;text-align:center;margin-top:24px;">All three converge &#8595;</div>
+
+        <div class="aid-flow" style="margin-top:24px;">
+          <div class="aid-flow__step"><span class="aid-note">Capture</span><h4>Written as the work happens</h4><p>The session doing the work writes the record while the reasoning is still intact.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Store</span><h4>knowledge/ in the project repo</h4><p>Plain text, versioned with the feature it describes.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Reuse</span><h4>Loaded by every session</h4><p>Every new session reads it on start-up, alongside the design system.</p></div>
+          <div class="aid-flow__step"><span class="aid-note">Apply</span><h4>Interrogated in plain language</h4><p>Why is it built this way? Answered with citations to the actual records.</p></div>
+        </div>
+
+        <div class="aid-code" style="margin-top:24px;">knowledge/
+  decisions/     <span class="aid-cmt">— one record per decision</span>
+  research/      <span class="aid-cmt">— findings, insight summaries</span>
+  tests/         <span class="aid-cmt">— plans, results, live outcomes</span>
+  conventions/   <span class="aid-cmt">— patterns, tone, a11y rules</span>
+  INDEX.md       <span class="aid-cmt">— the map a session reads first</span></div>
+
+        <div class="aid-note-box" style="margin-top:24px;"><span>&#8635;</span><span>Each cycle adds to the sources, so the next one starts further forward — this is what compounds.</span></div>
+
+        <div class="aid-benefit-grid" style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line-dark);">
+          <div class="aid-benefit"><h4>The evidence base grows</h4><p>A question asked in year two is answered from the record of year one, in minutes.</p></div>
+          <div class="aid-benefit"><h4>The design system hardens</h4><p>Patterns proven in live testing become components everyone inherits.</p></div>
+          <div class="aid-benefit"><h4>The conventions sharpen</h4><p>Rules learned the hard way are written once and applied automatically.</p></div>
+          <div class="aid-benefit"><h4>Nobody owns "documentation"</h4><p>The record is a by-product of doing the work, not a task at the end.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">Why teams are moving this way</span>
+          <span class="aid-note">The commercial case</span>
+        </div>
+        <h2 class="section__title" style="margin-bottom:40px;">Four things change.</h2>
+        <div class="aid-benefit-grid">
+          <div class="aid-benefit"><span class="aid-note">Time</span><h4>Days to a testable build</h4><p>No rebuild between approval and a real URL.</p></div>
+          <div class="aid-benefit"><span class="aid-note">Cost</span><h4>Options become cheap</h4><p>A variation is a prompt and a branch.</p></div>
+          <div class="aid-benefit"><span class="aid-note">Intelligence</span><h4>Behaviour, not opinion</h4><p>Every release can answer whether it worked.</p></div>
+          <div class="aid-benefit"><span class="aid-note">Agility</span><h4>Fast stops fighting careful</h4><p>Speed no longer costs control.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="aid-continue">
+      <a href="#team" data-aid-tab="team" class="section-link-arrow">Meet the team <span>&#8594;</span></a>
+    </div>
+
+  </div>
+
+  <!-- ============ TEAM ============ -->
+  <div class="aid-panel" data-aid-panel="team" hidden>
+
+    <section class="section section--light">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="row-index">The team</span>
+          <span class="aid-note">Small, senior, specialised</span>
+        </div>
+        <div class="aid-head-split" style="margin-bottom:40px;">
+          <h2 class="section__title" style="margin-bottom:0;">A small, senior team.</h2>
+          <p class="aid-body">Antiphono is built around a small, senior team. Each person brings a distinct specialism; clients draw on them as their project requires.</p>
+        </div>
+
+        <div class="cta-banner" style="display:block;margin-bottom:1px;">
+          <span class="aid-note" style="display:block;margin-bottom:10px;">Founder &amp; Creative Director</span>
+          <h4 style="font-size:1.4rem;font-weight:400;margin-bottom:10px;">Ben Thomas</h4>
+          <p style="font-size:14.5px;line-height:1.6;max-width:760px;">Leads strategy, client relationships, and creative direction across all projects. Ben also personally leads all design and prototyping work — bringing together research insight and hands-on craft to shape how products look, feel, and function.</p>
+        </div>
+
+        <div class="aid-card-grid" style="grid-template-columns:repeat(2,1fr);margin-top:24px;">
+          <div class="aid-card"><span class="aid-note">Reports to Ben</span><h4>Senior Designer</h4><p>Supports delivery across lower complexity design tasks and rollout work — adapting, implementing and maintaining design across products and platforms.</p></div>
+          <div class="aid-card"><span class="aid-note">Reports to Ben</span><h4>AI Tech Researcher</h4><p>Specialises in applied AI tools, emerging technology, and integrating machine intelligence into design and product workflows.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__inner">
+        <div class="aid-eyebrow-row">
+          <span class="aid-note">Next steps</span>
+        </div>
+        <div class="aid-head-split" style="margin-bottom:40px;">
+          <div>
+            <h2 class="section__title" style="margin-bottom:16px;">Let's start your next project.</h2>
+            <p class="aid-lede" style="max-width:640px;">The best way to see this work is on one real feature. We set up the design system, the pipeline and the measurement, then run a single feature end to end with your team.</p>
+          </div>
+          <div>
+            <span class="aid-note" style="display:block;margin-bottom:14px;">New business</span>
+            <a href="mailto:hello@antiphono.studio" class="section-link-arrow" style="font-size:1.1rem;">hello@antiphono.studio <span>&#8599;</span></a>
+            <div style="margin-top:20px;"><a href="/#book" class="btn">Book a call</a></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding-top:32px;border-top:1px solid var(--line);">
+          <div><span class="aid-note" style="display:block;margin-bottom:10px;">Week one</span><p class="aid-body">Design system audit; repo and pipeline set up to your governance.</p></div>
+          <div><span class="aid-note" style="display:block;margin-bottom:10px;">Weeks two &amp; three</span><p class="aid-body">One feature designed, prototyped, reviewed and deployed to your sandbox.</p></div>
+          <div><span class="aid-note" style="display:block;margin-bottom:10px;">Week four</span><p class="aid-body">Live with measurement in place, and your team running the process.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light" style="text-align:center;">
+      <div class="section__inner">
+        <p style="font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:400;max-width:680px;margin:0 auto 32px;">Get in touch. Let's find out <span class="aid-em">what we can make together.</span></p>
+        <a href="mailto:hello@antiphono.studio" class="btn">Email hello@antiphono.studio</a>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer footer">
+  <div class="footer-inner footer__inner">
+    <div class="footer-top footer__top">
+      <div class="footer-brand footer__brand">
+        <a href="/" class="brand-mark">
+          <svg class="brand-logo footer__logo" viewBox="0 0 272 237" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#c)"><path d="M165.695 0H106.605C103.829 0 101.259 1.48595 99.8521 3.91238L74.8281 47.4C71.8268 52.6102 75.5785 59.1183 81.5812 59.1183H131.667C134.443 59.1183 137.013 60.6043 138.42 63.0307L197.453 165.618C200.455 170.828 196.703 177.336 190.7 177.336H149.656C143.654 177.336 139.921 183.844 142.903 189.055L167.927 232.542C169.315 234.969 171.885 236.455 174.68 236.455H233.77C236.546 236.455 239.116 234.969 240.523 232.542L270.049 181.249C271.437 178.841 271.437 175.85 270.049 173.443L172.448 3.91238C171.06 1.50476 168.49 0 165.695 0Z"/><path d="M30.6141 121.923L1.05047 173.217C-.337666 175.624-.337666 178.615 1.05047 181.023L26.1307 224.529C29.1321 229.721 36.6168 229.721 39.6182 224.529L64.6422 181.023C66.0303 178.615 68.6003 177.11 71.3765 177.11H121.481C127.465 177.11 131.217 170.602 128.215 165.411L103.135 121.904C101.747 119.497 99.1768 118.011 96.4005 118.011H37.3484C34.5721 118.011 32.0022 119.497 30.6141 121.904V121.923Z"/></g><defs><clipPath id="c"><rect width="272" height="237"/></clipPath></defs></svg>
+        </a>
+        <p class="footer__tagline">AI product design &amp; research studio. Sydney, Australia.</p>
+      </div>
+      <nav class="footer-nav footer__col" aria-label="Site">
+        <p class="footer__col-label">Navigate</p>
+        <a href="/work">Work</a>
+        <a href="/articles">Thinking</a>
+        <a href="/reports">Research</a>
+        <a href="/ai-enabled-design">AI-Enabled Design</a>
+        <a href="/#book">Book a call</a>
+      </nav>
+      <div class="footer-social footer__col">
+        <p class="footer__col-label">Connect</p>
+        <a href="mailto:hello@antiphono.studio">Email</a>
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom footer__bottom">
+      <span>&copy; <span id="year"></span> Antiphono Pty Ltd</span>
+      <span>AI Product Design + Research</span>
+      <span>Sydney, Australia</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="render.js"></script>
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.page-hero .text-reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('is-visible'), 100 + i * 150);
+    });
+  }, 100);
+
+  /* AI-Enabled Design tab switching */
+  (function () {
+    var panels = document.querySelectorAll('.aid-panel');
+    if (!panels.length) return;
+    var names = Array.prototype.map.call(document.querySelectorAll('.aid-tab'), function (b) { return b.dataset.aidTab; });
+
+    function activate(name, opts) {
+      opts = opts || {};
+      if (names.indexOf(name) === -1) name = names[0];
+      document.querySelectorAll('.aid-tab').forEach(function (b) { b.classList.toggle('is-active', b.dataset.aidTab === name); });
+      panels.forEach(function (p) { p.hidden = p.dataset.aidPanel !== name; });
+      if (opts.scroll) {
+        var bar = document.querySelector('.aid-tabbar');
+        if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-aid-tab]');
+      if (!link) return;
+      e.preventDefault();
+      var name = link.dataset.aidTab;
+      history.pushState(null, '', '#' + name);
+      activate(name, { scroll: true });
+    });
+
+    window.addEventListener('popstate', function () { activate(location.hash.slice(1), { scroll: true }); });
+
+    activate(location.hash.slice(1));
+  })();
+</script>
+<script src="script.js"></script>
+</body>
+</html>
