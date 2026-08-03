@@ -2442,28 +2442,32 @@ body.nav-open { overflow: hidden; }
   .aid-tree__row .fld-cmt { margin-left: 0; white-space: normal; padding-left: 23px; flex: 1 0 100%; }
 }
 
-/* Org-wide "family tree" — shared foundations feeding every product */
-.aid-orgtree__shared { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 4px; }
-@media (max-width: 760px) { .aid-orgtree__shared { grid-template-columns: 1fr; } }
-.aid-orgtree__cell { border: 1px solid var(--line); padding: 18px 20px; }
-.section--light .aid-orgtree__cell { border-color: var(--line-dark); }
-.aid-orgtree__cell .benefit-icon { margin-bottom: 10px; }
-.aid-orgtree__cell h5 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; font-weight: 600; margin: 0 0 6px; color: var(--white); }
-.section--light .aid-orgtree__cell h5 { color: var(--black); }
-.aid-orgtree__cell p { font-size: 12px; line-height: 1.55; color: var(--grey); margin: 0; }
-.section--light .aid-orgtree__cell p { color: var(--grey-mid); }
-.aid-orgtree__link { text-align: center; padding: 14px 0; font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); position: relative; }
-.aid-orgtree__link::before { content: ''; position: absolute; left: 50%; top: -4px; width: 1px; height: 8px; background: var(--line); }
-.section--light .aid-orgtree__link::before { background: var(--line-dark); }
-.aid-orgtree__products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-@media (max-width: 760px) { .aid-orgtree__products { grid-template-columns: 1fr; } }
-.aid-orgtree__product { border: 1px solid var(--line); background: var(--dark-surface); padding: 18px 20px; }
-.section--light .aid-orgtree__product { border-color: var(--line-dark); background: var(--white); }
-.aid-orgtree__product h5 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; font-weight: 600; margin: 0 0 12px; color: var(--white); }
-.section--light .aid-orgtree__product h5 { color: var(--black); }
-.aid-orgtree__envs { display: flex; gap: 6px; flex-wrap: wrap; }
-.aid-orgtree__env { font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase; padding: 5px 9px; border: 1px solid var(--line); color: var(--grey); }
-.section--light .aid-orgtree__env { border-color: var(--line-dark); color: var(--grey-mid); }
+/* Multi-brand organisation tree — root + brand/global boxes connected by curved
+   fan-out edges (rendered by flow-diagram.js), with detail cards beneath */
+#aidRoot [data-flowdia="orgroot"] .flowdia__node { text-align: center; }
+#aidRoot [data-flowdia="orgroot"] .flowdia__node h4 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 600; font-size: 12.5px; margin: 0; }
+
+.aid-orgtree2__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+@media (max-width: 900px) { .aid-orgtree2__cards { grid-template-columns: 1fr; } }
+.aid-orgtree2__card { border: 1px solid var(--line); padding: 22px 24px; display: flex; flex-direction: column; gap: 20px; }
+.section--light .aid-orgtree2__card { border-color: var(--line-dark); }
+.aid-orgtree2__card--global { align-self: start; }
+.aid-orgtree2__card-title { font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+
+.aid-orgtree2__group-label { display: flex; align-items: center; gap: 8px; font-family: var(--font); font-size: 12.5px; font-weight: 600; color: var(--white); }
+.section--light .aid-orgtree2__group-label { color: var(--black); }
+.aid-orgtree2__group-label .benefit-icon { width: 15px; height: 15px; margin-bottom: 0; }
+
+.aid-orgtree2__group-list { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; margin-left: 23px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--grey); }
+.section--light .aid-orgtree2__group-list { color: var(--grey-mid); }
+
+.aid-orgtree2__projects { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; margin-left: 23px; }
+.aid-orgtree2__project { border-left: 2px solid var(--line); padding-left: 12px; }
+.section--light .aid-orgtree2__project { border-left-color: var(--line-dark); }
+.aid-orgtree2__project-name { display: block; font-family: var(--font); font-size: 11.5px; font-weight: 600; color: var(--grey-light); margin-bottom: 4px; }
+.section--light .aid-orgtree2__project-name { color: var(--black); }
+.aid-orgtree2__project-tree { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; line-height: 1.7; color: var(--grey); margin: 0; }
+.section--light .aid-orgtree2__project-tree { color: var(--grey-mid); }
 
 /* Small generic pictogram inline in a flow-diagram node title */
 .flowdia__node .node-icon { display: inline-flex; width: 13px; height: 13px; vertical-align: -2px; margin-right: 6px; color: inherit; }
