@@ -2394,3 +2394,76 @@ body.nav-open { overflow: hidden; }
   .section:not(.section--light) .aid-org-diagram__cell { border-top-color: var(--line); }
   .aid-org-diagram__cell:first-child { border-top: none; }
 }
+
+/* ===== 35. AI-ENABLED DESIGN — revision 2 ===== */
+
+/* Tabbar now sits immediately under the fixed topnav with no hero above it */
+#aidRoot > .aid-tabbar:first-child { margin-top: 0; }
+
+/* AI / creativity Venn diagram + pull-quote */
+.aid-venn-wrap { display: grid; grid-template-columns: 300px 1fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+@media (max-width: 760px) { .aid-venn-wrap { grid-template-columns: 1fr; gap: 40px; } }
+.aid-venn { width: 100%; max-width: 300px; margin: 0 auto; color: var(--grey-light); }
+.section--light .aid-venn { color: var(--grey-mid); }
+.aid-venn svg { width: 100%; height: auto; overflow: visible; }
+.aid-venn circle { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.aid-venn .aid-venn__label { font-family: var(--font); font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; fill: currentColor; }
+.aid-venn-quote { font-family: var(--font-editorial); font-style: italic; font-weight: 300; font-size: clamp(1.35rem, 2.6vw, 2.1rem); line-height: 1.35; color: var(--white); margin: 0; }
+.section--light .aid-venn-quote { color: var(--black); }
+.aid-venn-sub { margin-top: 22px; font-size: clamp(14px, 1.1vw, 16px); color: var(--grey); line-height: 1.7; max-width: 520px; }
+.section--light .aid-venn-sub { color: var(--grey-mid); }
+
+/* Icon list — replaces paragraph blocks with short, iconed points */
+.aid-icon-list { display: flex; flex-direction: column; gap: 20px; margin-top: 4px; }
+.aid-icon-item { display: flex; gap: 14px; align-items: flex-start; }
+.aid-icon-item .benefit-icon { flex: 0 0 auto; width: 22px; height: 22px; margin-bottom: 0; margin-top: 1px; }
+.aid-icon-item p { font-size: 14.5px; line-height: 1.55; color: var(--grey); margin: 0; }
+.section--light .aid-icon-item p { color: var(--grey-mid); }
+
+/* Icon-only variant of .aid-benefit / .aid-org-diagram cells (drop the uppercase label, add a mark) */
+.aid-benefit .benefit-icon, .aid-org-diagram__cell .benefit-icon { margin-bottom: 12px; }
+
+/* Visual single-project folder tree */
+.aid-tree { border: 1px solid var(--line); background: var(--dark-surface); padding: 14px 0; }
+.section--light .aid-tree { border-color: var(--line-dark); background: var(--white); }
+.aid-tree__row { display: flex; align-items: center; gap: 9px; padding: 8px 20px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+.aid-tree__row .fld-icon { width: 14px; height: 14px; flex: 0 0 auto; color: var(--grey); }
+.aid-tree__row .fld-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.aid-tree__row .fld-cmt { margin-left: auto; font-family: var(--font); font-size: 11.5px; color: var(--grey); white-space: nowrap; padding-left: 16px; }
+.aid-tree__row.lvl-0 { color: var(--white); font-weight: 600; }
+.section--light .aid-tree__row.lvl-0 { color: var(--black); }
+.aid-tree__row.lvl-1 { padding-left: 40px; color: var(--grey-light); }
+.section--light .aid-tree__row.lvl-1 { color: var(--grey-mid); }
+.aid-tree__row.lvl-2 { padding-left: 62px; color: var(--grey); font-size: 12.5px; }
+
+@media (max-width: 560px) {
+  .aid-tree__row { flex-wrap: wrap; row-gap: 2px; }
+  .aid-tree__row .fld-cmt { margin-left: 0; white-space: normal; padding-left: 23px; flex: 1 0 100%; }
+}
+
+/* Org-wide "family tree" — shared foundations feeding every product */
+.aid-orgtree__shared { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 4px; }
+@media (max-width: 760px) { .aid-orgtree__shared { grid-template-columns: 1fr; } }
+.aid-orgtree__cell { border: 1px solid var(--line); padding: 18px 20px; }
+.section--light .aid-orgtree__cell { border-color: var(--line-dark); }
+.aid-orgtree__cell .benefit-icon { margin-bottom: 10px; }
+.aid-orgtree__cell h5 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; font-weight: 600; margin: 0 0 6px; color: var(--white); }
+.section--light .aid-orgtree__cell h5 { color: var(--black); }
+.aid-orgtree__cell p { font-size: 12px; line-height: 1.55; color: var(--grey); margin: 0; }
+.section--light .aid-orgtree__cell p { color: var(--grey-mid); }
+.aid-orgtree__link { text-align: center; padding: 14px 0; font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); position: relative; }
+.aid-orgtree__link::before { content: ''; position: absolute; left: 50%; top: -4px; width: 1px; height: 8px; background: var(--line); }
+.section--light .aid-orgtree__link::before { background: var(--line-dark); }
+.aid-orgtree__products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 760px) { .aid-orgtree__products { grid-template-columns: 1fr; } }
+.aid-orgtree__product { border: 1px solid var(--line); background: var(--dark-surface); padding: 18px 20px; }
+.section--light .aid-orgtree__product { border-color: var(--line-dark); background: var(--white); }
+.aid-orgtree__product h5 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; font-weight: 600; margin: 0 0 12px; color: var(--white); }
+.section--light .aid-orgtree__product h5 { color: var(--black); }
+.aid-orgtree__envs { display: flex; gap: 6px; flex-wrap: wrap; }
+.aid-orgtree__env { font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase; padding: 5px 9px; border: 1px solid var(--line); color: var(--grey); }
+.section--light .aid-orgtree__env { border-color: var(--line-dark); color: var(--grey-mid); }
+
+/* Small generic pictogram inline in a flow-diagram node title */
+.flowdia__node .node-icon { display: inline-flex; width: 13px; height: 13px; vertical-align: -2px; margin-right: 6px; color: inherit; }
+.flowdia__node .node-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
