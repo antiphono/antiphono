@@ -229,52 +229,82 @@
           <span class="row-index">The whole process</span>
           <span class="aid-note">A loop, not a line</span>
         </div>
-        <h2 class="section__title" style="margin-bottom:40px;">At a glance.</h2>
+        <h2 class="section__title" style="margin-bottom:16px;">At a glance.</h2>
+        <p class="aid-body" style="margin-bottom:8px;">One design system governs everything below it. Design hands off into development and its first test; each environment that ships gets its own testing gate; everything converges into the record that starts the next brief.</p>
 
-        <div class="cta-banner" style="display:block;margin-bottom:24px;">
-          <span class="aid-note" style="display:block;margin-bottom:10px;">Freestanding · its own repo</span>
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
-            <h4 style="font-size:1.2rem;font-weight:400;margin:0;">Design system</h4>
-            <div style="display:flex;align-items:center;gap:14px;font-size:13px;color:var(--grey-mid);flex-wrap:wrap;">
-              <span>Authored in Figma</span><span>&#8594;</span><span>Sync &amp; API check agents</span><span>&#8594;</span><span>Live component library</span>
+        <div class="flowdia" data-flowdia="master">
+          <div class="flowdia__nodes">
+
+            <div class="flowdia__band">
+              <div class="flowdia__node flowdia__node--fixed flowdia__node--tall" data-node="sys">
+                <span class="aid-note">Freestanding · its own repo</span>
+                <h4>Design system</h4>
+                <p>Authored in Figma &#8594; synced &amp; checked by agents &#8594; live component library. Governed independently; every stage below inherits a version of it.</p>
+              </div>
+              <div class="flowdia__node" data-node="d1"><span class="aid-note">01 Design</span><h4>Brief or problem</h4><p>Product owner &#8212; a problem to solve, not a solution to build.</p></div>
+              <div class="flowdia__node" data-node="d2"><span class="aid-note">01 Design</span><h4>Research</h4><p>UX lead &#183; Claude &#8212; hours, not weeks.</p></div>
+              <div class="flowdia__node" data-node="d3"><span class="aid-note">01 Design</span><h4>Prototype directions</h4><p>Built from live design system components.</p></div>
+              <div class="flowdia__node" data-node="d4"><span class="aid-note">01 Design</span><h4>Present, iterate, sign off</h4><p>One decision gate before engineering effort is committed.</p></div>
             </div>
+
+            <div class="flowdia__band">
+              <div class="flowdia__node flowdia__node--dim flowdia__node--fixed" data-node="pad1" aria-hidden="true"></div>
+              <div class="flowdia__node flowdia__node--dim" data-node="pad2" aria-hidden="true"></div>
+              <div class="flowdia__node flowdia__node--dim" data-node="pad3" aria-hidden="true"></div>
+              <div class="flowdia__node" data-node="tloc"><span class="aid-note">03 Testing &#183; Local</span><h4>Internal walkthrough</h4><p>UX, product and dev click through several directions before anything is built.</p></div>
+            </div>
+
+            <div class="flowdia__band">
+              <div class="flowdia__node" data-node="dev1"><span class="aid-note">02 Development</span><h4>Branch, build, instrument</h4><p>New sub-folder or branch; tracking wired in as it's written.</p></div>
+              <div class="flowdia__node" data-node="dev2"><span class="aid-note">02 Development</span><h4>Pull request &amp; review</h4><p>Claude writes the summary; a second pair of eyes approves.</p></div>
+              <div class="flowdia__node" data-node="dev3"><span class="aid-note">02 Development</span><h4>Merge to dev</h4><p>Deploys itself to a shareable sandbox URL.</p></div>
+              <div class="flowdia__node" data-node="dev4"><span class="aid-note">02 Development</span><h4>Promote to staging</h4><p>Production-like environment, per region.</p></div>
+              <div class="flowdia__node" data-node="dev5"><span class="aid-note">02 Development</span><h4>Merge to main</h4><p>A separate, deliberate gate &#8212; the only route to live.</p></div>
+            </div>
+
+            <div class="flowdia__band">
+              <div class="flowdia__node flowdia__node--dim" data-node="pad4" aria-hidden="true"></div>
+              <div class="flowdia__node flowdia__node--dim" data-node="pad5" aria-hidden="true"></div>
+              <div class="flowdia__node" data-node="sbx"><span class="aid-note">03 Testing &#183; Dev</span><h4>Internal review</h4><p>Team and stakeholders on a real URL, same-day fixes.</p></div>
+              <div class="flowdia__node" data-node="qa"><span class="aid-note">03 Testing &#183; Staging</span><h4>QA &amp; user testing</h4><p>Regression, accessibility, remote participant tasks.</p></div>
+              <div class="flowdia__node" data-node="live"><span class="aid-note">03 Testing &#183; Live</span><h4>Behaviour in real traffic</h4><p>A/B and /v2 variants, GA4, GTM, Contentsquare.</p></div>
+            </div>
+
+            <div class="flowdia__band">
+              <div class="flowdia__node flowdia__node--full flowdia__node--emph" data-node="store"><span class="aid-note">04 Knowledge &#183; Store</span><h4>knowledge/ in the project repo</h4><p>Every step above writes its own record as the work happens &#8212; committed in the same pull request as the change.</p></div>
+            </div>
+
+            <div class="flowdia__band">
+              <div class="flowdia__node flowdia__node--full flowdia__node--emph" data-node="reuse"><span class="aid-note">04 Knowledge &#183; Reuse</span><h4>Loaded by every future session</h4><p>Read on start-up alongside the design system, so the next brief starts from accumulated evidence rather than memory.</p></div>
+            </div>
+
+            <script type="application/json" class="flowdia__edges">
+            [
+              {"from":"sys","to":"d1","fromSide":"right","toSide":"left"},
+              {"from":"d1","to":"d2","fromSide":"right","toSide":"left"},
+              {"from":"d2","to":"d3","fromSide":"right","toSide":"left"},
+              {"from":"d3","to":"d4","fromSide":"right","toSide":"left"},
+              {"from":"d4","to":"tloc","fromSide":"bottom","toSide":"top"},
+              {"from":"d4","to":"dev1","fromSide":"bottom","toSide":"top"},
+              {"from":"dev1","to":"dev2","fromSide":"right","toSide":"left"},
+              {"from":"dev2","to":"dev3","fromSide":"right","toSide":"left"},
+              {"from":"dev3","to":"dev4","fromSide":"right","toSide":"left"},
+              {"from":"dev4","to":"dev5","fromSide":"right","toSide":"left"},
+              {"from":"dev3","to":"sbx","fromSide":"bottom","toSide":"top"},
+              {"from":"dev4","to":"qa","fromSide":"bottom","toSide":"top"},
+              {"from":"dev5","to":"live","fromSide":"bottom","toSide":"top"},
+              {"from":"tloc","to":"store","fromSide":"bottom","toSide":"top"},
+              {"from":"sbx","to":"store","fromSide":"bottom","toSide":"top"},
+              {"from":"qa","to":"store","fromSide":"bottom","toSide":"top"},
+              {"from":"live","to":"store","fromSide":"bottom","toSide":"top"},
+              {"from":"store","to":"reuse","fromSide":"bottom","toSide":"top","noArrow":false},
+              {"from":"reuse","to":"sys","fromSide":"left","toSide":"left","dashed":true,"via":[[-0.028,0.985],[-0.028,0.05]]}
+            ]
+            </script>
           </div>
         </div>
 
-        <div class="aid-lane"><span>01 Design</span><a href="#design" data-aid-tab="design" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
-        <div class="aid-flow">
-          <div class="aid-flow__step"><span class="aid-note">01</span><h4>Brief or problem</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">02</span><h4>Research</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">03</span><h4>Prototype directions</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">04</span><h4>Present, iterate, sign off</h4></div>
-        </div>
-
-        <div class="aid-lane" style="margin-top:40px;"><span>02 Development</span><a href="#development" data-aid-tab="development" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
-        <div class="aid-flow">
-          <div class="aid-flow__step"><span class="aid-note">01</span><h4>Branch, build, instrument</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">02</span><h4>Pull request &amp; review</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">03</span><h4>Merge to dev &#8594; sandbox</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">04</span><h4>Promote to staging</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">05</span><h4>Merge to main &#8594; live</h4></div>
-        </div>
-
-        <div class="aid-lane" style="margin-top:40px;"><span>03 Testing</span><a href="#testing" data-aid-tab="testing" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
-        <div class="aid-flow">
-          <div class="aid-flow__step"><span class="aid-note">Local</span><h4>Internal walkthrough</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">Dev</span><h4>Sandbox review</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">Staging</span><h4>QA, a11y &amp; user testing</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">Live</span><h4>Behaviour in real traffic</h4></div>
-        </div>
-
-        <div class="aid-lane" style="margin-top:40px;"><span>04 Knowledge</span><a href="#knowledge" data-aid-tab="knowledge" class="section-link-arrow">Full detail <span>&#8594;</span></a></div>
-        <div class="aid-flow">
-          <div class="aid-flow__step"><span class="aid-note">Capture</span><h4>Written as the work happens</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">Store</span><h4>knowledge/ in the repo</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">Reuse</span><h4>Loaded by every session</h4></div>
-          <div class="aid-flow__step"><span class="aid-note">Apply</span><h4>Interrogated in plain language</h4></div>
-        </div>
-
-        <div class="aid-note-box" style="margin-top:32px;">
+        <div class="aid-note-box" style="margin-top:8px;">
           <span>&#8635;</span>
           <span>The loop closes — the next brief starts from accumulated evidence rather than memory.</span>
         </div>
@@ -337,31 +367,48 @@
         </div>
         <h2 class="section__title" style="margin-bottom:40px;">How it gets made.</h2>
 
-        <div class="aid-flow" style="grid-template-columns:1fr 1fr;">
-          <div class="aid-flow__step"><span class="aid-note">D1</span><h4>Brief or problem statement</h4><p>A problem to solve, not a solution to build.</p><div class="aid-foot"><b>Owner</b> Product owner</div></div>
-          <div class="aid-flow__step"><span class="aid-note">D2</span><h4>Research the problem</h4><p>Existing behaviour, prior findings. Hours rather than weeks — the judgement stays human.</p><div class="aid-foot"><b>Owner</b> UX lead · Claude</div></div>
+        <div class="flowdia" data-flowdia="routes">
+          <div class="flowdia__nodes">
+
+            <div class="flowdia__band">
+              <div class="flowdia__node" data-node="d1"><span class="aid-note">D1</span><h4>Brief or problem statement</h4><p>A problem to solve, not a solution to build.</p><div class="aid-foot"><b>Owner</b> Product owner</div></div>
+              <div class="flowdia__node" data-node="d2"><span class="aid-note">D2</span><h4>Research the problem</h4><p>Existing behaviour, prior findings. Hours rather than weeks — the judgement stays human.</p><div class="aid-foot"><b>Owner</b> UX lead &#183; Claude</div></div>
+              <div class="flowdia__node flowdia__node--dim flowdia__node--fixed" data-node="pad-r1" aria-hidden="true"></div>
+              <div class="flowdia__node flowdia__node--dim flowdia__node--fixed" data-node="pad-r2" aria-hidden="true"></div>
+            </div>
+
+            <div class="flowdia__band flowdia__band--tight">
+              <div class="flowdia__node" data-node="routeA"><span class="aid-note">Route A &#183; Claude Code</span><h4>Coded prototype</h4><p>User-facing product work — usually several directions in parallel.</p><div class="aid-foot">Bound to the live design system; measurement events implemented in the prototype itself.</div></div>
+              <div class="flowdia__node" data-node="routeB"><span class="aid-note">Route B &#183; Claude</span><h4>Claude design</h4><p>Marketing pages and campaign assets that need real layout thinking.</p><div class="aid-foot">Anything shipping inside the product re-enters the pipeline at Development.</div></div>
+              <div class="flowdia__node" data-node="routeC"><span class="aid-note">Route C &#183; Canva / Adobe Express</span><h4>Templated assets</h4><p>Social, email and simple collateral produced at volume.</p><div class="aid-foot">Brand-locked templates; marketing self-serves variants.</div></div>
+              <div class="flowdia__node" data-node="routeD"><span class="aid-note">Route D &#183; Figma</span><h4>Direct in Figma</h4><p>Complex or one-off visual design, and new design system components.</p><div class="aid-foot">New patterns are synced into code for everyone.</div></div>
+            </div>
+
+            <div class="flowdia__band">
+              <div class="flowdia__node flowdia__node--dim flowdia__node--fixed" data-node="pad-r3" aria-hidden="true"></div>
+              <div class="flowdia__node flowdia__node--dim flowdia__node--fixed" data-node="pad-r4" aria-hidden="true"></div>
+              <div class="flowdia__node" data-node="d4"><span class="aid-note">D4</span><h4>Present &amp; iterate</h4><p>The team walks the work itself. Review becomes a working session rather than a hand-back.</p><div class="aid-foot"><b>Owner</b> UX lead &#8594; product owner</div></div>
+              <div class="flowdia__node" data-node="d5"><span class="aid-note">D5</span><h4>Sign off</h4><p>One decision gate before engineering effort is committed. Only work that ships inside the product carries on &#8212; marketing routes finish here.</p><div class="aid-foot"><b>Owner</b> Product owner &#183; continues at 02 Development</div></div>
+            </div>
+
+            <script type="application/json" class="flowdia__edges">
+            [
+              {"from":"d1","to":"d2","fromSide":"right","toSide":"left"},
+              {"from":"d2","to":"routeA","fromSide":"bottom","toSide":"top"},
+              {"from":"d2","to":"routeB","fromSide":"bottom","toSide":"top"},
+              {"from":"d2","to":"routeC","fromSide":"bottom","toSide":"top"},
+              {"from":"d2","to":"routeD","fromSide":"bottom","toSide":"top"},
+              {"from":"routeA","to":"d4","fromSide":"bottom","toSide":"top"},
+              {"from":"routeB","to":"d4","fromSide":"bottom","toSide":"top"},
+              {"from":"routeC","to":"d4","fromSide":"bottom","toSide":"top"},
+              {"from":"routeD","to":"d4","fromSide":"bottom","toSide":"top"},
+              {"from":"d4","to":"d5","fromSide":"right","toSide":"left"},
+              {"from":"d5","to":"routeD","fromSide":"top","toSide":"right","dashed":true,"via":[[1.03,0.55]]}
+            ]
+            </script>
+          </div>
         </div>
-
-        <div class="aid-note-box" style="justify-content:center;text-align:center;margin-top:24px;">Fans out into four parallel routes, chosen by what's being made &#8595;</div>
-
-        <div class="aid-card-grid" style="grid-template-columns:repeat(4,1fr);margin-top:24px;">
-          <div class="aid-card"><span class="aid-note">Route A · Claude Code</span><h4>Coded prototype</h4><p>User-facing product work — working, clickable directions, usually several in parallel.</p><div class="aid-foot">Bound to the live design system; measurement events implemented in the prototype itself.</div></div>
-          <div class="aid-card"><span class="aid-note">Route B · Claude</span><h4>Claude design</h4><p>Marketing pages and campaign assets that need real layout thinking.</p><div class="aid-foot">Anything shipping inside the product re-enters the pipeline at Development.</div></div>
-          <div class="aid-card"><span class="aid-note">Route C · Canva / Adobe Express</span><h4>Templated assets</h4><p>Social, email and simple collateral produced at volume.</p><div class="aid-foot">Brand-locked templates; marketing self-serves variants without a design request.</div></div>
-          <div class="aid-card"><span class="aid-note">Route D · Figma</span><h4>Direct in Figma</h4><p>Complex or one-off visual design, and new design system components.</p><div class="aid-foot">New patterns are synced into code for everyone.</div></div>
-        </div>
-
-        <div class="aid-note-box" style="justify-content:center;text-align:center;margin-top:24px;">All four routes converge &#8595;</div>
-
-        <div class="aid-flow" style="grid-template-columns:1fr 1fr;margin-top:24px;">
-          <div class="aid-flow__step"><span class="aid-note">D4</span><h4>Present &amp; iterate</h4><p>The team walks the work itself. Review becomes a working session rather than a hand-back.</p><div class="aid-foot"><b>Owner</b> UX lead &#8594; product owner</div></div>
-          <div class="aid-flow__step"><span class="aid-note">D5</span><h4>Sign off</h4><p>One decision gate before engineering effort is committed.</p><div class="aid-foot"><b>Owner</b> Product owner</div></div>
-        </div>
-
-        <div class="cta-banner" style="margin-top:24px;">
-          <p style="font-size:15px;max-width:620px;">Only work that ships inside the product carries on into development and testing. Marketing routes finish at sign-off.</p>
-          <span class="aid-note" style="text-align:right;">Continues at 02 &#8594;</span>
-        </div>
+        <p class="small-text" style="font-size:12px;color:var(--grey);margin-top:8px;">Iteration happens inside the same session — changes are re-prompted in minutes, not re-briefed.</p>
       </div>
     </section>
 
@@ -397,30 +444,57 @@
         </div>
         <h2 class="section__title" style="margin-bottom:40px;">Local to live.</h2>
 
-        <div class="aid-lane"><span>Local — on each team member's machine</span></div>
-        <div class="aid-flow" style="grid-template-columns:repeat(3,1fr);">
-          <div class="aid-flow__step"><span class="aid-note">Step 01</span><h4>Open the project folder</h4><p>A session per build project. CLAUDE.md supplies your environment URLs, naming and coding conventions.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Step 02</span><h4>Branch off dev</h4><p>A new sub-folder for new work; a branch inside the existing folder for a variation.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Step 03</span><h4>Build &amp; instrument</h4><p>Assembled from live design system components, with tracking wired in as it is written.</p></div>
-        </div>
+        <div class="flowdia" data-flowdia="devmoves">
+          <div class="flowdia__nodes">
 
-        <div class="aid-lane" style="margin-top:40px;"><span>Online repo — shared by the whole team</span></div>
-        <div class="aid-flow">
-          <div class="aid-flow__step"><span class="aid-note">Step 04</span><h4>Pull request</h4><p>Claude writes the plain-language change summary; a second pair of eyes approves.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Step 05</span><h4>Merge to dev</h4><p>The shared integration branch — deploys itself.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Step 06</span><h4>Promote to staging</h4><p>Release candidate, checked in production-like conditions.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Step 07</span><h4>Merge to main</h4><p>A separate, deliberate gate — the only route to live.</p></div>
-        </div>
+            <div class="flowdia__band">
+              <span class="aid-note" style="flex:0 0 100%;margin-bottom:-8px;">Local — on each team member's machine</span>
+            </div>
+            <div class="flowdia__band flowdia__band--tight">
+              <div class="flowdia__node" data-node="step1"><span class="aid-note">Step 01</span><h4>Open the project folder</h4><p>A session per build project. CLAUDE.md supplies your environment URLs, naming and coding conventions.</p></div>
+              <div class="flowdia__node" data-node="step2"><span class="aid-note">Step 02</span><h4>Branch off dev</h4><p>A new sub-folder for new work; a branch inside the existing folder for a variation.</p></div>
+              <div class="flowdia__node" data-node="step3"><span class="aid-note">Step 03</span><h4>Build &amp; instrument</h4><p>Assembled from live design system components, with tracking wired in as it is written.</p></div>
+              <div class="flowdia__node flowdia__node--dim" data-node="pad-d1" aria-hidden="true"></div>
+            </div>
 
-        <div class="aid-lane" style="margin-top:40px;"><span>Environments — where the code actually runs</span></div>
-        <div class="aid-flow">
-          <div class="aid-flow__step"><span class="aid-note">Automatic</span><h4>Local preview</h4><p>Only you see it. Nothing shared, nothing at risk.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Automatic</span><h4>Sandbox URL</h4><p>Shareable link for internal review, deployed on merge.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">On promotion</span><h4>Staging / UAT</h4><p>Per region where you operate — e.g. EU and US.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">On release</span><h4>Production</h4><p>Region deploys, parallel /v2 pages, admin-portal switching.</p></div>
-        </div>
+            <div class="flowdia__band" style="margin-top:8px;">
+              <span class="aid-note" style="flex:0 0 100%;margin-bottom:-8px;">Online repo — shared by the whole team</span>
+            </div>
+            <div class="flowdia__band flowdia__band--tight">
+              <div class="flowdia__node" data-node="step4"><span class="aid-note">Step 04</span><h4>Pull request</h4><p>Claude writes the plain-language change summary; a second pair of eyes approves.</p></div>
+              <div class="flowdia__node" data-node="step5"><span class="aid-note">Step 05</span><h4>Merge to dev</h4><p>The shared integration branch — deploys itself.</p></div>
+              <div class="flowdia__node" data-node="step6"><span class="aid-note">Step 06</span><h4>Promote to staging</h4><p>Release candidate, checked in production-like conditions.</p></div>
+              <div class="flowdia__node" data-node="step7"><span class="aid-note">Step 07</span><h4>Merge to main</h4><p>A separate, deliberate gate — the only route to live.</p></div>
+            </div>
 
-        <div class="aid-note-box" style="margin-top:32px;"><span>&#8635;</span><span>Findings return — fixes are re-prompted in the same local session.</span></div>
+            <div class="flowdia__band" style="margin-top:8px;">
+              <span class="aid-note" style="flex:0 0 100%;margin-bottom:-8px;">Environments — where the code actually runs</span>
+            </div>
+            <div class="flowdia__band flowdia__band--tight">
+              <div class="flowdia__node" data-node="envLocal"><span class="aid-note">Automatic</span><h4>Local preview</h4><p>Only you see it. Nothing shared, nothing at risk.</p></div>
+              <div class="flowdia__node" data-node="envSandbox"><span class="aid-note">Automatic</span><h4>Sandbox URL</h4><p>Shareable link for internal review, deployed on merge.</p></div>
+              <div class="flowdia__node" data-node="envStaging"><span class="aid-note">On promotion</span><h4>Staging / UAT</h4><p>Per region where you operate — e.g. EU and US.</p></div>
+              <div class="flowdia__node" data-node="envProd"><span class="aid-note">On release</span><h4>Production</h4><p>Region deploys, parallel /v2 pages, admin-portal switching.</p></div>
+            </div>
+
+            <script type="application/json" class="flowdia__edges">
+            [
+              {"from":"step1","to":"step2","fromSide":"right","toSide":"left"},
+              {"from":"step2","to":"step3","fromSide":"right","toSide":"left"},
+              {"from":"step3","to":"step4","fromSide":"bottom","toSide":"top"},
+              {"from":"step3","to":"envLocal","fromSide":"bottom","toSide":"top"},
+              {"from":"step4","to":"step5","fromSide":"right","toSide":"left"},
+              {"from":"step5","to":"step6","fromSide":"right","toSide":"left"},
+              {"from":"step6","to":"step7","fromSide":"right","toSide":"left"},
+              {"from":"step5","to":"envSandbox","fromSide":"bottom","toSide":"top"},
+              {"from":"step6","to":"envStaging","fromSide":"bottom","toSide":"top"},
+              {"from":"step7","to":"envProd","fromSide":"bottom","toSide":"top"},
+              {"from":"envLocal","to":"step1","fromSide":"left","toSide":"left","dashed":true,"via":[[-0.03,0.97],[-0.03,0.18]]}
+            ]
+            </script>
+          </div>
+        </div>
+        <div class="aid-note-box" style="margin-top:8px;"><span>&#8635;</span><span>Findings return — fixes are re-prompted in the same local session.</span></div>
 
         <div class="aid-benefit-grid" style="margin-top:56px;padding-top:32px;border-top:1px solid var(--line-dark);">
           <div><span class="aid-note" style="display:block;margin-bottom:12px;">Tailor it · Online repo</span><p style="font-size:13.5px;line-height:1.6;color:var(--grey-mid);">GitHub, Azure DevOps, GitLab or Bitbucket. Branch names and approval rules follow whatever your organisation already audits.</p></div>
@@ -612,19 +686,34 @@
         </div>
         <h2 class="section__title" style="margin-bottom:40px;">Every stage feeds it.</h2>
 
-        <div class="aid-card-grid" style="grid-template-columns:repeat(3,1fr);">
-          <div class="aid-card"><span class="aid-note">Source · 01 Design</span><h4>What the design stage produces</h4><p>Problem statements, research findings, options considered and why they were rejected, sign-off rationale.</p></div>
-          <div class="aid-card"><span class="aid-note">Source · 02 Development</span><h4>What the build produces</h4><p>Auto-written PR summaries, design system releases and changelogs, what shipped where and when.</p></div>
-          <div class="aid-card"><span class="aid-note">Source · 03 Testing</span><h4>What testing produces</h4><p>Internal review notes, QA and accessibility results, live behavioural and conversion data.</p></div>
-        </div>
+        <div class="flowdia" data-flowdia="cycle">
+          <div class="flowdia__nodes">
 
-        <div class="aid-note-box" style="justify-content:center;text-align:center;margin-top:24px;">All three converge &#8595;</div>
+            <div class="flowdia__band">
+              <div class="flowdia__node" data-node="src1"><span class="aid-note">Source &#183; 01 Design</span><h4>What the design stage produces</h4><p>Problem statements, research findings, options considered and why they were rejected, sign-off rationale.</p></div>
+              <div class="flowdia__node" data-node="src2"><span class="aid-note">Source &#183; 02 Development</span><h4>What the build produces</h4><p>Auto-written PR summaries, design system releases and changelogs, what shipped where and when.</p></div>
+              <div class="flowdia__node" data-node="src3"><span class="aid-note">Source &#183; 03 Testing</span><h4>What testing produces</h4><p>Internal review notes, QA and accessibility results, live behavioural and conversion data.</p></div>
+            </div>
 
-        <div class="aid-flow" style="margin-top:24px;">
-          <div class="aid-flow__step"><span class="aid-note">Capture</span><h4>Written as the work happens</h4><p>The session doing the work writes the record while the reasoning is still intact.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Store</span><h4>knowledge/ in the project repo</h4><p>Plain text, versioned with the feature it describes.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Reuse</span><h4>Loaded by every session</h4><p>Every new session reads it on start-up, alongside the design system.</p></div>
-          <div class="aid-flow__step"><span class="aid-note">Apply</span><h4>Interrogated in plain language</h4><p>Why is it built this way? Answered with citations to the actual records.</p></div>
+            <div class="flowdia__band">
+              <div class="flowdia__node" data-node="capture"><span class="aid-note">Capture</span><h4>Written as the work happens</h4><p>The session doing the work writes the record while the reasoning is still intact.</p></div>
+              <div class="flowdia__node" data-node="store"><span class="aid-note">Store</span><h4>knowledge/ in the project repo</h4><p>Plain text, versioned with the feature it describes.</p></div>
+              <div class="flowdia__node" data-node="reuse"><span class="aid-note">Reuse</span><h4>Loaded by every session</h4><p>Every new session reads it on start-up, alongside the design system.</p></div>
+              <div class="flowdia__node" data-node="apply"><span class="aid-note">Apply</span><h4>Interrogated in plain language</h4><p>Why is it built this way? Answered with citations to the actual records.</p></div>
+            </div>
+
+            <script type="application/json" class="flowdia__edges">
+            [
+              {"from":"src1","to":"capture","fromSide":"bottom","toSide":"top"},
+              {"from":"src2","to":"capture","fromSide":"bottom","toSide":"top"},
+              {"from":"src3","to":"capture","fromSide":"bottom","toSide":"top"},
+              {"from":"capture","to":"store","fromSide":"right","toSide":"left"},
+              {"from":"store","to":"reuse","fromSide":"right","toSide":"left"},
+              {"from":"reuse","to":"apply","fromSide":"right","toSide":"left"},
+              {"from":"apply","to":"src3","fromSide":"top","toSide":"right","dashed":true,"via":[[1.03,0.5]]}
+            ]
+            </script>
+          </div>
         </div>
 
         <div class="aid-code" style="margin-top:24px;">knowledge/
@@ -763,6 +852,7 @@
 
 <script src="data.js"></script>
 <script src="render.js"></script>
+<script src="flow-diagram.js"></script>
 <script>
   setTimeout(() => {
     document.querySelectorAll('.page-hero .text-reveal').forEach((el, i) => {
@@ -785,6 +875,7 @@
         var bar = document.querySelector('.aid-tabbar');
         if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      if (window.FlowDiagrams) window.FlowDiagrams.redraw();
     }
 
     document.addEventListener('click', function (e) {
