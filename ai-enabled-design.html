@@ -451,7 +451,7 @@
         <div class="aid-eyebrow-row">
           <span class="row-index">2.2 Folder structure</span>
         </div>
-        <h2 class="section__title" style="margin-bottom:16px;">Identical on every machine, and in the repo.</h2>
+        <h2 class="section__title" style="margin-bottom:16px;">Enforcing structure for everyone, locally and online</h2>
         <p class="aid-body" style="max-width:760px;">A convention Claude keeps to every time, so a new feature is filed the same way whoever starts it — and the repo stays navigable for non-technical team members.</p>
 
         <div class="aid-folder-block" style="margin-top:48px;">
@@ -470,95 +470,17 @@
         <div class="aid-folder-block">
           <span class="aid-note" style="display:block;margin-bottom:14px;">The whole organisation</span>
           <p class="aid-body" style="max-width:640px;margin-bottom:24px;">The same pattern repeats at company scale — every brand gets its own identity and knowledge, while shared technical guidelines keep every brand's engineering consistent.</p>
-
-          <div class="flowdia" data-flowdia="orgroot">
-            <div class="flowdia__nodes flowdia__nodes--grid" style="grid-template-columns:repeat(3,1fr);">
-              <div class="flowdia__node" data-node="org" style="grid-column:1/-1;grid-row:1;max-width:280px;justify-self:center;"><h4>Organisation root folder</h4></div>
-              <div class="flowdia__node" data-node="brand1" style="grid-column:1;grid-row:2;"><h4>Brand 1 root folder</h4></div>
-              <div class="flowdia__node" data-node="brand2" style="grid-column:2;grid-row:2;"><h4>Brand 2 root folder</h4></div>
-              <div class="flowdia__node" data-node="global" style="grid-column:3;grid-row:2;"><h4>Global technical guidelines</h4></div>
-              <script type="application/json" class="flowdia__edges">
-              [
-                {"from":"org","to":"brand1","fromSide":"bottom","toSide":"top","curve":true},
-                {"from":"org","to":"brand2","fromSide":"bottom","toSide":"top","curve":true},
-                {"from":"org","to":"global","fromSide":"bottom","toSide":"top","curve":true}
-              ]
-              </script>
-            </div>
-
-            <div class="aid-orgtree2__cards">
-              <div class="aid-orgtree2__card">
-                <span class="aid-orgtree2__card-title">Brand 1</span>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v9"/></svg></span>Brand design system</span>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg></span>Brand instructions</span>
-                  <div class="aid-orgtree2__group-list"><span>Brand history</span><span>Brand strategy</span><span>Audience data</span><span>Brand rules</span><span>Tone of voice</span><span>Brand assets</span></div>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="3" y="14" width="4" height="7"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="4" width="4" height="17"/></svg></span>Captured data</span>
-                  <div class="aid-orgtree2__group-list"><span>GTM</span><span>GA4</span><span>Contentsquare</span><span>Session replay</span><span>Heatmaps</span><span>Feature flags</span></div>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span>Knowledge base</span>
-                  <div class="aid-orgtree2__group-list"><span>decisions/</span><span>research/</span><span>tests/</span><span>conventions/</span><span>INDEX.md</span></div>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>Projects / features</span>
-                  <div class="aid-orgtree2__projects">
-                    <div class="aid-orgtree2__project">
-                      <span class="aid-orgtree2__project-name">Project 1</span>
-                      <p class="aid-orgtree2__project-tree">CLAUDE.md<br>knowledge/<br>features/&lt;feature-name&gt;/ (v1, v2, v3)<br>test-history/<br>shared/</p>
-                    </div>
-                    <div class="aid-orgtree2__project">
-                      <span class="aid-orgtree2__project-name">Project 2</span>
-                      <p class="aid-orgtree2__project-tree">CLAUDE.md<br>knowledge/<br>features/&lt;feature-name&gt;/ (v1, v2, v3)<br>test-history/<br>shared/</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="aid-orgtree2__card">
-                <span class="aid-orgtree2__card-title">Brand 2</span>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v9"/></svg></span>Brand design system</span>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg></span>Brand instructions</span>
-                  <div class="aid-orgtree2__group-list"><span>Brand history</span><span>Brand strategy</span><span>Audience data</span><span>Brand rules</span><span>Tone of voice</span><span>Brand assets</span></div>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="3" y="14" width="4" height="7"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="4" width="4" height="17"/></svg></span>Captured data</span>
-                  <div class="aid-orgtree2__group-list"><span>GTM</span><span>GA4</span><span>Contentsquare</span><span>Session replay</span><span>Heatmaps</span><span>Feature flags</span></div>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span>Knowledge base</span>
-                  <div class="aid-orgtree2__group-list"><span>decisions/</span><span>research/</span><span>tests/</span><span>conventions/</span><span>INDEX.md</span></div>
-                </div>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>Projects / features</span>
-                  <div class="aid-orgtree2__projects">
-                    <div class="aid-orgtree2__project">
-                      <span class="aid-orgtree2__project-name">Project 1</span>
-                      <p class="aid-orgtree2__project-tree">CLAUDE.md<br>knowledge/<br>features/&lt;feature-name&gt;/ (v1, v2, v3)<br>test-history/<br>shared/</p>
-                    </div>
-                    <div class="aid-orgtree2__project">
-                      <span class="aid-orgtree2__project-name">Project 2</span>
-                      <p class="aid-orgtree2__project-tree">CLAUDE.md<br>knowledge/<br>features/&lt;feature-name&gt;/ (v1, v2, v3)<br>test-history/<br>shared/</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="aid-orgtree2__card aid-orgtree2__card--global">
-                <span class="aid-orgtree2__card-title">Global</span>
-                <div class="aid-orgtree2__group">
-                  <span class="aid-orgtree2__group-label"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 0 0 5.4-5.4l-2.7 2.7-2-2z"/></svg></span>Guidelines</span>
-                  <div class="aid-orgtree2__group-list"><span>Infrastructure guidelines</span><span>Deployment instructions</span><span>Coding conventions</span></div>
-                </div>
-              </div>
-            </div>
+          <div class="aid-tree">
+            <div class="aid-tree__row lvl-0"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>organisation/</div>
+            <div class="aid-tree__row lvl-1"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>&lt;brand-1&gt;/<span class="fld-cmt">brand root folder</span></div>
+            <div class="aid-tree__row lvl-2"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>design-system/<span class="fld-cmt">brand-specific components, tokens</span></div>
+            <div class="aid-tree__row lvl-2"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>instructions/<span class="fld-cmt">history, strategy, audience, tone, assets</span></div>
+            <div class="aid-tree__row lvl-2"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>captured-data/<span class="fld-cmt">GTM, GA4, Contentsquare, heatmaps, flags</span></div>
+            <div class="aid-tree__row lvl-2"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>knowledge/<span class="fld-cmt">decisions, research, tests, conventions, INDEX.md</span></div>
+            <div class="aid-tree__row lvl-2"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>projects/</div>
+            <div class="aid-tree__row lvl-3"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>&lt;project-name&gt;/<span class="fld-cmt">CLAUDE.md, knowledge/, features/, test-history/, shared/</span></div>
+            <div class="aid-tree__row lvl-1"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>&lt;brand-2&gt;/<span class="fld-cmt">same pattern as brand 1</span></div>
+            <div class="aid-tree__row lvl-1"><span class="fld-icon"><svg viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z"/></svg></span>global/<span class="fld-cmt">infrastructure, deployment, coding conventions</span></div>
           </div>
         </div>
       </div>

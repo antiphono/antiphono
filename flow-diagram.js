@@ -52,24 +52,12 @@
     return d;
   }
 
-  function bezierPath(a, b, fromSide) {
-    if (fromSide === 'bottom' || fromSide === 'top') {
-      var my = (a.y + b.y) / 2;
-      return 'M' + a.x + ',' + a.y + ' C' + a.x + ',' + my + ' ' + b.x + ',' + my + ' ' + b.x + ',' + b.y;
-    }
-    var mx = (a.x + b.x) / 2;
-    return 'M' + a.x + ',' + a.y + ' C' + mx + ',' + a.y + ' ' + mx + ',' + b.y + ' ' + b.x + ',' + b.y;
-  }
-
   function buildPath(edge, rects, containerRect) {
     var fromRect = rects[edge.from];
     var toRect = rects[edge.to];
     if (!fromRect || !toRect) return null;
     var a = anchor(fromRect, edge.fromSide || 'right');
     var b = anchor(toRect, edge.toSide || 'left');
-    if (edge.curve) {
-      return bezierPath(a, b, edge.fromSide || 'right');
-    }
     var points;
     if (edge.via && edge.via.length) {
       var viaPx = edge.via.map(function (p) {
