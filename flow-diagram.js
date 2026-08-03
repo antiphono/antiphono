@@ -9,12 +9,14 @@
   var MOBILE_BP = 860;
   var NS = 'http://www.w3.org/2000/svg';
 
+  var GAP = 6; /* small breathing gap between a box edge and where its connector starts/ends */
+
   function anchor(rect, side) {
     switch (side) {
-      case 'right': return { x: rect.right, y: rect.top + rect.height / 2 };
-      case 'left': return { x: rect.left, y: rect.top + rect.height / 2 };
-      case 'top': return { x: rect.left + rect.width / 2, y: rect.top };
-      case 'bottom': return { x: rect.left + rect.width / 2, y: rect.bottom };
+      case 'right': return { x: rect.right + GAP, y: rect.top + rect.height / 2 };
+      case 'left': return { x: rect.left - GAP, y: rect.top + rect.height / 2 };
+      case 'top': return { x: rect.left + rect.width / 2, y: rect.top - GAP };
+      case 'bottom': return { x: rect.left + rect.width / 2, y: rect.bottom + GAP };
       default: return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
     }
   }
@@ -92,6 +94,20 @@
       svg.appendChild(defs);
       svg.dataset.markerId = marker.id;
 
+      var dot = document.createElementNS(NS, 'marker');
+      dot.setAttribute('id', 'flowdia-dot-' + Math.random().toString(36).slice(2));
+      dot.setAttribute('viewBox', '0 0 10 10');
+      dot.setAttribute('refX', '5');
+      dot.setAttribute('refY', '5');
+      dot.setAttribute('markerWidth', '4.5');
+      dot.setAttribute('markerHeight', '4.5');
+      var dotShape = document.createElementNS(NS, 'circle');
+      dotShape.setAttribute('cx', '5'); dotShape.setAttribute('cy', '5'); dotShape.setAttribute('r', '4.5');
+      dotShape.setAttribute('fill', 'currentColor');
+      dot.appendChild(dotShape);
+      defs.appendChild(dot);
+      svg.dataset.dotId = dot.id;
+
       container.insertBefore(svg, container.firstChild);
     }
     return svg;
@@ -136,6 +152,7 @@
 
     Array.prototype.slice.call(svg.querySelectorAll('path.flowdia__edge')).forEach(function (p) { p.remove(); });
     var markerId = svg.dataset.markerId;
+    var dotId = svg.dataset.dotId;
 
     edges.forEach(function (edge) {
       var d = buildPath(edge, rects, containerRect);
@@ -144,6 +161,7 @@
       path.setAttribute('d', d);
       path.setAttribute('class', 'flowdia__edge' + (edge.dashed ? ' flowdia__edge--dashed' : ''));
       if (!edge.noArrow) path.setAttribute('marker-end', 'url(#' + markerId + ')');
+      if (!edge.noStartDot) path.setAttribute('marker-start', 'url(#' + dotId + ')');
       svg.appendChild(path);
     });
   }

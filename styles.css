@@ -1992,6 +1992,17 @@ body.nav-open { overflow: hidden; }
 
 /* ===== 32. AI-ENABLED DESIGN PAGE ===== */
 
+/* Bold heading hierarchy + generous section rhythm — scoped to this page only,
+   deliberately overriding the sitewide thin-weight editorial headings */
+#aidRoot .section__title,
+#aidRoot h2, #aidRoot h3, #aidRoot h4 { font-weight: 700; }
+#aidRoot .flowdia__node h4 { font-weight: 500; } /* diagrams stay light/compact on purpose */
+#aidRoot .page-hero__title { font-weight: 700; }
+
+#aidRoot .section__inner { padding-top: clamp(72px, 9vw, 132px); padding-bottom: clamp(72px, 9vw, 132px); }
+#aidRoot .aid-eyebrow-row { margin-bottom: clamp(32px, 4vw, 52px); }
+#aidRoot .flowdia { margin-top: 48px; }
+
 /* Secondary sticky section nav, sits under the fixed topnav */
 .aid-tabbar {
   position: sticky;
@@ -2214,12 +2225,19 @@ body.nav-open { overflow: hidden; }
 
 /* ===== 33. FLOW DIAGRAMS (connected, curved-connector process diagrams) ===== */
 
-.flowdia { margin: 32px 0; }
-.flowdia__nodes { position: relative; display: flex; flex-direction: column; gap: 28px; }
-.flowdia__svg { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; color: var(--grey); }
-.section--light .flowdia__svg { color: var(--grey-light); }
-.flowdia__edge { fill: none; stroke: currentColor; stroke-width: 1.4; }
-.flowdia__edge--dashed { stroke-dasharray: 4 4; }
+.flowdia {
+  margin: 40px 0;
+  border: 1px solid var(--line);
+  padding: clamp(24px, 4vw, 44px) clamp(20px, 3.5vw, 40px);
+}
+.section--light .flowdia { border-color: var(--line-dark); }
+
+.flowdia__nodes { position: relative; display: flex; flex-direction: column; gap: 32px; }
+.flowdia__nodes--grid { display: grid; gap: 34px 22px; }
+.flowdia__svg { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; color: var(--grey-mid); }
+.section--light .flowdia__svg { color: var(--grey); }
+.flowdia__edge { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.flowdia__edge--dashed { stroke-dasharray: 3 4; }
 
 .flowdia__band { position: relative; z-index: 1; display: flex; gap: 20px; align-items: stretch; flex-wrap: nowrap; }
 .flowdia__band--tight { gap: 14px; }
@@ -2232,34 +2250,45 @@ body.nav-open { overflow: hidden; }
   min-width: 0;
   background: var(--black);
   border: 1px solid var(--line);
-  padding: 18px 20px;
+  padding: 13px 15px;
 }
 .section--light .flowdia__node { background: var(--white); border-color: var(--line-dark); }
-.flowdia__node .aid-note { display: block; font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
-.flowdia__node h4 { font-size: 1rem; font-weight: 400; letter-spacing: -0.01em; margin: 0 0 6px; line-height: 1.25; }
-.flowdia__node p { font-size: 12.5px; line-height: 1.55; color: var(--grey); margin: 0; }
+.flowdia__node .aid-note { display: block; font-size: 9.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey); margin-bottom: 6px; }
+.flowdia__node h4 { font-size: 0.83rem; font-weight: 500; letter-spacing: -0.005em; margin: 0 0 5px; line-height: 1.25; }
+.flowdia__node p { font-size: 11px; line-height: 1.5; color: var(--grey); margin: 0; }
 .section--light .flowdia__node p { color: var(--grey-mid); }
-.flowdia__node .aid-foot { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 11px; color: var(--grey); }
+.flowdia__node .aid-foot { margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--line); font-size: 9.5px; color: var(--grey); }
 .section--light .flowdia__node .aid-foot { border-top-color: var(--line-dark); }
 
 .flowdia__node--tall { display: flex; flex-direction: column; justify-content: flex-start; }
 .flowdia__node--fixed { flex: 0 0 220px; }
 .flowdia__node--full { flex: 1 1 100%; }
-.flowdia__node--dim { opacity: 0.001; pointer-events: none; } /* invisible spacer to hold grid alignment */
+.flowdia__node--dim { opacity: 0.001; pointer-events: none; } /* invisible spacer to hold flex-based alignment */
 
-.flowdia__node--emph { border-top: 2px solid var(--white); }
-.section--light .flowdia__node--emph { border-top-color: var(--black); }
+.flowdia__node--emph { border-width: 1.5px; }
+.flowdia__node--emph h4 { font-size: 0.92rem; }
 
-/* Mobile: stack bands, drop the SVG, use a simple down-cue between nodes */
+.flowdia__lane-label {
+  grid-column: 1 / -1;
+  font-size: 9.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--grey); padding-bottom: 8px; border-bottom: 1px solid var(--line);
+}
+.section--light .flowdia__lane-label { border-bottom-color: var(--line-dark); }
+
+/* Mobile: stack everything (grid or flex), drop the SVG, use a simple down-cue between nodes */
 @media (max-width: 860px) {
+  .flowdia { padding: 24px 20px; }
   .flowdia__svg { display: none !important; }
   .flowdia__band { flex-direction: column; }
+  .flowdia__nodes--grid { display: flex; flex-direction: column; gap: 0; }
   .flowdia__node--fixed { flex-basis: auto; }
   .flowdia__node--dim { display: none; }
   .flowdia__nodes { gap: 0; }
   .flowdia__band + .flowdia__band { margin-top: 0; }
-  .flowdia__node { margin-bottom: 22px; }
+  .flowdia__node, .flowdia__lane-label { margin-bottom: 22px; }
   .flowdia__node:last-child { margin-bottom: 0; }
+  .flowdia__node h4 { font-size: 0.95rem; }
+  .flowdia__node p { font-size: 12.5px; }
   .flowdia__node:not(:first-child)::before {
     content: '↓';
     display: block;
