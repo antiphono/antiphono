@@ -535,7 +535,7 @@
           <span class="row-index">3.1 Testing at scale</span>
         </div>
         <h2 class="section__title" style="margin-bottom:16px;">Internal &amp; external test stages.</h2>
-        <p class="aid-body" style="margin-bottom:8px;">Three internal gates decide what deploys and prove the release is safe. Only stage four involves customers — and every stage passes its output straight into the next.</p>
+        <p class="aid-body" style="margin-bottom:8px;">Builds from design and development are reviewed internally across three gates, then branched into A/A and split tests with real audiences. Faster production and simpler deployment mean several variations can run live at once — so the decision comes from real behaviour, and the winning version becomes the default.</p>
 
         <div class="flowdia" data-flowdia="teststages">
           <div class="flowdia__nodes flowdia__nodes--grid" style="grid-template-columns:repeat(4,1fr);">
@@ -561,6 +561,7 @@
               <span class="aid-note">04 &#183; Production</span>
               <h4>Live, with real users</h4>
               <p><b>In</b> A released build, measurement already live</p>
+              <div class="aid-variant-mini"><span>Variant A</span><span>Variant B</span><span>Variant C</span></div>
               <div class="aid-foot"><b>Out</b> A verdict, and evidence in knowledge/</div>
             </div>
             <script type="application/json" class="flowdia__edges">
@@ -583,7 +584,30 @@
         </div>
         <h2 class="section__title" style="margin-bottom:24px;">Capturing real user data in Claude</h2>
         <p class="aid-body" style="max-width:760px;">Tracking is implemented and verified back at the prototype stage and carried through the build, so every version is measurable from its first session — nothing is retro-fitted once the question has been asked.</p>
-        <div class="tool-row" style="margin-top:24px;">
+
+        <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--line);">
+          <span class="aid-note" style="display:block;margin-bottom:10px;">Comparing live variations</span>
+          <p class="aid-body" style="max-width:760px;">Rather than shipping one guess, several variations of the same feature run live at once — each shown to a slice of real traffic. Claude reads the results as they come in, so the comparison is a measurement, not an opinion.</p>
+          <div class="aid-variant-compare">
+            <div class="aid-variant-compare__row">
+              <span class="aid-variant-compare__label">Variant A</span>
+              <div class="aid-variant-compare__track"><div class="aid-variant-compare__bar" style="width:38%;"></div></div>
+              <span class="aid-variant-compare__pct">38%</span>
+            </div>
+            <div class="aid-variant-compare__row aid-variant-compare__row--winner">
+              <span class="aid-variant-compare__label">Variant B</span>
+              <div class="aid-variant-compare__track"><div class="aid-variant-compare__bar" style="width:54%;"></div></div>
+              <span class="aid-variant-compare__pct">54%</span>
+            </div>
+            <div class="aid-variant-compare__row">
+              <span class="aid-variant-compare__label">Variant C</span>
+              <div class="aid-variant-compare__track"><div class="aid-variant-compare__bar" style="width:29%;"></div></div>
+              <span class="aid-variant-compare__pct">29%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-row" style="margin-top:32px;">
           <span class="tool-chip" data-tool-logo="googletagmanager">Google Tag Manager</span>
           <span class="tool-chip" data-tool-logo="googleanalytics">GA4</span>
           <span class="tool-chip">Contentsquare</span>
@@ -593,7 +617,7 @@
         <div class="aid-loop-strip">
           <div class="aid-loop-node"><span class="lbl">Tools capture</span>Behaviour &amp; conversion data</div>
           <span class="aid-loop-arrow">&#8594;</span>
-          <div class="aid-loop-node"><span class="lbl">Read by</span><span class="tool-mark" data-tool-logo="claude"></span>Claude</div>
+          <div class="aid-loop-node"><span class="lbl">Read by</span><span><span class="tool-mark" data-tool-logo="claude"></span>Claude</span></div>
           <span class="aid-loop-arrow">&#8594;</span>
           <div class="aid-loop-node"><span class="lbl">Written to</span>knowledge/</div>
           <span class="aid-loop-arrow">&#8594;</span>

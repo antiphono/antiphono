@@ -2362,13 +2362,14 @@ body.nav-open { overflow: hidden; }
 
 /* Mini learning-loop strip: tools -> Claude -> knowledge */
 .aid-loop-strip {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
   padding: 18px 20px; border: 1px solid var(--line-dark); margin-top: 16px;
 }
 .section:not(.section--light) .aid-loop-strip { border-color: var(--line); }
 .aid-loop-strip .aid-loop-arrow { color: var(--grey); font-size: 16px; flex: 0 0 auto; }
-.aid-loop-strip .aid-loop-node { display: flex; flex-direction: column; gap: 8px; }
+.aid-loop-strip .aid-loop-node { display: flex; flex-direction: column; gap: 8px; flex: 1 1 0; min-width: 0; }
 .aid-loop-strip .aid-loop-node span.lbl { font-family: var(--font); font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey); }
+.aid-loop-strip .aid-loop-node .tool-mark { flex: 0 0 auto; }
 
 /* Folder-structure two-panel layout */
 .aid-folder-block + .aid-folder-block { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line-dark); }
@@ -2467,3 +2468,21 @@ body.nav-open { overflow: hidden; }
 /* Small generic pictogram inline in a flow-diagram node title */
 .flowdia__node .node-icon { display: inline-flex; width: 13px; height: 13px; vertical-align: -2px; margin-right: 6px; color: inherit; }
 .flowdia__node .node-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Compact variant chips inside a flow-diagram node (production stage running several live variations) */
+.aid-variant-mini { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+.aid-variant-mini span { font-size: 9px; letter-spacing: 0.02em; padding: 3px 7px; border: 1px solid var(--line); color: var(--grey); }
+.section--light .aid-variant-mini span { border-color: var(--line-dark); }
+
+/* Live-variant comparison bars */
+.aid-variant-compare { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; max-width: 560px; }
+.aid-variant-compare__row { display: grid; grid-template-columns: 84px 1fr 40px; align-items: center; gap: 14px; }
+.aid-variant-compare__label { font-size: 12.5px; color: var(--grey); }
+.aid-variant-compare__row--winner .aid-variant-compare__label { color: var(--white); font-weight: 600; }
+.section--light .aid-variant-compare__row--winner .aid-variant-compare__label { color: var(--black); }
+.aid-variant-compare__track { height: 8px; background: var(--dark-surface); border-radius: var(--radius); overflow: hidden; }
+.section--light .aid-variant-compare__track { background: var(--line-dark); }
+.aid-variant-compare__bar { height: 100%; background: var(--grey); border-radius: var(--radius); }
+.aid-variant-compare__row--winner .aid-variant-compare__bar { background: var(--white); }
+.section--light .aid-variant-compare__row--winner .aid-variant-compare__bar { background: var(--black); }
+.aid-variant-compare__pct { font-size: 12px; color: var(--grey); text-align: right; }
