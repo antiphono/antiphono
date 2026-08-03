@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antiphono — Coming soon</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  .gate-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px var(--gutter); }
+  .gate-card { max-width: 440px; width: 100%; text-align: center; }
+  .gate-logo { width: 40px; height: auto; margin: 0 auto 32px; display: block; color: var(--white); }
+  .gate-title { font-family: var(--font); font-style: normal; font-weight: 800; letter-spacing: -0.02em; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin-bottom: 16px; color: var(--white); }
+  .gate-sub { color: var(--grey); font-size: 15px; line-height: 1.6; margin-bottom: 36px; }
+  .gate-sub a { color: var(--white); text-decoration: underline; }
+  .gate-form { display: flex; gap: 10px; }
+  .gate-input { flex: 1; min-width: 0; background: var(--dark-surface); border: 1px solid var(--line); color: var(--white); padding: 14px 16px; font-family: var(--font); font-size: 14px; border-radius: var(--radius); }
+  .gate-input::placeholder { color: var(--grey); }
+  .gate-input:focus { outline: none; border-color: var(--grey-light); }
+  .gate-btn { background: var(--white); color: var(--black); border: none; padding: 14px 22px; font-family: var(--font); font-size: 14px; font-weight: 600; border-radius: var(--radius); cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
+  .gate-btn:hover { opacity: 0.85; }
+  .gate-error { color: #e5484d; font-size: 13px; margin-top: 14px; min-height: 18px; visibility: hidden; }
+  .gate-error.is-visible { visibility: visible; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="gate-wrap">
+  <div class="gate-card">
+    <svg class="gate-logo" viewBox="0 0 272 237" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g clip-path="url(#g)"><path d="M165.695 0H106.605C103.829 0 101.259 1.486 99.852 3.912L74.828 47.4C71.827 52.61 75.578 59.118 81.581 59.118H131.667C134.443 59.118 137.013 60.604 138.42 63.031L197.453 165.618C200.455 170.828 196.703 177.336 190.7 177.336H149.656C143.654 177.336 139.921 183.844 142.903 189.055L167.927 232.542C169.315 234.969 171.885 236.455 174.68 236.455H233.77C236.546 236.455 239.116 234.969 240.523 232.542L270.049 181.249C271.437 178.841 271.437 175.85 270.049 173.443L172.448 3.912C171.06 1.505 168.49 0 165.695 0Z"/><path d="M30.614 121.923L1.05 173.217C-.338 175.624-.338 178.615 1.05 181.023L26.131 224.529C29.132 229.721 36.617 229.721 39.618 224.529L64.642 181.023C66.03 178.615 68.6 177.11 71.376 177.11H121.481C127.465 177.11 131.217 170.602 128.215 165.411L103.135 121.904C101.747 119.497 99.177 118.011 96.4 118.011H37.348C34.572 118.011 32.002 119.497 30.614 121.904V121.923Z"/></g><defs><clipPath id="g"><rect width="272" height="237"/></clipPath></defs></svg>
+    <h1 class="gate-title">Something new is on the way.</h1>
+    <p class="gate-sub">We're rebuilding the site. In the meantime, take a look at <a href="/ai-enabled-design">AI-Enabled Design</a> — or enter the preview password if you have one.</p>
+    <form class="gate-form" id="gateForm">
+      <input class="gate-input" type="password" id="gatePassword" name="password" placeholder="Password" autocomplete="off">
+      <button class="gate-btn" type="submit">Enter</button>
+    </form>
+    <p class="gate-error" id="gateError">That password didn't work — try again.</p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('gateForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pwd = document.getElementById('gatePassword').value;
+    var err = document.getElementById('gateError');
+    var btn = e.target.querySelector('.gate-btn');
+    err.classList.remove('is-visible');
+    btn.disabled = true;
+    fetch('/api/unlock', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pwd })
+    }).then(function (r) {
+      return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+    }).then(function (res) {
+      btn.disabled = false;
+      if (res.ok && res.data.success) {
+        window.location.reload();
+      } else {
+        err.classList.add('is-visible');
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      err.classList.add('is-visible');
+    });
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

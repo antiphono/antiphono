@@ -3,11 +3,78 @@ const https = require('https');
 const http_ = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const PORT = process.env.PORT || 4500;
 const ROOT = __dirname;
 const RSS_URL = process.env.RSS_URL || 'https://app.trysoro.com/api/rss/4bf8bb35-204c-4ff2-8667-8720cfb5ca54';
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+
+// ── Site-wide password gate ───────────────────────────────────────────────
+// Everything is gated behind a "coming soon" page except /ai-enabled-design
+// (and shared static assets it depends on). Entering the password sets a
+// signed cookie that unlocks the whole site for that browser.
+
+const GATE_PASSWORD = process.env.GATE_PASSWORD || 'NoFomo';
+const GATE_SECRET = process.env.GATE_SECRET || 'antiphono-preview-gate';
+const GATE_COOKIE = 'aid_gate';
+const GATE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days, in seconds
+
+function gateToken() {
+  return crypto.createHmac('sha256', GATE_SECRET).update(GATE_PASSWORD).digest('hex');
+}
+
+function parseCookies(req) {
+  const out = {};
+  const header = req.headers.cookie;
+  if (!header) return out;
+  header.split(';').forEach((pair) => {
+    const idx = pair.indexOf('=');
+    if (idx === -1) return;
+    const key = pair.slice(0, idx).trim();
+    const val = pair.slice(idx + 1).trim();
+    if (key) out[key] = decodeURIComponent(val);
+  });
+  return out;
+}
+
+function isUnlocked(req) {
+  const cookies = parseCookies(req);
+  const given = cookies[GATE_COOKIE];
+  if (!given) return false;
+  const expected = gateToken();
+  const a = Buffer.from(given);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
+// Paths that stay public even when the rest of the site is gated.
+const GATE_ALLOWED_PAGES = ['/ai-enabled-design', '/ai-enabled-design.html', '/coming-soon', '/coming-soon.html'];
+
+function isGatedRequest(urlPath) {
+  if (urlPath === '/api/unlock') return false;
+  // Only HTML page requests are gated — static assets (css/js/svg/fonts/etc.)
+  // always pass through, since the public page depends on them.
+  const ext = path.extname(urlPath);
+  if (ext && ext !== '.html') return false;
+  if (GATE_ALLOWED_PAGES.includes(urlPath)) return false;
+  return true;
+}
+
+function readBody(req, maxBytes) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    let size = 0;
+    req.on('data', (chunk) => {
+      size += chunk.length;
+      if (size > maxBytes) { reject(new Error('Body too large')); req.destroy(); return; }
+      data += chunk;
+    });
+    req.on('end', () => resolve(data));
+    req.on('error', reject);
+  });
+}
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -196,6 +263,28 @@ function safeJoin(root, requestPath) {
 http.createServer((req, res) => {
   const urlPath = decodeURIComponent(req.url.split('?')[0]);
 
+  // POST /api/unlock — check the gate password, set the unlock cookie
+  if (urlPath === '/api/unlock' && req.method === 'POST') {
+    readBody(req, 10 * 1024).then((body) => {
+      let password = '';
+      try { password = (JSON.parse(body || '{}').password || '').toString(); } catch (e) {}
+      if (password === GATE_PASSWORD) {
+        const secure = req.headers['x-forwarded-proto'] === 'https' || req.socket.encrypted ? '; Secure' : '';
+        res.setHeader('Set-Cookie', GATE_COOKIE + '=' + encodeURIComponent(gateToken()) +
+          '; Path=/; HttpOnly; Max-Age=' + GATE_MAX_AGE + '; SameSite=Lax' + secure);
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: true }));
+      } else {
+        res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false }));
+      }
+    }).catch(() => {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false }));
+    });
+    return;
+  }
+
   // /api/articles — serve RSS articles as JSON
   if (urlPath === '/api/articles') {
     getArticles().then((articles) => {
@@ -207,6 +296,17 @@ http.createServer((req, res) => {
     }).catch((err) => {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: err.message }));
+    });
+    return;
+  }
+
+  // Site-wide password gate — every HTML page except /ai-enabled-design
+  // shows the coming-soon page until the visitor has unlocked it.
+  if (isGatedRequest(urlPath) && !isUnlocked(req)) {
+    fs.readFile(path.join(ROOT, 'coming-soon.html'), (err, data) => {
+      if (err) { res.writeHead(404); res.end('Not found'); return; }
+      res.writeHead(200, { 'Content-Type': MIME['.html'] });
+      res.end(data);
     });
     return;
   }
