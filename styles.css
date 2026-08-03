@@ -2100,6 +2100,12 @@ body.nav-open { overflow: hidden; }
   border: 1px solid var(--line);
 }
 .section--light .aid-card-grid { background: var(--line-dark); border-color: var(--line-dark); }
+@media (max-width: 700px) {
+  /* Some usages set an explicit column count inline (e.g. 2 or 3 up); force a
+     single column below 700px regardless, since inline styles otherwise beat
+     the default auto-fit/minmax responsiveness. */
+  .aid-card-grid { grid-template-columns: 1fr !important; }
+}
 .aid-card {
   background: var(--black);
   padding: 28px 24px;
@@ -2113,6 +2119,17 @@ body.nav-open { overflow: hidden; }
 .section--light .aid-card .aid-foot { border-top-color: var(--line-dark); }
 .aid-card .aid-foot b { color: var(--grey-light); font-weight: 500; }
 .section--light .aid-card .aid-foot b { color: var(--black); }
+
+/* Round initials avatar — placeholder until a real photo is supplied */
+.aid-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--dark-surface); border: 1px solid var(--line);
+  font-family: var(--font); font-size: 15px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--grey-light); margin-bottom: 16px; overflow: hidden;
+}
+.aid-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.section--light .aid-avatar { background: var(--white); border-color: var(--line-dark); color: var(--grey-mid); }
 
 /* Flow — sequential steps joined by arrows, wraps to stacked on mobile */
 .aid-flow {
@@ -2409,6 +2426,8 @@ body.nav-open { overflow: hidden; }
 .aid-venn svg { width: 100%; height: auto; overflow: visible; }
 .aid-venn circle { fill: none; stroke: currentColor; stroke-width: 1.3; }
 .aid-venn .aid-venn__label { font-family: var(--font); font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; fill: currentColor; }
+.aid-venn .aid-venn__mark { fill: var(--white); }
+.section--light .aid-venn .aid-venn__mark { fill: var(--black); }
 .aid-venn-quote { font-family: var(--font); font-style: normal; font-weight: 700; letter-spacing: -0.03em; font-size: clamp(2rem, 4.5vw, 4rem); line-height: 1.0; color: var(--white); margin: 0; }
 .section--light .aid-venn-quote { color: var(--black); }
 .aid-venn-sub { margin-top: 22px; font-size: clamp(14px, 1.1vw, 16px); color: var(--grey); line-height: 1.7; max-width: 520px; }
