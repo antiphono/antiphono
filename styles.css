@@ -1240,6 +1240,7 @@ body.nav-open { overflow: hidden; }
   padding: 7px 12px;
   margin-bottom: 24px;
 }
+.section--light .row-index { border-color: var(--line-dark); }
 
 /* ===== 23. WORK SCROLL (work.html sticky layout) ===== */
 .work-scroll {
@@ -2305,4 +2306,91 @@ body.nav-open { overflow: hidden; }
     color: var(--grey);
     font-size: 14px;
   }
+}
+
+/* ===== 34. AI-ENABLED DESIGN — tool logos, icons, quicklinks, hero split ===== */
+
+/* Hero: serif line + bold sans word */
+#aidRoot .page-hero__title { font-weight: 400; } /* per-span weights below take over */
+#aidRoot .page-hero__title .aid-hero-serif { font-family: var(--font-editorial); font-style: italic; font-weight: 300; color: var(--grey); }
+#aidRoot .page-hero__title .aid-hero-bold { font-family: var(--font); font-weight: 800; color: var(--white); letter-spacing: -0.03em; }
+
+/* Small compact section-jump links, used above the master diagram */
+.aid-quicklinks { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 8px; }
+.aid-quicklinks a {
+  font-family: var(--font); font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--grey-mid); cursor: pointer;
+  border-bottom: 1px solid var(--line-dark); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.section--light .aid-quicklinks a { color: var(--grey-mid); border-bottom-color: var(--line-dark); }
+.aid-quicklinks a:hover { color: var(--black); border-bottom-color: var(--black); }
+.section--dark .aid-quicklinks a,
+.section:not(.section--light) .aid-quicklinks a { color: var(--grey); border-bottom-color: var(--line); }
+.section:not(.section--light) .aid-quicklinks a:hover { color: var(--white); border-bottom-color: var(--white); }
+
+/* Generic benefit pictograms (not brand logos) */
+.benefit-icon { width: 26px; height: 26px; display: block; margin-bottom: 14px; color: var(--grey-mid); }
+.section:not(.section--light) .benefit-icon { color: var(--grey); }
+.benefit-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.benefit-icon svg.is-filled { fill: currentColor; stroke: none; }
+
+/* Tool / platform logo chips — self-hosted monochrome marks via tool-logos.js */
+.tool-logo__icon { width: 14px; height: 14px; flex: 0 0 auto; }
+.tool-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tool-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; letter-spacing: 0.02em; color: var(--grey-mid);
+  border: 1px solid var(--line-dark); padding: 7px 12px 7px 10px; border-radius: var(--radius);
+}
+.section:not(.section--light) .tool-chip { color: var(--grey-light); border-color: var(--line); }
+.tool-chip--bare { border: none; padding: 0; }
+
+/* Bare inline logo mark, e.g. beside a diagram-node title */
+.tool-mark { display: inline-flex; width: 15px; height: 15px; vertical-align: -3px; margin-right: 6px; color: inherit; }
+.tool-mark .tool-logo__icon { width: 100%; height: 100%; }
+
+/* Small logo row under a flow node or content block */
+.tool-strip { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 10px; }
+.tool-strip [data-tool-logo] { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--grey); }
+.tool-strip .tool-logo__icon { width: 15px; height: 15px; }
+
+/* Subtle hover lift on diagram nodes — a touch of interactivity/dynamism */
+.flowdia__node { transition: transform 0.18s var(--ease), border-color 0.18s; }
+.flowdia__node:hover { transform: translateY(-2px); border-color: var(--grey); }
+.section--light .flowdia__node:hover { border-color: var(--grey-mid); }
+
+/* Mini learning-loop strip: tools -> Claude -> knowledge */
+.aid-loop-strip {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+  padding: 18px 20px; border: 1px solid var(--line-dark); margin-top: 16px;
+}
+.section:not(.section--light) .aid-loop-strip { border-color: var(--line); }
+.aid-loop-strip .aid-loop-arrow { color: var(--grey); font-size: 16px; flex: 0 0 auto; }
+.aid-loop-strip .aid-loop-node { display: flex; flex-direction: column; gap: 8px; }
+.aid-loop-strip .aid-loop-node span.lbl { font-family: var(--font); font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey); }
+
+/* Folder-structure two-panel layout */
+.aid-folder-block + .aid-folder-block { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line-dark); }
+.section:not(.section--light) .aid-folder-block + .aid-folder-block { border-top-color: var(--line); }
+.aid-org-diagram { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; border: 1px solid var(--line-dark); }
+.section:not(.section--light) .aid-org-diagram { border-color: var(--line); }
+.aid-org-diagram__cell { flex: 1 1 200px; padding: 18px 20px; border-left: 1px solid var(--line-dark); }
+.section:not(.section--light) .aid-org-diagram__cell { border-left-color: var(--line); }
+.aid-org-diagram__cell:first-child { border-left: none; }
+.aid-org-diagram__cell .aid-note { display: block; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
+.aid-org-diagram__cell h4 { font-size: 0.95rem; margin: 0 0 6px; }
+.aid-org-diagram__cell p { font-size: 12.5px; line-height: 1.55; color: var(--grey-mid); margin: 0; }
+.section:not(.section--light) .aid-org-diagram__cell p { color: var(--grey); }
+.aid-org-diagram__cell--emph { background: var(--dark-surface); }
+.aid-org-diagram__cell--emph .aid-note,
+.aid-org-diagram__cell--emph h4,
+.aid-org-diagram__cell--emph p { color: var(--white) !important; }
+.aid-org-diagram__cell--emph p { color: var(--cream-dim) !important; }
+
+@media (max-width: 760px) {
+  .aid-org-diagram { flex-direction: column; }
+  .aid-org-diagram__cell { border-left: none; border-top: 1px solid var(--line-dark); }
+  .section:not(.section--light) .aid-org-diagram__cell { border-top-color: var(--line); }
+  .aid-org-diagram__cell:first-child { border-top: none; }
 }
