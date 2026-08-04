@@ -2455,6 +2455,12 @@ body.nav-open { overflow: hidden; }
 .flowdia__node .node-icon { display: inline-flex; width: 13px; height: 13px; vertical-align: -2px; margin-right: 6px; color: inherit; }
 .flowdia__node .node-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
+/* Compact vertical folder/file list inside a flow-diagram node */
+.flowdia__node .mini-tree { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+.flowdia__node .mini-tree__row { display: flex; align-items: center; gap: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; line-height: 1.4; color: var(--grey); }
+.section--light .flowdia__node .mini-tree__row { color: var(--grey-mid); }
+.flowdia__node .mini-tree__row svg { width: 10px; height: 10px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
 /* Compact variant chips inside a flow-diagram node (production stage running several live variations) */
 .aid-variant-mini { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
 .aid-variant-mini span { font-size: 9px; letter-spacing: 0.02em; padding: 3px 7px; border: 1px solid var(--line); color: var(--grey); }
