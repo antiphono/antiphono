@@ -49,16 +49,25 @@ function isUnlocked(req) {
   return crypto.timingSafeEqual(a, b);
 }
 
-// Paths that stay public even when the rest of the site is gated.
-const GATE_ALLOWED_PAGES = ['/ai-enabled-design', '/ai-enabled-design.html', '/coming-soon', '/coming-soon.html'];
+// The gate/coming-soon page itself must always be reachable, in every environment.
+const GATE_SYSTEM_PAGES = ['/coming-soon', '/coming-soon.html'];
+
+// Pages that stay public even when the rest of the site is gated. Defaults to
+// today's production behaviour (only /ai-enabled-design). Override with the
+// GATE_PUBLIC_PATHS env var — a comma-separated list, or an empty string to
+// gate everything (e.g. on a private staging environment).
+const GATE_PUBLIC_PATHS = process.env.GATE_PUBLIC_PATHS !== undefined
+  ? process.env.GATE_PUBLIC_PATHS.split(',').map((p) => p.trim()).filter(Boolean)
+  : ['/ai-enabled-design', '/ai-enabled-design.html'];
 
 function isGatedRequest(urlPath) {
   if (urlPath === '/api/unlock') return false;
   // Only HTML page requests are gated — static assets (css/js/svg/fonts/etc.)
-  // always pass through, since the public page depends on them.
+  // always pass through, since pages depend on them regardless of gate state.
   const ext = path.extname(urlPath);
   if (ext && ext !== '.html') return false;
-  if (GATE_ALLOWED_PAGES.includes(urlPath)) return false;
+  if (GATE_SYSTEM_PAGES.includes(urlPath)) return false;
+  if (GATE_PUBLIC_PATHS.includes(urlPath)) return false;
   return true;
 }
 
