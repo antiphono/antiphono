@@ -305,7 +305,7 @@ function renderWorkScroll(container, projects) {
   chaptersEl.innerHTML = projects.map((p, i) => {
     const subtitle = p.title.includes(' — ') ? p.title.split(' — ').slice(1).join(' — ') : p.title;
     return `<a class="work-chapter${i === 0 ? ' is-active' : ''}"
-        href="/work-project?slug=${encodeURIComponent(p.slug)}"
+        href="/work/${p.slug}"
         data-index="${i}"
         data-visual="${escapeHTML(p.visual)}">
       <span class="work-chapter__client">${String(i + 1).padStart(2, '0')} / ${escapeHTML(p.client)}</span>
@@ -366,7 +366,7 @@ function workTileHTML(project, positionClass) {
     : '';
   const visualContent = project.coverImage ? '' : (VISUAL_ICONS[project.visual] || '');
   return `
-    <a class="work-tile ${positionClass} reveal" href="/work-project?slug=${encodeURIComponent(project.slug)}">
+    <a class="work-tile ${positionClass} reveal" href="/work/${project.slug}">
       <div class="work-tile__visual work-tile__visual--${project.visual}"${visualStyle}>${visualContent}</div>
       <div class="work-tile__scrim"></div>
       ${activeChip}
@@ -402,7 +402,7 @@ function compactProjectTileHTML(project) {
     : '';
   const visualContent = project.coverImage ? '' : (VISUAL_ICONS[project.visual] || '');
   return `
-    <a class="work-tile work-tile--compact reveal" href="/work-project?slug=${encodeURIComponent(project.slug)}">
+    <a class="work-tile work-tile--compact reveal" href="/work/${project.slug}">
       <div class="work-tile__visual work-tile__visual--${project.visual}"${visualStyle}>${visualContent}</div>
       <div class="work-tile__scrim"></div>
       ${activeChip}
@@ -418,6 +418,21 @@ function renderMoreProjects(container, currentSlug) {
   if (!container) return;
   const related = pickRelated(PROJECTS, currentSlug, 3);
   container.innerHTML = `<div class="compact-grid">${related.map(compactProjectTileHTML).join('')}</div>`;
+}
+
+/* ===== Related block ===== */
+/* items: [{ eyebrow, title, href, line }] */
+function renderRelated(container, items) {
+  if (!container || !items || items.length < 2) return;
+  container.innerHTML = `
+    <div class="related__items">
+      ${items.map((item) => `
+        <a class="related__card" href="${escapeHTML(item.href)}">
+          <span class="related__card-eyebrow">${escapeHTML(item.eyebrow)}</span>
+          <span class="related__card-title">${escapeHTML(item.title)}</span>
+          <span class="related__card-line">${escapeHTML(item.line)}</span>
+        </a>`).join('')}
+    </div>`;
 }
 
 /* ===== Project detail page ===== */

@@ -12,7 +12,7 @@ const PROJECTS = [
     coverImage: "/images/policyfly/PF_header.jpg",
     deliverables: ["Product Research", "UX Design", "UI Design", "Design System"],
     summary: "An all-in-one insurance administration platform — from design system foundations to multi-line product launches.",
-    overview: ["PolicyFly is revolutionising insurance administration for insurers who need to move fast without sacrificing compliance. As UI/UX lead, the work spans a Material Design-grounded system that ensures consistency from print collateral to complex underwriting workflows across multiple platforms.", "The design system was built to scale with a rapidly growing product suite — new lines of business, new entitlement states, new device targets. Every component decision had to serve both the designer building screens and the engineer implementing them, with no ambiguity in between.", "Over multiple years and product launches, the focus has remained the same: making sophisticated insurance workflows feel less like bureaucracy and more like a product people actually want to use."],
+    overview: ["PolicyFly is rebuilding insurance administration for insurers who need to move fast without sacrificing compliance. As UI/UX lead, the work spans a Material Design-grounded system that ensures consistency from print collateral to complex underwriting workflows across multiple platforms.", "The design system was built to scale with a rapidly growing product suite — new lines of business, new entitlement states, new device targets. Every component decision had to serve both the designer building screens and the engineer implementing them, with no ambiguity in between.", "Over multiple years and product launches, the focus has remained the same: making sophisticated insurance workflows feel less like bureaucracy and more like a product people actually want to use."],
     sections: [
       { type: "fullwidth", image: "/images/policyfly/1b.PolicyDocs_Menu.jpg", alt: "1B.Policydocs Menu" },
       { type: "fullwidth", image: "/images/policyfly/1i_Tasks (phase1)_Change Due Date.jpg", alt: "1I Tasks (Phase1) Change Due Date" },
@@ -295,7 +295,7 @@ const PROJECTS = [
     coverImage: "/images/beauty-crew/BC_Showcase1.png",
     deliverables: ["Product Strategy", "User Experience", "Interface & Brand Design"],
     summary: "Aggregated the editorial power of Seven's beauty brands into one community platform — elegant, age-agnostic, and designed to make content shoppable.",
-    overview: ["BeautyCrew aims to revolutionise the way consumers interact with beauty through a community approach to editorial, referral and retail. The platform established a firm foothold aggregating the reach, editorial power and brand equity of Seven's beauty and fashion brands, amplified by a market-leading mobile web experience.", "The product, brand and content experience is intentionally elegant but age-agnostic — its audience is extremely diverse, spanning teens to age preventers. The central ethos of the content strategy was to engage users in conversation, with editorial designed and worded to encourage dialogue within the community.", "Retail placements are integrated throughout various stages of the editorial experience to encourage and validate purchase decisions. The ReviewCrew feature actively rewards knowledge exchange — user reviews help people understand the quality of the latest cosmetics before they buy."],
+    overview: ["BeautyCrew set out to change the way consumers interact with beauty through a community approach to editorial, referral and retail. The platform established a firm foothold aggregating the reach, editorial power and brand equity of Seven's beauty and fashion brands, amplified by a market-leading mobile web experience.", "The product, brand and content experience is intentionally elegant but age-agnostic — its audience is extremely diverse, spanning teens to age preventers. The central ethos of the content strategy was to engage users in conversation, with editorial designed and worded to encourage dialogue within the community.", "Retail placements are integrated throughout various stages of the editorial experience to encourage and validate purchase decisions. The ReviewCrew feature actively rewards knowledge exchange — user reviews help people understand the quality of the latest cosmetics before they buy."],
     sections: [
       { type: "fullwidth", image: "/images/beauty-crew/BC_Comment.jpg", alt: "Comment" },
       { type: "fullwidth", image: "/images/beauty-crew/BC_Comment2 copy.jpg", alt: "Comment2" },
@@ -743,6 +743,64 @@ const PROJECTS = [
     ],
   },
 
+];
+
+/* ===== Launch case studies ===== */
+/* Fields used by the work gallery and case study page cards.
+   Body copy lives in the static HTML files under /work/. */
+const caseStudies = [
+  {
+    slug: "policyfly",
+    client: "PolicyFly",
+    named: true,
+    sector: "InsurTech",
+    yearStart: 2018,
+    yearEnd: "present",
+    headline: "", /* TODO Ben */
+    summary: "", /* TODO Ben */
+    services: ["UX design", "Product design", "Design systems"],
+    thumbnail: "",
+    featured: true
+  },
+  {
+    slug: "hearsay",
+    client: "Hearsay",
+    named: true,
+    sector: "SaaS and technology",
+    yearStart: 2024,
+    yearEnd: 2024,
+    headline: "", /* TODO Ben */
+    summary: "", /* TODO Ben */
+    services: ["Product design", "Product strategy", "AI feature design"],
+    thumbnail: "",
+    featured: true
+  },
+  {
+    slug: "winter-olympics-on-7",
+    client: "Winter Olympics on 7",
+    named: true,
+    sector: "OTT streaming",
+    yearStart: 2018,
+    yearEnd: 2018,
+    headline: "", /* TODO Ben */
+    summary: "", /* TODO Ben */
+    services: ["Product strategy", "Product design", "UX design", "UI design", "Analytics and measurement"],
+    thumbnail: "",
+    featured: true
+  },
+  {
+    slug: "beautycrew",
+    client: "BeautyCrew",
+    named: true,
+    sector: "Ecommerce and cosmetics",
+    yearStart: 2018,
+    yearEnd: 2018,
+    headline: "", /* TODO Ben */
+    summary: "", /* TODO Ben */
+    services: ["Product design", "Product strategy"],
+    thumbnail: "",
+    featured: false
+  }
 ];
 
 const ARTICLES = [];
