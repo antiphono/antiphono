@@ -1,0 +1,30 @@
+{
+  "updated": "2026-08-05",
+  "placeholder": true,
+  "counters": [
+    {
+      "id": "participants",
+      "label": "People we have researched with",
+      "qualifier": "Interviews and usability sessions since 2018. Not surveys",
+      "value": 840
+    },
+    {
+      "id": "platforms",
+      "label": "Client platforms we measure in",
+      "qualifier": "Live analytics and behaviour platforms",
+      "value": 14
+    },
+    {
+      "id": "features",
+      "label": "Features tested in production",
+      "qualifier": "Variations shipped to real traffic and measured",
+      "value": 260
+    },
+    {
+      "id": "decisions",
+      "label": "Decisions on the record",
+      "qualifier": "Written to the project record as the work happens",
+      "value": 1450
+    }
+  ]
+}

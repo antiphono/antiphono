@@ -187,6 +187,18 @@ setInterval(getArticles, CACHE_TTL);
 
 // ── Static file server ────────────────────────────────────────────────────
 
+function serve404(res) {
+  fs.readFile(path.join(ROOT, '404.html'), (err, data) => {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end('<h1>Not found</h1>');
+      return;
+    }
+    res.writeHead(404, { 'Content-Type': MIME['.html'] });
+    res.end(data);
+  });
+}
+
 function safeJoin(root, requestPath) {
   const resolved = path.normalize(path.join(root, requestPath));
   if (!resolved.startsWith(root)) return null;
@@ -211,6 +223,22 @@ http.createServer((req, res) => {
     return;
   }
 
+  // 301 redirects
+  if (urlPath === '/ai-enabled-design') {
+    res.writeHead(301, { Location: '/how-we-run-a-project' });
+    res.end();
+    return;
+  }
+  if (urlPath === '/work-project') {
+    const qs = req.url.indexOf('?') !== -1 ? req.url.slice(req.url.indexOf('?') + 1) : '';
+    const slug = new URLSearchParams(qs).get('slug');
+    if (slug) {
+      res.writeHead(301, { Location: '/work/' + slug });
+      res.end();
+      return;
+    }
+  }
+
   let filePath = safeJoin(ROOT, urlPath === '/' ? '/index.html' : urlPath);
   if (!filePath) {
     res.writeHead(400);
@@ -228,18 +256,10 @@ http.createServer((req, res) => {
             res.end(data2);
             return;
           }
-          fs.readFile(path.join(ROOT, 'index.html'), (err3, fallback) => {
-            if (err3) { res.writeHead(404); res.end('Not found'); return; }
-            res.writeHead(200, { 'Content-Type': MIME['.html'] });
-            res.end(fallback);
-          });
+          serve404(res);
         });
       }
-      fs.readFile(path.join(ROOT, 'index.html'), (err2, fallback) => {
-        if (err2) { res.writeHead(404); res.end('Not found'); return; }
-        res.writeHead(200, { 'Content-Type': MIME['.html'] });
-        res.end(fallback);
-      });
+      serve404(res);
       return;
     }
     const ext = path.extname(filePath);

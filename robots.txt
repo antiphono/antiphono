@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# /reports is hidden permanently. Keep this Disallow at launch when the rest is opened up.
+Disallow: /reports
