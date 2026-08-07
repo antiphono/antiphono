@@ -41,7 +41,7 @@ Rules:
 | How we run a project | How we work, Services, Contact |
 | Work gallery | Each card to its case study. Filter chips to the matching Services anchor |
 | Case study | Every service in "At a glance" links to its Services anchor. Related block: two case studies plus one service or article |
-| Article | Related block: one case study, one service, one article |
+| Article | Out of scope. Thinking renders an RSS feed and is not restructured |
 | About | Services, How we work, AI data and IP |
 | AI, data and IP | How we work, Services, About |
 
@@ -78,3 +78,7 @@ On every page except the home page, marked up with `BreadcrumbList` JSON-LD.
 Home / Work / PolicyFly
 Home / Services
 ```
+
+## Never link to
+
+`/reports` is hidden. No header link, no footer link, no related block entry, no in-body link. Check `render.js` as well as the HTML.

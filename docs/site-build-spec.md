@@ -92,9 +92,9 @@ Page body content lives in HTML, not injected by JavaScript. JavaScript is for t
 | `/how-we-run-a-project` | Technical detail | New. Receives the deep content from `/ai-enabled-design` |
 | `/work` | Case study gallery | Rebuild |
 | `/work/[slug]` | Individual case study | New URL structure |
-| `/articles` | Thinking | Keep, restructure |
+| `/articles` | Thinking | Keep as is. RSS feed from Soro, out of scope |
 | `/articles/[slug]` | Article | Keep |
-| `/reports` | Research reports | Keep |
+| `/reports` | Research reports | **Hidden.** Keep the files, remove every link, permanent noindex |
 | `/ai-data-and-ip` | AI, data and your IP | New |
 | `/about` | About | New |
 | `/contact` | Contact | New, replaces the `#book` anchor |
@@ -145,7 +145,7 @@ Rules:
 - Not sticky on scroll for standard pages. Sticky only where a section navigation is present (see 4.2).
 - Logo links to `/` and carries the accessible name "Antiphono, home".
 
-Research reports move out of the top navigation and into the footer.
+Research reports is hidden and appears in no navigation. Thinking stays in the header and is not restructured.
 
 ### 4.2 Section navigation, for long pages
 
@@ -198,8 +198,10 @@ See Part 6.4.
 
 Three columns.
 
-**Navigate:** Work · Services · How we work · Thinking · Research reports · About · Contact
+**Navigate:** Work · Services · How we work · Thinking · About · Contact
 **Position:** AI, data and your IP · Accessibility · How we run a project
+
+Research reports is NOT in the footer. That page is hidden.
 **Contact:** ben@antiphono.com · LinkedIn
 
 Rules:
@@ -747,12 +749,23 @@ Replace every `#book` anchor across the site with `/contact`.
 
 ---
 
-### 5.9 Thinking, `/articles` and Research, `/reports`
+### 5.9 Thinking, `/articles`
 
-Keep the existing structure. Two changes:
+**Out of scope. Do not change this page.** It pulls an RSS feed from Soro and renders it. Do not restructure it, rewrite the cards, audit the article copy or touch the RSS proxy in `server.js`.
 
-1. Every article page needs `Article` schema, an author of Ben Tweedie, a published date and a related block.
-2. Article and report cards must show a real date. Undated content reads as abandoned.
+Apply the shared header, footer and breadcrumbs only if that can be done without altering how the feed is fetched or rendered. If it cannot, stop and ask.
+
+Thinking stays in the main navigation.
+
+### 5.10 Research, `/reports`
+
+**Hidden. Do not link to it from anywhere.** The page holds placeholder PDFs which Ben will replace later.
+
+- Remove every link to `/reports` from the header, the footer, related blocks, `render.js` and every HTML file.
+- Leave the page and its files in place. Do not delete anything.
+- Keep `noindex, nofollow` on it permanently, and add a source comment saying the launch checklist must skip this page.
+- Exclude it from `sitemap.xml`.
+- Add `Disallow: /reports` to `robots.txt` and keep that line when the rest is opened up at launch.
 
 ---
 
@@ -1104,7 +1117,7 @@ The current site cannot hold this content without these changes.
 
 Header becomes: Work · Services · How we work · Thinking · About · **Get in touch**
 
-Research reports move to the footer. `/ai-enabled-design` leaves the top navigation and becomes a link from `/how-we-work`.
+Research reports is hidden and removed from all navigation. `/ai-enabled-design` leaves the top navigation and becomes a link from `/how-we-work`.
 
 Mobile navigation needs `aria-expanded`, a focus trap while open, Escape to close, and focus returning to the toggle on close.
 
@@ -1150,8 +1163,8 @@ WCAG 2.1 AA. Not optional, and not a later pass. It is also a stated client comm
 
 ## Part 11: Before launch
 
-- [ ] Remove `noindex, nofollow` from every page. **Only on Ben's instruction.**
-- [ ] Update `robots.txt` to allow crawling and reference the sitemap.
+- [ ] Remove `noindex, nofollow` from every page EXCEPT `/reports`, which stays hidden. **Only on Ben's instruction.**
+- [ ] Update `robots.txt` to allow crawling and reference the sitemap. Keep `Disallow: /reports`.
 - [ ] Replace the invented counter values and set `"placeholder": false`.
 - [ ] Confirm the publication conditions in `Antiphono-AI-and-Data-Position-v2.md` section 4 are met before `/ai-data-and-ip` goes live.
 - [ ] Every `TODO` in this build resolved or the section removed.
@@ -1162,7 +1175,8 @@ WCAG 2.1 AA. Not optional, and not a later pass. It is also a stated client comm
 - [ ] All structured data validates.
 - [ ] Every internal link resolves. No links to `#`.
 - [ ] Keyboard test on every page.
-- [ ] `sitemap.xml` covers every indexable page.
+- [ ] `sitemap.xml` covers every indexable page and excludes `/reports`.
+- [ ] No link anywhere on the site resolves to `/reports`.
 - [ ] `/ai-enabled-design` redirects correctly and does not 404 for clients holding the link.
 
 ---

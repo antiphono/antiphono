@@ -100,9 +100,38 @@ Copy has moved to `docs/copy/how-we-run-a-project.md`. Every fix required when m
 
 ---
 
-# Thinking, `/articles` and Research, `/reports`
+# Thinking, `/articles`
 
-Keep the existing structure. Two changes:
+**Do not change this page.**
 
-1. Every article page needs `Article` schema, an author of Ben Tweedie, a published date and a related block.
-2. Article and report cards must show a real date. Undated content reads as abandoned.
+Thinking pulls an RSS feed from Soro and renders it. The feed, the proxy in `server.js` and the rendering are all working and out of scope. Do not restructure it, do not rewrite the article cards, do not audit the article copy, and do not touch the RSS proxy.
+
+Two things only, and only if they can be done without altering how the feed renders:
+
+1. Apply the shared header, footer and breadcrumbs so it matches the rest of the site.
+2. Keep `noindex, nofollow` in place like every other page.
+
+Thinking stays in the main navigation.
+
+If adding the shared components would require changing how the feed is fetched or rendered, stop and ask rather than proceeding.
+
+---
+
+# Research, `/reports`
+
+**Hidden for now. Do not link to it from anywhere.**
+
+The page currently holds placeholder research PDFs which will be replaced later. Until then it must not be reachable through the site.
+
+What to do:
+
+1. **Remove every link to `/reports`.** It comes out of the header, out of the footer, and out of any related content block. Check `render.js` and every HTML file.
+2. **Leave the page and its files in place.** Do not delete anything. It comes back later.
+3. **Keep `noindex, nofollow` on it permanently,** not just until launch. Add a comment in the file saying so, because the launch checklist removes `noindex` everywhere else and this page must be skipped.
+4. **Exclude `/reports` from `sitemap.xml`.**
+5. **Add `Disallow: /reports` to `robots.txt`,** and keep that line when the rest of `robots.txt` is opened up at launch.
+
+The placeholder PDFs stay reachable by direct URL unless Ben says otherwise. Flag this if you think it is a risk.
+
+"Want to commission a report?" and any other calls to action on that page are dormant along with it. Leave them as they are.
+

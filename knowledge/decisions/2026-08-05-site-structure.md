@@ -61,3 +61,9 @@ GroupTogether and Future Women can be named in case studies but are kept out of 
 ## Unresolved
 
 Billing model. The recorded July 2026 decision was to move from hourly billing to retainers, because under hourly billing efficiency reduces revenue. Ben's current direction is time and materials with rates shaped per project. The recommendation on the table is to keep flexible rates but quote committed blocks up front rather than invoicing hours after the fact. Nothing on the website depends on this.
+
+## Thinking and Research
+
+Thinking, at `/articles`, renders an RSS feed from Soro. It works and is out of scope for the rebuild. It stays in the main navigation and is not restructured.
+
+Research, at `/reports`, holds placeholder PDFs and is hidden until real reports replace them. Files stay in place, every link is removed, and it keeps `noindex` permanently rather than being opened up with the rest of the site at launch. The placeholder PDFs remain reachable by direct URL, which is a small credibility risk if a link ever leaks.

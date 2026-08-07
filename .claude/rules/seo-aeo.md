@@ -99,7 +99,9 @@ Disallow: /
 
 At launch, allow everything and reference the sitemap.
 
-**`sitemap.xml`.** Every indexable page with `lastmod`. Generate it from a list in `data.js` so it cannot drift out of date.
+**`sitemap.xml`.** Every indexable page with `lastmod`. Generate it from a list in `data.js` so it cannot drift out of date. Exclude `/reports`, which is hidden.
+
+**`/reports` is permanently excluded.** It keeps `noindex, nofollow` after launch, stays out of the sitemap, and `robots.txt` keeps `Disallow: /reports` when the rest is opened up.
 
 **`llms.txt`** at the site root. Short, factual, no marketing language.
 

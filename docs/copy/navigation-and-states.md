@@ -19,7 +19,7 @@ Logo accessible name: `Antiphono, home`.
 Mobile toggle accessible name: `Menu`. When open: `Close menu`.
 Skip link: `Skip to main content`.
 
-Research reports are not in the header. They live in the footer.
+Research reports are not in the navigation at all. That page is hidden. See `other-pages.md`.
 
 ---
 
@@ -30,7 +30,9 @@ Research reports are not in the header. They live in the footer.
 > Antiphono is a product design and research studio in Sydney, Australia.
 
 **Column 1, Navigate**
-Work · Services · How we work · Thinking · Research reports · About · Contact
+Work · Services · How we work · Thinking · About · Contact
+
+Research reports are deliberately absent. That page is hidden.
 
 **Column 2, Position**
 AI, data and your IP · How we run a project · Accessibility
@@ -98,15 +100,9 @@ One per page, above the footer. Copy varies by page and is given in each page's 
 
 Every card shows a real published date. Undated content reads as abandoned.
 
-**Empty state for Thinking:**
+Thinking renders an RSS feed and is not expected to be empty. No empty state is needed and the page is out of scope for restructuring.
 
-> **Nothing published here yet.**
-> New writing goes up here as it happens. In the meantime, the [work](/work) is a better guide to how we think.
-
-**Empty state for Research reports:**
-
-> **No reports published yet.**
-> If there is something you want researched properly, [get in touch](/contact).
+Research reports is hidden. No empty state is needed.
 
 ---
 

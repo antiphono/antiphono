@@ -9,7 +9,7 @@ Use these files as written. Do not rewrite, paraphrase or improve the copy. It h
 | `how-we-work.md` | `/how-we-work` |
 | `how-we-run-a-project.md` | `/how-we-run-a-project` |
 | `ai-data-and-ip.md` | `/ai-data-and-ip` |
-| `other-pages.md` | `/about`, `/work`, `/contact`, `/articles`, `/reports` |
+| `other-pages.md` | `/about`, `/work`, `/contact`, plus the rules for `/articles` and `/reports` |
 | `navigation-and-states.md` | Header, footer, breadcrumbs, filters, counters, empty states, 404, 500, alt text and link text rules |
 
 ## What is not here
@@ -20,7 +20,7 @@ Use these files as written. Do not rewrite, paraphrase or improve the copy. It h
 
 **Real counter values.** See `.claude/rules/counters.md`.
 
-**Existing articles and reports.** Whatever is currently on `/articles` and `/reports` has not been audited against the voice rules. Flag anything that breaks them rather than silently rewriting it.
+**Thinking and Research copy.** Neither needs any. `/articles` renders an RSS feed from Soro and is out of scope, and `/reports` is hidden. See `other-pages.md` for both.
 
 ## TODO markers
 
