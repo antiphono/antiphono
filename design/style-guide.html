@@ -676,6 +676,9 @@
     <a href="#voice">Voice</a>
     <a href="#accessibility">Accessibility</a>
 
+    <p class="sg-nav__group">References</p>
+    <a href="#ref-fontshare">Fontshare</a>
+
     <div class="sg-nav__spacer"></div>
 
     <div class="sg-nav__footer">
@@ -1445,6 +1448,254 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
           </tr>
         </tbody>
       </table>
+    </section>
+
+    <!-- ════════ REFERENCE: FONTSHARE ════════ -->
+    <section class="sg-section" id="ref-fontshare">
+      <p class="sg-eyebrow">08 — Reference</p>
+      <h2>Fontshare</h2>
+
+      <p class="sg-body">Extracted from fontshare.com in August 2026 as a visual reference for the Antiphono direction. Fontshare is a free type library by Indian Type Foundry. Its site is a useful benchmark: editorial, dark, warm, typographically confident, almost no decoration.</p>
+
+      <div class="sg-draft" style="color:#60A5FA;border-color:rgba(96,165,250,0.25);">
+        <span style="width:5px;height:5px;background:#60A5FA;border-radius:50%;display:inline-block;"></span>
+        Provisional — values below are not applied to styles.css
+      </div>
+
+      <!-- ── Colour extraction ── -->
+      <div class="sg-h3">Colour palette</div>
+
+      <p class="sg-body">Fontshare uses a tight warm palette: a strongly warm cream for the page shell, a near-black with brown undertones for content surfaces, and a warm stone grey for secondary text. No accent colour. No gradients.</p>
+
+      <div class="sg-palette" style="margin-bottom:40px;">
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#10100E;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Content surface</span>
+            <span class="sg-swatch__hex">#10100E</span>
+            <span class="sg-swatch__var">Font card background</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#191815;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Deep surface</span>
+            <span class="sg-swatch__hex">#191815</span>
+            <span class="sg-swatch__var">Overlay / mobile menu</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#30302B;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Interactive surface</span>
+            <span class="sg-swatch__hex">#30302B</span>
+            <span class="sg-swatch__var">Hover / selected state</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#FFFFE3;border:1px solid rgba(0,0,0,0.1);"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name" style="color:#0A0A0A;">Page cream</span>
+            <span class="sg-swatch__hex" style="color:#6A6A62;">#FFFFE3</span>
+            <span class="sg-swatch__var" style="color:#87877F;">Shell / text on dark</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#C0C0AB;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Stone</span>
+            <span class="sg-swatch__hex">#C0C0AB</span>
+            <span class="sg-swatch__var">Secondary / muted text</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#000000;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">True black</span>
+            <span class="sg-swatch__hex">#000000</span>
+            <span class="sg-swatch__var">Body default (overridden)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Token comparison ── -->
+      <div class="sg-h3">Token comparison: Fontshare vs Antiphono</div>
+
+      <p class="sg-body">Antiphono's palette already shares the warm direction. The main differences are warmth intensity in the cream, and the absence of an intermediate interactive surface token.</p>
+
+      <table class="sg-token-table">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Fontshare</th>
+            <th>Antiphono current</th>
+            <th>Gap / note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Page / shell bg</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#FFFFE3 (warm yellow-cream)</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#F2F1EC (--white)</td>
+            <td>Antiphono is more neutral. Fontshare adds yellow warmth. Both are low-contrast to page black.</td>
+          </tr>
+          <tr>
+            <td>Content bg / near-black</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#10100E (warm near-black)</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#0A0A0A (--black)</td>
+            <td>Very close. Fontshare is fractionally lighter and has more warm undertone.</td>
+          </tr>
+          <tr>
+            <td>Elevated surface</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#191815</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#141413 (--dark-surface)</td>
+            <td>Both warm dark surfaces, nearly identical in role and tone.</td>
+          </tr>
+          <tr>
+            <td>Interactive / hover</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#30302B</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">None</td>
+            <td style="color:#E8A44A;">Gap. Antiphono has no mid-dark surface token for hover states. Provisional: add <code>--surface: #1E1E1A</code>.</td>
+          </tr>
+          <tr>
+            <td>Secondary text</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#C0C0AB (warm stone)</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#87877F (--grey)</td>
+            <td>Fontshare's stone is lighter and warmer. Antiphono's grey is darker and cooler. Both pass AA on dark backgrounds.</td>
+          </tr>
+          <tr>
+            <td>Accent</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">None — no accent colour</td>
+            <td style="font-family:'Space Mono',monospace;font-size:11px;">#C8FF47 (--lime)</td>
+            <td>Antiphono uses lime for active states. Fontshare relies on border-weight changes alone.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ── Typography ── -->
+      <div class="sg-h3">Typographic scale approach</div>
+
+      <p class="sg-body">Fontshare uses extreme typographic scale: display names at 90px weight 400, metadata labels at 12px weight 500–600. The gap between these two sizes is the entire design. Nothing else needs decoration when the type is that confident.</p>
+
+      <div style="border:1px solid var(--line);border-radius:2px;padding:40px 40px 32px;margin-bottom:24px;background:rgb(16,16,14);">
+        <p style="font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:#C0C0AB;margin-bottom:6px;font-family:'Sora',sans-serif;">Font name · 12 styles · Variable</p>
+        <div style="font-size:clamp(3rem,8vw,5.5rem);font-weight:400;color:#FFFFE3;line-height:1.0;font-family:'Sora',sans-serif;letter-spacing:-0.02em;">Display Text</div>
+        <p style="font-size:11px;color:#C0C0AB;margin-top:28px;font-family:'Sora',sans-serif;">By Foundry Name</p>
+      </div>
+
+      <table class="sg-token-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Size</th>
+            <th>Weight</th>
+            <th>Colour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Display / font name</td>
+            <td>90px (raw) / ~5.5rem clamped</td>
+            <td>400 (Regular)</td>
+            <td>#FFFFE3 on dark</td>
+          </tr>
+          <tr>
+            <td>Metadata labels (style count, tags)</td>
+            <td>12px</td>
+            <td>500</td>
+            <td>#C0C0AB (stone)</td>
+          </tr>
+          <tr>
+            <td>Byline / foundry name</td>
+            <td>11–12px</td>
+            <td>400</td>
+            <td>#C0C0AB (stone)</td>
+          </tr>
+          <tr>
+            <td>Navigation items (active filter)</td>
+            <td>24px</td>
+            <td>500</td>
+            <td>#10100E on #FFFFE3</td>
+          </tr>
+          <tr>
+            <td>Navigation logo</td>
+            <td>12px</td>
+            <td>600</td>
+            <td>#FFFFE3 on dark header</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ── Layout ── -->
+      <div class="sg-h3">Layout approach</div>
+
+      <p class="sg-body">The layout is deliberately simple: a sticky header at 60px, full-bleed dark panels that fill the viewport for each item, a 1px divider between panels, metadata above the type specimen, byline below. No container max-width. No sidebar. No card grid.</p>
+
+      <table class="sg-token-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Value</th>
+            <th>Note for Antiphono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Header height</td>
+            <td>60px</td>
+            <td>Antiphono nav is similar. Keep compact.</td>
+          </tr>
+          <tr>
+            <td>Content panels</td>
+            <td>Full-bleed, full-viewport-height</td>
+            <td>Not applicable to Antiphono (different content type).</td>
+          </tr>
+          <tr>
+            <td>Panel divider</td>
+            <td>1px solid, warm dark-on-dark</td>
+            <td>Matches Antiphono's --line usage. Consistent approach.</td>
+          </tr>
+          <tr>
+            <td>Metadata row height</td>
+            <td>~40px above specimen</td>
+            <td>Compare to Antiphono's .row-index eyebrow labels.</td>
+          </tr>
+          <tr>
+            <td>Max-width</td>
+            <td>None — fully fluid</td>
+            <td>Antiphono uses --max-w (1120px). Keep max-width for readability.</td>
+          </tr>
+          <tr>
+            <td>Body/shell background</td>
+            <td>Cream shell, dark content</td>
+            <td>Inverted from Antiphono (dark body, light accents). Alternative worth exploring.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ── What this tells us ── -->
+      <div class="sg-h3">What this means for Antiphono</div>
+
+      <p class="sg-body">The Fontshare palette validates the warm dark direction already in <code>styles.css</code>. Three concrete proposals for Ben to consider:</p>
+
+      <div class="sg-principles" style="margin-top:0;">
+        <div class="sg-principle">
+          <p class="sg-principle__n">01</p>
+          <h4>Add a mid-dark surface token</h4>
+          <p>Provisional: <code>--surface: #1E1E1A</code>. Sits between <code>--black</code> and <code>--dark-surface</code>. Useful for hover states, selected rows, and interactive cards without reaching for a full surface elevation.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">02</p>
+          <h4>Warm the cream further, optionally</h4>
+          <p>Current <code>--white: #F2F1EC</code> is already warm. Fontshare goes to <code>#FFFFE3</code> for a more pronounced warmth. A small step (e.g. <code>#F5F4EC</code>) could push the cream towards their direction without committing to full yellow.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">03</p>
+          <h4>Test display type at a larger cap</h4>
+          <p>Fontshare's confidence comes from scale. Antiphono's current display cap is <code>--text-3xl</code> via clamp. A dedicated hero class at <code>clamp(3.5rem, 7vw, 6rem)</code> on select pages would match the editorial confidence of the reference.</p>
+        </div>
+      </div>
+
     </section>
 
   </main>
