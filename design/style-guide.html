@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Design System | Antiphono</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+
+/* ── Guide layout ──────────────────────────────── */
+
+.sg {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sg-nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 48px 28px 48px 32px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+
+.sg-nav__brand {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 4px;
+}
+
+.sg-nav__sub {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  margin-bottom: 40px;
+}
+
+.sg-nav__group {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  margin-top: 28px;
+  margin-bottom: 6px;
+}
+
+.sg-nav a {
+  display: block;
+  font-size: 12px;
+  color: var(--grey);
+  padding: 5px 0;
+  transition: color 0.15s;
+}
+
+.sg-nav a:hover { color: var(--white); }
+.sg-nav a.is-active { color: var(--white); }
+
+.sg-nav__spacer { flex: 1; }
+
+.sg-nav__footer {
+  font-size: 10px;
+  color: var(--grey-mid);
+  line-height: 1.6;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+/* Main content */
+.sg-main {
+  padding: 80px 80px 160px;
+}
+
+/* Sections */
+.sg-section {
+  max-width: 860px;
+  margin-bottom: 96px;
+  padding-bottom: 96px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 48px;
+}
+
+.sg-section:last-child {
+  border-bottom: none;
+}
+
+.sg-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 16px;
+}
+
+.sg-section > h2 {
+  font-family: var(--font-editorial);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+
+.sg-h3 {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-top: 52px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sg-body {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+
+/* Draft badge */
+.sg-draft {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: #E8A44A;
+  border: 1px solid rgba(232,164,74,0.25);
+  padding: 6px 12px;
+  border-radius: 100px;
+  margin-bottom: 40px;
+}
+
+.sg-draft::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #E8A44A;
+  border-radius: 50%;
+  animation: sg-pulse 2s ease infinite;
+}
+
+@keyframes sg-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ── Colour section ───────────────────────────── */
+
+.sg-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.sg-swatch {
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.sg-swatch__block {
+  height: 64px;
+}
+
+.sg-swatch__info {
+  padding: 10px 12px 12px;
+  background: var(--dark-surface);
+}
+
+.sg-swatch__name {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+
+.sg-swatch__hex {
+  display: block;
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey);
+}
+
+.sg-swatch__var {
+  display: block;
+  font-size: 9px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  margin-top: 2px;
+}
+
+/* Contrast pairs */
+.sg-contrast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.sg-contrast-pair {
+  padding: 20px;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+}
+
+.sg-contrast-pair__sample {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.sg-contrast-pair__label {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  margin-bottom: 4px;
+}
+
+.sg-contrast-pair__ratio {
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+
+.sg-contrast-pair__pass {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-top: 6px;
+}
+
+.pass { background: rgba(200,255,71,0.12); color: #C8FF47; }
+.fail { background: rgba(255,80,80,0.12); color: #FF5050; }
+
+/* ── Typography section ───────────────────────── */
+
+.sg-type-family {
+  margin-bottom: 40px;
+  padding: 36px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+
+.sg-type-family__meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.sg-type-family__tag {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey);
+  background: var(--dark-surface);
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.sg-type-family__name {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+}
+
+.sg-type-specimen {
+  overflow: hidden;
+}
+
+.sg-scale-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: baseline;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.sg-scale-row:last-child { border-bottom: none; }
+
+.sg-scale-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.sg-scale-var {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--lime);
+}
+
+.sg-scale-size {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+}
+
+.sg-scale-use {
+  font-size: 9px;
+  color: var(--grey-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+.sg-scale-sample {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--white);
+}
+
+/* Weight scale */
+.sg-weight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.sg-weight-item {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+
+.sg-weight-sample {
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
+.sg-weight-label {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey);
+}
+
+/* ── Space section ────────────────────────────── */
+
+.sg-space-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.sg-space-row:first-child { border-top: 1px solid var(--line-soft); }
+
+.sg-space-bar-wrap {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.sg-space-bar {
+  background: var(--white);
+  opacity: 0.12;
+  height: 1px;
+  position: relative;
+}
+
+.sg-space-bar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: inherit;
+  opacity: 1;
+}
+
+.sg-space-value {
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  color: var(--white);
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.sg-space-px {
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.sg-space-use {
+  font-size: 12px;
+  color: var(--grey);
+}
+
+/* ── Component section ────────────────────────── */
+
+.sg-demo {
+  padding: 48px 40px;
+  background: var(--dark-surface);
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.sg-demo--light {
+  background: var(--white);
+}
+
+.sg-demo--center {
+  justify-content: center;
+}
+
+.sg-code {
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  background: var(--black);
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  border-radius: 2px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.sg-token-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.sg-token-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey-mid);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.sg-token-table td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+}
+
+.sg-token-table td:first-child {
+  font-family: 'Space Mono', monospace;
+  color: var(--lime);
+  font-size: 11px;
+  white-space: nowrap;
+  padding-right: 24px;
+}
+
+.sg-token-table td:nth-child(2) {
+  color: var(--white);
+  padding-right: 24px;
+}
+
+.sg-token-table td:last-child {
+  color: var(--grey);
+}
+
+/* ── Motion section ───────────────────────────── */
+
+.sg-ease-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.sg-ease-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.sg-ease-card__label {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey);
+  margin-bottom: 6px;
+}
+
+.sg-ease-card__curve {
+  font-size: 9px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.sg-ease-card__use {
+  font-size: 11px;
+  color: var(--grey-mid);
+  margin-bottom: 24px;
+}
+
+.sg-ease-track {
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.sg-ease-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  left: 0;
+}
+
+.sg-ease-card:hover .sg-ease-dot { left: calc(100% - 8px); }
+.sg-ease-card--spring .sg-ease-dot { transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.sg-ease-card--sharp .sg-ease-dot { transition: left 0.9s cubic-bezier(0.87, 0, 0.13, 1); }
+.sg-ease-card--fast .sg-ease-dot { transition: left 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Timing scale */
+.sg-timing-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.sg-timing-label {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--white);
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.sg-timing-desc {
+  font-size: 12px;
+  color: var(--grey);
+  flex: 1;
+}
+
+.sg-timing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--lime);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-name: sg-timing-flash;
+}
+
+.sg-timing-row:nth-child(1) .sg-timing-dot { animation-duration: 0.2s; }
+.sg-timing-row:nth-child(2) .sg-timing-dot { animation-duration: 0.4s; }
+.sg-timing-row:nth-child(3) .sg-timing-dot { animation-duration: 0.6s; }
+.sg-timing-row:nth-child(4) .sg-timing-dot { animation-duration: 0.9s; }
+
+@keyframes sg-timing-flash {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.1; }
+}
+
+/* Principles */
+.sg-principles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.sg-principle {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+
+.sg-principle__n {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  color: var(--grey-mid);
+  margin-bottom: 12px;
+}
+
+.sg-principle h4 {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.sg-principle p {
+  font-size: 12px;
+  color: var(--grey);
+  line-height: 1.65;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .sg-main { padding: 48px 40px 120px; }
+}
+
+@media (max-width: 760px) {
+  .sg { grid-template-columns: 1fr; }
+  .sg-nav { position: static; height: auto; padding: 28px 24px; border-right: none; border-bottom: 1px solid var(--line); }
+  .sg-nav__spacer { display: none; }
+  .sg-main { padding: 40px 24px 80px; }
+  .sg-weight-grid { grid-template-columns: 1fr 1fr; }
+  .sg-ease-grid { grid-template-columns: 1fr; }
+  .sg-principles { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="sg">
+
+  <!-- ── Sidebar ─── -->
+  <nav class="sg-nav" aria-label="Style guide navigation">
+    <p class="sg-nav__brand">Antiphono</p>
+    <p class="sg-nav__sub">Design System v1 · Draft</p>
+
+    <p class="sg-nav__group">Foundation</p>
+    <a href="#overview">Overview</a>
+    <a href="#colour">Colour</a>
+    <a href="#typography">Typography</a>
+    <a href="#space">Space &amp; Grid</a>
+
+    <p class="sg-nav__group">Components</p>
+    <a href="#buttons">Buttons</a>
+    <a href="#labels">Labels &amp; Tags</a>
+    <a href="#links">Links</a>
+    <a href="#chips">Filter Chips</a>
+
+    <p class="sg-nav__group">Principles</p>
+    <a href="#motion">Motion</a>
+    <a href="#voice">Voice</a>
+    <a href="#accessibility">Accessibility</a>
+
+    <div class="sg-nav__spacer"></div>
+
+    <div class="sg-nav__footer">
+      Not indexed. Not public.<br>
+      For internal reference only.
+    </div>
+  </nav>
+
+  <!-- ── Main ─── -->
+  <main class="sg-main">
+
+    <!-- ════════ OVERVIEW ════════ -->
+    <section class="sg-section" id="overview">
+      <p class="sg-eyebrow">00 — Overview</p>
+      <h2>Design System</h2>
+
+      <div class="sg-draft">Draft — pending Ben's sign-off before applying to the site</div>
+
+      <p class="sg-body">This document defines the visual language for Antiphono.com. It codifies what already exists in <code>styles.css</code> and proposes the decisions that are currently implicit. Nothing here is applied to the site until approved.</p>
+
+      <div class="sg-h3">Design principles</div>
+
+      <div class="sg-principles">
+        <div class="sg-principle">
+          <p class="sg-principle__n">01</p>
+          <h4>Outcome, not process</h4>
+          <p>Every page opens with the result. Tools and methods are secondary. The design reflects this — what you see is always the most important thing on screen.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">02</p>
+          <h4>Nothing decorative</h4>
+          <p>No gradients for atmosphere, no texture for texture's sake. Every visual decision earns its place by carrying meaning or improving readability.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">03</p>
+          <h4>Precision over polish</h4>
+          <p>Sharp edges, tight spacing, exact alignment. The 2px border radius is a decision, not a default. Refinement comes from constraint, not ornamentation.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">04</p>
+          <h4>Typographic hierarchy</h4>
+          <p>Sora carries the work. Fraunces appears once per section, briefly, as a human signal inside a precise system. Never use Fraunces for body copy.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">05</p>
+          <h4>Motion with purpose</h4>
+          <p>One well-choreographed entrance outperforms ten hover effects. Motion confirms an action, reveals content, or acknowledges a state change. Nothing else.</p>
+        </div>
+        <div class="sg-principle">
+          <p class="sg-principle__n">06</p>
+          <h4>Accessible by default</h4>
+          <p>WCAG 2.1 AA is the floor, not the target. Contrast ratios, focus rings and reduced-motion support are wired in from the start, not audited at the end.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ COLOUR ════════ -->
+    <section class="sg-section" id="colour">
+      <p class="sg-eyebrow">01 — Colour</p>
+      <h2>The palette</h2>
+
+      <p class="sg-body">A near-monochrome system of warm blacks and cream, with a single lime accent for interactive moments. Colour enters through photography and client work, never through the UI chrome itself.</p>
+
+      <div class="sg-h3">Core tokens</div>
+
+      <div class="sg-palette">
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#0A0A0A;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Black</span>
+            <span class="sg-swatch__hex">#0A0A0A</span>
+            <span class="sg-swatch__var">--black</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#141413;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Dark Surface</span>
+            <span class="sg-swatch__hex">#141413</span>
+            <span class="sg-swatch__var">--dark-surface</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#F2F1EC;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name" style="color:#0A0A0A;">White</span>
+            <span class="sg-swatch__hex" style="color:#6A6A62;">#F2F1EC</span>
+            <span class="sg-swatch__var" style="color:#87877F;">--white</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#87877F;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Grey</span>
+            <span class="sg-swatch__hex">#87877F</span>
+            <span class="sg-swatch__var">--grey</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#6A6A62;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name">Grey Mid</span>
+            <span class="sg-swatch__hex">#6A6A62</span>
+            <span class="sg-swatch__var">--grey-mid</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#BDBDB5;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name" style="color:#0A0A0A;">Grey Light</span>
+            <span class="sg-swatch__hex" style="color:#6A6A62;">#BDBDB5</span>
+            <span class="sg-swatch__var" style="color:#87877F;">--grey-light</span>
+          </div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__block" style="background:#C8FF47;"></div>
+          <div class="sg-swatch__info">
+            <span class="sg-swatch__name" style="color:#0A0A0A;">Lime</span>
+            <span class="sg-swatch__hex" style="color:#6A6A62;">#C8FF47</span>
+            <span class="sg-swatch__var" style="color:#87877F;">--lime</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sg-h3">Colour roles</div>
+
+      <table class="sg-token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Role</th>
+            <th>Where it appears</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>--black</td>
+            <td>Page background</td>
+            <td>Body, all dark sections</td>
+          </tr>
+          <tr>
+            <td>--dark-surface</td>
+            <td>Elevated surfaces</td>
+            <td>Cards, flow nodes, code blocks, nav (scrolled)</td>
+          </tr>
+          <tr>
+            <td>--white</td>
+            <td>Primary text &amp; primary action</td>
+            <td>Headings, body, .btn background, .btn-lime background</td>
+          </tr>
+          <tr>
+            <td>--grey</td>
+            <td>Secondary text</td>
+            <td>Labels, captions, navigation links (default), eyebrows</td>
+          </tr>
+          <tr>
+            <td>--grey-mid</td>
+            <td>Tertiary text</td>
+            <td>Sub-labels, monospace annotations, meta copy</td>
+          </tr>
+          <tr>
+            <td>--grey-light</td>
+            <td>Subtle text</td>
+            <td>Footnotes, disabled states, placeholder text</td>
+          </tr>
+          <tr>
+            <td>--lime</td>
+            <td>Accent — reserved</td>
+            <td>Active filter chips, highlight marks, select states. Not used on buttons currently.</td>
+          </tr>
+          <tr>
+            <td>--line</td>
+            <td>Border on dark</td>
+            <td>rgba(242,241,236,0.10) — all borders on dark backgrounds</td>
+          </tr>
+          <tr>
+            <td>--line-dark</td>
+            <td>Border on light</td>
+            <td>rgba(10,10,10,0.10) — borders on --white section backgrounds</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sg-h3">Accessible combinations</div>
+
+      <div class="sg-contrast-grid">
+        <div class="sg-contrast-pair" style="background:#0A0A0A;">
+          <div class="sg-contrast-pair__sample" style="color:#F2F1EC;">Aa</div>
+          <div class="sg-contrast-pair__label">--white on --black</div>
+          <div class="sg-contrast-pair__ratio" style="color:#F2F1EC;">17.9 : 1</div>
+          <span class="sg-contrast-pair__pass pass">AA ✓ AAA ✓</span>
+        </div>
+        <div class="sg-contrast-pair" style="background:#0A0A0A;">
+          <div class="sg-contrast-pair__sample" style="color:#87877F;">Aa</div>
+          <div class="sg-contrast-pair__label">--grey on --black</div>
+          <div class="sg-contrast-pair__ratio" style="color:#87877F;">4.6 : 1</div>
+          <span class="sg-contrast-pair__pass pass">AA ✓</span>
+        </div>
+        <div class="sg-contrast-pair" style="background:#0A0A0A;">
+          <div class="sg-contrast-pair__sample" style="color:#6A6A62;">Aa</div>
+          <div class="sg-contrast-pair__label">--grey-mid on --black</div>
+          <div class="sg-contrast-pair__ratio" style="color:#6A6A62;">3.1 : 1</div>
+          <span class="sg-contrast-pair__pass fail">Body: fail. Large text: AA ✓</span>
+        </div>
+        <div class="sg-contrast-pair" style="background:#141413;">
+          <div class="sg-contrast-pair__sample" style="color:#F2F1EC;">Aa</div>
+          <div class="sg-contrast-pair__label">--white on --dark-surface</div>
+          <div class="sg-contrast-pair__ratio" style="color:#F2F1EC;">15.8 : 1</div>
+          <span class="sg-contrast-pair__pass pass">AA ✓ AAA ✓</span>
+        </div>
+        <div class="sg-contrast-pair" style="background:#F2F1EC;">
+          <div class="sg-contrast-pair__sample" style="color:#0A0A0A;">Aa</div>
+          <div class="sg-contrast-pair__label">--black on --white</div>
+          <div class="sg-contrast-pair__ratio" style="color:#0A0A0A;">17.9 : 1</div>
+          <span class="sg-contrast-pair__pass pass" style="color:#C8FF47;background:rgba(200,255,71,0.12);">AA ✓ AAA ✓</span>
+        </div>
+        <div class="sg-contrast-pair" style="background:#C8FF47;">
+          <div class="sg-contrast-pair__sample" style="color:#0A0A0A;">Aa</div>
+          <div class="sg-contrast-pair__label">--black on --lime</div>
+          <div class="sg-contrast-pair__ratio" style="color:#0A0A0A;">13.4 : 1</div>
+          <span class="sg-contrast-pair__pass pass" style="color:#0A0A0A;background:rgba(0,0,0,0.1);">AA ✓ AAA ✓</span>
+        </div>
+      </div>
+
+      <p class="sg-body" style="margin-top:20px;font-size:12px;">Note: --grey-mid (#6A6A62) on --black (#0A0A0A) has a 3.1:1 ratio — below 4.5:1 for normal body text. Restrict it to labels at 11px+ or annotate that it is decorative-only where ratio fails.</p>
+    </section>
+
+    <!-- ════════ TYPOGRAPHY ════════ -->
+    <section class="sg-section" id="typography">
+      <p class="sg-eyebrow">02 — Typography</p>
+      <h2>Type system</h2>
+
+      <p class="sg-body">Three typefaces, each with a distinct role. Sora handles everything functional. Fraunces provides a single editorial moment per page. Space Mono annotates technical values.</p>
+
+      <div class="sg-h3">Typefaces</div>
+
+      <div class="sg-type-family">
+        <div class="sg-type-family__meta">
+          <span class="sg-type-family__tag">Primary</span>
+          <span class="sg-type-family__name">Sora · Self-hosted · Weights 100–800</span>
+        </div>
+        <div class="sg-type-specimen" style="font-family:'Sora',sans-serif;">
+          <p style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;letter-spacing:-0.02em;line-height:1.05;color:var(--white);">Product design that thinks, then ships.</p>
+          <p style="font-size:1rem;font-weight:400;color:var(--grey);line-height:1.65;margin-top:20px;max-width:520px;">Sora carries all functional text: navigation, body copy, labels, buttons, and headings. It is geometric without being cold, precise without losing warmth.</p>
+        </div>
+      </div>
+
+      <div class="sg-type-family">
+        <div class="sg-type-family__meta">
+          <span class="sg-type-family__tag">Editorial</span>
+          <span class="sg-type-family__name">Fraunces · Google Fonts · 300 light, optical-size aware</span>
+        </div>
+        <div class="sg-type-specimen" style="font-family:'Fraunces',Georgia,serif;">
+          <p style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;font-style:italic;letter-spacing:-0.02em;line-height:1.05;color:var(--white);">Research that decides. Design that ships.</p>
+          <p style="font-size:1rem;font-weight:400;font-style:normal;color:var(--grey);line-height:1.65;margin-top:20px;max-width:520px;font-family:'Sora',sans-serif;">Fraunces appears once: in the hero heading of a page or section, always italic, always at display size. Never for body copy, never for navigation.</p>
+        </div>
+      </div>
+
+      <div class="sg-type-family">
+        <div class="sg-type-family__meta">
+          <span class="sg-type-family__tag">Mono</span>
+          <span class="sg-type-family__name">Space Mono · Self-hosted · Bold only</span>
+        </div>
+        <div class="sg-type-specimen" style="font-family:'Space Mono',monospace;">
+          <p style="font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.1;color:var(--white);">840 · 14 · 260</p>
+          <p style="font-size:11px;font-weight:700;color:var(--grey);line-height:1.65;margin-top:20px;max-width:520px;letter-spacing:0.04em;">Space Mono annotates technical values only: counter numbers, CSS variable names in documentation, code snippets, version strings. Never use it for prose.</p>
+        </div>
+      </div>
+
+      <div class="sg-h3">Type scale</div>
+
+      <div style="border: 1px solid var(--line); border-radius: 2px; overflow: hidden;">
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-3xl</span>
+            <span class="sg-scale-size">clamp(2.5rem → 5rem)</span>
+            <span class="sg-scale-use">Page hero / H1</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:clamp(2rem,4vw,3.8rem);">Antiphono</span>
+        </div>
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-2xl</span>
+            <span class="sg-scale-size">clamp(1.75rem → 3rem)</span>
+            <span class="sg-scale-use">Section H2</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:clamp(1.5rem,3vw,2.5rem);">Section heading</span>
+        </div>
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-xl</span>
+            <span class="sg-scale-size">clamp(1.25rem → 1.75rem)</span>
+            <span class="sg-scale-use">Intro / H3</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:clamp(1.1rem,2vw,1.6rem);">Intro paragraph</span>
+        </div>
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-lg</span>
+            <span class="sg-scale-size">1.25rem · 20px</span>
+            <span class="sg-scale-use">Lead / H4</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:1.15rem;">Lead text, card headings</span>
+        </div>
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-base</span>
+            <span class="sg-scale-size">1rem · 16px</span>
+            <span class="sg-scale-use">Body</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:1rem;font-weight:400;letter-spacing:normal;line-height:1.65;color:var(--grey);">Body paragraph text, line-height 1.65</span>
+        </div>
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-sm</span>
+            <span class="sg-scale-size">0.8125rem · 13px</span>
+            <span class="sg-scale-use">Secondary / labels</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:0.8125rem;font-weight:400;letter-spacing:normal;color:var(--grey);">Secondary body, card meta, button text</span>
+        </div>
+        <div class="sg-scale-row" style="padding:16px 20px;">
+          <div class="sg-scale-meta">
+            <span class="sg-scale-var">--text-xs</span>
+            <span class="sg-scale-size">0.6875rem · 11px</span>
+            <span class="sg-scale-use">Captions / eyebrows</span>
+          </div>
+          <span class="sg-scale-sample" style="font-size:0.6875rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);">EYEBROW LABEL · CAPTION</span>
+        </div>
+      </div>
+
+      <div class="sg-h3">Sora weights in use</div>
+
+      <div class="sg-weight-grid">
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-weight:300;">Ag</div>
+          <div class="sg-weight-label">300 Light<br><span style="color:var(--grey-mid);">Large body, hero sub</span></div>
+        </div>
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-weight:400;">Ag</div>
+          <div class="sg-weight-label">400 Regular<br><span style="color:var(--grey-mid);">Body copy, body nav</span></div>
+        </div>
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-weight:500;">Ag</div>
+          <div class="sg-weight-label">500 Medium<br><span style="color:var(--grey-mid);">Labels, eyebrows, UI</span></div>
+        </div>
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-weight:600;">Ag</div>
+          <div class="sg-weight-label">600 SemiBold<br><span style="color:var(--grey-mid);">Headings, CTA text</span></div>
+        </div>
+      </div>
+
+      <div class="sg-h3">Typographic rules</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Element</th><th>Treatment</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>h1–h4</td>
+            <td>line-height: 1.05 · letter-spacing: -0.02em</td>
+            <td>Applied globally. Tight tracking at display sizes.</td>
+          </tr>
+          <tr>
+            <td>p</td>
+            <td>line-height: 1.65</td>
+            <td>Applied globally. Never tighter for body prose.</td>
+          </tr>
+          <tr>
+            <td>em in headings</td>
+            <td>font-family: Fraunces, italic</td>
+            <td>The one permitted editorial moment per heading.</td>
+          </tr>
+          <tr>
+            <td>Uppercase labels</td>
+            <td>letter-spacing: 0.10–0.14em · font-size: 9–11px</td>
+            <td>--text-xs weight 500. Never uppercase at body size.</td>
+          </tr>
+          <tr>
+            <td>Selection</td>
+            <td>background: --white · color: --black</td>
+            <td>Inverts the default — dark text on cream highlight.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ SPACE ════════ -->
+    <section class="sg-section" id="space">
+      <p class="sg-eyebrow">03 — Space &amp; Grid</p>
+      <h2>Spacing system</h2>
+
+      <p class="sg-body">An 8px base unit. Spacing choices are multiples of 4 at small sizes and multiples of 8 above 16px. The gutter and max-width are the only layout constants; everything inside them uses the scale below.</p>
+
+      <div class="sg-h3">Spacing scale</div>
+
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:4px;"></div></div>
+        <span class="sg-space-value">4px</span>
+        <span class="sg-space-px">0.25rem</span>
+        <span class="sg-space-use">Icon gap, tight inline spacing</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:8px;"></div></div>
+        <span class="sg-space-value">8px</span>
+        <span class="sg-space-px">0.5rem</span>
+        <span class="sg-space-use">Button gap, chip gap, form field gap</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:12px;"></div></div>
+        <span class="sg-space-value">12px</span>
+        <span class="sg-space-px">0.75rem</span>
+        <span class="sg-space-use">Label to content spacing</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:16px;"></div></div>
+        <span class="sg-space-value">16px</span>
+        <span class="sg-space-px">1rem</span>
+        <span class="sg-space-use">Paragraph gap, small card padding</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:24px;"></div></div>
+        <span class="sg-space-value">24px</span>
+        <span class="sg-space-px">1.5rem</span>
+        <span class="sg-space-use">Section sub-items, eyebrow to heading</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:32px;"></div></div>
+        <span class="sg-space-value">32px</span>
+        <span class="sg-space-px">2rem</span>
+        <span class="sg-space-use">Card body padding, list gap</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:48px;"></div></div>
+        <span class="sg-space-value">48px</span>
+        <span class="sg-space-px">3rem</span>
+        <span class="sg-space-use">Heading to content, subsection spacing</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:64px;"></div></div>
+        <span class="sg-space-value">64px</span>
+        <span class="sg-space-px">4rem</span>
+        <span class="sg-space-use">--gutter (desktop), major section padding</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:96px;"></div></div>
+        <span class="sg-space-value">96px</span>
+        <span class="sg-space-px">6rem</span>
+        <span class="sg-space-use">Between major sections</span>
+      </div>
+      <div class="sg-space-row">
+        <div class="sg-space-bar-wrap"><div class="sg-space-bar" style="width:128px;"></div></div>
+        <span class="sg-space-value">128px</span>
+        <span class="sg-space-px">8rem</span>
+        <span class="sg-space-use">Large section padding, hero spacing</span>
+      </div>
+
+      <div class="sg-h3">Layout tokens</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>--gutter</td>
+            <td>64px desktop · 24px mobile</td>
+            <td>Horizontal page padding, left and right</td>
+          </tr>
+          <tr>
+            <td>--nav-h</td>
+            <td>64px desktop · 56px mobile</td>
+            <td>Fixed top navigation height</td>
+          </tr>
+          <tr>
+            <td>--radius</td>
+            <td>2px</td>
+            <td>Default border radius. Sharp by design.</td>
+          </tr>
+          <tr>
+            <td>--radius-lift</td>
+            <td>24px</td>
+            <td>Large cards, modals, lifted surfaces only</td>
+          </tr>
+          <tr>
+            <td>Max content width</td>
+            <td>1280px</td>
+            <td>Not yet a token. Proposed: --max-w: 1280px</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ BUTTONS ════════ -->
+    <section class="sg-section" id="buttons">
+      <p class="sg-eyebrow">04 — Components</p>
+      <h2>Buttons</h2>
+
+      <div class="sg-h3">Primary — .btn</div>
+      <p class="sg-body">White/cream background, black text. The default call to action for in-page conversions.</p>
+      <div class="sg-demo">
+        <a href="#" class="btn" onclick="return false;">Book a call</a>
+        <a href="#" class="btn btn--small" onclick="return false;">Get in touch</a>
+      </div>
+      <div class="sg-code">
+.btn — 44px height · Sora 500 · 13px · border-radius: 2px · hover: translateY(-2px)
+.btn--small — 36px height · 11px · padding: 0 16px
+      </div>
+
+      <div class="sg-h3">Ghost — .btn--ghost</div>
+      <p class="sg-body">Transparent background, cream border. Secondary actions alongside a primary button.</p>
+      <div class="sg-demo">
+        <a href="#" class="btn btn--ghost" onclick="return false;">View case study</a>
+        <a href="#" class="btn btn--ghost btn--small" onclick="return false;">Learn more</a>
+      </div>
+
+      <div class="sg-h3">Navigation CTA — .btn-lime</div>
+      <p class="sg-body">The topnav call-to-action. Currently renders as a cream pill — the lime variable exists but is not applied here. Pill shape (border-radius: 999px) distinguishes it from page buttons.</p>
+      <div class="sg-demo">
+        <a href="#" class="btn-lime" onclick="return false;">Get in touch</a>
+      </div>
+      <div class="sg-code">
+.btn-lime — 38px · border-radius: 999px · background: --white · color: --black · weight 600 · 11px
+Note: Named 'lime' but currently cream. Rename or restyle pending visual identity sign-off.
+      </div>
+
+      <div class="sg-h3">Ghost dark — .btn-ghost (on light sections)</div>
+      <div class="sg-demo sg-demo--light">
+        <a href="#" class="btn-ghost" onclick="return false;">View the work</a>
+      </div>
+    </section>
+
+    <!-- ════════ LABELS ════════ -->
+    <section class="sg-section" id="labels">
+      <p class="sg-eyebrow">04 — Components</p>
+      <h2>Labels &amp; Tags</h2>
+
+      <div class="sg-h3">Eyebrow label — .row-index</div>
+      <p class="sg-body">The primary section labelling element. Marks sections and introduces heading context. Always uppercase, always before the heading.</p>
+      <div class="sg-demo">
+        <span class="row-index">Product design</span>
+        <span class="row-index">Case study</span>
+        <span class="row-index">01 — Design</span>
+      </div>
+      <div class="sg-code">
+.row-index — 11px · weight 500 · tracking 0.12em · uppercase · border: 1px solid --line · radius: 2px · padding: 7px 12px
+      </div>
+
+      <div class="sg-h3">Service chips — .cs-card__chips / chip styling</div>
+      <p class="sg-body">Small inline labels used on case study cards to list services. Not interactive.</p>
+      <div class="sg-demo">
+        <span style="display:inline-flex;align-items:center;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--grey);border:1px solid var(--line);border-radius:2px;padding:4px 9px;">UX Design</span>
+        <span style="display:inline-flex;align-items:center;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--grey);border:1px solid var(--line);border-radius:2px;padding:4px 9px;">Product Strategy</span>
+        <span style="display:inline-flex;align-items:center;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--grey);border:1px solid var(--line);border-radius:2px;padding:4px 9px;">Design Systems</span>
+      </div>
+    </section>
+
+    <!-- ════════ LINKS ════════ -->
+    <section class="sg-section" id="links">
+      <p class="sg-eyebrow">04 — Components</p>
+      <h2>Links</h2>
+
+      <div class="sg-h3">Arrow link — .section-link-arrow</div>
+      <p class="sg-body">The primary text navigation element. Used at the end of sections to direct to the next page or related content. Grey at rest, white on hover, arrow shifts diagonally.</p>
+      <div class="sg-demo">
+        <a href="#" class="section-link-arrow" onclick="return false;">How we work <span>→</span></a>
+        <a href="#" class="section-link-arrow" onclick="return false;">View the case study <span>↗</span></a>
+      </div>
+      <div class="sg-code">
+.section-link-arrow — 13px · weight 500 · color: --grey · hover: --white
+.section-link-arrow span — transition: transform 0.25s · hover: translate(3px, -3px)
+      </div>
+
+      <div class="sg-h3">Body links</div>
+      <p class="sg-body">In-prose links inherit the body colour and gain an underline offset decoration. No visited state colour — use underline weight only.</p>
+      <div class="sg-demo">
+        <p style="font-size:14px;line-height:1.7;color:var(--grey);max-width:480px;">This is a paragraph with an <a href="#" onclick="return false;" style="color:var(--white);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(242,241,236,0.3);">inline link to another page</a> that uses underline for visual distinction without colour alone.</p>
+      </div>
+    </section>
+
+    <!-- ════════ CHIPS ════════ -->
+    <section class="sg-section" id="chips">
+      <p class="sg-eyebrow">04 — Components</p>
+      <h2>Filter chips</h2>
+
+      <p class="sg-body">Interactive filter controls on the gallery page. The active state uses lime background with black text — one of the few places --lime is used in the current build.</p>
+
+      <div class="sg-demo">
+        <button class="filter-chip is-active" onclick="return false;">All</button>
+        <button class="filter-chip" onclick="return false;">Product design</button>
+        <button class="filter-chip" onclick="return false;">UX design</button>
+        <button class="filter-chip" onclick="return false;">Design systems</button>
+        <button class="filter-chip" onclick="return false;">AI feature design</button>
+      </div>
+      <div class="sg-code">
+.filter-chip — 13px · border: 1px solid --line · border-radius: 999px · padding: 7px 16px · transition: 0.2s
+.filter-chip.is-active — background: --white · color: --black · border-color: --white
+Note: Active state is currently cream, not lime. To use lime here, set: background: --lime · color: --black · border-color: --lime
+      </div>
+    </section>
+
+    <!-- ════════ MOTION ════════ -->
+    <section class="sg-section" id="motion">
+      <p class="sg-eyebrow">05 — Motion</p>
+      <h2>Easing &amp; timing</h2>
+
+      <p class="sg-body">Hover over each card to see the easing curve in action. All transitions respect <code>prefers-reduced-motion</code> — when set, show final states immediately with no animation.</p>
+
+      <div class="sg-h3">Easing curves</div>
+
+      <div class="sg-ease-grid">
+        <div class="sg-ease-card sg-ease-card--spring">
+          <div class="sg-ease-card__label">--ease</div>
+          <div class="sg-ease-card__curve">cubic-bezier<br>(0.16, 1, 0.3, 1)</div>
+          <div class="sg-ease-card__use">Entrances, reveals, elements appearing. Spring-like — overshoot is subtle.</div>
+          <div class="sg-ease-track"><div class="sg-ease-dot"></div></div>
+        </div>
+        <div class="sg-ease-card sg-ease-card--sharp">
+          <div class="sg-ease-card__label">--ease-in-out</div>
+          <div class="sg-ease-card__curve">cubic-bezier<br>(0.87, 0, 0.13, 1)</div>
+          <div class="sg-ease-card__use">State transitions. Decisive — hits maximum speed in the middle, stops cleanly.</div>
+          <div class="sg-ease-track"><div class="sg-ease-dot"></div></div>
+        </div>
+        <div class="sg-ease-card sg-ease-card--fast">
+          <div class="sg-ease-card__label">Fast hover</div>
+          <div class="sg-ease-card__curve">--ease at 0.2s<br>or 0.15s linear</div>
+          <div class="sg-ease-card__use">Button hover, colour changes, border transitions. Instant-feeling feedback.</div>
+          <div class="sg-ease-track"><div class="sg-ease-dot"></div></div>
+        </div>
+      </div>
+
+      <div class="sg-h3">Timing scale</div>
+
+      <div class="sg-timing-row">
+        <span class="sg-timing-label">0.15–0.2s</span>
+        <span class="sg-timing-desc">Hover colour, border, opacity — immediate feedback</span>
+        <div class="sg-timing-dot"></div>
+      </div>
+      <div class="sg-timing-row">
+        <span class="sg-timing-label">0.4s</span>
+        <span class="sg-timing-desc">Small reveals, short element transitions</span>
+        <div class="sg-timing-dot"></div>
+      </div>
+      <div class="sg-timing-row">
+        <span class="sg-timing-label">0.6s</span>
+        <span class="sg-timing-desc">Section fades, mid-size reveals</span>
+        <div class="sg-timing-dot"></div>
+      </div>
+      <div class="sg-timing-row">
+        <span class="sg-timing-label">--slow (0.9s)</span>
+        <span class="sg-timing-desc">Text reveals, hero entrances, large choreographed sequences</span>
+        <div class="sg-timing-dot"></div>
+      </div>
+
+      <div class="sg-h3">Motion rules</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Rule</th><th>How to apply it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>One entrance sequence per page</td>
+            <td>Stagger hero elements using animation-delay. Don't animate every card independently on scroll.</td>
+          </tr>
+          <tr>
+            <td>Reduced motion</td>
+            <td>@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: 0.01ms !important; } }</td>
+          </tr>
+          <tr>
+            <td>No motion for no reason</td>
+            <td>A fade-in that takes 0.6s adds more delay than delight. Default to no animation; add it when it carries meaning.</td>
+          </tr>
+          <tr>
+            <td>Transforms over layout</td>
+            <td>Animate transform and opacity only. Never animate width, height, top, left, or padding.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ VOICE ════════ -->
+    <section class="sg-section" id="voice">
+      <p class="sg-eyebrow">06 — Voice</p>
+      <h2>Writing rules</h2>
+
+      <p class="sg-body">These apply to every word on the site — headings, body, alt text, button labels, meta descriptions. The tone is a senior person explaining something technical to a smart client over coffee.</p>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Rule</th><th>What it means</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Australian English</td>
+            <td>Organisation, recognise, colour, behaviour, analyse, optimise — not US spellings</td>
+          </tr>
+          <tr>
+            <td>No em dashes</td>
+            <td>Use commas, full stops, colons or brackets instead. Never — this.</td>
+          </tr>
+          <tr>
+            <td>Outcome first</td>
+            <td>Lead with the result. Tools and methods are secondary. Never open a page with technology.</td>
+          </tr>
+          <tr>
+            <td>Short sentences</td>
+            <td>Plain verbs. Specific nouns. If it takes two reads, rewrite it.</td>
+          </tr>
+          <tr>
+            <td>No invented numbers</td>
+            <td>No percentages, speed claims or figures unless real and sourced. Counter values are verified, not estimated.</td>
+          </tr>
+          <tr>
+            <td>Forbidden words</td>
+            <td>leverage, unlock, seamless, cutting edge, revolutionise, supercharge, game changing, best in class, synergy, holistic, empower, transform (as a noun), robust, journey (unless a literal user journey)</td>
+          </tr>
+          <tr>
+            <td>Headings test</td>
+            <td>Would a technically literate client with no design background know exactly what this heading means on first read? If not, rewrite it.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ ACCESSIBILITY ════════ -->
+    <section class="sg-section" id="accessibility">
+      <p class="sg-eyebrow">07 — Accessibility</p>
+      <h2>WCAG 2.1 AA</h2>
+
+      <p class="sg-body">Antiphono publicly commits to WCAG 2.1 AA on client work. The site failing its own standard is a credibility problem, not a minor oversight. Every new component is tested before it ships.</p>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Skip link</td>
+            <td>&lt;a href="#main-content" class="skip-link"&gt; — first focusable element on every page</td>
+          </tr>
+          <tr>
+            <td>Contrast: body text</td>
+            <td>4.5:1 minimum. --white on --black is 17.9:1. --grey on --black is 4.6:1 — just passes.</td>
+          </tr>
+          <tr>
+            <td>Contrast: large text &amp; UI</td>
+            <td>3:1 minimum. --grey-mid (#6A6A62) on --black is 3.1:1 — use at 18px+ or bold 14px+ only.</td>
+          </tr>
+          <tr>
+            <td>Focus rings</td>
+            <td>Visible on all interactive elements. Never remove outline without replacing it with something equally visible.</td>
+          </tr>
+          <tr>
+            <td>Heading structure</td>
+            <td>One h1 per page. No skipped levels. Headings describe structure, never appearance.</td>
+          </tr>
+          <tr>
+            <td>Keyboard navigation</td>
+            <td>All interactive elements reachable by Tab. Mobile menu: focus-trapped, Escape closes, focus returns to toggle.</td>
+          </tr>
+          <tr>
+            <td>Alt text</td>
+            <td>Meaningful alt on content images. alt="" on decorative ones. Australian English, no em dashes.</td>
+          </tr>
+          <tr>
+            <td>Reduced motion</td>
+            <td>@media (prefers-reduced-motion: reduce) applied globally. Counters, scroll reveals and transitions all comply.</td>
+          </tr>
+          <tr>
+            <td>Colour alone</td>
+            <td>Never use colour as the only signal. Filter active state uses both colour and border weight change.</td>
+          </tr>
+          <tr>
+            <td>Live regions</td>
+            <td>Gallery filter state changes announced via aria-live="polite" on #galleryStatus.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('.sg-section');
+  const navLinks = document.querySelectorAll('.sg-nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('is-active'));
+        const active = document.querySelector(`.sg-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
