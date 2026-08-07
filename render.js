@@ -607,3 +607,111 @@ function renderReportList(container, reports) {
   if (!container) return;
   container.innerHTML = reports.map(reportRowHTML).join('');
 }
+
+/* ===== Case study gallery (work.html) ===== */
+
+function formatCaseStudyYears(cs) {
+  if (cs.yearEnd === 'present') return cs.yearStart + ' to present';
+  if (!cs.yearEnd || cs.yearStart === cs.yearEnd) return String(cs.yearStart);
+  return cs.yearStart + ' to ' + cs.yearEnd;
+}
+
+function caseStudyCardHTML(cs) {
+  var displayName = cs.named ? cs.client : cs.sector;
+  var years = formatCaseStudyYears(cs);
+  var yearsClass = cs.yearEnd === 'present' ? 'cs-card__years cs-card__years--present' : 'cs-card__years';
+  var mediaContent = cs.thumbnail
+    ? '<img src="' + escapeHTML(cs.thumbnail) + '" alt="' + escapeHTML(displayName) + '" loading="lazy" width="800" height="450">'
+    : '';
+  var mediaStyle = cs.thumbnail ? ' style="background-image:url(\'' + escapeHTML(cs.thumbnail) + '\');background-size:cover;background-position:center;"' : '';
+  return '<a class="cs-card" href="/work/' + escapeHTML(cs.slug) + '"'
+    + ' data-services=\'' + JSON.stringify(cs.services).replace(/'/g, '&#39;') + '\''
+    + ' data-sector="' + escapeHTML(cs.sector) + '">'
+    + '<div class="cs-card__media"' + mediaStyle + '>' + mediaContent + '</div>'
+    + '<div class="cs-card__body">'
+    + '<div class="cs-card__header">'
+    + '<span class="cs-card__client">' + escapeHTML(displayName) + '</span>'
+    + '<span class="' + yearsClass + '">' + escapeHTML(years) + '</span>'
+    + '</div>'
+    + '<p class="cs-card__sector">' + escapeHTML(cs.sector) + '</p>'
+    + '<div class="cs-card__chips">' + cs.services.map(function(s) { return '<span class="chip">' + escapeHTML(s) + '</span>'; }).join('') + '</div>'
+    + '<span class="cs-card__cta">View case study ' + ARROW_SVG + '</span>'
+    + '</div>'
+    + '</a>';
+}
+
+function sortCaseStudies(items) {
+  return items.slice().sort(function(a, b) {
+    if (a.featured !== b.featured) return a.featured ? -1 : 1;
+    var aEnd = a.yearEnd === 'present' ? 9999 : (a.yearEnd || a.yearStart);
+    var bEnd = b.yearEnd === 'present' ? 9999 : (b.yearEnd || b.yearStart);
+    return bEnd - aEnd || b.yearStart - a.yearStart;
+  });
+}
+
+function renderCaseStudyGallery(galleryEl, filterEl, statusEl, items) {
+  if (!galleryEl || !items || !items.length) return;
+  var sorted = sortCaseStudies(items);
+
+  galleryEl.innerHTML = sorted.map(caseStudyCardHTML).join('');
+
+  if (!filterEl) return;
+  var allServices = [];
+  sorted.forEach(function(cs) {
+    cs.services.forEach(function(s) {
+      if (allServices.indexOf(s) === -1) allServices.push(s);
+    });
+  });
+  allServices.sort();
+
+  var chips = ['<button class="filter-chip is-active" data-service="All" type="button" aria-current="true">All</button>'];
+  allServices.forEach(function(s) {
+    chips.push('<button class="filter-chip" data-service="' + escapeHTML(s) + '" type="button">' + escapeHTML(s) + '</button>');
+  });
+  filterEl.innerHTML = chips.join('');
+
+  function applyFilter(selected) {
+    var cards = galleryEl.querySelectorAll('.cs-card');
+    var count = 0;
+    cards.forEach(function(card) {
+      var services = [];
+      try { services = JSON.parse(card.dataset.services || '[]'); } catch (e) {}
+      var show = selected === 'All' || services.indexOf(selected) !== -1;
+      card.hidden = !show;
+      if (show) count++;
+    });
+    if (statusEl) statusEl.textContent = selected === 'All' ? '' : count + ' case ' + (count === 1 ? 'study' : 'studies') + ' for ' + selected;
+  }
+
+  filterEl.addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-chip');
+    if (!btn) return;
+    filterEl.querySelectorAll('.filter-chip').forEach(function(b) {
+      b.classList.remove('is-active');
+      b.removeAttribute('aria-current');
+    });
+    btn.classList.add('is-active');
+    btn.setAttribute('aria-current', 'true');
+    var selected = btn.dataset.service;
+    var params = new URLSearchParams(window.location.search);
+    if (selected === 'All') { params.delete('service'); } else { params.set('service', selected); }
+    var qs = params.toString();
+    history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
+    applyFilter(selected);
+  });
+
+  var initService = new URLSearchParams(window.location.search).get('service');
+  if (initService) {
+    var activeBtn = null;
+    filterEl.querySelectorAll('.filter-chip').forEach(function(b) {
+      if (b.dataset.service === initService) activeBtn = b;
+    });
+    if (activeBtn) {
+      filterEl.querySelector('.is-active').classList.remove('is-active');
+      filterEl.querySelector('[aria-current]').removeAttribute('aria-current');
+      activeBtn.classList.add('is-active');
+      activeBtn.setAttribute('aria-current', 'true');
+      applyFilter(initService);
+    }
+  }
+}

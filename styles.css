@@ -3293,3 +3293,82 @@ body.nav-open { overflow: hidden; }
 /* ===== 48. SECTION NAV INNER WRAPPER ===== */
 
 .section-nav__inner { width: 100%; }
+
+/* ===== 49. CASE STUDY GALLERY (work.html) ===== */
+
+.cs-gallery-filter {
+  padding: clamp(40px, 6vw, 64px) var(--gutter) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cs-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2.5vw, 24px);
+  padding: clamp(32px, 5vw, 56px) var(--gutter) clamp(64px, 10vw, 100px);
+}
+@media (min-width: 768px) {
+  .cs-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.cs-card {
+  display: block;
+  text-decoration: none;
+  color: var(--white);
+  border: 1px solid var(--line);
+  transition: border-color 0.2s;
+}
+.cs-card[hidden] { display: none !important; }
+.cs-card:hover { border-color: rgba(255,255,227,0.25); }
+.cs-card:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+
+.cs-card__media {
+  aspect-ratio: 16 / 9;
+  background: rgba(255,255,227,0.03);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.cs-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cs-card__body {
+  padding: clamp(20px, 2.5vw, 28px);
+}
+.cs-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+.cs-card__client { font-weight: 500; font-size: 1rem; line-height: 1.3; }
+.cs-card__years { font-size: var(--text-sm); color: var(--grey); white-space: nowrap; flex-shrink: 0; }
+.cs-card__years--present { color: var(--white); font-weight: 500; }
+.cs-card__sector { font-size: var(--text-sm); color: var(--grey); margin-bottom: 16px; }
+.cs-card__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.cs-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-sm);
+  color: var(--grey);
+  transition: color 0.2s;
+}
+.cs-card:hover .cs-card__cta { color: var(--white); }
+.cs-card:hover .cs-card__cta .link-arrow { transform: translate(2px, -2px); }
+.cs-card__cta .link-arrow { transition: transform 0.2s; }
+
+.cs-gallery-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-card, .cs-card__cta, .cs-card__cta .link-arrow { transition: none; }
+}
