@@ -633,6 +633,188 @@
   line-height: 1.65;
 }
 
+/* ── New easing cards ─────────────────────────── */
+
+.sg-ease-card--expo .sg-ease-dot  { transition: left 0.9s cubic-bezier(0.86, 0, 0.07, 1); }
+.sg-ease-card--cubic .sg-ease-dot { transition: left 0.9s cubic-bezier(0.65, 0.05, 0.36, 1); }
+.sg-ease-card--out .sg-ease-dot   { transition: left 0.5s cubic-bezier(0.215, 0.61, 0.355, 1); }
+
+/* ── Button demo (NLC-style) ──────────────────── */
+
+.sg-btn-nlc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  height: 52px;
+  padding: 0 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid var(--white);
+  border-radius: 0;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.45s cubic-bezier(0.86, 0, 0.07, 1),
+              color 0.45s cubic-bezier(0.86, 0, 0.07, 1),
+              border-color 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.sg-btn-nlc--dark {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+.sg-btn-nlc--dark:hover {
+  background: transparent;
+  color: var(--white);
+}
+.sg-btn-nlc--ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--line);
+}
+.sg-btn-nlc--ghost:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+.sg-btn-arrow {
+  display: inline-block;
+  transform: translateX(-120%) translateX(-8px);
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.sg-btn-nlc:hover .sg-btn-arrow { transform: translateX(0); }
+
+/* ── Row hover demo ───────────────────────────── */
+
+.sg-row-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--line);
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.sg-row-demo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: 0;
+}
+.sg-row-demo > * { position: relative; z-index: 1; }
+.sg-row-demo:hover { color: var(--black); }
+.sg-row-demo:hover::before { transform: scaleY(1); }
+.sg-row-demo:hover span { color: var(--black) !important; }
+
+/* ── Link underline demo ──────────────────────── */
+
+.sg-link-demo {
+  position: relative;
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.sg-link-demo::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -0.12em;
+  height: 0.07em;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 100% 100%;
+  transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.sg-link-demo:hover::after {
+  transform: scaleX(1);
+  transform-origin: 0% 0%;
+}
+
+/* ── Mark highlight demo ──────────────────────── */
+
+.sg-mark-demo {
+  position: relative;
+  background: transparent;
+  color: var(--white);
+}
+.sg-mark-demo::before {
+  content: '';
+  position: absolute;
+  inset: -0.1em -0.05em;
+  background: var(--lime);
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  animation: sg-mark-reveal 1.2s cubic-bezier(0.86, 0, 0.07, 1) 0.8s forwards;
+  z-index: -1;
+}
+@keyframes sg-mark-reveal {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+/* ── Text line reveal demo ────────────────────── */
+
+.sg-line-reveal {
+  display: block;
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--white);
+  animation: sg-line-up 0.9s cubic-bezier(0.86, 0, 0.07, 1) both;
+}
+@keyframes sg-line-up {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Clip reveal demo ─────────────────────────── */
+
+.sg-clip-reveal {
+  animation: sg-clip-in 1.3s cubic-bezier(0.77, 0, 0.18, 1) 0.3s both;
+}
+@keyframes sg-clip-in {
+  from { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
+  to   { clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0); }
+}
+
+/* ── Heading underline demo ───────────────────── */
+
+.sg-underline-heading {
+  display: inline-block;
+}
+.sg-underline-line {
+  display: inline-block;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  position: relative;
+}
+.sg-underline-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.04em;
+  width: 100%;
+  height: 0.025em;
+  background: currentColor;
+  animation: sg-underline-in 0.9s cubic-bezier(0.86, 0, 0.07, 1) both;
+}
+@keyframes sg-underline-in {
+  from { transform: scaleX(0); transform-origin: left center; }
+  to   { transform: scaleX(1); transform-origin: left center; }
+}
+
 /* Responsive */
 @media (max-width: 960px) {
   .sg-main { padding: 48px 40px 120px; }
@@ -672,12 +854,14 @@
     <a href="#chips">Filter Chips</a>
 
     <p class="sg-nav__group">Principles</p>
-    <a href="#motion">Motion</a>
+    <a href="#motion">Motion &amp; Reveals</a>
+    <a href="#interactions">Interactions</a>
     <a href="#voice">Voice</a>
     <a href="#accessibility">Accessibility</a>
 
     <p class="sg-nav__group">References</p>
     <a href="#ref-fontshare">Fontshare</a>
+    <a href="#ref-nlc">NLC / Obys</a>
 
     <div class="sg-nav__spacer"></div>
 
@@ -720,7 +904,7 @@
         <div class="sg-principle">
           <p class="sg-principle__n">04</p>
           <h4>Typographic hierarchy</h4>
-          <p>Sora carries the work. Fraunces appears once per section, briefly, as a human signal inside a precise system. Never use Fraunces for body copy.</p>
+          <p>Sora carries all the work. One typeface, three weights. Hierarchy comes entirely from scale, tracking and weight — never from a second typeface.</p>
         </div>
         <div class="sg-principle">
           <p class="sg-principle__n">05</p>
@@ -911,154 +1095,178 @@
       <p class="sg-eyebrow">02 — Typography</p>
       <h2>Type system</h2>
 
-      <p class="sg-body">Three typefaces, each with a distinct role. Sora handles everything functional. Fraunces provides a single editorial moment per page. Space Mono annotates technical values.</p>
+      <p class="sg-body">One typeface. All hierarchy comes from scale, weight and tracking — not from switching fonts. Sora is geometric without being cold. The system uses three weights and a dramatic range from 11px labels to display-scale headings that fill the viewport at large sizes.</p>
 
-      <div class="sg-h3">Typefaces</div>
+      <div class="sg-h3">Typeface</div>
 
       <div class="sg-type-family">
         <div class="sg-type-family__meta">
-          <span class="sg-type-family__tag">Primary</span>
-          <span class="sg-type-family__name">Sora · Self-hosted · Weights 100–800</span>
+          <span class="sg-type-family__tag">Sole typeface</span>
+          <span class="sg-type-family__name">Sora · Self-hosted · Weights 300 · 500 · 600</span>
         </div>
         <div class="sg-type-specimen" style="font-family:'Sora',sans-serif;">
-          <p style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;letter-spacing:-0.02em;line-height:1.05;color:var(--white);">Product design that thinks, then ships.</p>
-          <p style="font-size:1rem;font-weight:400;color:var(--grey);line-height:1.65;margin-top:20px;max-width:520px;">Sora carries all functional text: navigation, body copy, labels, buttons, and headings. It is geometric without being cold, precise without losing warmth.</p>
+          <p style="font-size:clamp(3rem,7vw,5.5rem);font-weight:500;letter-spacing:-0.04em;line-height:0.95;color:var(--white);">Product design<br>that ships.</p>
+          <p style="font-size:clamp(1rem,1.5vw,1.1rem);font-weight:300;color:var(--grey);line-height:1.65;margin-top:28px;max-width:520px;">Sora carries everything — display headlines, section headings, body copy, navigation, labels, and buttons. Hierarchy comes entirely from size, tracking and weight. There is no second typeface for editorial moments.</p>
         </div>
       </div>
 
-      <div class="sg-type-family">
-        <div class="sg-type-family__meta">
-          <span class="sg-type-family__tag">Editorial</span>
-          <span class="sg-type-family__name">Fraunces · Google Fonts · 300 light, optical-size aware</span>
-        </div>
-        <div class="sg-type-specimen" style="font-family:'Fraunces',Georgia,serif;">
-          <p style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;font-style:italic;letter-spacing:-0.02em;line-height:1.05;color:var(--white);">Research that decides. Design that ships.</p>
-          <p style="font-size:1rem;font-weight:400;font-style:normal;color:var(--grey);line-height:1.65;margin-top:20px;max-width:520px;font-family:'Sora',sans-serif;">Fraunces appears once: in the hero heading of a page or section, always italic, always at display size. Never for body copy, never for navigation.</p>
-        </div>
-      </div>
+      <div class="sg-h3">Weights in use</div>
 
-      <div class="sg-type-family">
-        <div class="sg-type-family__meta">
-          <span class="sg-type-family__tag">Mono</span>
-          <span class="sg-type-family__name">Space Mono · Self-hosted · Bold only</span>
+      <div class="sg-weight-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-size:40px;font-weight:300;letter-spacing:-0.03em;">Ag</div>
+          <div class="sg-weight-label" style="margin-top:16px;font-size:11px;font-weight:500;color:var(--white);">300 Light</div>
+          <div style="font-size:11px;color:var(--grey-mid);margin-top:4px;line-height:1.5;">Body copy. Long-form prose. Never for headings or labels.</div>
         </div>
-        <div class="sg-type-specimen" style="font-family:'Space Mono',monospace;">
-          <p style="font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.1;color:var(--white);">840 · 14 · 260</p>
-          <p style="font-size:11px;font-weight:700;color:var(--grey);line-height:1.65;margin-top:20px;max-width:520px;letter-spacing:0.04em;">Space Mono annotates technical values only: counter numbers, CSS variable names in documentation, code snippets, version strings. Never use it for prose.</p>
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-size:40px;font-weight:500;letter-spacing:-0.03em;">Ag</div>
+          <div class="sg-weight-label" style="margin-top:16px;font-size:11px;font-weight:500;color:var(--white);">500 Medium</div>
+          <div style="font-size:11px;color:var(--grey-mid);margin-top:4px;line-height:1.5;">All headings. Navigation. UI labels. Buttons. The default heading weight.</div>
+        </div>
+        <div class="sg-weight-item">
+          <div class="sg-weight-sample" style="font-size:40px;font-weight:600;letter-spacing:-0.03em;">Ag</div>
+          <div class="sg-weight-label" style="margin-top:16px;font-size:11px;font-weight:500;color:var(--white);">600 SemiBold</div>
+          <div style="font-size:11px;color:var(--grey-mid);margin-top:4px;line-height:1.5;">Emphasis within headings. Counter numbers. Strong pull-quotes only.</div>
         </div>
       </div>
 
       <div class="sg-h3">Type scale</div>
 
-      <div style="border: 1px solid var(--line); border-radius: 2px; overflow: hidden;">
-        <div class="sg-scale-row" style="padding:16px 20px;">
+      <p class="sg-body" style="margin-bottom:24px;">The scale runs from 11px eyebrow labels to a display size that fills the top of the page. The gap between these extremes is the entire visual system. At display sizes tracking goes to -0.05em. At body sizes tracking is normal.</p>
+
+      <div style="border:1px solid var(--line);border-radius:2px;overflow:hidden;">
+        <div class="sg-scale-row" style="padding:24px 20px;border-bottom:1px solid var(--line);">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-3xl</span>
-            <span class="sg-scale-size">clamp(2.5rem → 5rem)</span>
-            <span class="sg-scale-use">Page hero / H1</span>
+            <span class="sg-scale-var">Display</span>
+            <span class="sg-scale-size">clamp(3.5rem, 8vw, 7rem)</span>
+            <span class="sg-scale-use">Hero headline · H1 · Page title</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:clamp(2rem,4vw,3.8rem);">Antiphono</span>
+          <span class="sg-scale-sample" style="font-size:clamp(2.8rem,6vw,5.2rem);font-weight:500;letter-spacing:-0.05em;line-height:0.9;">Antiphono</span>
         </div>
-        <div class="sg-scale-row" style="padding:16px 20px;">
+        <div class="sg-scale-row" style="padding:20px;border-bottom:1px solid var(--line);">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-2xl</span>
-            <span class="sg-scale-size">clamp(1.75rem → 3rem)</span>
-            <span class="sg-scale-use">Section H2</span>
+            <span class="sg-scale-var">Section</span>
+            <span class="sg-scale-size">clamp(2.25rem, 5vw, 4.5rem)</span>
+            <span class="sg-scale-use">Section heading · H2</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:clamp(1.5rem,3vw,2.5rem);">Section heading</span>
+          <span class="sg-scale-sample" style="font-size:clamp(1.9rem,4vw,3.4rem);font-weight:500;letter-spacing:-0.04em;line-height:0.95;">How we work</span>
         </div>
-        <div class="sg-scale-row" style="padding:16px 20px;">
+        <div class="sg-scale-row" style="padding:20px;border-bottom:1px solid var(--line);">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-xl</span>
-            <span class="sg-scale-size">clamp(1.25rem → 1.75rem)</span>
-            <span class="sg-scale-use">Intro / H3</span>
+            <span class="sg-scale-var">Sub-heading</span>
+            <span class="sg-scale-size">clamp(1.5rem, 2.5vw, 2.25rem)</span>
+            <span class="sg-scale-use">Sub-section · H3 · Card title (large)</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:clamp(1.1rem,2vw,1.6rem);">Intro paragraph</span>
+          <span class="sg-scale-sample" style="font-size:clamp(1.3rem,2.2vw,1.9rem);font-weight:500;letter-spacing:-0.03em;line-height:1.0;">User research</span>
         </div>
-        <div class="sg-scale-row" style="padding:16px 20px;">
+        <div class="sg-scale-row" style="padding:20px;border-bottom:1px solid var(--line);">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-lg</span>
-            <span class="sg-scale-size">1.25rem · 20px</span>
-            <span class="sg-scale-use">Lead / H4</span>
+            <span class="sg-scale-var">Lead</span>
+            <span class="sg-scale-size">clamp(1.125rem, 1.5vw, 1.375rem)</span>
+            <span class="sg-scale-use">Intro paragraph · H4 · Card title</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:1.15rem;">Lead text, card headings</span>
+          <span class="sg-scale-sample" style="font-size:clamp(1rem,1.4vw,1.2rem);font-weight:500;letter-spacing:-0.015em;line-height:1.2;">Research that shapes the build</span>
         </div>
-        <div class="sg-scale-row" style="padding:16px 20px;">
+        <div class="sg-scale-row" style="padding:20px;border-bottom:1px solid var(--line);">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-base</span>
+            <span class="sg-scale-var">Body</span>
             <span class="sg-scale-size">1rem · 16px</span>
-            <span class="sg-scale-use">Body</span>
+            <span class="sg-scale-use">Long-form prose · Descriptions</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:1rem;font-weight:400;letter-spacing:normal;line-height:1.65;color:var(--grey);">Body paragraph text, line-height 1.65</span>
+          <span class="sg-scale-sample" style="font-size:1rem;font-weight:300;letter-spacing:normal;line-height:1.65;color:var(--grey);">We start with the people using the product, not the technology powering it.</span>
         </div>
-        <div class="sg-scale-row" style="padding:16px 20px;">
+        <div class="sg-scale-row" style="padding:20px;border-bottom:1px solid var(--line);">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-sm</span>
+            <span class="sg-scale-var">Small</span>
             <span class="sg-scale-size">0.8125rem · 13px</span>
-            <span class="sg-scale-use">Secondary / labels</span>
+            <span class="sg-scale-use">Card meta · Secondary body · Button text</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:0.8125rem;font-weight:400;letter-spacing:normal;color:var(--grey);">Secondary body, card meta, button text</span>
+          <span class="sg-scale-sample" style="font-size:0.8125rem;font-weight:300;letter-spacing:normal;color:var(--grey);">Four months · Research, strategy and design</span>
         </div>
-        <div class="sg-scale-row" style="padding:16px 20px;">
+        <div class="sg-scale-row" style="padding:20px;">
           <div class="sg-scale-meta">
-            <span class="sg-scale-var">--text-xs</span>
+            <span class="sg-scale-var">Label</span>
             <span class="sg-scale-size">0.6875rem · 11px</span>
-            <span class="sg-scale-use">Captions / eyebrows</span>
+            <span class="sg-scale-use">Eyebrows · Captions · Section tags</span>
           </div>
-          <span class="sg-scale-sample" style="font-size:0.6875rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);">EYEBROW LABEL · CAPTION</span>
+          <span class="sg-scale-sample" style="font-size:0.6875rem;font-weight:500;letter-spacing:0.10em;text-transform:uppercase;color:var(--grey);">01 — Services</span>
         </div>
       </div>
 
-      <div class="sg-h3">Sora weights in use</div>
+      <div class="sg-h3">Tracking rules</div>
 
-      <div class="sg-weight-grid">
-        <div class="sg-weight-item">
-          <div class="sg-weight-sample" style="font-weight:300;">Ag</div>
-          <div class="sg-weight-label">300 Light<br><span style="color:var(--grey-mid);">Large body, hero sub</span></div>
-        </div>
-        <div class="sg-weight-item">
-          <div class="sg-weight-sample" style="font-weight:400;">Ag</div>
-          <div class="sg-weight-label">400 Regular<br><span style="color:var(--grey-mid);">Body copy, body nav</span></div>
-        </div>
-        <div class="sg-weight-item">
-          <div class="sg-weight-sample" style="font-weight:500;">Ag</div>
-          <div class="sg-weight-label">500 Medium<br><span style="color:var(--grey-mid);">Labels, eyebrows, UI</span></div>
-        </div>
-        <div class="sg-weight-item">
-          <div class="sg-weight-sample" style="font-weight:600;">Ag</div>
-          <div class="sg-weight-label">600 SemiBold<br><span style="color:var(--grey-mid);">Headings, CTA text</span></div>
-        </div>
-      </div>
-
-      <div class="sg-h3">Typographic rules</div>
+      <p class="sg-body" style="margin-bottom:24px;">Letter-spacing does the work that a second typeface used to do. At display size, very tight tracking (-0.05em) makes the heading feel structural. At body size, tracking is normal — forcing it tighter makes prose hard to read.</p>
 
       <table class="sg-token-table">
-        <thead><tr><th>Element</th><th>Treatment</th><th>Notes</th></tr></thead>
+        <thead><tr><th>Size range</th><th>Letter-spacing</th><th>Line-height</th><th>Where</th></tr></thead>
         <tbody>
           <tr>
-            <td>h1–h4</td>
-            <td>line-height: 1.05 · letter-spacing: -0.02em</td>
-            <td>Applied globally. Tight tracking at display sizes.</td>
+            <td>Display (≥ 3.5rem)</td>
+            <td>-0.05em</td>
+            <td>0.90–0.95</td>
+            <td>Hero H1, page title</td>
           </tr>
           <tr>
-            <td>p</td>
-            <td>line-height: 1.65</td>
-            <td>Applied globally. Never tighter for body prose.</td>
+            <td>Section (2.25–3.5rem)</td>
+            <td>-0.04em</td>
+            <td>0.95–1.00</td>
+            <td>Section H2</td>
           </tr>
           <tr>
-            <td>em in headings</td>
-            <td>font-family: Fraunces, italic</td>
-            <td>The one permitted editorial moment per heading.</td>
+            <td>Sub-heading (1.5–2.25rem)</td>
+            <td>-0.03em</td>
+            <td>1.00–1.10</td>
+            <td>H3, large card titles</td>
           </tr>
           <tr>
-            <td>Uppercase labels</td>
-            <td>letter-spacing: 0.10–0.14em · font-size: 9–11px</td>
-            <td>--text-xs weight 500. Never uppercase at body size.</td>
+            <td>Lead (1.125–1.5rem)</td>
+            <td>-0.015em</td>
+            <td>1.15–1.25</td>
+            <td>Intro text, H4</td>
           </tr>
           <tr>
-            <td>Selection</td>
-            <td>background: --white · color: --black</td>
-            <td>Inverts the default — dark text on cream highlight.</td>
+            <td>Body (≤ 1rem)</td>
+            <td>normal</td>
+            <td>1.60–1.70</td>
+            <td>Prose, descriptions</td>
+          </tr>
+          <tr>
+            <td>Labels (≤ 0.75rem)</td>
+            <td>+0.08–0.12em</td>
+            <td>1.25</td>
+            <td>Eyebrows, tags — uppercase only</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sg-h3">Rules</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Rule</th><th>What it means in practice</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Single typeface</td>
+            <td>Sora only. No second font for editorial moments. Scale and tracking create the contrast a second typeface would add.</td>
+          </tr>
+          <tr>
+            <td>Weight discipline</td>
+            <td>300 for body, 500 for headings and UI, 600 for emphasis only. Never 700+ on site copy.</td>
+          </tr>
+          <tr>
+            <td>Display lines break deliberately</td>
+            <td>At display size, control where each line breaks. A badly-wrapped headline undoes the tracking.</td>
+          </tr>
+          <tr>
+            <td>Tight line-height at large sizes</td>
+            <td>0.9 at display size. Anything higher at that scale produces gaps that weaken the structure.</td>
+          </tr>
+          <tr>
+            <td>No uppercase at body size</td>
+            <td>Uppercase + tight body-size type is illegible. Labels only, at 11px or smaller.</td>
+          </tr>
+          <tr>
+            <td>Selection colour</td>
+            <td>background: --white · color: --black — inverts the dark theme on text selection.</td>
           </tr>
         </tbody>
       </table>
@@ -1278,30 +1486,30 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
 
     <!-- ════════ MOTION ════════ -->
     <section class="sg-section" id="motion">
-      <p class="sg-eyebrow">05 — Motion</p>
-      <h2>Easing &amp; timing</h2>
+      <p class="sg-eyebrow">05 — Motion &amp; Reveals</p>
+      <h2>Motion system</h2>
 
-      <p class="sg-body">Hover over each card to see the easing curve in action. All transitions respect <code>prefers-reduced-motion</code> — when set, show final states immediately with no animation.</p>
+      <p class="sg-body">Everything animates with one of three easing curves — all variants of an aggressive In-Out that accelerates fast and stops cleanly. Nothing fades. Nothing scales. Content wipes in using clip-path or translates up from below a clipped overflow. Hover each card to preview the curve.</p>
 
       <div class="sg-h3">Easing curves</div>
 
       <div class="sg-ease-grid">
-        <div class="sg-ease-card sg-ease-card--spring">
-          <div class="sg-ease-card__label">--ease</div>
-          <div class="sg-ease-card__curve">cubic-bezier<br>(0.16, 1, 0.3, 1)</div>
-          <div class="sg-ease-card__use">Entrances, reveals, elements appearing. Spring-like — overshoot is subtle.</div>
+        <div class="sg-ease-card sg-ease-card--expo">
+          <div class="sg-ease-card__label">Primary — Expo In-Out</div>
+          <div class="sg-ease-card__curve">cubic-bezier<br>(0.86, 0, 0.07, 1)</div>
+          <div class="sg-ease-card__use">All scroll-triggered reveals: text lines, image wipes, underlines, marks, page transitions. The signature curve.</div>
           <div class="sg-ease-track"><div class="sg-ease-dot"></div></div>
         </div>
-        <div class="sg-ease-card sg-ease-card--sharp">
-          <div class="sg-ease-card__label">--ease-in-out</div>
-          <div class="sg-ease-card__curve">cubic-bezier<br>(0.87, 0, 0.13, 1)</div>
-          <div class="sg-ease-card__use">State transitions. Decisive — hits maximum speed in the middle, stops cleanly.</div>
+        <div class="sg-ease-card sg-ease-card--cubic">
+          <div class="sg-ease-card__label">Secondary — Cubic In-Out</div>
+          <div class="sg-ease-card__curve">cubic-bezier<br>(0.65, 0.05, 0.36, 1)</div>
+          <div class="sg-ease-card__use">Overlay transitions, menu open/close, accordion panels. Slightly softer than primary — for contained UI movements.</div>
           <div class="sg-ease-track"><div class="sg-ease-dot"></div></div>
         </div>
-        <div class="sg-ease-card sg-ease-card--fast">
-          <div class="sg-ease-card__label">Fast hover</div>
-          <div class="sg-ease-card__curve">--ease at 0.2s<br>or 0.15s linear</div>
-          <div class="sg-ease-card__use">Button hover, colour changes, border transitions. Instant-feeling feedback.</div>
+        <div class="sg-ease-card sg-ease-card--out">
+          <div class="sg-ease-card__label">Quick — Cubic Out</div>
+          <div class="sg-ease-card__curve">cubic-bezier<br>(0.215, 0.61, 0.355, 1)</div>
+          <div class="sg-ease-card__use">Row hover backgrounds, fast colour changes. Snappy entry — no perceivable easing on exit.</div>
           <div class="sg-ease-track"><div class="sg-ease-dot"></div></div>
         </div>
       </div>
@@ -1310,24 +1518,170 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
 
       <div class="sg-timing-row">
         <span class="sg-timing-label">0.15–0.2s</span>
-        <span class="sg-timing-desc">Hover colour, border, opacity — immediate feedback</span>
-        <div class="sg-timing-dot"></div>
+        <span class="sg-timing-desc">Colour, opacity, border — immediate hover feedback only</span>
+        <div class="sg-timing-dot" style="animation-duration:0.2s;"></div>
       </div>
       <div class="sg-timing-row">
-        <span class="sg-timing-label">0.4s</span>
-        <span class="sg-timing-desc">Small reveals, short element transitions</span>
-        <div class="sg-timing-dot"></div>
+        <span class="sg-timing-label">0.3–0.35s</span>
+        <span class="sg-timing-desc">Accordion icons, checkbox states, quick UI toggles</span>
+        <div class="sg-timing-dot" style="animation-duration:0.35s;"></div>
       </div>
       <div class="sg-timing-row">
-        <span class="sg-timing-label">0.6s</span>
-        <span class="sg-timing-desc">Section fades, mid-size reveals</span>
-        <div class="sg-timing-dot"></div>
+        <span class="sg-timing-label">0.45–0.5s</span>
+        <span class="sg-timing-desc">Button background swap, link underline, row hover</span>
+        <div class="sg-timing-dot" style="animation-duration:0.5s;"></div>
       </div>
       <div class="sg-timing-row">
-        <span class="sg-timing-label">--slow (0.9s)</span>
-        <span class="sg-timing-desc">Text reveals, hero entrances, large choreographed sequences</span>
-        <div class="sg-timing-dot"></div>
+        <span class="sg-timing-label">0.8–0.9s</span>
+        <span class="sg-timing-desc">Text line reveals, heading underlines, button arrow slides</span>
+        <div class="sg-timing-dot" style="animation-duration:0.9s;"></div>
       </div>
+      <div class="sg-timing-row">
+        <span class="sg-timing-label">1.2–1.3s</span>
+        <span class="sg-timing-desc">Image clip-path wipes, mark highlights, page overlay transitions</span>
+        <div class="sg-timing-dot" style="animation-duration:1.3s;"></div>
+      </div>
+
+      <div class="sg-h3">Text line reveal</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Headings and large text are split into lines. Each line sits inside an overflow-hidden wrapper. On scroll entry the text translates up from 110% to 0. Subsequent lines stagger by +0.15s per line. The wrapper clips the motion so the text appears to emerge from below the baseline.</p>
+
+      <div class="sg-demo" style="background:var(--black);flex-direction:column;align-items:flex-start;gap:0;padding:40px;">
+        <div style="overflow:hidden;padding-bottom:0.15em;">
+          <div class="sg-line-reveal" style="animation-delay:0s;">Product design</div>
+        </div>
+        <div style="overflow:hidden;padding-bottom:0.15em;">
+          <div class="sg-line-reveal" style="animation-delay:0.15s;">that ships.</div>
+        </div>
+        <p style="font-size:11px;color:var(--grey-mid);margin-top:24px;">Each line in an overflow:hidden wrapper · translateY(110%) → 0 · stagger +0.15s per line</p>
+      </div>
+
+      <div class="sg-code">/* Text line reveal — HTML structure */
+&lt;h1&gt;
+  &lt;span class="line-w"&gt;&lt;span class="line"&gt;Product design&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="line-w"&gt;&lt;span class="line"&gt;that ships.&lt;/span&gt;&lt;/span&gt;
+&lt;/h1&gt;
+
+/* CSS */
+.line-w {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.15em; /* prevents descender clip */
+}
+.line {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.86, 0, 0.07, 1);
+  will-change: transform;
+}
+.is-started .line { transform: translateY(0); }
+.is-started .line-w:nth-child(2) .line { transition-delay: 0.15s; }
+.is-started .line-w:nth-child(3) .line { transition-delay: 0.30s; }</div>
+
+      <div class="sg-h3">Image / block reveal — clip-path wipe</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Images and content blocks reveal using a clip-path polygon that wipes from the bottom edge upward. The element is fully present in the DOM — only the visible area changes. No opacity, no scale. Duration 1.3s with a 0.15s delay after the text lines have started.</p>
+
+      <div class="sg-demo" style="background:var(--black);gap:20px;align-items:flex-start;flex-direction:column;">
+        <div style="width:100%;height:160px;background:var(--dark-surface);border:1px solid var(--line);position:relative;overflow:hidden;">
+          <div class="sg-clip-reveal" style="position:absolute;inset:0;background:linear-gradient(135deg,var(--dark-surface),var(--black));display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:0.8125rem;font-weight:500;color:var(--grey);">Image / content block</span>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--grey-mid);">clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%) → full rect · 1.3s · cubic-bezier(0.77, 0, 0.18, 1)</p>
+      </div>
+
+      <div class="sg-code">/* Image reveal — clip-path */
+.reveal-block {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  transition: clip-path 1.3s cubic-bezier(0.77, 0, 0.18, 1);
+}
+/* Loaded state (set by IntersectionObserver) */
+.reveal-block.is-started {
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+  transition-delay: 0.15s;
+}</div>
+
+      <div class="sg-h3">Heading underline reveal</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Large headings have an underline that scales in from the left on scroll entry. It is a pseudo-element set at 0.02em height — thin enough to be a rule, not a decoration. The second line delays by an additional 0.2s.</p>
+
+      <div class="sg-demo" style="background:var(--black);flex-direction:column;align-items:flex-start;">
+        <div class="sg-underline-heading">
+          <span class="sg-underline-line" style="transition-delay:0.3s;">How we work</span>
+        </div>
+        <p style="font-size:11px;color:var(--grey-mid);margin-top:24px;">scaleX(0) → scaleX(1) · transform-origin: left · 0.9s + 0.3s delay</p>
+      </div>
+
+      <div class="sg-code">/* Heading underline */
+.large-heading {
+  position: relative;
+}
+.large-heading .line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.05em;
+  width: 100%;
+  height: 0.02em;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.86, 0, 0.07, 1) 0.3s;
+}
+.is-started .large-heading .line::after { transform: scaleX(1); }
+/* Stagger second line underline */
+.is-started .large-heading .line-w:nth-child(2)::after {
+  transition-delay: 0.5s;
+}</div>
+
+      <div class="sg-h3">Scroll trigger — state classes</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Animations are driven by two state classes added by an IntersectionObserver. The observer adds <code>.is-started</code> when an element enters the viewport and <code>.is-complete</code> when its transition ends. CSS defines the initial (hidden) and final (visible) states; JS only flips the class.</p>
+
+      <div class="sg-code">/* IntersectionObserver pattern */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('is-started');
+    entry.target.addEventListener('transitionend', () => {
+      entry.target.classList.add('is-complete');
+    }, { once: true });
+    observer.unobserve(entry.target);
+  });
+}, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+/* prefers-reduced-motion: skip to final state immediately */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { transition: none !important; }
+  [data-reveal] .line { transform: none !important; }
+  [data-reveal] .reveal-block { clip-path: none !important; }
+}</div>
+
+      <div class="sg-h3">Page transitions</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Between pages, a full-viewport overlay wipes in with a clip-path, the new page loads, then the overlay wipes out. The overlay colour matches the destination page's accent. Duration is 0.6s in / 0.6s out. The site uses Swup for AJAX navigation — the overlay is a fixed element that Swup controls via class hooks.</p>
+
+      <div class="sg-code">/* Page transition overlay */
+[data-page-overlay] {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0); /* hidden */
+  transition: clip-path 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+  z-index: 100;
+}
+/* Entering: overlay covers screen */
+.is-transitioning [data-page-overlay] {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: all;
+}
+/* Leaving: overlay retreats */
+.is-loaded [data-page-overlay] {
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+}</div>
 
       <div class="sg-h3">Motion rules</div>
 
@@ -1335,28 +1689,199 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
         <thead><tr><th>Rule</th><th>How to apply it</th></tr></thead>
         <tbody>
           <tr>
-            <td>One entrance sequence per page</td>
-            <td>Stagger hero elements using animation-delay. Don't animate every card independently on scroll.</td>
+            <td>Wipe, don't fade</td>
+            <td>Use clip-path or translateY reveals, not opacity fades. Fades feel unresolved. Wipes feel decisive.</td>
+          </tr>
+          <tr>
+            <td>One easing curve</td>
+            <td>The Expo In-Out (0.86, 0, 0.07, 1) is the site's motion signature. Use it for everything scroll-triggered. Deviate only for quick hover feedback.</td>
+          </tr>
+          <tr>
+            <td>Stagger lines, not sections</td>
+            <td>Within a heading, stagger each line by +0.15s. Do not stagger entire sections against each other — too much delay before content appears.</td>
+          </tr>
+          <tr>
+            <td>Transforms and clip-path only</td>
+            <td>Animate transform, clip-path, and opacity. Never animate width, height, padding, or top/left — these trigger layout.</td>
+          </tr>
+          <tr>
+            <td>Observe once, remove observer</td>
+            <td>Call observer.unobserve() after adding .is-started. Elements do not re-animate on scroll back.</td>
           </tr>
           <tr>
             <td>Reduced motion</td>
-            <td>@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: 0.01ms !important; } }</td>
+            <td>@media (prefers-reduced-motion: reduce) removes all transitions and sets elements to their final state immediately. No exceptions.</td>
           </tr>
           <tr>
-            <td>No motion for no reason</td>
-            <td>A fade-in that takes 0.6s adds more delay than delight. Default to no animation; add it when it carries meaning.</td>
+            <td>will-change: transform</td>
+            <td>Set on .line elements only, not on every animated element. Overuse causes GPU memory pressure.</td>
           </tr>
-          <tr>
-            <td>Transforms over layout</td>
-            <td>Animate transform and opacity only. Never animate width, height, top, left, or padding.</td>
-          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════════ INTERACTIONS ════════ -->
+    <section class="sg-section" id="interactions">
+      <p class="sg-eyebrow">06 — Interactions</p>
+      <h2>Interaction patterns</h2>
+
+      <p class="sg-body">Every interactive element has exactly one primary behaviour on hover or focus. State changes use the same easing as reveal animations — nothing is linear, nothing is instant except colour feedback.</p>
+
+      <div class="sg-h3">Button: background swap + arrow slide</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">The primary button inverts its colours on hover. The arrow icon starts off-screen left and slides in as the background transitions. Both happen in a single 0.45s Expo In-Out transition.</p>
+
+      <div class="sg-demo" style="background:var(--black);gap:24px;flex-direction:column;align-items:flex-start;">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+          <a class="sg-btn-nlc sg-btn-nlc--dark" href="#">Book a call <span class="sg-btn-arrow" aria-hidden="true">→</span></a>
+          <a class="sg-btn-nlc sg-btn-nlc--ghost" href="#">View work <span class="sg-btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <p style="font-size:11px;color:var(--grey-mid);">Hover to see: background swap 0.45s · arrow slides from left 0.8s · both on cubic-bezier(0.86, 0, 0.07, 1)</p>
+      </div>
+
+      <div class="sg-code">/* Button: background swap + arrow reveal */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  height: 52px;
+  padding: 0 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid currentColor;
+  border-radius: 0; /* Sharp — no border-radius */
+  overflow: hidden;
+  transition: background-color 0.45s cubic-bezier(0.86, 0, 0.07, 1),
+              color 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.btn__icon { overflow: hidden; width: 1em; }
+.btn__icon svg {
+  transform: translateX(-140%);
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.btn:hover .btn__icon svg { transform: translateX(0); }</div>
+
+      <div class="sg-h3">Row: background wipe from bottom</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">List rows — portfolio items, service rows, case study links — reveal a background by scaling a pseudo-element from the bottom up. The text colour inverts simultaneously. Fast (0.2s) so it feels responsive, not theatrical.</p>
+
+      <div class="sg-demo" style="background:var(--black);padding:0;flex-direction:column;gap:0;">
+        <div class="sg-row-demo">
+          <span style="font-size:0.8125rem;font-weight:500;">User research</span>
+          <span style="font-size:0.8125rem;color:var(--grey);">Strategy · Research · Synthesis</span>
+          <span style="font-size:0.8125rem;color:var(--grey);">→</span>
+        </div>
+        <div class="sg-row-demo">
+          <span style="font-size:0.8125rem;font-weight:500;">Product design</span>
+          <span style="font-size:0.8125rem;color:var(--grey);">UI · UX · Prototyping</span>
+          <span style="font-size:0.8125rem;color:var(--grey);">→</span>
+        </div>
+        <div class="sg-row-demo">
+          <span style="font-size:0.8125rem;font-weight:500;">Design systems</span>
+          <span style="font-size:0.8125rem;color:var(--grey);">Components · Tokens · Governance</span>
+          <span style="font-size:0.8125rem;color:var(--grey);">→</span>
+        </div>
+        <p style="font-size:11px;color:var(--grey-mid);padding:16px 20px;">Hover a row — background wipes from bottom in 0.2s</p>
+      </div>
+
+      <div class="sg-code">/* Row hover: background wipes from bottom */
+.row {
+  position: relative;
+  transition: color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--white); /* or accent colour */
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: -1;
+}
+.row:hover { color: var(--black); }
+.row:hover::before { transform: scaleY(1); }</div>
+
+      <div class="sg-h3">Link underline: scaleX wipe</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Navigation links and inline text links use an animated underline — a pseudo-element that scales from 0 to 1 on enter, and reverses direction on leave. Not a text-decoration; a real element with full control over timing and origin.</p>
+
+      <div class="sg-demo" style="background:var(--black);gap:24px;">
+        <a class="sg-link-demo" href="#">Services</a>
+        <a class="sg-link-demo" href="#">How we work</a>
+        <a class="sg-link-demo" href="#">Contact</a>
+      </div>
+
+      <div class="sg-code">/* Link underline: animated scaleX */
+.link {
+  position: relative;
+  display: inline-block;
+}
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -0.1em;
+  height: 0.06em;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 100% 100%; /* leaves from right */
+  transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.link:hover::after {
+  transform: scaleX(1);
+  transform-origin: 0% 0%; /* enters from left */
+}</div>
+
+      <div class="sg-h3">Highlight mark: scaleY wipe from bottom</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">Key phrases in body copy use a coloured <code>&lt;mark&gt;</code> background that wipes up from below on scroll entry. The text is visible immediately — the colour arrives 0.25s later so the reader has already read the word before it's highlighted.</p>
+
+      <div class="sg-demo" style="background:var(--black);flex-direction:column;align-items:flex-start;">
+        <p style="font-size:1rem;font-weight:300;line-height:1.65;color:var(--grey);max-width:480px;">We run <mark class="sg-mark-demo">structured research</mark> before any design work begins, because the most expensive mistake is building the right solution to the wrong problem.</p>
+        <p style="font-size:11px;color:var(--grey-mid);margin-top:16px;">The highlight wipes in from the bottom — text readable first, colour arrives 0.25s later</p>
+      </div>
+
+      <div class="sg-code">/* Highlight mark: scaleY from bottom */
+mark {
+  position: relative;
+  background: transparent;
+  color: inherit;
+}
+mark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--lime); /* or accent */
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1);
+  z-index: -1;
+}
+.is-started mark::before {
+  transform: scaleY(1);
+  transition-delay: 0.25s;
+}</div>
+
+      <div class="sg-h3">Interaction rules</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>Pattern</th><th>Duration</th><th>Easing</th><th>Trigger</th></tr></thead>
+        <tbody>
+          <tr><td>Button bg swap</td><td>0.45s</td><td>cubic-bezier(0.86, 0, 0.07, 1)</td><td>:hover / :focus-visible</td></tr>
+          <tr><td>Button arrow slide</td><td>0.8s</td><td>cubic-bezier(0.86, 0, 0.07, 1)</td><td>:hover</td></tr>
+          <tr><td>Row bg wipe</td><td>0.2s</td><td>cubic-bezier(0.215, 0.61, 0.355, 1)</td><td>:hover</td></tr>
+          <tr><td>Link underline</td><td>0.5s</td><td>cubic-bezier(0.215, 0.61, 0.355, 1)</td><td>:hover</td></tr>
+          <tr><td>Mark highlight</td><td>1.2s + 0.25s delay</td><td>cubic-bezier(0.86, 0, 0.07, 1)</td><td>.is-started (scroll)</td></tr>
+          <tr><td>Image clip reveal</td><td>1.3s + 0.15s delay</td><td>cubic-bezier(0.77, 0, 0.18, 1)</td><td>.is-started (scroll)</td></tr>
+          <tr><td>Colour / opacity change</td><td>0.15–0.2s</td><td>linear or ease</td><td>:hover</td></tr>
+          <tr><td>Accordion open/close</td><td>0.35s</td><td>cubic-bezier(0.86, 0, 0.07, 1)</td><td>click / Enter</td></tr>
         </tbody>
       </table>
     </section>
 
     <!-- ════════ VOICE ════════ -->
     <section class="sg-section" id="voice">
-      <p class="sg-eyebrow">06 — Voice</p>
+      <p class="sg-eyebrow">07 — Voice</p>
       <h2>Writing rules</h2>
 
       <p class="sg-body">These apply to every word on the site — headings, body, alt text, button labels, meta descriptions. The tone is a senior person explaining something technical to a smart client over coffee.</p>
@@ -1398,7 +1923,7 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
 
     <!-- ════════ ACCESSIBILITY ════════ -->
     <section class="sg-section" id="accessibility">
-      <p class="sg-eyebrow">07 — Accessibility</p>
+      <p class="sg-eyebrow">09 — Accessibility</p>
       <h2>WCAG 2.1 AA</h2>
 
       <p class="sg-body">Antiphono publicly commits to WCAG 2.1 AA on client work. The site failing its own standard is a credibility problem, not a minor oversight. Every new component is tested before it ships.</p>
@@ -1452,7 +1977,7 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
 
     <!-- ════════ REFERENCE: FONTSHARE ════════ -->
     <section class="sg-section" id="ref-fontshare">
-      <p class="sg-eyebrow">08 — Reference</p>
+      <p class="sg-eyebrow">Reference</p>
       <h2>Fontshare</h2>
 
       <p class="sg-body">Extracted from fontshare.com in August 2026 as a visual reference for the Antiphono direction. Fontshare is a free type library by Indian Type Foundry. Its site is a useful benchmark: editorial, dark, warm, typographically confident, almost no decoration.</p>
@@ -1695,6 +2220,168 @@ Note: Active state is currently cream, not lime. To use lime here, set: backgrou
           <p>Fontshare's confidence comes from scale. Antiphono's current display cap is <code>--text-3xl</code> via clamp. A dedicated hero class at <code>clamp(3.5rem, 7vw, 6rem)</code> on select pages would match the editorial confidence of the reference.</p>
         </div>
       </div>
+
+    </section>
+
+    <!-- ════════ REFERENCE: NLC ════════ -->
+    <section class="sg-section" id="ref-nlc">
+      <p class="sg-eyebrow">Reference</p>
+      <h2>NLC / Obys Agency</h2>
+
+      <p class="sg-body">Extracted from nlc.obys.agency in August 2026. Built by Obys Agency. The NLC site defines the motion and typographic approach this design system adopts: a single grotesque typeface with extreme scale contrast, aggressive Expo In-Out easing throughout, and content that wipes in rather than fades.</p>
+
+      <div class="sg-draft" style="color:#60A5FA;border-color:rgba(96,165,250,0.25);">
+        <span style="width:5px;height:5px;background:#60A5FA;border-radius:50%;display:inline-block;"></span>
+        Colour palette not adopted — type, motion and layout approach only
+      </div>
+
+      <div class="sg-h3">Typeface extraction</div>
+
+      <p class="sg-body" style="margin-bottom:20px;">NLC uses <strong style="color:var(--white);">Scto Grotesk A</strong> (Schick Toikka) — a commercial condensed grotesque not available for free use. Antiphono adapts the same principles using Sora: single typeface, weight 500 throughout, hierarchy built entirely from size and tracking.</p>
+
+      <table class="sg-token-table">
+        <thead><tr><th>NLC value</th><th>Antiphono equivalent</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Scto Grotesk A · weight 500</td>
+            <td>Sora · weight 500</td>
+            <td>Both are geometric grotesques. Scto is condensed; Sora is rounder. Apply tighter tracking to compensate.</td>
+          </tr>
+          <tr>
+            <td>Single typeface throughout</td>
+            <td>Sora only</td>
+            <td>No editorial serif. No mono for UI. Hierarchy from scale and tracking alone.</td>
+          </tr>
+          <tr>
+            <td>Extra heading: 14.6rem desktop</td>
+            <td>Display: clamp(3.5rem, 8vw, 7rem)</td>
+            <td>NLC scales to 146px at 1280px+. Antiphono's 1120px max-width makes ~70px the practical ceiling.</td>
+          </tr>
+          <tr>
+            <td>Section heading: 9.2rem desktop</td>
+            <td>Section: clamp(2.25rem, 5vw, 4.5rem)</td>
+            <td>NLC's proportions are steeper. Antiphono text-heavy pages need slightly more restraint.</td>
+          </tr>
+          <tr>
+            <td>letter-spacing: -0.05em all headings</td>
+            <td>-0.05em (display) → -0.03em (sub-heading)</td>
+            <td>NLC uses -0.05em at every heading level. Antiphono scales tracking with size — looser at smaller sizes.</td>
+          </tr>
+          <tr>
+            <td>line-height: 0.9 all headings</td>
+            <td>0.90–0.95 at display · 1.0 at sub-heading</td>
+            <td>0.9 at small heading sizes clips ascenders. Step up to 1.0 below 2rem.</td>
+          </tr>
+          <tr>
+            <td>Body: 1.4rem · weight 500</td>
+            <td>Body: 1rem · weight 300</td>
+            <td>NLC uses medium weight for body — works with their condensed typeface. Sora at 500 is too heavy for prose; use 300.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sg-h3">Motion extraction</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>NLC pattern</th><th>Adopted</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>cubic-bezier(0.86, 0, 0.07, 1) — Expo In-Out</td>
+            <td>Yes — primary easing</td>
+            <td>Used for all scroll reveals, underlines, marks, page transitions. Replaces the previous spring curve.</td>
+          </tr>
+          <tr>
+            <td>cubic-bezier(0.65, 0.05, 0.36, 1) — Cubic In-Out</td>
+            <td>Yes — secondary easing</td>
+            <td>Overlays, menus, accordions.</td>
+          </tr>
+          <tr>
+            <td>cubic-bezier(0.215, 0.61, 0.355, 1) — Cubic Out</td>
+            <td>Yes — hover easing</td>
+            <td>Row hovers, quick interactive responses.</td>
+          </tr>
+          <tr>
+            <td>Text split into .line-w / .line</td>
+            <td>Yes</td>
+            <td>Overflow hidden wrapper + translateY(110%) reveal.</td>
+          </tr>
+          <tr>
+            <td>clip-path polygon wipe (bottom → top)</td>
+            <td>Yes</td>
+            <td>Images and content blocks. 1.3s · cubic-bezier(0.77, 0, 0.18, 1).</td>
+          </tr>
+          <tr>
+            <td>Heading underline scaleX reveal</td>
+            <td>Yes</td>
+            <td>0.9s · 0.3s delay · staggered per line.</td>
+          </tr>
+          <tr>
+            <td>Mark highlight scaleY reveal</td>
+            <td>Yes</td>
+            <td>1.2s · 0.25s delay. Text readable first, colour arrives second.</td>
+          </tr>
+          <tr>
+            <td>Button arrow translateX reveal</td>
+            <td>Yes</td>
+            <td>0.8s · arrow enters from left on hover.</td>
+          </tr>
+          <tr>
+            <td>Page transition clip-path overlay</td>
+            <td>Aspirational</td>
+            <td>Requires Swup or equivalent AJAX navigation. Not implemented yet — document for when navigation is revisited.</td>
+          </tr>
+          <tr>
+            <td>Custom cursor</td>
+            <td>No</td>
+            <td>NLC uses a custom cursor. Antiphono does not — adds complexity without matching benefit on a text-heavy site.</td>
+          </tr>
+          <tr>
+            <td>Lenis smooth scroll</td>
+            <td>No</td>
+            <td>Smooth scroll conflicts with native browser behaviour and causes accessibility issues. Not adopted.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sg-h3">Layout extraction</div>
+
+      <table class="sg-token-table">
+        <thead><tr><th>NLC pattern</th><th>Antiphono approach</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>3px solid top border on each section</td>
+            <td>Adopt. A single heavy rule separating sections is cleaner than margin alone.</td>
+          </tr>
+          <tr>
+            <td>Left sidebar: single letters stacked vertically (N · L · C)</td>
+            <td>Not adopted directly. The fixed left strip is brand-specific. Antiphono could use a vertical section label strip on case study pages.</td>
+          </tr>
+          <tr>
+            <td>Section number badges ("1:", "2:", "3:")</td>
+            <td>Adopt. Small numbered labels in a dark box before each section heading give scannable structure to long pages.</td>
+          </tr>
+          <tr>
+            <td>Two-column section layout: label column + content column</td>
+            <td>Adopt. Section label / eyebrow in narrow left column (~25%), content in wide right column (~75%). Used on how-we-work and case study pages.</td>
+          </tr>
+          <tr>
+            <td>Data displayed as full-width table rows with 1px horizontal rules</td>
+            <td>Adopt. Numbers, stats, portfolio items — all as ruled rows, not cards. Cleaner at scale.</td>
+          </tr>
+          <tr>
+            <td>Full-viewport-height hero sections</td>
+            <td>Partial. Antiphono hero fills the viewport above the fold but does not scroll-lock.</td>
+          </tr>
+          <tr>
+            <td>20px horizontal page padding (mobile) · container at md</td>
+            <td>Antiphono uses --gutter (64px desktop · 24px mobile). Keep existing token.</td>
+          </tr>
+          <tr>
+            <td>No border-radius on buttons or interactive elements</td>
+            <td>Adopt. --radius: 2px remains for internal UI. Buttons and row elements: 0 border-radius.</td>
+          </tr>
+        </tbody>
+      </table>
 
     </section>
 
