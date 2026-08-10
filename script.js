@@ -110,7 +110,7 @@ const processObs = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[data-reveal], .process-item').forEach(el => processObs.observe(el));
 
-// Legacy .reveal
+// Legacy .reveal-legacy
 const legacyRevealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -120,10 +120,36 @@ const legacyRevealObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal').forEach((el, i) => {
+document.querySelectorAll('.reveal-legacy').forEach((el, i) => {
   el.style.transitionDelay = `${(i % 6) * 60}ms`;
   legacyRevealObs.observe(el);
 });
+
+// ===== Layout system reveals — .reveal / .rise / .wipe get .is-started =====
+const systemRevealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('is-started');
+    systemRevealObs.unobserve(e.target);
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+
+// Exposed so pages that render rows from data.js can register them once drawn
+window.observeReveals = function(root) {
+  const scope = root || document;
+  scope.querySelectorAll('[data-stagger]').forEach(group => {
+    Array.from(group.children).forEach((child, i) => child.style.setProperty('--i', i));
+  });
+  scope.querySelectorAll('.reveal').forEach(block => {
+    block.querySelectorAll('.line-w').forEach((w, i) => w.style.setProperty('--i', i));
+  });
+  scope.querySelectorAll('.reveal, .rise, .wipe').forEach(el => {
+    if (!el.classList.contains('is-started')) systemRevealObs.observe(el);
+  });
+};
+
+// Runs after the render listeners registered earlier in the document
+document.addEventListener('DOMContentLoaded', () => window.observeReveals());
 
 // Manifesto statement lines — staggered text reveal
 const manifestoObs = new IntersectionObserver((entries) => {

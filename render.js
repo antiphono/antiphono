@@ -640,6 +640,34 @@ function caseStudyCardHTML(cs) {
     + '</a>';
 }
 
+/* Work index: full-width ruled rows. Case study thumbnails are not shot yet,
+   so the client name carries the row at display scale rather than a placeholder
+   image. Adopted from the NLC data-row pattern in the style guide. */
+function workIndexRowHTML(cs, i) {
+  var displayName = cs.named ? cs.client : cs.sector;
+  var num = ('0' + (i + 1)).slice(-2);
+  return '<a class="wi-row rise" href="/work/' + escapeHTML(cs.slug) + '"'
+    + ' data-services=\'' + JSON.stringify(cs.services).replace(/'/g, '&#39;') + '\''
+    + ' data-sector="' + escapeHTML(cs.sector) + '">'
+    + '<span class="wi-row__num">' + num + '</span>'
+    + '<span class="wi-row__name">' + escapeHTML(displayName) + '</span>'
+    + '<span class="wi-row__sector">' + escapeHTML(cs.sector) + '</span>'
+    + '<span class="wi-row__services">' + cs.services.map(function(s) {
+        return '<span class="wi-row__svc">' + escapeHTML(s) + '</span>';
+      }).join('') + '</span>'
+    + '<span class="wi-row__year">' + escapeHTML(formatCaseStudyYears(cs)) + '</span>'
+    + '<span class="wi-row__go" aria-hidden="true">' + ARROW_SVG + '</span>'
+    + '</a>';
+}
+
+function renderWorkIndex(container, items) {
+  if (!container || !items || !items.length) return;
+  container.innerHTML = '<div class="wi-head" aria-hidden="true">'
+    + '<span>No.</span><span>Client</span><span>Sector</span><span>Services</span><span>Years</span><span></span>'
+    + '</div>'
+    + items.map(workIndexRowHTML).join('');
+}
+
 function sortCaseStudies(items) {
   return items.slice().sort(function(a, b) {
     if (a.featured !== b.featured) return a.featured ? -1 : 1;
@@ -653,7 +681,8 @@ function renderCaseStudyGallery(galleryEl, filterEl, statusEl, items) {
   if (!galleryEl || !items || !items.length) return;
   var sorted = sortCaseStudies(items);
 
-  galleryEl.innerHTML = sorted.map(caseStudyCardHTML).join('');
+  renderWorkIndex(galleryEl, sorted);
+  if (window.observeReveals) window.observeReveals(galleryEl);
 
   if (!filterEl) return;
   var allServices = [];
@@ -671,7 +700,7 @@ function renderCaseStudyGallery(galleryEl, filterEl, statusEl, items) {
   filterEl.innerHTML = chips.join('');
 
   function applyFilter(selected) {
-    var cards = galleryEl.querySelectorAll('.cs-card');
+    var cards = galleryEl.querySelectorAll('.wi-row');
     var count = 0;
     cards.forEach(function(card) {
       var services = [];
