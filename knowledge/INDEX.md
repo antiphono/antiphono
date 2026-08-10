@@ -7,6 +7,7 @@ This repository keeps its own record, the same way client projects do. When a de
 | Date | Decision | File |
 |---|---|---|
 | 2026-08-05 | Site structure, services list, case studies, counters and content process | `decisions/2026-08-05-site-structure.md` |
+| 2026-08-10 | Editorial band grid replaces the 760px column. Rows over cards, Sora only | `decisions/2026-08-10-layout-system.md` |
 
 ## Open questions
 
