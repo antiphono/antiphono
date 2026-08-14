@@ -1,0 +1,196 @@
+/* ============================================================
+   Antiphono design tokens
+   ------------------------------------------------------------
+   Every value used in styles.css and in page markup resolves to
+   a token declared here. Nothing else declares a literal colour,
+   radius, duration or type size.
+
+   Loaded before styles.css on every page.
+
+   Provisional values are marked PROVISIONAL. There is no approved
+   visual identity yet, so anything marked that way is a working
+   value for the staging build, not a brand decision.
+   ============================================================ */
+
+:root {
+
+  /* ---- Palette -------------------------------------------------
+     Black and white only. Colour comes from client work imagery.
+     Do not introduce a brand palette here without Ben's sign off. */
+  --black:        #0A0A0A;
+  --white:        #F2F1EC;
+  --dark-surface: #141413;
+  --grey:         #87877F;
+  --grey-mid:     #6A6A62;
+  --grey-light:   #BDBDB5;
+
+  /* Rules and hairlines, expressed against the dark ground */
+  --line:      rgba(242, 241, 236, 0.10);
+  --line-soft: rgba(242, 241, 236, 0.06);
+  --line-dark: rgba(10, 10, 10, 0.10);
+
+  /* ---- Surfaces ------------------------------------------------
+     PROVISIONAL. Borrowed from the Ezendo reference frame, which
+     insets panels and cards on a light ground. */
+  --surface-panel:       var(--black);
+  --surface-card:        var(--dark-surface);
+  --surface-card-light:  #FFFFFF;
+  --surface-sunken:      #E8E7E1;
+
+  /* Image placeholders. No stock photography on this site, so every
+     image space renders as a flat token surface until real work
+     imagery exists. */
+  --surface-placeholder:      #C4C3BD;
+  --surface-placeholder-deep: #9E9D97;
+
+  /* ---- Typography ----------------------------------------------
+     One typeface. Hierarchy comes from scale, weight and tracking.
+     Fraunces and Space Mono were removed and must not return. */
+  --font: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --weight-light:  300;
+  --weight-medium: 500;
+  --weight-semi:   600;
+
+  /* Utility scale */
+  --text-xs:   0.6875rem;  /* 11px, labels and eyebrows */
+  --text-sm:   0.8125rem;  /* 13px */
+  --text-base: 1rem;
+  --text-lg:   1.25rem;
+  --text-xl:   clamp(1.25rem, 2vw, 1.75rem);
+  --text-2xl:  clamp(1.75rem, 3.5vw, 3rem);
+  --text-3xl:  clamp(2.5rem, 6vw, 5rem);
+
+  /* Display ramp, style guide section 02 */
+  --display: clamp(3rem, 8vw, 7rem);
+  --section: clamp(2rem, 5vw, 4.25rem);
+  --sub:     clamp(1.375rem, 2.4vw, 2rem);
+  --lead:    clamp(1.0625rem, 1.5vw, 1.375rem);
+
+  /* Tracking, tightens as size increases */
+  --track-display: -0.05em;
+  --track-section: -0.04em;
+  --track-sub:     -0.03em;
+  --track-lead:    -0.015em;
+  --track-body:    normal;
+  --track-label:   0.10em;
+
+  /* Line height */
+  --leading-display: 0.9;
+  --leading-heading: 1.05;
+  --leading-body:    1.5;
+
+  /* ---- Motion --------------------------------------------------
+     NLC / Obys easing signature, style guide section 05. */
+  --ease-expo:  cubic-bezier(0.86, 0, 0.07, 1);      /* primary reveals */
+  --ease-cubic: cubic-bezier(0.65, 0.05, 0.36, 1);   /* overlays, menus */
+  --ease-out:   cubic-bezier(0.215, 0.61, 0.355, 1); /* hover */
+  --ease-clip:  cubic-bezier(0.77, 0, 0.18, 1);      /* image wipes */
+
+  --dur-quick:  0.2s;
+  --dur-hover:  0.45s;
+  --dur-reveal: 0.9s;
+  --dur-clip:   1.3s;
+  --slow:       0.9s;
+
+  --stagger-1: 0.15s;
+  --stagger-2: 0.30s;
+  --stagger-3: 0.45s;
+
+  /* ---- Layout --------------------------------------------------- */
+  --gutter: clamp(24px, 4vw, 72px);
+  --maxw:   1680px;
+  --rail:   22%;    /* sticky label column */
+  --rule:   3px;    /* heavy section separator */
+  --nav-h:  72px;
+
+  /* Vertical rhythm */
+  --space-2xs: 4px;
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  clamp(28px, 4vw, 48px);
+  --space-xl:  clamp(36px, 5vw, 64px);
+  --space-2xl: clamp(48px, 6vw, 96px);
+  --space-3xl: clamp(64px, 9vw, 150px);
+
+  /* ---- Radii ----------------------------------------------------
+     PROVISIONAL. The reference frame uses generous radii on panels
+     and cards against otherwise square section rules. */
+  --radius:       2px;
+  --radius-card:  20px;
+  --radius-lift:  24px;
+  --radius-panel: 32px;
+  --radius-pill:  999px;
+
+  /* Inset for the hero panel, which floats off the page edge */
+  --panel-inset: clamp(8px, 1vw, 16px);
+
+  /* ---- Component sizing -----------------------------------------
+     PROVISIONAL. Derived from the Ezendo reference frame. */
+  --hairline:       1px;
+  --control-sm:     36px;                        /* circular icon button */
+  --rule-short:     clamp(20px, 3vw, 44px);      /* kicker rule */
+  --scroll-cue-h:   clamp(32px, 5vw, 64px);
+  --hero-panel-h:   min(84vh, 900px);
+  --hero-scroll-y:  38%;                         /* scroll cue vertical anchor */
+  --stat-card-h:    clamp(200px, 22vw, 280px);
+  --stat-card-min:  260px;
+  --text-stat:      clamp(2.5rem, 5vw, 4rem);
+
+  /* Opacity steps */
+  --opacity-muted:  0.5;
+  --opacity-label:  0.55;
+
+  /* Breakpoints cannot be tokens (media queries do not read custom
+     properties), so they are written literally and listed here:
+     860px  spread collapses
+     900px  hero foot and cards stack */
+
+  /* ---- Legacy aliases -------------------------------------------
+     Needed by render.js, the articles page and inner pages. Do not
+     remove without checking those first. */
+  --bg:           #0A0A0A;
+  --bg-raised:    #141413;
+  --cream:        #F2F1EC;
+  --cream-dim:    #B8B7B0;
+  --ink:          #0A0A0A;
+  --grey-soft:    #5C5C54;
+  --lime:         #C8FF47;
+  --font-body:    'Sora', -apple-system, sans-serif;
+  --font-display: 'Sora', -apple-system, sans-serif;
+  --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* ============================================================
+   Section colour schemes
+   ------------------------------------------------------------
+   A section declares its ground with data-scheme. Descendants read
+   the local tokens rather than hard-coding a colour, so a section
+   can be flipped from dark to light by changing one attribute.
+
+   data-scheme="dark"   default. White text on black.
+   data-scheme="light"  black text on the off-white ground.
+
+   .band--light is kept as an alias so existing pages keep working.
+   ============================================================ */
+
+[data-scheme="dark"] {
+  background: var(--black);
+  color: var(--white);
+  --line: rgba(242, 241, 236, 0.10);
+  --line-soft: rgba(242, 241, 236, 0.06);
+  --grey: #87877F;
+  --surface-card: var(--dark-surface);
+}
+
+[data-scheme="light"],
+.band--light {
+  background: var(--white);
+  color: var(--black);
+  --line: rgba(10, 10, 10, 0.14);
+  --line-soft: rgba(10, 10, 10, 0.07);
+  --grey: #55554E;          /* 7.1:1 on --white, passes AA body text */
+  --surface-card: var(--surface-card-light);
+}

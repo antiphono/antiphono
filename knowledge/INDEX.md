@@ -8,6 +8,7 @@ This repository keeps its own record, the same way client projects do. When a de
 |---|---|---|
 | 2026-08-05 | Site structure, services list, case studies, counters and content process | `decisions/2026-08-05-site-structure.md` |
 | 2026-08-10 | Editorial band grid replaces the 760px column. Rows over cards, Sora only | `decisions/2026-08-10-layout-system.md` |
+| 2026-08-14 | Tokens move to `styles/tokens.css`. Sections declare a ground with `data-scheme` | `decisions/2026-08-14-tokens-file-and-section-schemes.md` |
 
 ## Open questions
 
