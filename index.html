@@ -107,17 +107,18 @@
     </div>
   </div>
 
-  <!-- 1.2 What changed -->
+  <!-- 1.2 What changed. Treatment: offset statement on a rule. -->
   <section class="section shell" aria-labelledby="h-changed">
-    <div class="split split--wide-left">
+    <div class="statement">
       <div class="stack-lg">
         <p class="label" data-anim="fade">01 / What changed</p>
-        <h2 class="h1 lines" id="h-changed">
-          <span class="line-w"><span class="line">Making things used to be</span></span>
-          <span class="line-w"><span class="line">the expensive part.</span></span>
+        <h2 class="display lines" id="h-changed">
+          <span class="line-w"><span class="line">Making things</span></span>
+          <span class="line-w"><span class="line">used to be the</span></span>
+          <span class="line-w"><span class="line">expensive part.</span></span>
         </h2>
       </div>
-      <div class="stack">
+      <div class="statement__answer stack">
         <p class="lead" data-anim="up">Drawing every screen. Writing every summary. Rebuilding every option somebody wanted to compare.</p>
         <p class="muted" data-anim="up">That cost has mostly gone. Judgement has not. So the constraint moved. You are no longer limited by how much you can produce. You are limited by how well you decide.</p>
       </div>
@@ -217,53 +218,67 @@
     </div>
   </section>
 
-  <!-- 1.6 Your developers stay in control -->
-  <section class="section shell" aria-labelledby="h-devs">
-    <div class="split">
-      <div class="stack-lg">
-        <p class="label" data-anim="fade">05 / Your team</p>
-        <h2 class="h1 lines" id="h-devs">
-          <span class="line-w"><span class="line">Your developers</span></span>
-          <span class="line-w"><span class="line">stay in control.</span></span>
-        </h2>
-      </div>
-      <div class="stack">
-        <p class="lead" data-anim="up">We are not a replacement for your engineering team and we do not bid against them.</p>
-        <p class="muted" data-anim="up">We build front end code and hand it over. Your team reviews, merges and ships it through your own pipeline. We do not deploy to your production environment.</p>
+  <!-- 1.6 Your developers. Treatment: inverted inset panel. -->
+  <section class="section--flush" aria-labelledby="h-devs">
+    <div class="panel section" data-scheme="light">
+      <div class="shell split">
+        <div class="stack-lg">
+          <p class="label" data-anim="fade">05 / Your team</p>
+          <h2 class="display lines" id="h-devs">
+            <span class="line-w"><span class="line">Your developers</span></span>
+            <span class="line-w"><span class="line">stay in control.</span></span>
+          </h2>
+        </div>
+        <div class="stack">
+          <p class="lead" data-anim="up">We are not a replacement for your engineering team and we do not bid against them.</p>
+          <p class="muted" data-anim="up">We build front end code and hand it over. Your team reviews, merges and ships it through your own pipeline. We do not deploy to your production environment.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 1.7 Selected work -->
+  <!-- 1.7 Selected work. Treatment: offset stepped grid. -->
   <section class="section shell" aria-labelledby="h-work">
     <div class="stack-lg">
       <p class="label" data-anim="fade">06 / Selected work</p>
-      <h2 class="h1 lines" id="h-work">
+      <h2 class="display lines" id="h-work">
         <span class="line-w"><span class="line">Selected work</span></span>
       </h2>
-      <div class="bento" data-stagger>
-        <div class="bento__cell bento__cell--half" data-anim="up">
-          <span class="ph ph--wide" data-label="Placeholder" aria-hidden="true"></span>
-          <span class="h3">PolicyFly</span>
-          <span class="small muted">InsurTech &middot; 2018 to present</span>
-        </div>
-        <div class="bento__cell bento__cell--half" data-anim="up">
-          <span class="ph ph--wide" data-label="Placeholder" aria-hidden="true"></span>
-          <span class="h3">Hearsay</span>
-          <span class="small muted">SaaS and technology &middot; 2024</span>
-        </div>
-        <div class="bento__cell bento__cell--half" data-anim="up">
-          <span class="ph ph--wide" data-label="Placeholder" aria-hidden="true"></span>
-          <span class="h3">Winter Olympics on 7</span>
-          <span class="small muted">OTT streaming &middot; 2018</span>
-        </div>
-        <div class="bento__cell bento__cell--half" data-anim="up">
-          <span class="ph ph--wide" data-label="Placeholder" aria-hidden="true"></span>
-          <span class="h3">BeautyCrew</span>
-          <span class="small muted">Ecommerce and cosmetics &middot; 2018</span>
-        </div>
+      <div class="offset-grid" data-stagger>
+        <a class="offset-card" href="/work" data-anim="up">
+          <span class="ph ph--tall" data-label="Placeholder" aria-hidden="true"></span>
+          <span class="offset-card__meta">
+            <span class="h2">PolicyFly</span>
+            <span class="small muted">2018 to present</span>
+          </span>
+          <span class="small muted">InsurTech</span>
+        </a>
+        <a class="offset-card" href="/work" data-anim="up">
+          <span class="ph ph--square" data-label="Placeholder" aria-hidden="true"></span>
+          <span class="offset-card__meta">
+            <span class="h2">Hearsay</span>
+            <span class="small muted">2024</span>
+          </span>
+          <span class="small muted">SaaS and technology</span>
+        </a>
+        <a class="offset-card" href="/work" data-anim="up">
+          <span class="ph ph--tall" data-label="Placeholder" aria-hidden="true"></span>
+          <span class="offset-card__meta">
+            <span class="h2">Winter Olympics on 7</span>
+            <span class="small muted">2018</span>
+          </span>
+          <span class="small muted">OTT streaming</span>
+        </a>
+        <a class="offset-card" href="/work" data-anim="up">
+          <span class="ph ph--square" data-label="Placeholder" aria-hidden="true"></span>
+          <span class="offset-card__meta">
+            <span class="h2">BeautyCrew</span>
+            <span class="small muted">2018</span>
+          </span>
+          <span class="small muted">Ecommerce and cosmetics</span>
+        </a>
       </div>
-      <div data-anim="up">
+      <div data-anim="up" style="margin-top:var(--s-9)">
         <a href="/work" class="btn btn--ghost">See all work
           <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.4"/></svg>
         </a>
@@ -271,40 +286,41 @@
     </div>
   </section>
 
-  <!-- 1.10 Your data stays yours -->
+  <!-- 1.10 Data and IP. Treatment: centred and quiet. -->
   <section class="section shell" aria-labelledby="h-data">
-    <div class="split split--wide-left">
-      <div class="stack-lg">
-        <p class="label" data-anim="fade">07 / Data and IP</p>
-        <h2 class="h1 lines" id="h-data">
-          <span class="line-w"><span class="line">Your data</span></span>
-          <span class="line-w"><span class="line">stays yours.</span></span>
-        </h2>
-      </div>
-      <div class="stack">
-        <p class="lead" data-anim="up">We work inside your own AI accounts, under your settings. Nothing of yours sits in our systems, and everything we make belongs to you.</p>
-        <div data-anim="up">
-          <a href="/ai-data-and-ip" class="btn btn--ghost">AI, data and your IP
-            <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.4"/></svg>
-          </a>
-        </div>
+    <div class="centred">
+      <p class="label" data-anim="fade">07 / Data and IP</p>
+      <h2 class="h1 lines" id="h-data">
+        <span class="line-w"><span class="line">Your data stays yours.</span></span>
+      </h2>
+      <p class="lead" data-anim="up">We work inside your own AI accounts, under your settings. Nothing of yours sits in our systems, and everything we make belongs to you.</p>
+      <div data-anim="up">
+        <a href="/ai-data-and-ip" class="btn btn--ghost">AI, data and your IP
+          <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.4"/></svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 1.11 Start -->
+  <!-- 1.11 Start. Treatment: display CTA with circular action. -->
   <section class="section shell" aria-labelledby="h-start">
-    <div class="stack-lg">
+    <div class="cta">
       <p class="label" data-anim="fade">08 / Start here</p>
-      <h2 class="display lines measure" id="h-start">
-        <span class="line-w"><span class="line">Start.</span></span>
+      <h2 class="display lines" id="h-start">
+        <span class="line-w"><span class="line">Tell us what you</span></span>
+        <span class="line-w"><span class="line">are trying to fix.</span></span>
       </h2>
-      <p class="lead measure" data-anim="up">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem, build something you can click, and give you a plan with a number against it.</p>
-      <p class="muted measure" data-anim="up">You own all of it either way.</p>
-      <div data-anim="up">
-        <a href="/contact" class="btn">Get in touch
-          <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.4"/></svg>
-        </a>
+      <div class="split">
+        <p class="lead" data-anim="up">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem, build something you can click, and give you a plan with a number against it.</p>
+        <div class="stack" data-anim="up">
+          <p class="muted">You own all of it either way.</p>
+          <a href="/contact" class="cta__circle">Get in touch</a>
+        </div>
+      </div>
+      <div class="metrics" data-stagger style="width:100%">
+        <div class="metrics__item" data-anim="up"><span class="metrics__value">2018</span><span class="small muted">Established</span></div>
+        <div class="metrics__item" data-anim="up"><span class="metrics__value">Sydney</span><span class="small muted">Based in Australia, working worldwide</span></div>
+        <div class="metrics__item" data-anim="up"><span class="metrics__value">1</span><span class="small muted">You deal with the person doing the work</span></div>
       </div>
     </div>
   </section>

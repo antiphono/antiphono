@@ -311,7 +311,7 @@ body {
   align-items: start;
   position: relative;
 }
-.row__index { font-size: var(--t-small); color: var(--ink-faint); padding-top: var(--s-1); }
+.row__index { font-size: var(--t-small); color: var(--ink-muted); padding-top: var(--s-1); }
 .row__body { display: flex; flex-direction: column; gap: var(--s-3); }
 a.row { transition: padding-inline-start var(--d-base) var(--e-expo); }
 a.row::before {
@@ -350,7 +350,7 @@ a.row:hover { padding-inline-start: var(--s-4); }
   padding-top: var(--s-4);
   border-top: var(--hair) solid var(--rule);
   font-size: var(--t-caption);
-  color: var(--ink-faint);
+  color: var(--ink-muted);
 }
 @media (max-width: 860px) {
   .footer__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
@@ -417,3 +417,145 @@ a.row:hover { padding-inline-start: var(--s-4); }
   .marquee__track { animation: none; }
   .btn, .bento__cell, a.row, a.row::before, .nav__links a::after { transition: none; }
 }
+
+/* ============================================================
+   SECTION TREATMENTS
+   ------------------------------------------------------------
+   One distinct treatment per content section, so no two read the
+   same. Derived from the Figma design language: generous radii,
+   inset panels, oversized numerals, ground flips.
+   ============================================================ */
+
+/* Ground flip. A section declares its own ground and the tokens
+   that depend on it, so descendants never name a colour. */
+[data-scheme="light"] {
+  --ground:        var(--mono-white);
+  --ground-raised: var(--mono-10);
+  --ground-inset:  var(--mono-10);
+  --ink:           var(--mono-black);
+  --ink-muted:     var(--mono-60);
+  --ink-faint:     var(--mono-50);
+  --rule:          var(--black-10);
+  --rule-strong:   rgba(0, 0, 0, 0.22);
+  background: var(--ground);
+  color: var(--ink);
+}
+
+/* ---- Inset panel. Floats off the page edge, big radius. ------- */
+.panel {
+  border-radius: var(--r-xl);
+  padding: clamp(40px, 6vw, 120px) var(--gutter);
+  margin-inline: var(--s-3);
+  overflow: hidden;
+}
+
+/* ---- Statement. Oversized claim, answer offset below right. --- */
+.statement {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: start;
+}
+.statement__answer {
+  padding-top: var(--s-9);
+  border-left: var(--hair) solid var(--rule);
+  padding-left: var(--s-6);
+}
+@media (max-width: 860px) {
+  .statement { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); }
+  .statement__answer { padding-top: 0; border-left: 0; padding-left: 0; }
+}
+
+/* ---- Figure split. Image leads, copy sticks alongside. -------- */
+.figure-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: start;
+}
+.figure-split__media { position: relative; }
+.figure-split__body { position: sticky; top: var(--s-9); display: flex; flex-direction: column; gap: var(--s-4); }
+@media (max-width: 860px) {
+  .figure-split { grid-template-columns: minmax(0, 1fr); }
+  .figure-split__body { position: static; }
+}
+
+/* ---- Offset grid. Cards step down the page, not a flat row. --- */
+.offset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-6) var(--s-5);
+}
+.offset-grid > *:nth-child(even) { transform: translateY(var(--s-8)); }
+.offset-card { display: flex; flex-direction: column; gap: var(--s-3); }
+.offset-card .ph { border-radius: var(--r-lg); margin-bottom: var(--s-2); }
+.offset-card__meta { display: flex; justify-content: space-between; gap: var(--s-3); align-items: baseline; }
+@media (max-width: 860px) {
+  .offset-grid { grid-template-columns: minmax(0, 1fr); }
+  .offset-grid > *:nth-child(even) { transform: none; }
+}
+
+/* ---- Centred. Deliberately quiet, narrow, no grid. ------------ */
+.centred {
+  max-width: 60ch;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-4);
+}
+.centred .label { justify-content: center; }
+
+/* ---- Display CTA. Full-bleed close with a circular action. ---- */
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-6);
+}
+.cta__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(120px, 14vw, 200px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-pill);
+  border: var(--hair) solid var(--rule-strong);
+  font-size: var(--t-small);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  text-align: center;
+  transition: background-color var(--d-base) var(--e-expo),
+              color var(--d-base) var(--e-expo),
+              transform var(--d-base) var(--e-expo);
+}
+.cta__circle:hover { background: var(--ink); color: var(--ground); transform: scale(1.04); }
+
+/* ---- Metric strip. Facts on a rule, no cards. ----------------- */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  border-top: var(--hair) solid var(--rule);
+}
+.metrics__item {
+  padding: var(--s-5) var(--s-4) var(--s-5) 0;
+  border-bottom: var(--hair) solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.metrics__value {
+  font-size: var(--t-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--tr-h1);
+  font-weight: var(--w-semi);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__circle { transition: none; }
+  .cta__circle:hover { transform: none; }
+}
+
+/* --ink-faint is 3.66:1 on the dark ground. That passes for large text
+   and decorative marks only, never for body or caption sizes. */
