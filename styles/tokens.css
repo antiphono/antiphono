@@ -129,6 +129,13 @@
   --leading-caption: 1.3333;
   --track-caption:   0em;
 
+  /* ---- Poster scale (spec 2026-08-17) ---------------------------
+     The middle of the type ramp is deliberately unused on the home
+     page pairs. Two sizes only: poster and reading. */
+  --text-poster:    clamp(3rem, 11vw, 9rem);
+  --leading-poster: 0.92;
+  --track-poster:   -0.05em;
+
   /* Label tracking is not a Figma variable. Used for uppercase
      eyebrows, which the reference frame sets wide. PROVISIONAL. */
   --track-label: 0.10em;
@@ -203,6 +210,14 @@
   --radius-pill:  999px;
 
   --panel-inset:   clamp(8px, 1vw, 16px);
+
+  /* Antiphonal pair. Ratios alternate between sections so no two
+     consecutive pairs share a split. */
+  --pair-ratio-a: 58fr 42fr;
+  --pair-ratio-b: 55fr 45fr;
+  --panel-pad:    clamp(28px, 5vw, 96px);
+  --pair-delay:   0.12s;
+
   --hairline:      1px;
   --control-sm:    36px;
   --rule-short:    clamp(20px, 3vw, 44px);
