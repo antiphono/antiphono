@@ -1674,3 +1674,65 @@ a.stag:hover { background: var(--mono-white); color: var(--mono-90); }
 }
 @media (max-width: 860px) { .tst__top { flex-direction: column; gap: var(--s-4); } }
 @media (prefers-reduced-motion: reduce) { .tst__btn { transition: none; } }
+
+/* ============================================================
+   SHOWREEL, Figma node 5209:925
+   ------------------------------------------------------------
+   Autoplaying video panel. Masked top and bottom so it blends
+   into the sections either side rather than sitting as a block.
+   ============================================================ */
+.reel { display: flex; justify-content: center; padding-inline: var(--s-2); }
+.reel__panel {
+  position: relative;
+  width: 100%;
+  max-width: 1416px;
+  height: clamp(420px, 62vw, 900px);
+  border-radius: var(--hero-radius);
+  overflow: hidden;
+  isolation: isolate;
+  /* Blend into the neighbouring sections */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+}
+.reel__panel::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(150deg, var(--mono-70), var(--mono-black-90));
+}
+.reel__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.reel__panel::after { content: ""; position: absolute; inset: 0; background: var(--black-60); }
+
+.reel__play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  z-index: 2;
+  width: clamp(160px, 20vw, 280px); aspect-ratio: 1 / 1;
+  border-radius: var(--r-pill);
+  border: var(--hair) dashed var(--mono-white);
+  display: grid; place-items: center;
+  font-size: 20px; line-height: 1.5; letter-spacing: -0.02em;
+  font-weight: var(--w-medium); color: var(--mono-white);
+  transition: background-color var(--d-fast) var(--e-out),
+              color var(--d-fast) var(--e-out),
+              transform var(--d-base) var(--e-expo);
+}
+.reel__play:hover {
+  background: var(--mono-white); color: var(--mono-90);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.reel__title {
+  position: absolute; left: 30px; right: 30px; bottom: var(--s-5);
+  z-index: 2;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+  font-size: clamp(2rem, 8.3vw, 7.5rem); line-height: 1; letter-spacing: -0.03em;
+  font-weight: var(--w-semi); color: var(--mono-white);
+  mix-blend-mode: overlay; text-transform: capitalize;
+  pointer-events: none;
+}
+
+@media (max-width: 860px) {
+  .reel__title { left: var(--s-4); right: var(--s-4); bottom: var(--s-4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel__play { transition: none; }
+  .reel__play:hover { transform: translate(-50%, -50%); }
+}
