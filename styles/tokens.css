@@ -216,6 +216,7 @@
   --pair-ratio-a: 58fr 42fr;
   --pair-ratio-b: 55fr 45fr;
   --panel-pad:    clamp(28px, 5vw, 96px);
+  --panel-min-h:  clamp(360px, 52vw, 720px);
   --pair-delay:   0.12s;
 
   --hairline:      1px;

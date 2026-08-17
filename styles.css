@@ -4289,3 +4289,73 @@ a.row:hover .row__go svg { transform: translateX(6px); }
   color: var(--accent);
   border-color: var(--accent);
 }
+
+/* ============================================================
+   ANTIPHONAL PAIR
+   ------------------------------------------------------------
+   Two panels, edge to edge, no gutter. Opposite grounds. The
+   meeting edge is the contrast. Spec 2026-08-17.
+   ============================================================ */
+
+.pair {
+  display: grid;
+  grid-template-columns: var(--pair-ratio-a);
+  align-items: stretch;
+}
+.pair--b { grid-template-columns: var(--pair-ratio-b); }
+
+/* Call on the right. Order swaps, ratio follows the call. */
+.pair--flip { direction: rtl; }
+.pair--flip > * { direction: ltr; }
+
+.panel {
+  padding: var(--panel-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  min-height: var(--panel-min-h);
+}
+
+.panel__poster {
+  font-size: var(--text-poster);
+  line-height: var(--leading-poster);
+  letter-spacing: var(--track-poster);
+  font-weight: var(--weight-semi);
+  margin: 0;
+}
+
+.panel__read {
+  font-size: var(--text-body2);
+  line-height: var(--leading-body2);
+  letter-spacing: var(--track-body2);
+  font-weight: var(--weight-regular);
+  max-width: 46ch;
+  margin: 0;
+}
+
+.panel__label {
+  font-size: var(--text-caption);
+  line-height: var(--leading-caption);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--grey);
+  margin: 0;
+}
+
+/* Response arrives after the call */
+html.js .panel--response .reveal .line,
+html.js .panel--response .rise { transition-delay: var(--pair-delay); }
+
+@media (max-width: 900px) {
+  .pair,
+  .pair--b { grid-template-columns: minmax(0, 1fr); }
+  .pair--flip { direction: ltr; }
+  .panel { min-height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .panel--response .reveal .line,
+  html.js .panel--response .rise { transition-delay: 0s; }
+}
