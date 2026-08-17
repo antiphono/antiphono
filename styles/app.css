@@ -1895,3 +1895,23 @@ a.ct__fact:hover { color: var(--mono-30); }
   .ft__legal-row { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
 }
 @media (prefers-reduced-motion: reduce) { .ft__email, .ft__col a, .ft__top-link { transition: none; } }
+
+/* ---- Booking embed -----------------------------------------------
+   cal.com in an iframe rather than their embed script, so no third
+   party JavaScript runs on the page. */
+.book { display: flex; flex-direction: column; gap: var(--s-4); }
+.book__frame {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--mono-10);
+  min-height: clamp(520px, 62vh, 760px);
+}
+.book__frame iframe { width: 100%; height: 100%; min-height: inherit; border: 0; display: block; }
+.book__alt {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-3); flex-wrap: wrap;
+  font-size: var(--t-small); line-height: 20px; color: var(--mono-60);
+}
+.book__alt a { color: var(--mono-90); font-weight: var(--w-medium); text-decoration: underline; }
+.book__alt a:hover { color: var(--mono-50); }

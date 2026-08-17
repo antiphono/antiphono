@@ -723,30 +723,24 @@
         </div>
       </div>
 
-      <form class="ct__form" action="mailto:ben@antiphono.com" method="post" enctype="text/plain" data-anim="up">
-        <div class="field">
-          <label for="ct-email">Your email</label>
-          <input id="ct-email" name="email" type="email" required placeholder="you@company.com">
+      <div class="ct__form book" data-anim="up">
+        <div class="stack" style="gap:var(--s-2)">
+          <h3 style="font-size:var(--t-small);line-height:20px;font-weight:var(--w-medium);color:var(--mono-90)">Book a discovery call</h3>
+          <p class="book__alt">Two to three weeks, scoped and quoted up front. Pick a time that suits you.</p>
         </div>
-        <div class="field">
-          <label for="ct-company">Your company</label>
-          <input id="ct-company" name="company" type="text" placeholder="Company name">
+        <div class="book__frame">
+          <iframe
+            src="https://cal.com/ben-tweedie-v96yxs/discovery-call?embed=true"
+            title="Book a discovery call with Antiphono"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div class="field">
-          <label for="ct-msg">What are you trying to fix?</label>
-          <textarea id="ct-msg" name="message" rows="3" required placeholder="A feature that is not converting, a product that needs research behind it."></textarea>
-        </div>
-        <fieldset class="field" style="border:0;padding:0;margin:0">
-          <legend style="font-size:var(--t-small);font-weight:var(--w-medium);color:var(--mono-90);padding:0">How you would like to work</legend>
-          <div class="ct__opts">
-            <label class="ct__opt"><input type="radio" name="engagement" value="Discovery"><span>Discovery</span></label>
-            <label class="ct__opt"><input type="radio" name="engagement" value="A defined piece of work"><span>A defined piece of work</span></label>
-            <label class="ct__opt"><input type="radio" name="engagement" value="Continuous work"><span>Continuous work</span></label>
-            <label class="ct__opt"><input type="radio" name="engagement" value="Not sure yet"><span>Not sure yet</span></label>
-          </div>
-        </fieldset>
-        <button class="ct__send" type="submit">Send message</button>
-      </form>
+        <p class="book__alt">
+          <span>Prefer email?</span>
+          <a href="https://cal.com/ben-tweedie-v96yxs/discovery-call" target="_blank" rel="noopener">Open the booking page in a new tab</a>
+          <a href="mailto:ben@antiphono.com">ben@antiphono.com</a>
+        </p>
+      </div>
     </div>
   </section>
 
