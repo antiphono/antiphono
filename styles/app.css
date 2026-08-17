@@ -58,12 +58,14 @@ body {
 .skip-link:focus { top: var(--s-3); }
 
 /* ---- Layout -------------------------------------------------- */
+/* Full width. Sections span the viewport; only the gutter holds
+   content off the edge. --measure is kept for opt-in narrow blocks. */
 .shell {
   width: 100%;
-  max-width: var(--measure);
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
+.shell--capped { max-width: var(--measure); }
 .section { padding-block: var(--section-y); position: relative; }
 .section--flush { padding-block: 0; }
 .section--tight { padding-block: var(--s-7); }
@@ -559,3 +561,212 @@ a.row:hover { padding-inline-start: var(--s-4); }
 
 /* --ink-faint is 3.66:1 on the dark ground. That passes for large text
    and decorative marks only, never for body or caption sizes. */
+
+/* ============================================================
+   COMPONENT LIBRARY
+   ------------------------------------------------------------
+   Reusable across every content section. Each is self-contained
+   and reads only tokens, so a section can flip ground with
+   data-scheme and every component follows.
+   ============================================================ */
+
+/* ---- Mobile navigation ---------------------------------------- */
+.nav__toggle {
+  display: none;
+  width: var(--s-6);
+  height: var(--s-6);
+  border: var(--hair) solid var(--rule-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+.nav__toggle span {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  height: var(--hair);
+  background: currentColor;
+  transition: transform var(--d-fast) var(--e-out), opacity var(--d-fast) var(--e-out);
+}
+.nav__toggle span:nth-child(1) { top: 40%; }
+.nav__toggle span:nth-child(2) { top: 58%; }
+.nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(0.28rem) rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-0.28rem) rotate(-45deg); }
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  background: var(--ground);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-4);
+  padding: var(--s-9) var(--gutter) var(--s-6);
+  transform: translateY(-100%);
+  transition: transform var(--d-base) var(--e-expo);
+}
+.menu[data-open="true"] { transform: translateY(0); }
+.menu a {
+  font-size: var(--t-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--tr-h1);
+  font-weight: var(--w-semi);
+}
+@media (max-width: 860px) { .nav__toggle { display: block; } }
+@media (min-width: 861px) { .menu { display: none; } }
+
+/* ---- Card ------------------------------------------------------ */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border: var(--hair) solid var(--rule);
+  border-radius: var(--r-lg);
+  background: var(--ground-raised);
+  transition: border-color var(--d-fast) var(--e-out),
+              transform var(--d-fast) var(--e-out);
+}
+.card:hover { border-color: var(--rule-strong); transform: translateY(calc(var(--s-1) * -1)); }
+.card--flush { padding: 0; background: transparent; border: 0; }
+.card__media { border-radius: var(--r-md); overflow: hidden; }
+.card__meta { display: flex; justify-content: space-between; gap: var(--s-3); align-items: baseline; }
+.card__foot { margin-top: auto; padding-top: var(--s-3); border-top: var(--hair) solid var(--rule); }
+
+/* ---- Accordion. <details> so it works with no JavaScript. ------ */
+.accordion { border-top: var(--hair) solid var(--rule); }
+.accordion__item { border-bottom: var(--hair) solid var(--rule); }
+.accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--t-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+  font-weight: var(--w-medium);
+  transition: color var(--d-fast) var(--e-out);
+}
+.accordion__summary::-webkit-details-marker { display: none; }
+.accordion__summary:hover { color: var(--ink-muted); }
+.accordion__icon {
+  flex: none;
+  width: var(--s-5);
+  height: var(--s-5);
+  border-radius: var(--r-pill);
+  border: var(--hair) solid var(--rule-strong);
+  position: relative;
+  transition: transform var(--d-base) var(--e-expo), background-color var(--d-fast) var(--e-out);
+}
+.accordion__icon::before,
+.accordion__icon::after {
+  content: "";
+  position: absolute;
+  inset: 50% 25%;
+  height: var(--hair);
+  background: currentColor;
+  transform: translateY(-50%);
+  transition: opacity var(--d-fast) var(--e-out);
+}
+.accordion__icon::after { transform: translateY(-50%) rotate(90deg); }
+.accordion__item[open] .accordion__icon { transform: rotate(135deg); }
+.accordion__item[open] .accordion__icon::after { opacity: 0; }
+.accordion__panel { padding-bottom: var(--s-5); max-width: 66ch; color: var(--ink-muted); }
+
+/* ---- Chart. CSS bars driven by --v, a 0 to 100 percentage. -----
+   Values must come from real data. Never ship invented figures. */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-2);
+  height: clamp(160px, 22vw, 280px);
+  padding-top: var(--s-5);
+  border-bottom: var(--hair) solid var(--rule);
+}
+.chart__bar {
+  flex: 1;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+  background: var(--ground-raised);
+  border: var(--hair) solid var(--rule);
+  border-bottom: 0;
+  height: calc(var(--v, 0) * 1%);
+  position: relative;
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  transition: transform var(--d-slow) var(--e-expo), background-color var(--d-fast) var(--e-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.chart.in .chart__bar { transform: scaleY(1); }
+.chart__bar[data-active="true"] { background: var(--ink); }
+.chart__axis {
+  display: flex;
+  gap: var(--s-2);
+  padding-top: var(--s-2);
+  font-size: var(--t-caption);
+  color: var(--ink-muted);
+}
+.chart__axis span { flex: 1; text-align: center; }
+
+/* ---- Rating. Only ever rendered with a real, sourced score. ---- */
+.rating { display: flex; align-items: center; gap: var(--s-1); }
+.rating__star { width: var(--s-3); height: var(--s-3); }
+.rating__star--off { opacity: 0.25; }
+
+/* ---- Testimonial ----------------------------------------------- */
+.quote {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--s-6);
+  align-items: start;
+  padding: var(--s-6);
+  border: var(--hair) solid var(--rule);
+  border-radius: var(--r-lg);
+  background: var(--ground-raised);
+}
+.quote__body { display: flex; flex-direction: column; gap: var(--s-4); height: 100%; }
+.quote__text {
+  font-size: var(--t-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--tr-h3);
+}
+.quote__attrib { margin-top: auto; display: flex; flex-direction: column; gap: var(--s-1); }
+.quote__nav { display: flex; gap: var(--s-2); }
+.quote__btn {
+  width: var(--s-6);
+  height: var(--s-6);
+  border-radius: var(--r-pill);
+  border: var(--hair) solid var(--rule-strong);
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+.quote__btn:hover { background: var(--ink); color: var(--ground); }
+@media (max-width: 860px) { .quote { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- Logo wall. Real client marks only. ------------------------ */
+.logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+  gap: var(--s-5);
+  align-items: center;
+}
+.logos__item {
+  height: var(--s-6);
+  display: grid;
+  place-items: center;
+  color: var(--ink-muted);
+  font-size: var(--t-small);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu, .nav__toggle span, .accordion__icon, .accordion__icon::before,
+  .accordion__icon::after, .chart__bar, .card, .quote__btn { transition: none; }
+  .chart__bar { transform: scaleY(1); }
+}

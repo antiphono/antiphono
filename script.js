@@ -77,9 +77,57 @@
     below.forEach(function (el) { obs.observe(el); });
   }
 
+  /* ---- Mobile menu ------------------------------------------
+     aria-expanded on the toggle, focus trapped while open, Escape
+     closes, focus returns to the toggle on close. */
+  function menu() {
+    var toggle = document.getElementById('navToggle');
+    var panel = document.getElementById('menu');
+    if (!toggle || !panel) return;
+
+    var open = false;
+
+    function focusable() {
+      return Array.prototype.slice.call(panel.querySelectorAll('a[href], button'));
+    }
+
+    function set(next) {
+      open = next;
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.setAttribute('data-open', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        var f = focusable();
+        if (f.length) f[0].focus();
+      } else {
+        toggle.focus();
+      }
+    }
+
+    toggle.addEventListener('click', function () { set(!open); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { set(false); return; }
+      if (e.key !== 'Tab') return;
+      var f = focusable();
+      if (!f.length) return;
+      var first = f[0];
+      var last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    panel.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') set(false);
+    });
+  }
+
+  var boot = function () { init(); menu(); };
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    init();
+    boot();
   }
 })();
