@@ -1415,3 +1415,141 @@ a.tag:hover { background: var(--mono-90); color: var(--mono-white); border-color
 @media (prefers-reduced-motion: reduce) {
   .mrow, .mrow__icon, .tag { transition: none; }
 }
+
+/* ============================================================
+   SELECTED WORK, Figma node 5209:1801
+   ============================================================ */
+.work { padding: clamp(64px, 8vw, 108px) var(--hero-inset) clamp(96px, 15vw, 216px); }
+.work__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-6); }
+.work__right { display: flex; flex-direction: column; gap: var(--s-6); max-width: 987px; flex: 1; }
+.work__title {
+  display: flex; align-items: flex-start; gap: var(--s-1);
+  font-size: clamp(3rem, 8.3vw, 7.5rem);        /* 120px cap */
+  line-height: 1; letter-spacing: -0.03em;
+  font-weight: var(--w-semi); color: var(--mono-90); text-transform: capitalize;
+}
+.work__count {
+  font-size: clamp(1.125rem, 1.9vw, 1.75rem);   /* 28px cap */
+  letter-spacing: -0.03em; color: var(--mono-50); text-transform: none;
+}
+.work__sub { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-5); }
+.work__sub p:first-child { max-width: 426px; font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.01em; color: var(--mono-70); }
+.work__sub p:last-child { color: var(--mono-50); font-size: var(--btn-text); white-space: nowrap; }
+
+.work__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--hero-card-gap); margin-top: var(--s-8); }
+.wk { grid-column: span 2; display: flex; flex-direction: column; }
+.wk--wide { grid-column: span 4; }
+.wk__media {
+  position: relative; height: clamp(280px, 37vw, 535px);
+  border-radius: var(--hero-radius); overflow: hidden;
+  background: linear-gradient(150deg, var(--mono-30), var(--mono-40));
+}
+.wk__media::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--black-60); opacity: 0;
+  transition: opacity var(--d-fast) var(--e-out);
+}
+.wk:hover .wk__media::after { opacity: 1; }
+.wk__go {
+  position: absolute; inset: auto var(--s-4) var(--s-4) auto;
+  width: var(--s-6); height: var(--s-6); border-radius: var(--r-pill);
+  background: var(--mono-white); color: var(--mono-90);
+  display: grid; place-items: center; z-index: 1;
+  opacity: 0; transform: translateY(var(--s-2));
+  transition: opacity var(--d-fast) var(--e-out), transform var(--d-base) var(--e-expo);
+}
+.wk:hover .wk__go { opacity: 1; transform: translateY(0); }
+.wk__meta {
+  background: var(--mono-white); border-radius: var(--r-md);
+  padding: var(--s-4); display: flex; align-items: center;
+  justify-content: space-between; gap: var(--s-3);
+  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+.wk:hover .wk__meta { background: var(--mono-90); color: var(--mono-white); }
+.wk__name { display: flex; align-items: baseline; gap: var(--s-2); color: var(--mono-90); }
+.wk:hover .wk__name { color: var(--mono-white); }
+.wk__num { font-size: var(--t-small); line-height: 20px; font-weight: var(--w-medium); }
+.wk__label { font-size: 20px; line-height: 36px; letter-spacing: -0.02em; font-weight: var(--w-semi); }
+.wk__year { font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.01em; color: var(--mono-50); white-space: nowrap; }
+.wk:hover .wk__year { color: var(--mono-30); }
+
+@media (max-width: 1100px) {
+  .work { padding-inline: var(--s-5); }
+  .work__top { flex-direction: column; gap: var(--s-4); }
+  .work__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wk, .wk--wide { grid-column: span 1; }
+}
+@media (max-width: 860px) {
+  .work__grid { grid-template-columns: minmax(0, 1fr); }
+  .work__sub { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wk__media::after, .wk__go, .wk__meta { transition: none; }
+  .wk:hover .wk__go { transform: none; }
+}
+
+/* ============================================================
+   SERVICES, Figma node 5209:1953. Dark expander stack.
+   ============================================================ */
+.svc { padding-block: clamp(64px, 8vw, 108px); }
+.svc__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-5); margin-top: var(--s-6); }
+.svc__title {
+  font-size: clamp(3rem, 8.3vw, 7.5rem); line-height: 1; letter-spacing: -0.03em;
+  font-weight: var(--w-semi); color: var(--mono-white); text-transform: capitalize;
+}
+.svc__count { font-size: clamp(1.25rem, 2.2vw, 2rem); line-height: 42px; letter-spacing: -0.03em; color: var(--mono-50); font-weight: var(--w-medium); }
+.svc__list { display: flex; flex-direction: column; gap: var(--hero-card-gap); margin-top: var(--s-7); }
+
+.srow {
+  background: #141414;
+  border-radius: var(--hero-radius);
+  padding: var(--s-6);
+  display: block;
+  transition: background-color var(--d-fast) var(--e-out);
+}
+.srow:hover { background: var(--mono-black-90); }
+.srow__summary { display: flex; align-items: flex-start; gap: var(--hero-card-gap); cursor: pointer; list-style: none; }
+.srow__summary::-webkit-details-marker { display: none; }
+.srow__num {
+  width: clamp(96px, 22vw, 320px); flex: none;
+  font-size: clamp(2.5rem, 8.3vw, 7.5rem); line-height: 1; letter-spacing: -0.03em;
+  font-weight: var(--w-semi); color: var(--mono-white); opacity: 0.2;
+  transition: opacity var(--d-base) var(--e-out);
+}
+.srow[open] .srow__num { opacity: 1; }
+.srow__main { flex: 1; min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-4); }
+.srow__body { display: flex; flex-direction: column; gap: var(--s-5); opacity: 0.5; transition: opacity var(--d-base) var(--e-out); }
+.srow[open] .srow__body { opacity: 1; }
+.srow__name { font-size: clamp(1.5rem, 2.2vw, 2rem); line-height: 42px; letter-spacing: -0.03em; font-weight: var(--w-medium); color: var(--mono-white); }
+.srow__tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.stag {
+  display: inline-flex; align-items: center; height: 40px; padding-inline: 20px;
+  border-radius: var(--r-pill); background: var(--white-10);
+  backdrop-filter: blur(15.169px);
+  font-size: var(--t-small); color: var(--mono-40);
+  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+a.stag:hover { background: var(--mono-white); color: var(--mono-90); }
+.srow__icon {
+  width: 40px; height: 40px; flex: none; border-radius: 32px;
+  border: 1.2px solid var(--white-10); position: relative; color: var(--mono-white);
+  transition: transform var(--d-base) var(--e-expo), background-color var(--d-fast) var(--e-out);
+}
+.srow__icon::before, .srow__icon::after {
+  content: ""; position: absolute; inset: 50% 30%; height: 2px; margin-top: -1px; background: currentColor;
+}
+.srow__icon::after { transform: rotate(90deg); }
+.srow[open] .srow__icon { transform: rotate(135deg); }
+.srow[open] .srow__icon::after { opacity: 0; }
+.srow__panel { display: grid; grid-template-columns: 432px minmax(0, 333px); gap: var(--s-8); padding-top: var(--s-6); align-items: start; }
+.srow__figure { height: 250px; border-radius: var(--r-md); background: linear-gradient(150deg, var(--mono-70), var(--mono-black-90)); }
+.srow__text { font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.01em; color: rgba(255,255,255,0.7); }
+
+@media (max-width: 1100px) { .srow__panel { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); } }
+@media (max-width: 860px) {
+  .srow { padding: var(--s-4); }
+  .srow__summary { flex-direction: column; }
+  .srow__num { width: auto; }
+  .svc__head { flex-direction: column; gap: var(--s-3); }
+}
+@media (prefers-reduced-motion: reduce) { .srow, .srow__num, .srow__body, .srow__icon, .stag { transition: none; } }
