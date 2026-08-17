@@ -841,3 +841,29 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
   flex-wrap: wrap;
 }
 .footer__final { color: var(--text-secondary-dark); }
+
+/* ============================================================
+   Small screen display safety
+   ------------------------------------------------------------
+   The display sizes were drawn for short words. A long single
+   word at display-l overflows below about 420px, since the line
+   cannot break inside itself. Found migrating /about, where
+   "conversation." pushed the page to 702px at a 375px viewport.
+   ============================================================ */
+@media (max-width: 480px) {
+  .display-xl, .display-l, .display-m {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  .res__headline, .vision__headline, .mani__headline {
+    font-size: clamp(2.25rem, 11vw, 3.5rem);
+  }
+  /* The circular CTA is drawn at a fixed size that exceeds a 375px
+     viewport once the container gutter is taken off. */
+  /* The .res container stays a two column grid at mobile, so its
+     323px copy column and 220px CTA column together exceed a 375px
+     viewport. Collapse it and cap the circle. */
+  .res .container-x { grid-template-columns: minmax(0, 1fr); }
+  .res__cta { width: 100%; display: flex; justify-content: flex-start; }
+  .circle-cta { width: min(220px, 64vw); height: min(220px, 64vw); }
+}
