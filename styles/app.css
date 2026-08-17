@@ -119,9 +119,9 @@ body {
   justify-content: space-between;
   gap: var(--s-4);
   padding: var(--s-4) var(--gutter);
-  background: color-mix(in srgb, var(--ground) 72%, transparent);
-  backdrop-filter: blur(12px);
-  border-bottom: var(--hair) solid var(--rule);
+  /* No glass on the full width bar. The blur and translucent fill
+     belong to the central .tabs pill only, per Figma 5210:176. */
+  background: transparent;
 }
 .nav__mark { display: flex; align-items: center; gap: var(--s-2); font-weight: var(--w-semi); letter-spacing: var(--tr-h3); }
 .nav__mark svg { width: var(--s-5); height: auto; }
