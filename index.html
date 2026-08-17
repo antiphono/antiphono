@@ -569,36 +569,62 @@
     </div>
   </section>
 
-  <!-- 1.8 What clients say. Component built, section hidden.
+  <!-- 1.8 Testimonials. Figma node 5231:211. PLACEHOLDER CONTENT.
        TODO Ben: no testimonials exist. Copy doc section 11 lists who to
-       ask and in what order. Full name, role and company on every quote.
-       An unattributed quote reads as invented, so nothing renders until
-       real quotes are approved. Remove hidden to publish. -->
-  <section class="section shell" aria-labelledby="h-quotes" hidden>
-    <div class="stack-lg">
-      <p class="label">What clients say</p>
-      <h2 class="display" id="h-quotes">What clients say</h2>
-      <figure class="quote">
-        <div class="quote__body">
-          <div class="rating" aria-label="Rating"></div>
-          <blockquote class="quote__text"></blockquote>
-          <figcaption class="quote__attrib">
-            <span class="h3"></span>
-            <span class="small muted"></span>
-          </figcaption>
+       ask, starting with Future Women and GroupTogether. Full name, role
+       and company on every quote. Nothing here is a real quote. -->
+  <section class="tst section--flush" data-scheme="light" aria-labelledby="h-tst">
+    <div class="tst__top">
+      <p class="why__caption" data-anim="fade">
+        <img src="/media/figma/icon-dot.svg" alt="" width="8" height="8">
+        What clients say
+      </p>
+      <div>
+        <h2 class="tst__title lines" id="h-tst"><span class="line-w"><span class="line">Testimonials.</span></span></h2>
+        <p class="tst__sub" data-anim="up">Placeholder section. Real client quotes replace this before launch, each with a full name, role and company.</p>
+      </div>
+    </div>
+
+    <div class="tst__card" data-anim="up">
+      <div>
+        <p class="tst__quotemark" aria-hidden="true">&ldquo;</p>
+        <p class="tst__quote">Placeholder quote. This slot holds a real client sentence about the work.
+          <em>A second sentence continues in the lighter weight, the way the layout intends.</em></p>
+        <p class="tst__rate"><span class="tst__stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.4 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.4 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.4 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.4 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.4 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg></span><span></span></p>
+        <p class="tst__global"><img src="/media/figma/icon-globe.svg" alt="" width="44" height="44">Antiphono works with clients anywhere</p>
+      </div>
+
+      <div class="tst__person">
+        <div class="tst__who"><b>Placeholder name</b><span>Role, Company</span></div>
+      </div>
+
+      <div class="tst__next">
+        <span class="tst__thumb" aria-hidden="true"></span>
+        <p class="tst__meta"><span>Testimonial</span><span>01/01</span></p>
+        <div class="tst__nav">
+          <button class="tst__btn" aria-label="Previous testimonial" disabled>
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M5 1L1 5l4 4M1 5h13" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
+          <button class="tst__btn tst__btn--on" aria-label="Next testimonial" disabled>
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
         </div>
-        <div class="stack">
-          <span class="ph ph--square" data-label="Placeholder" aria-hidden="true"></span>
-          <div class="quote__nav">
-            <button class="quote__btn" aria-label="Previous testimonial">
-              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M5 1L1 5l4 4M1 5h13" stroke="currentColor" stroke-width="1.4"/></svg>
-            </button>
-            <button class="quote__btn" aria-label="Next testimonial">
-              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M9 1l4 4-4 4M13 5H0" stroke="currentColor" stroke-width="1.4"/></svg>
-            </button>
-          </div>
-        </div>
-      </figure>
+      </div>
+    </div>
+
+    <div class="tst__stats" data-stagger>
+        <article class="tstat" data-anim="up">
+          <div class="tstat__top"><p class="tstat__label">People we have researched with</p><span aria-hidden="true">*</span></div>
+          <div><p class="tstat__val">&mdash;&mdash;</p><p class="tstat__note">Placeholder. Real figure needed before this ships.</p></div>
+        </article>
+        <article class="tstat" data-anim="up">
+          <div class="tstat__top"><p class="tstat__label">Features tested in production</p><span aria-hidden="true">*</span></div>
+          <div><p class="tstat__val">&mdash;&mdash;</p><p class="tstat__note">Placeholder. Real figure needed before this ships.</p></div>
+        </article>
+        <article class="tstat" data-anim="up">
+          <div class="tstat__top"><p class="tstat__label">Decisions on the record</p><span aria-hidden="true">*</span></div>
+          <div><p class="tstat__val">&mdash;&mdash;</p><p class="tstat__note">Placeholder. Real figure needed before this ships.</p></div>
+        </article>
     </div>
   </section>
 
