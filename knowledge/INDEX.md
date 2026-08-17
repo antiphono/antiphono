@@ -10,6 +10,7 @@ This repository keeps its own record, the same way client projects do. When a de
 | 2026-08-10 | Editorial band grid replaces the 760px column. Rows over cards, Sora only | `decisions/2026-08-10-layout-system.md` |
 | 2026-08-14 | Tokens move to `styles/tokens.css`. Sections declare a ground with `data-scheme` | `decisions/2026-08-14-tokens-file-and-section-schemes.md` |
 | 2026-08-17 | GSAP and Lenis approved for scroll driven pages. CDN only, no bundler, no npm | `decisions/2026-08-17-frameworks-approved.md` |
+| 2026-08-18 | The Apex stack becomes the site system. `styles/system.css` created, migration not started | `decisions/2026-08-18-apex-becomes-the-site-system.md` |
 
 ## Open questions
 
