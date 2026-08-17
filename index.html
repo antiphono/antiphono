@@ -103,38 +103,40 @@
          <span class="mock__screen">. Slots are named hero-COLUMN-ROW.
          Each column is duplicated so the loop is seamless: add your
          image to both copies of the same slot name. -->
+    <!-- Hero background: 3D screen deck.
+         TO ADD A DESIGN: put the file in media/work/ then drop
+         <img src="/media/work/your-shot.png" alt=""> inside the
+         matching <span class="screen__view">. Slots are screen-1 to
+         screen-6. Captions live in the data-captions attribute below. -->
     <div class="herov__bg" aria-hidden="true">
-      <div class="mockwall">
-      <span class="mockwall__col">
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-1"></span></span>
-        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-1-2"></span></span>
-        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-3"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-4"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-1"></span></span>
-        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-1-2"></span></span>
-        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-3"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-4"></span></span>
-      </span>
-      <span class="mockwall__col">
-        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-1"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-2"></span></span>
-        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-2-3"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-4"></span></span>
-        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-1"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-2"></span></span>
-        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-2-3"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-4"></span></span>
-      </span>
-      <span class="mockwall__col">
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-1"></span></span>
-        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-2"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-3"></span></span>
-        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-3-4"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-1"></span></span>
-        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-2"></span></span>
-        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-3"></span></span>
-        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-3-4"></span></span>
-      </span>
+      <div class="stage">
+        <div class="deck" id="deck" data-captions="Prototype, PolicyFly | Design system | Live variant test | Research synthesis | Component library | Measurement">
+        <figure class="screen" data-slot="screen-1">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-2">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-3">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-4">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-5">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-6">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+          <figcaption class="deck__caption" id="deckCaption"></figcaption>
+        </div>
       </div>
       <video class="herov__video" id="heroVideo" autoplay muted loop playsinline preload="none"></video>
     </div>

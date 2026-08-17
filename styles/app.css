@@ -1953,71 +1953,74 @@ a.ct__fact:hover { color: var(--mono-30); }
 }
 
 /* ============================================================
-   HERO MOCKUP MONTAGE
+   HERO 3D SCREEN DECK
    ------------------------------------------------------------
-   Placeholder animation for the hero background. Three columns of
-   device frames drifting at different speeds, so the wall reads as
-   depth rather than a slideshow. Every frame holds a real <img>
-   slot: drop a screenshot in and it appears in the montage.
-   Pure CSS, no library, no build step.
+   A real 3D stage: perspective projection, z-depth and Y-axis
+   rotation. One screen faces the camera at a time. The outgoing
+   screen rotates away and recedes while the next rotates in.
+   Every transform is driven from script.js via the Web Animations
+   API. Each screen holds an <img> slot for your work.
    ============================================================ */
 
-.mockwall {
+.stage {
   position: absolute; inset: 0; z-index: -1;
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-4);
-  padding: var(--s-4);
+  display: grid; place-items: center;
+  perspective: 1500px;
+  perspective-origin: 50% 45%;
   overflow: hidden;
-  /* Sit back so the hero type stays dominant */
-  opacity: 0.55;
-  -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% 40%, #000 40%, transparent 100%);
-          mask-image: radial-gradient(ellipse 120% 90% at 50% 40%, #000 40%, transparent 100%);
 }
-.mockwall__col {
-  display: flex; flex-direction: column; gap: var(--s-4);
-  will-change: transform;
-  /* Motion is driven by the Web Animations API in script.js, not by
-     CSS keyframes, so the timeline can be seeked, rate-changed and
-     paused at runtime. */
+.deck {
+  position: relative;
+  transform-style: preserve-3d;
+  width: min(64vw, 900px);
+  aspect-ratio: 16 / 10;
 }
 
-/* A single device frame. Add .mock--phone for a tall one. */
-.mock {
-  flex: none;
-  border-radius: var(--r-md);
+.screen {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  border-radius: var(--r-lg);
   overflow: hidden;
   background: var(--mono-black-90);
   border: var(--hair) solid var(--white-20);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 60px 140px rgba(0, 0, 0, 0.65),
+              0 0 0 1px rgba(255, 255, 255, 0.04);
+  opacity: 0;
 }
-.mock__bar {
-  height: 26px; display: flex; align-items: center; gap: 6px;
-  padding-inline: 10px; background: var(--mono-80);
+.screen__bar {
+  height: 34px; display: flex; align-items: center; gap: 7px;
+  padding-inline: 14px; background: var(--mono-80);
   border-bottom: var(--hair) solid var(--white-10);
 }
-.mock__bar i {
-  width: 7px; height: 7px; border-radius: var(--r-pill);
-  background: var(--white-20); display: block;
-}
-.mock__screen {
-  position: relative; display: block; width: 100%;
-  aspect-ratio: 16 / 10;
+.screen__bar i { width: 9px; height: 9px; border-radius: var(--r-pill); background: var(--white-20); display: block; }
+.screen__view {
+  position: relative; display: block; width: 100%; height: calc(100% - 34px);
   background:
-    repeating-linear-gradient(135deg, transparent 0, transparent 22px,
-      var(--white-10) 22px, var(--white-10) 23px),
+    repeating-linear-gradient(135deg, transparent 0, transparent 26px,
+      var(--white-10) 26px, var(--white-10) 27px),
     linear-gradient(150deg, var(--mono-70), var(--mono-black-90));
 }
-.mock__screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.mock--phone .mock__screen { aspect-ratio: 9 / 17; }
-.mock--phone .mock__bar { display: none; }
-.mock--phone { border-radius: var(--r-lg); }
-.mock--tall .mock__screen { aspect-ratio: 4 / 5; }
+.screen__view img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 
-@media (max-width: 860px) {
-  .mockwall { grid-template-columns: repeat(2, 1fr); opacity: 0.4; }
+/* Caption rides with the active screen */
+.deck__caption {
+  position: absolute; left: 0; right: 0; bottom: -46px;
+  text-align: center;
+  font-size: var(--t-caption); letter-spacing: var(--tr-label);
+  text-transform: uppercase; color: var(--mono-40);
 }
+
+/* Reflected floor, sells the depth */
+.stage::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 34%;
+  background: linear-gradient(to top, var(--mono-black), transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 860px) { .deck { width: 84vw; } }
 @media (prefers-reduced-motion: reduce) {
-  .mockwall__col { transform: none !important; }
+  .screen { transition: none !important; }
 }
 
 /* ---- Scroll progress rail. Injected by dynamics() in script.js. --- */

@@ -262,90 +262,123 @@
       .catch(function () { /* feed down, section stays empty */ });
   }
 
-  /* ---- Hero montage -----------------------------------------
-     Driven by the Web Animations API rather than CSS keyframes, so
-     each column gets its own timeline that can be seeked, sped up
-     and paused. Distance is measured at runtime from real layout,
-     which is why the loop is seamless at any column height.
+  /* ---- Hero 3D screen deck -----------------------------------
+     A real 3D presentation: each screen is positioned in the stage's
+     perspective space and animated on the Y axis with depth.
 
-     Behaviour:
-       - each column drifts at its own duration and direction
-       - playbackRate eases up while the page is scrolling
-       - timelines pause when the hero leaves the viewport and when
-         the tab is hidden, so nothing burns frames offscreen
-       - reduced motion leaves the wall static */
-  function montage() {
-    var wall = document.querySelector('.mockwall');
-    if (!wall || typeof Element === 'undefined' || !Element.prototype.animate) return;
+     One screen faces the camera at a time. Advancing rotates the
+     outgoing screen away and pushes it back along Z while the next
+     rotates in from the opposite side. Every keyframe is driven
+     through the Web Animations API so the timelines can be
+     interrupted mid-flight when someone drags or clicks.
 
-    var cols = Array.prototype.slice.call(wall.querySelectorAll('.mockwall__col'));
-    if (!cols.length) return;
+     Reduced motion shows the first screen, still. */
+  function deck() {
+    var el = document.getElementById('deck');
+    if (!el || !Element.prototype.animate) return;
+
+    var screens = Array.prototype.slice.call(el.querySelectorAll('.screen'));
+    if (!screens.length) return;
+
+    var caption = document.getElementById('deckCaption');
+    var labels = (el.dataset.captions || '').split('|').map(function (t) { return t.trim(); });
+
+    var EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    var IN_DUR = 1500, OUT_DUR = 1100, HOLD = 3400;
+    var index = 0, timer = null, busy = false;
+
+    // Resting pose: face on, slight tilt so it reads as an object in space.
+    var REST = 'translate3d(0,0,0) rotateY(0deg) rotateX(2deg) scale(1)';
+
+    function place(node, pose, opacity) {
+      node.style.transform = pose;
+      node.style.opacity = opacity;
+    }
+
+    // Start every screen parked off to the right, deep in Z.
+    screens.forEach(function (sc) {
+      place(sc, 'translate3d(58%, 0, -900px) rotateY(52deg) rotateX(2deg) scale(0.82)', 0);
+    });
+    place(screens[0], REST, 1);
+    if (caption) caption.textContent = labels[0] || '';
+
     if (reduced) return;
 
-    var players = [];
+    function show(next) {
+      if (busy || next === index) return;
+      busy = true;
 
-    function build() {
-      players.forEach(function (p) { p.cancel(); });
-      players = cols.map(function (col, i) {
-        // Each column holds its children twice, so travelling half the
-        // scroll height lands exactly on the duplicate.
-        var distance = col.scrollHeight / 2;
-        if (!distance) return null;
+      var out = screens[index];
+      var incoming = screens[next];
 
-        var reverse = i % 2 === 1;
-        var anim = col.animate(
-          [
-            { transform: 'translate3d(0, 0, 0)' },
-            { transform: 'translate3d(0, ' + (reverse ? distance : -distance) + 'px, 0)' }
-          ],
-          {
-            duration: 42000 + i * 9000,
-            iterations: Infinity,
-            easing: 'linear'
-          }
-        );
-        anim.startTime = anim.timeline.currentTime - (i * 4000);
-        return anim;
-      }).filter(Boolean);
-    }
+      out.animate([
+        { transform: REST, opacity: 1 },
+        { transform: 'translate3d(-58%, 0, -900px) rotateY(-52deg) rotateX(2deg) scale(0.82)', opacity: 0 }
+      ], { duration: OUT_DUR, easing: EASE, fill: 'forwards' });
 
-    build();
+      incoming.animate([
+        { transform: 'translate3d(58%, 0, -900px) rotateY(52deg) rotateX(2deg) scale(0.82)', opacity: 0 },
+        { transform: REST, opacity: 1 }
+      ], { duration: IN_DUR, easing: EASE, fill: 'forwards' }).finished
+        .then(function () { busy = false; })
+        .catch(function () { busy = false; });
 
-    // Scroll couples into playback rate, then eases back to rest.
-    var target = 1, current = 1, ticking = false, idle;
-    function ease() {
-      current += (target - current) * 0.08;
-      players.forEach(function (p) { p.playbackRate = current; });
-      if (Math.abs(target - current) > 0.01) {
-        requestAnimationFrame(ease);
-      } else {
-        ticking = false;
+      if (caption) {
+        caption.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, fill: 'forwards' }).finished
+          .then(function () {
+            caption.textContent = labels[next] || '';
+            caption.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: EASE, fill: 'forwards' });
+          }).catch(function () {});
       }
-    }
-    window.addEventListener('scroll', function () {
-      target = 2.6;
-      clearTimeout(idle);
-      idle = setTimeout(function () { target = 1; if (!ticking) { ticking = true; ease(); } }, 140);
-      if (!ticking) { ticking = true; ease(); }
-    }, { passive: true });
 
-    // Stop when offscreen or backgrounded.
-    function set(play) {
-      players.forEach(function (p) { play ? p.play() : p.pause(); });
+      index = next;
     }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) { set(e.isIntersecting); });
-      }, { threshold: 0 }).observe(wall);
-    }
-    document.addEventListener('visibilitychange', function () {
-      set(document.visibilityState === 'visible');
+
+    function advance() { show((index + 1) % screens.length); }
+    function start() { stop(); timer = setInterval(advance, HOLD); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+    // A slow float on the whole deck, so the stage is never dead still.
+    el.animate([
+      { transform: 'rotateY(-3deg) rotateX(0.5deg)' },
+      { transform: 'rotateY(3deg) rotateX(-0.5deg)' },
+      { transform: 'rotateY(-3deg) rotateX(0.5deg)' }
+    ], { duration: 16000, iterations: Infinity, easing: 'ease-in-out' });
+
+    // Pointer parallax: the camera leans toward the cursor.
+    var hero = el.closest('.herov') || document.body;
+    hero.addEventListener('pointermove', function (e) {
+      var b = hero.getBoundingClientRect();
+      var px = (e.clientX - b.left) / b.width - 0.5;
+      var py = (e.clientY - b.top) / b.height - 0.5;
+      el.parentElement.style.perspectiveOrigin =
+        (50 + px * 18).toFixed(1) + '% ' + (45 + py * 14).toFixed(1) + '%';
     });
 
-    var rebuild;
-    window.addEventListener('resize', function () {
-      clearTimeout(rebuild);
-      rebuild = setTimeout(build, 250);
+    // Drag to scrub between screens.
+    var downX = null;
+    el.addEventListener('pointerdown', function (e) { downX = e.clientX; stop(); });
+    window.addEventListener('pointerup', function (e) {
+      if (downX === null) return;
+      var dx = e.clientX - downX;
+      if (Math.abs(dx) > 60) {
+        show(dx < 0 ? (index + 1) % screens.length
+                    : (index - 1 + screens.length) % screens.length);
+      }
+      downX = null;
+      start();
+    });
+
+    // Only run while the hero is on screen and the tab is visible.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (entry) { entry.isIntersecting ? start() : stop(); });
+      }, { threshold: 0.15 }).observe(el);
+    } else {
+      start();
+    }
+    document.addEventListener('visibilitychange', function () {
+      document.visibilityState === 'visible' ? start() : stop();
     });
   }
 
@@ -458,7 +491,7 @@
     }
   }
 
-  var boot = function () { init(); menu(); tabs(); video(); articles(); montage(); dynamics(); };
+  var boot = function () { init(); menu(); tabs(); video(); articles(); deck(); dynamics(); };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
