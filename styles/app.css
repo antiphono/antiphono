@@ -1789,8 +1789,11 @@ a.stag:hover { background: var(--mono-white); color: var(--mono-90); }
 .ct__panel {
   position: relative; border-radius: var(--hero-radius); overflow: hidden;
   background: #151515;
-  display: grid; grid-template-columns: 546px minmax(0, 654px);
-  gap: var(--s-7); justify-content: space-between;
+  /* Booking card is exactly 66% of the panel's content width. The
+     gap is subtracted from the copy column so the 66% stays true. */
+  display: grid;
+  grid-template-columns: minmax(0, calc(34% - var(--s-7))) minmax(0, 66%);
+  gap: var(--s-7);
   padding: clamp(32px, 5vw, 60px) clamp(24px, 4vw, 48px);
 }
 .ct__left { display: flex; flex-direction: column; gap: var(--s-6); }
@@ -1948,3 +1951,84 @@ a.ct__fact:hover { color: var(--mono-30); }
   .wk__media img { transition: none; }
   .wk:hover .wk__media img { transform: none; }
 }
+
+/* ============================================================
+   HERO MOCKUP MONTAGE
+   ------------------------------------------------------------
+   Placeholder animation for the hero background. Three columns of
+   device frames drifting at different speeds, so the wall reads as
+   depth rather than a slideshow. Every frame holds a real <img>
+   slot: drop a screenshot in and it appears in the montage.
+   Pure CSS, no library, no build step.
+   ============================================================ */
+
+.mockwall {
+  position: absolute; inset: 0; z-index: -1;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+  padding: var(--s-4);
+  overflow: hidden;
+  /* Sit back so the hero type stays dominant */
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% 40%, #000 40%, transparent 100%);
+          mask-image: radial-gradient(ellipse 120% 90% at 50% 40%, #000 40%, transparent 100%);
+}
+.mockwall__col {
+  display: flex; flex-direction: column; gap: var(--s-4);
+  will-change: transform;
+  /* Motion is driven by the Web Animations API in script.js, not by
+     CSS keyframes, so the timeline can be seeked, rate-changed and
+     paused at runtime. */
+}
+
+/* A single device frame. Add .mock--phone for a tall one. */
+.mock {
+  flex: none;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--mono-black-90);
+  border: var(--hair) solid var(--white-20);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.mock__bar {
+  height: 26px; display: flex; align-items: center; gap: 6px;
+  padding-inline: 10px; background: var(--mono-80);
+  border-bottom: var(--hair) solid var(--white-10);
+}
+.mock__bar i {
+  width: 7px; height: 7px; border-radius: var(--r-pill);
+  background: var(--white-20); display: block;
+}
+.mock__screen {
+  position: relative; display: block; width: 100%;
+  aspect-ratio: 16 / 10;
+  background:
+    repeating-linear-gradient(135deg, transparent 0, transparent 22px,
+      var(--white-10) 22px, var(--white-10) 23px),
+    linear-gradient(150deg, var(--mono-70), var(--mono-black-90));
+}
+.mock__screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.mock--phone .mock__screen { aspect-ratio: 9 / 17; }
+.mock--phone .mock__bar { display: none; }
+.mock--phone { border-radius: var(--r-lg); }
+.mock--tall .mock__screen { aspect-ratio: 4 / 5; }
+
+@media (max-width: 860px) {
+  .mockwall { grid-template-columns: repeat(2, 1fr); opacity: 0.4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mockwall__col { transform: none !important; }
+}
+
+/* ---- Scroll progress rail. Injected by dynamics() in script.js. --- */
+.progress {
+  position: fixed; inset: 0 0 auto 0; z-index: 60;
+  height: 2px; background: var(--mono-white);
+  transform: scaleX(0); transform-origin: 0 50%;
+  pointer-events: none;
+}
+/* Pointer-driven transforms need their own compositing context and
+   must not fight the reveal transition. */
+.wk, .bento__cell { transform-style: preserve-3d; }
+.pill, .btn, .cta__circle, .tst__btn, .srow__icon, .why__social a { will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .progress { display: none; } }

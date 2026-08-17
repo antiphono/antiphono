@@ -97,8 +97,46 @@
     <!-- Background video. TODO Ben: supply the clip as media/hero.mp4
          and media/hero.webm, then add the <source> tags below. Until
          then the placeholder surface shows through. -->
+    <!-- Hero background. Drifting montage of device frames.
+         TO ADD A SCREENSHOT: put the file in media/work/ and drop an
+         <img src="/media/work/your-shot.png" alt=""> inside any
+         <span class="mock__screen">. Slots are named hero-COLUMN-ROW.
+         Each column is duplicated so the loop is seamless: add your
+         image to both copies of the same slot name. -->
     <div class="herov__bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none" id="heroVideo"></video>
+      <div class="mockwall">
+      <span class="mockwall__col">
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-1"></span></span>
+        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-1-2"></span></span>
+        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-3"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-4"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-1"></span></span>
+        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-1-2"></span></span>
+        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-3"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-1-4"></span></span>
+      </span>
+      <span class="mockwall__col">
+        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-1"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-2"></span></span>
+        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-2-3"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-4"></span></span>
+        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-1"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-2"></span></span>
+        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-2-3"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-2-4"></span></span>
+      </span>
+      <span class="mockwall__col">
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-1"></span></span>
+        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-2"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-3"></span></span>
+        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-3-4"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-1"></span></span>
+        <span class="mock mock--tall"><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-2"></span></span>
+        <span class="mock "><span class="mock__bar"><i></i><i></i><i></i></span><span class="mock__screen" data-slot="hero-3-3"></span></span>
+        <span class="mock mock--phone"><span class="mock__screen" data-slot="hero-3-4"></span></span>
+      </span>
+      </div>
+      <video class="herov__video" id="heroVideo" autoplay muted loop playsinline preload="none"></video>
     </div>
     <div class="herov__blur" aria-hidden="true"></div>
 

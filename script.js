@@ -262,7 +262,203 @@
       .catch(function () { /* feed down, section stays empty */ });
   }
 
-  var boot = function () { init(); menu(); tabs(); video(); articles(); };
+  /* ---- Hero montage -----------------------------------------
+     Driven by the Web Animations API rather than CSS keyframes, so
+     each column gets its own timeline that can be seeked, sped up
+     and paused. Distance is measured at runtime from real layout,
+     which is why the loop is seamless at any column height.
+
+     Behaviour:
+       - each column drifts at its own duration and direction
+       - playbackRate eases up while the page is scrolling
+       - timelines pause when the hero leaves the viewport and when
+         the tab is hidden, so nothing burns frames offscreen
+       - reduced motion leaves the wall static */
+  function montage() {
+    var wall = document.querySelector('.mockwall');
+    if (!wall || typeof Element === 'undefined' || !Element.prototype.animate) return;
+
+    var cols = Array.prototype.slice.call(wall.querySelectorAll('.mockwall__col'));
+    if (!cols.length) return;
+    if (reduced) return;
+
+    var players = [];
+
+    function build() {
+      players.forEach(function (p) { p.cancel(); });
+      players = cols.map(function (col, i) {
+        // Each column holds its children twice, so travelling half the
+        // scroll height lands exactly on the duplicate.
+        var distance = col.scrollHeight / 2;
+        if (!distance) return null;
+
+        var reverse = i % 2 === 1;
+        var anim = col.animate(
+          [
+            { transform: 'translate3d(0, 0, 0)' },
+            { transform: 'translate3d(0, ' + (reverse ? distance : -distance) + 'px, 0)' }
+          ],
+          {
+            duration: 42000 + i * 9000,
+            iterations: Infinity,
+            easing: 'linear'
+          }
+        );
+        anim.startTime = anim.timeline.currentTime - (i * 4000);
+        return anim;
+      }).filter(Boolean);
+    }
+
+    build();
+
+    // Scroll couples into playback rate, then eases back to rest.
+    var target = 1, current = 1, ticking = false, idle;
+    function ease() {
+      current += (target - current) * 0.08;
+      players.forEach(function (p) { p.playbackRate = current; });
+      if (Math.abs(target - current) > 0.01) {
+        requestAnimationFrame(ease);
+      } else {
+        ticking = false;
+      }
+    }
+    window.addEventListener('scroll', function () {
+      target = 2.6;
+      clearTimeout(idle);
+      idle = setTimeout(function () { target = 1; if (!ticking) { ticking = true; ease(); } }, 140);
+      if (!ticking) { ticking = true; ease(); }
+    }, { passive: true });
+
+    // Stop when offscreen or backgrounded.
+    function set(play) {
+      players.forEach(function (p) { play ? p.play() : p.pause(); });
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { set(e.isIntersecting); });
+      }, { threshold: 0 }).observe(wall);
+    }
+    document.addEventListener('visibilitychange', function () {
+      set(document.visibilityState === 'visible');
+    });
+
+    var rebuild;
+    window.addEventListener('resize', function () {
+      clearTimeout(rebuild);
+      rebuild = setTimeout(build, 250);
+    });
+  }
+
+  /* ---- Dynamics ----------------------------------------------
+     Runtime behaviour that CSS cannot express: pointer-relative
+     transforms, scroll-position maths and value interpolation.
+     Everything is batched into a single rAF loop, and the whole
+     module is skipped under reduced motion. */
+  function dynamics() {
+    if (reduced) return;
+
+    var raf = null, jobs = [];
+    function schedule() {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = null;
+        for (var i = 0; i < jobs.length; i++) jobs[i]();
+      });
+    }
+
+    /* Scroll progress rail across the top of the page. */
+    var rail = document.createElement('div');
+    rail.className = 'progress';
+    rail.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(rail);
+    function progress() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? window.scrollY / max : 0;
+      rail.style.transform = 'scaleX(' + pct.toFixed(4) + ')';
+    }
+    jobs.push(progress);
+
+    /* Parallax. Media drifts against the scroll at its own depth. */
+    var layers = Array.prototype.slice.call(
+      document.querySelectorAll('.wk__media img, .why__figure img, .ft__figure img, .mrow__figure img')
+    );
+    layers.forEach(function (el, i) { el.dataset.depth = (0.06 + (i % 3) * 0.04).toFixed(2); });
+    function parallax() {
+      var vh = window.innerHeight;
+      layers.forEach(function (el) {
+        var box = el.getBoundingClientRect();
+        if (box.bottom < 0 || box.top > vh) return;
+        var mid = box.top + box.height / 2;
+        var offset = (mid - vh / 2) * parseFloat(el.dataset.depth);
+        el.style.transform = 'translate3d(0,' + (-offset).toFixed(2) + 'px,0) scale(1.12)';
+      });
+    }
+    jobs.push(parallax);
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    schedule();
+
+    /* Magnetic pointer. Buttons lean toward the cursor and spring back. */
+    var magnets = Array.prototype.slice.call(
+      document.querySelectorAll('.pill, .btn, .cta__circle, .tst__btn, .srow__icon, .why__social a')
+    );
+    magnets.forEach(function (el) {
+      var strength = el.classList.contains('cta__circle') ? 0.34 : 0.22;
+      el.addEventListener('pointermove', function (e) {
+        var b = el.getBoundingClientRect();
+        var dx = (e.clientX - (b.left + b.width / 2)) * strength;
+        var dy = (e.clientY - (b.top + b.height / 2)) * strength;
+        el.style.transform = 'translate3d(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px,0)';
+      });
+      el.addEventListener('pointerleave', function () {
+        el.animate(
+          [{ transform: el.style.transform || 'none' }, { transform: 'translate3d(0,0,0)' }],
+          { duration: 620, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' }
+        );
+        el.style.transform = '';
+      });
+    });
+
+    /* Tilt. Work cards rotate toward the pointer in 3D. */
+    Array.prototype.slice.call(document.querySelectorAll('.wk, .bento__cell')).forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var b = card.getBoundingClientRect();
+        var rx = ((e.clientY - b.top) / b.height - 0.5) * -7;
+        var ry = ((e.clientX - b.left) / b.width - 0.5) * 7;
+        card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        card.style.transform = '';
+        setTimeout(function () { card.style.transition = ''; }, 620);
+      });
+    });
+
+    /* Count up. Any [data-count] interpolates when it first appears. */
+    var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    if (counters.length && 'IntersectionObserver' in window) {
+      var co = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          co.unobserve(el);
+          var end = parseFloat(el.dataset.count) || 0;
+          var suffix = el.dataset.countSuffix || '';
+          var t0 = performance.now();
+          (function step(now) {
+            var p = Math.min((now - t0) / 1400, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(end * eased) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          })(t0);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(function (el) { co.observe(el); });
+    }
+  }
+
+  var boot = function () { init(); menu(); tabs(); video(); articles(); montage(); dynamics(); };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
