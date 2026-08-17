@@ -1,0 +1,844 @@
+/* ============================================================
+   APEX ROADSTER: scoped stylesheet for /homepage2 only.
+
+   Source: styles/apex.css (the package's globals.css, kept
+   unmodified as the reference copy). This file is that
+   stylesheet with every selector scoped so it cannot reach
+   anything outside the Apex page.
+
+   Scoping contract:
+   - Tokens live on `.apex`, never on `:root`, so none of the
+     Apex custom properties reach styles/tokens.css.
+   - Every element rule is a descendant of `.apex`.
+   - The three rules that must sit on <html> for Lenis are
+     guarded with `:has(body.apex)`, so they only apply on a
+     page whose body carries the class.
+
+   Do not load this file on any other page.
+   ============================================================ */
+
+/* ---------- Tokens (scoped, was :root) ---------- */
+.apex {
+  /* Color */
+  --apex-white: #F4F4F2;
+  --pure-white: #FFFFFF;
+  --apex-black: #111214;
+  --deep-black: #08090A;
+  --text-on-light: #111214;
+  --text-secondary-light: #686A6D;
+  --text-on-dark: #F4F4F2;
+  --text-secondary-dark: #A4A6A8;
+  --hairline-light: rgba(17, 18, 20, 0.16);
+  --hairline-dark: rgba(255, 255, 255, 0.18);
+  --signal-red: #D7372F;
+
+  /* Type scale */
+  --display-xl: clamp(4.5rem, 10.4vw, 11rem);
+  --display-l: clamp(3.7rem, 8vw, 8.5rem);
+  --display-m: clamp(3rem, 6vw, 6.5rem);
+  --heading-l: clamp(2.5rem, 4.5vw, 5rem);
+  --heading-m: clamp(2rem, 3vw, 3.5rem);
+  --body-l: clamp(1rem, 1.2vw, 1.25rem);
+  --body: 0.95rem;
+  --small: 0.75rem;
+  --micro: 0.6875rem;
+
+  /* Spacing (8px system) */
+  --s-4: 4px;  --s-8: 8px;  --s-12: 12px; --s-16: 16px;
+  --s-24: 24px; --s-32: 32px; --s-48: 48px; --s-64: 64px;
+  --s-96: 96px; --s-128: 128px; --s-160: 160px;
+
+  /* Grid */
+  --content-max: 1800px;
+  --gutter: clamp(24px, 2.2vw, 40px);
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-mechanical: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-hover: 240ms;
+  --t-button: 380ms;
+  --t-text: 900ms;
+  --t-media: 1200ms;
+  --t-section: 1500ms;
+
+  /* Font stack: neo-grotesk */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Reset (scoped) ---------- */
+.apex, .apex *, .apex *::before, .apex *::after { box-sizing: border-box; }
+
+/* Lenis needs these on the root element. Guarded so they only
+   apply on the Apex page and cannot affect any other page. */
+html:has(body.apex) { scroll-behavior: auto; }
+html.lenis:has(body.apex),
+html.lenis:has(body.apex) body.apex { height: auto; }
+html.lenis.lenis-smooth:has(body.apex) { scroll-behavior: auto !important; }
+
+body.apex {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background: var(--apex-white);
+  color: var(--text-on-light);
+  font-size: var(--body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+.apex img, .apex video { display: block; max-width: 100%; }
+.apex a { color: inherit; text-decoration: none; }
+.apex button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+.apex ul, .apex ol { margin: 0; padding: 0; list-style: none; }
+.apex h1, .apex h2, .apex h3, .apex h4, .apex p { margin: 0; font-weight: 400; }
+
+.apex ::selection { background: var(--apex-black); color: var(--apex-white); }
+
+/* ---------- Typography utilities ---------- */
+.apex .display-xl {
+  font-size: var(--display-xl);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.apex .display-l {
+  font-size: var(--display-l);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.apex .display-m {
+  font-size: var(--display-m);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.apex .heading-l {
+  font-size: var(--heading-l);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.apex .heading-m {
+  font-size: var(--heading-m);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.apex .body-l { font-size: var(--body-l); line-height: 1.45; }
+.apex .micro-label {
+  font-size: var(--micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.apex .small { font-size: var(--small); }
+
+/* ---------- Layout utilities ---------- */
+.apex .container-x {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Masked line reveal ---------- */
+.apex .reveal-line { display: block; overflow: hidden; }
+.apex .reveal-line > span {
+  display: block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+/* ---------- Media reveal ---------- */
+.apex .media-mask { overflow: hidden; }
+.apex .media-mask > img, .apex .media-mask > video {
+  transform: scale(1.06);
+  will-change: transform;
+}
+
+/* ---------- Hairline ---------- */
+.apex .hairline-t { border-top: 1px solid var(--hairline-light); }
+.apex .on-dark .hairline-t { border-top-color: var(--hairline-dark); }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .apex, .apex *, .apex *::before, .apex *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .apex .reveal-line > span { transform: none; }
+  .apex .media-mask > img, .apex .media-mask > video { transform: none; }
+}
+
+/* ---------- Focus ---------- */
+.apex :focus-visible {
+  outline: 1.5px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ---------- Custom cursor ---------- */
+.apex .apex-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+.apex .apex-cursor__ring {
+  position: absolute;
+  width: 36px; height: 36px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width var(--t-hover) var(--ease-soft),
+              height var(--t-hover) var(--ease-soft),
+              background-color var(--t-hover) var(--ease-soft);
+  display: grid;
+  place-items: center;
+}
+.apex .apex-cursor__dot {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.apex .apex-cursor__label {
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0;
+  transition: opacity var(--t-hover) var(--ease-soft);
+  white-space: nowrap;
+}
+.apex .apex-cursor.is-active .apex-cursor__ring { width: 72px; height: 72px; }
+.apex .apex-cursor.has-label .apex-cursor__ring { width: 88px; height: 88px; background: rgba(255,255,255,0.08); }
+.apex .apex-cursor.has-label .apex-cursor__label { opacity: 1; }
+.apex .apex-cursor.has-label .apex-cursor__dot { opacity: 0; }
+@media (hover: none), (pointer: coarse) {
+  .apex .apex-cursor { display: none; }
+}
+@media (hover: hover) and (pointer: fine) {
+  body.apex.has-custom-cursor,
+  body.apex.has-custom-cursor a,
+  body.apex.has-custom-cursor button { cursor: none; }
+}
+
+/* ---------- Header ---------- */
+.apex .header-nav { display: none; }
+@media (min-width: 900px) { .apex .header-nav { display: block; } }
+
+.apex .header-link {
+  font-size: var(--micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: inherit;
+  display: inline-block;
+  overflow: hidden;
+}
+/* The source set overflow:hidden but never constrained the link to a
+   single line, so both copies of the label showed stacked and the
+   roll-up never read as a roll. One line height restores it. */
+.apex .header-link { height: 1.2em; line-height: 1.2; }
+.apex .header-link__inner {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.2;
+  transition: transform var(--t-button) var(--ease-editorial);
+}
+.apex .header-link:hover .header-link__inner { transform: translateY(-50%); }
+
+.apex .header-cta {
+  padding: 8px 16px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  transition: background-color var(--t-button) var(--ease-soft),
+              color var(--t-button) var(--ease-soft);
+  display: none;
+}
+@media (min-width: 900px) { .apex .header-cta { display: inline-block; } }
+.apex .header-cta:hover { background: currentColor; }
+.apex .header-cta:hover > * { color: inherit; }
+.apex .header-cta:hover { color: var(--apex-white); }
+.apex header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: difference; }
+
+.apex .header-burger {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  margin-right: -10px;
+}
+@media (min-width: 900px) { .apex .header-burger { display: none; } }
+.apex .header-burger span {
+  width: 22px; height: 1.5px; background: currentColor; display: block;
+}
+
+/* ---------- Mobile menu ---------- */
+.apex .mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--deep-black);
+  color: var(--text-on-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gutter);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+}
+.apex .mobile-menu__link {
+  font-size: clamp(2.6rem, 11vw, 5rem);
+  line-height: 1.04;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  display: block;
+  overflow: hidden;
+}
+.apex .mobile-menu__link > span { display: block; }
+.apex .mobile-menu__close {
+  position: absolute;
+  top: 20px; right: var(--gutter);
+  font-size: var(--micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+/* ---------- Buttons ---------- */
+.apex .btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: var(--micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: inherit;
+  transition: background-color var(--t-button) var(--ease-soft),
+              color var(--t-button) var(--ease-soft),
+              transform var(--t-hover) var(--ease-soft);
+  will-change: transform;
+}
+.apex .btn-pill:hover { transform: translateY(-2px); }
+.apex .btn-pill--dark { background: var(--apex-black); color: var(--text-on-dark); border-color: var(--apex-black); }
+.apex .btn-pill--dark:hover { background: transparent; color: var(--text-on-light); }
+.apex .hero .btn-pill,
+.apex [data-theme="dark"] .btn-pill { border-color: rgba(255,255,255,0.6); color: var(--text-on-dark); }
+.apex [data-theme="dark"] .btn-pill:hover { background: #fff; color: #111; }
+
+/* circular outline action (feature cards) */
+.apex .circle-action {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline-light);
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--text-on-light);
+  transition: background-color var(--t-button) var(--ease-soft),
+              color var(--t-button) var(--ease-soft),
+              transform var(--t-button) var(--ease-soft);
+}
+.apex .circle-action:hover { background: var(--apex-black); color: var(--text-on-dark); transform: scale(1.06); }
+
+/* large solid circular CTA (reservation) */
+.apex .circle-cta {
+  position: relative;
+  width: clamp(180px, 16vw, 260px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--apex-black);
+  color: var(--text-on-dark);
+  display: inline-grid;
+  place-items: center;
+  text-align: center;
+  font-size: var(--micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.4;
+  padding: 24px;
+  transition: transform var(--t-button) var(--ease-soft),
+              background-color var(--t-button) var(--ease-soft),
+              color var(--t-button) var(--ease-soft);
+  will-change: transform;
+}
+.apex .circle-cta:hover { background: var(--signal-red); color: #fff; }
+
+/* ---------- Journal ---------- */
+.apex .journal__pill {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--apex-black);
+  color: var(--text-on-dark);
+  width: max-content;
+}
+.apex .journal__title {
+  font-weight: 500;
+  transition: transform var(--t-button) var(--ease-soft),
+              color var(--t-button) var(--ease-soft);
+}
+.apex .journal__link:hover .journal__title { transform: translateX(10px); }
+.apex .journal__arrow {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity var(--t-hover) var(--ease-soft),
+              transform var(--t-hover) var(--ease-soft);
+}
+.apex .journal__link:hover .journal__arrow { opacity: 1; transform: translateX(0); }
+@media (max-width: 700px) {
+  .apex .journal__link { grid-template-columns: 1fr auto !important; }
+  .apex .journal__link .small, .apex .journal__pill { display: none; }
+}
+
+/* ---------- Footer ---------- */
+.apex .footer__link { color: var(--text-on-dark); transition: opacity var(--t-hover) var(--ease-soft); }
+.apex .footer__link:hover { opacity: 0.6; }
+.apex .footer__social {
+  width: 40px; height: 40px;
+  border: 1px solid var(--hairline-dark);
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-size: var(--small);
+  transition: background-color var(--t-hover) var(--ease-soft), color var(--t-hover) var(--ease-soft);
+}
+.apex .footer__social:hover { background: #fff; color: #111; }
+.apex .footer__top {
+  width: 48px; height: 48px;
+  border: 1px solid var(--hairline-dark);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  transition: background-color var(--t-hover) var(--ease-soft), color var(--t-hover) var(--ease-soft);
+}
+.apex .footer__top:hover { background: #fff; color: #111; }
+@media (max-width: 900px) {
+  .apex .footer__grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .apex .driver__grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .apex .driver__media { aspect-ratio: 16/10 !important; }
+  .apex .vision__float { position: relative !important; top: auto !important; right: auto !important; margin-top: 48px !important; }
+  .apex .system-card { grid-template-columns: 1fr !important; min-height: 0 !important; }
+  .apex .system-card__media { order: 1 !important; aspect-ratio: 16/10; min-height: 0 !important; }
+  .apex .system-card > div:last-child { order: 2 !important; }
+  .apex .res__cta { margin-top: 40px; }
+  .apex #reserve .container-x { grid-template-columns: 1fr !important; }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .apex { --gutter: 18px; }
+  .apex .display-xl { letter-spacing: -0.02em; }
+  .apex .vision__float { width: 100% !important; }
+  .apex .hero__meta { display: none !important; }
+  /* manifesto floating images become a simple stack */
+  .apex .mani__img { position: relative !important; inset: auto !important; width: 100% !important; margin-top: 24px !important; }
+  .apex .mani__img--vertical { display: none; }
+  /* purpose gallery: fall back to horizontal scroll snap, no pin */
+  .apex .purpose__track { position: relative !important; top: auto !important; transform: none !important; overflow-x: auto; padding-block: 24px; scroll-snap-type: x mandatory; }
+  .apex .purpose__card { scroll-snap-align: center; }
+  .apex .journal__link { grid-template-columns: 1fr auto !important; }
+  .apex .journal__link .small, .apex .journal__link .journal__pill { display: none; }
+  .apex .footer__grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+}
+
+/* ============================================================
+   PORT ADDITIONS
+   Styles that lived as inline React style objects in the source
+   components and are better expressed as CSS here.
+   ============================================================ */
+
+.apex .apex-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--gutter);
+  color: var(--text-on-dark);
+  transition: color 400ms var(--ease-soft), background-color 400ms var(--ease-soft);
+  background-color: transparent;
+}
+.apex .apex-header[data-header-theme="light"] { color: var(--text-on-light); }
+
+.apex .apex-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  line-height: 1;
+}
+.apex .apex-logo svg { flex: none; }
+.apex .apex-logo__word {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.apex .header-nav ul {
+  display: flex;
+  gap: clamp(20px, 2.4vw, 40px);
+  align-items: center;
+}
+.apex .header-actions { display: flex; align-items: center; gap: 24px; }
+
+/* Skip link, added for the port. Not in the source package. */
+.apex .apex-skip {
+  position: absolute;
+  left: var(--gutter);
+  top: 8px;
+  z-index: 300;
+  padding: 10px 16px;
+  background: var(--apex-black);
+  color: var(--text-on-dark);
+  font-size: var(--micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transform: translateY(-200%);
+  transition: transform var(--t-button) var(--ease-soft);
+}
+.apex .apex-skip:focus-visible { transform: translateY(0); }
+
+/* Sections */
+.apex .hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  background: var(--deep-black);
+  color: var(--text-on-dark);
+  overflow: clip;
+}
+.apex .hero__media-mask { position: absolute; inset: 0; will-change: clip-path; }
+.apex .hero__video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  will-change: transform;
+}
+.apex .hero__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,9,10,0.52), rgba(8,9,10,0) 42%);
+}
+.apex .hero__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: clamp(32px, 5vh, 64px);
+}
+.apex .hero__eyebrow { overflow: hidden; margin-bottom: 20px; }
+.apex .hero__eyebrow > span { display: block; }
+.apex .hero__headline { max-width: 14ch; margin-bottom: 24px; }
+.apex .hero__line { display: block; overflow: hidden; }
+.apex .hero__line > span { display: block; }
+.apex .hero__support {
+  color: var(--text-secondary-dark);
+  max-width: 42ch;
+  margin-bottom: 32px;
+}
+.apex .hero__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.apex .hero__meta {
+  display: flex;
+  gap: clamp(16px, 3vw, 48px);
+  color: var(--text-secondary-dark);
+}
+
+.apex .vision {
+  position: relative;
+  background: var(--apex-white);
+  padding-block: clamp(120px, 20vh, 220px);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+.apex .vision__inner { position: relative; width: 100%; }
+.apex .vision__label { color: var(--text-secondary-light); margin-bottom: 40px; }
+.apex .vision__headline { max-width: 9ch; }
+.apex .vision__line { display: block; overflow: hidden; }
+.apex .vision__line > span { display: block; }
+.apex .vision__body { color: var(--text-secondary-light); max-width: 40ch; margin-top: 48px; }
+.apex .vision__float {
+  position: absolute;
+  top: 8%;
+  right: var(--gutter);
+  width: clamp(180px, 20vw, 340px);
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  will-change: clip-path, transform;
+}
+.apex .vision__float img { width: 100%; height: 100%; object-fit: cover; }
+
+.apex .driver {
+  background: var(--apex-white);
+  padding-block: clamp(100px, 16vh, 200px);
+}
+.apex .driver__grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: clamp(40px, 6vw, 120px);
+  align-items: center;
+}
+.apex .driver__media { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+.apex .driver__media img { width: 100%; height: 100%; object-fit: cover; }
+.apex .driver__copy { max-width: 46ch; }
+.apex .driver__label { color: var(--text-secondary-light); margin-bottom: 28px; }
+.apex .driver__heading { margin-bottom: 28px; }
+.apex .driver__body { margin-bottom: 24px; }
+.apex .driver__secondary { color: var(--text-secondary-light); margin-bottom: 36px; }
+
+.apex .cine {
+  position: relative;
+  height: 100vh;
+  overflow: clip;
+  background: var(--deep-black);
+}
+.apex .cine__media { position: absolute; inset: 0; will-change: clip-path, transform; }
+.apex .cine__media video { width: 100%; height: 100%; object-fit: cover; }
+
+.apex .mani {
+  position: relative;
+  background: var(--apex-black);
+  color: var(--text-on-dark);
+  min-height: 150vh;
+  padding-block: clamp(140px, 24vh, 280px);
+  overflow: clip;
+}
+.apex .mani__inner { position: relative; text-align: center; }
+.apex .mani__label { color: var(--text-secondary-dark); margin-bottom: 56px; }
+.apex .mani__headline { position: relative; z-index: 2; }
+.apex .mani__line { display: block; overflow: hidden; }
+.apex .mani__line > span { display: block; }
+.apex .mani__copy { max-width: 52ch; margin: 56px auto 0; position: relative; z-index: 2; }
+.apex .mani__body { color: var(--text-secondary-dark); }
+.apex .mani__statement { margin-top: 32px; }
+.apex .mani__img { position: absolute; margin: 0; z-index: 1; will-change: transform, clip-path; }
+.apex .mani__img img { width: 100%; height: 100%; object-fit: cover; }
+.apex .mani__img--wide { left: 2%; bottom: 4%; width: clamp(280px, 38vw, 760px); aspect-ratio: 16/9; }
+.apex .mani__img--small { right: 6%; top: 2%; width: clamp(160px, 18vw, 340px); aspect-ratio: 4/3; }
+.apex .mani__img--vertical { right: 16%; bottom: 10%; width: clamp(140px, 15vw, 280px); aspect-ratio: 3/4; }
+
+.apex .systems {
+  background: var(--apex-white);
+  padding-block: clamp(100px, 14vh, 180px);
+}
+.apex .systems__label { color: var(--text-secondary-light); margin-bottom: 64px; }
+.apex .systems__list { display: grid; gap: clamp(48px, 8vh, 96px); }
+.apex .system-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 72vh;
+  border: 1px solid var(--hairline-light);
+  background: var(--apex-white);
+}
+.apex .system-card:nth-child(even) { background: var(--pure-white); }
+.apex .system-card__media {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+  order: 1;
+}
+.apex .system-card__body {
+  order: 2;
+  padding: clamp(28px, 4vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.apex .system-card:nth-child(even) .system-card__media { order: 2; }
+.apex .system-card:nth-child(even) .system-card__body { order: 1; }
+.apex .system-card__media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.apex .system-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: var(--text-secondary-light);
+}
+.apex .system-card__center { text-align: center; margin-block: auto; }
+.apex .system-card__title { margin-bottom: 24px; }
+.apex .system-card__desc { color: var(--text-secondary-light); max-width: 34ch; margin: 0 auto; }
+.apex .system-card__action { margin-top: 32px; }
+.apex .system-card__meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary-light);
+  border-top: 1px solid var(--hairline-light);
+  padding-top: 20px;
+}
+
+.apex .material { height: 70vh; overflow: clip; background: var(--deep-black); }
+.apex .material__img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+
+.apex .purpose {
+  position: relative;
+  height: 100vh;
+  background: var(--apex-black);
+  color: var(--text-on-dark);
+  overflow: clip;
+}
+.apex .purpose__track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  gap: clamp(16px, 2vw, 32px);
+  padding-inline: 8vw;
+  align-items: center;
+  will-change: transform;
+}
+.apex .purpose__card {
+  flex: none;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0.5;
+  will-change: transform;
+  width: clamp(200px, 22vw, 420px);
+  aspect-ratio: 4/3;
+}
+.apex .purpose__card:nth-child(even) {
+  width: clamp(240px, 26vw, 480px);
+  aspect-ratio: 4/5;
+}
+.apex .purpose__card img { width: 100%; height: 100%; object-fit: cover; }
+.apex .purpose__scrim { position: absolute; inset: 0; background: rgba(8,9,10,0.45); }
+.apex .purpose__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.apex .purpose__label { color: var(--text-secondary-dark); margin-bottom: 40px; }
+.apex .purpose__line { display: block; overflow: hidden; }
+.apex .purpose__line > span { display: block; }
+.apex .purpose__body {
+  color: var(--text-secondary-dark);
+  max-width: 44ch;
+  margin: 32px auto 36px;
+}
+
+.apex .journal {
+  background: var(--apex-white);
+  padding-block: clamp(100px, 16vh, 200px);
+}
+.apex .journal__heading { margin-bottom: 64px; }
+.apex .journal__row { border-top: 1px solid var(--hairline-light); }
+.apex .journal__link {
+  display: grid;
+  grid-template-columns: 140px auto 1fr auto;
+  align-items: center;
+  gap: clamp(16px, 3vw, 48px);
+  padding-block: clamp(20px, 3vh, 32px);
+}
+.apex .journal__date {
+  color: var(--text-secondary-light);
+  font-variant-numeric: tabular-nums;
+}
+.apex .journal__foot { text-align: center; margin-top: 56px; }
+
+.apex .res {
+  background: var(--apex-white);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(120px, 18vh, 220px);
+}
+.apex .res .container-x {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(40px, 6vw, 120px);
+  align-items: center;
+  width: 100%;
+}
+.apex .res__headline { margin-bottom: 40px; }
+.apex .res__line { display: block; overflow: hidden; }
+.apex .res__line > span { display: block; }
+/* alternating solid / ghost word treatment on the first line */
+.apex .res__line--ghost > span {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+.apex .res__body {
+  color: var(--text-secondary-light);
+  max-width: 42ch;
+  margin-bottom: 32px;
+}
+.apex .res__secondary { text-decoration: underline; text-underline-offset: 4px; }
+.apex .res__cta { display: flex; justify-content: center; }
+
+.apex .apex-footer {
+  background: var(--deep-black);
+  color: var(--text-on-dark);
+  padding-block: clamp(64px, 10vh, 120px) 40px;
+}
+.apex .footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: clamp(32px, 4vw, 64px);
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--hairline-dark);
+}
+.apex .footer__legal { color: var(--text-secondary-dark); margin-top: 20px; }
+.apex .footer__title { color: var(--text-secondary-dark); margin-bottom: 20px; }
+.apex .footer__list { display: grid; gap: 12px; }
+.apex .footer__socials { display: flex; gap: 12px; }
+.apex .footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.apex .footer__final { color: var(--text-secondary-dark); }

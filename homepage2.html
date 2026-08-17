@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111214">
+<title>Apex Roadster. Motion, reduced to its purest form.</title>
+<meta name="description" content="An electric roadster shaped by air, precision and instinct. Apex Motion Systems.">
+<link rel="icon" href="media/apex/assets/favicon.svg">
+<link rel="preload" as="image" href="media/apex/assets/hero-poster.webp">
+<!--
+  /homepage2 is a standalone port of the Apex Roadster package.
+  It loads styles/apex-scoped.css only. It does not load styles.css,
+  styles/app.css or styles/tokens.css, and nothing here is shared with
+  the rest of the site. See knowledge/decisions/2026-08-17-frameworks-approved.md
+-->
+<link rel="stylesheet" href="styles/apex-scoped.css">
+</head>
+<body class="apex">
+
+<a class="apex-skip" href="#top">Skip to content</a>
+
+<!-- ========== CustomCursor ========== -->
+<div class="apex-cursor" aria-hidden="true">
+  <div class="apex-cursor__ring"><span class="apex-cursor__label"></span></div>
+  <div class="apex-cursor__dot"></div>
+</div>
+
+<!-- ========== Header ========== -->
+<header class="apex-header" data-header-theme="dark">
+  <a href="#top" aria-label="Apex home">
+    <span class="apex-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 3 22 21H2L12 3Z" stroke="currentColor" stroke-width="1.6"></path>
+        <path d="M12 10.5 17 19H7L12 10.5Z" fill="currentColor"></path>
+      </svg>
+      <span class="apex-logo__word">Apex</span>
+    </span>
+  </a>
+
+  <nav aria-label="Primary" class="header-nav">
+    <ul>
+      <li><a href="#roadster" class="header-link"><span class="header-link__inner"><span>Roadster</span><span aria-hidden="true">Roadster</span></span></a></li>
+      <li><a href="#design" class="header-link"><span class="header-link__inner"><span>Design</span><span aria-hidden="true">Design</span></span></a></li>
+      <li><a href="#technology" class="header-link"><span class="header-link__inner"><span>Technology</span><span aria-hidden="true">Technology</span></span></a></li>
+      <li><a href="#experience" class="header-link"><span class="header-link__inner"><span>Experience</span><span aria-hidden="true">Experience</span></span></a></li>
+      <li><a href="#journal" class="header-link"><span class="header-link__inner"><span>Journal</span><span aria-hidden="true">Journal</span></span></a></li>
+    </ul>
+  </nav>
+
+  <div class="header-actions">
+    <a href="#reserve" class="header-cta micro-label">Configure</a>
+    <button type="button" class="header-burger" aria-label="Open menu" aria-expanded="false" aria-controls="apex-mobile-menu" data-menu-open>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ========== MobileMenu ========== -->
+<div class="mobile-menu" id="apex-mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div style="position:absolute;top:20px;left:var(--gutter)">
+    <span class="apex-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 3 22 21H2L12 3Z" stroke="currentColor" stroke-width="1.6"></path>
+        <path d="M12 10.5 17 19H7L12 10.5Z" fill="currentColor"></path>
+      </svg>
+      <span class="apex-logo__word">Apex</span>
+    </span>
+  </div>
+  <button type="button" class="mobile-menu__close" data-menu-close>Close</button>
+  <nav aria-label="Mobile">
+    <ul style="display:grid;gap:0.2em">
+      <li><a href="#roadster" class="mobile-menu__link" data-menu-close><span>Roadster</span></a></li>
+      <li><a href="#design" class="mobile-menu__link" data-menu-close><span>Design</span></a></li>
+      <li><a href="#technology" class="mobile-menu__link" data-menu-close><span>Technology</span></a></li>
+      <li><a href="#experience" class="mobile-menu__link" data-menu-close><span>Experience</span></a></li>
+      <li><a href="#journal" class="mobile-menu__link" data-menu-close><span>Journal</span></a></li>
+    </ul>
+  </nav>
+</div>
+
+<main id="top">
+
+  <!-- ========== Hero ========== -->
+  <section class="hero" id="roadster" data-theme="dark" aria-label="Apex Roadster hero">
+    <div class="hero__media-mask">
+      <video class="hero__video"
+             src="media/apex/video/apex-hero-video.mp4"
+             poster="media/apex/assets/hero-poster.webp"
+             autoplay muted loop playsinline preload="auto"></video>
+      <div class="hero__scrim" aria-hidden="true"></div>
+    </div>
+
+    <div class="container-x hero__inner">
+      <p class="micro-label hero__line hero__eyebrow"><span>Apex Roadster / 01</span></p>
+
+      <h1 class="display-l hero__headline">
+        <span class="hero__line"><span>Motion, reduced to its purest form.</span></span>
+      </h1>
+
+      <p class="body-l hero__support">An electric roadster shaped by air, precision and instinct.</p>
+
+      <div class="hero__row">
+        <a href="#vision" class="hero__cta btn-pill" data-cursor>Discover the Roadster</a>
+        <ul class="hero__meta micro-label">
+          <li>Zero Emissions</li>
+          <li>Dual-Motor Performance</li>
+          <li>Concept 2026</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VisionIntro ========== -->
+  <section class="vision" id="vision" data-theme="light" aria-label="Vision">
+    <div class="container-x vision__inner">
+      <p class="micro-label vision__label">01 / Vision</p>
+
+      <h2 class="display-l vision__headline">
+        <span class="vision__line"><span>The</span></span>
+        <span class="vision__line"><span>Next</span></span>
+        <span class="vision__line"><span>Form of</span></span>
+        <span class="vision__line"><span>Performance</span></span>
+      </h2>
+
+      <p class="body-l vision__body">Apex explores what a roadster can become when every surface, response and interaction is designed as one continuous system.</p>
+
+      <figure class="vision__float">
+        <img src="media/apex/assets/front-light-macro.webp"
+             alt="Close-up of the Apex Roadster front light signature" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== DriverEngineering ========== -->
+  <section class="driver" id="design" data-theme="light" aria-label="Engineered around the driver">
+    <div class="container-x driver__grid">
+      <figure class="driver__media media-mask">
+        <img src="media/apex/assets/interior-cockpit.webp"
+             alt="Apex Roadster cockpit with minimal light-gray materials" loading="lazy" decoding="async">
+      </figure>
+
+      <div class="driver__copy">
+        <p class="micro-label driver__reveal driver__label">02 / Engineering</p>
+        <h2 class="heading-m driver__reveal driver__heading">Engineered Around the Driver</h2>
+        <p class="body-l driver__reveal driver__body">The Apex Roadster removes the distance between intention and response. Every control, surface and line of sight has been placed around a single idea: immediate connection.</p>
+        <p class="driver__reveal driver__secondary">A lightweight electric architecture, adaptive dynamics and a driver-focused cabin work together without visual or mechanical excess.</p>
+        <a href="#technology" class="btn-pill btn-pill--dark driver__reveal" data-cursor>Read the Philosophy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CinematicInterlude ========== -->
+  <section class="cine" data-theme="dark" aria-label="Apex Roadster film">
+    <div class="cine__media">
+      <video src="media/apex/video/apex-hero-video.mp4"
+             poster="media/apex/assets/rear-three-quarter.webp"
+             autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+  </section>
+
+  <!-- ========== Manifesto ========== -->
+  <section class="mani" data-theme="dark" aria-label="Apex manifesto">
+    <div class="container-x mani__inner">
+      <p class="micro-label mani__label">About / Apex</p>
+
+      <h2 class="display-l mani__headline">
+        <span class="mani__line"><span>Beautifully</span></span>
+        <span class="mani__line"><span>Built For</span></span>
+        <span class="mani__line"><span>Motion</span></span>
+      </h2>
+
+      <div class="mani__copy">
+        <p class="body-l mani__body">We believe the future of performance should feel lighter, quieter and more human. Apex brings advanced electric engineering into a form that is emotional, intuitive and enduring.</p>
+        <p class="heading-m mani__statement">Less interface. More instinct.</p>
+      </div>
+
+      <figure class="mani__img mani__img--wide">
+        <img src="media/apex/assets/wide-dark-cinematic.webp" alt="Apex Roadster in a dark cinematic studio" loading="lazy" decoding="async">
+      </figure>
+      <figure class="mani__img mani__img--small">
+        <img src="media/apex/assets/side-profile.webp" alt="Apex Roadster side profile" loading="lazy" decoding="async">
+      </figure>
+      <figure class="mani__img mani__img--vertical">
+        <img src="media/apex/assets/vertical-detail.webp" alt="Vertical detail crop of the Apex Roadster bodywork" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ========== RoadsterSystems ========== -->
+  <section class="systems" id="technology" data-theme="light" aria-label="Roadster systems">
+    <div class="container-x">
+      <p class="micro-label systems__label">Roadster Systems</p>
+
+      <div class="systems__list">
+
+        <article class="system-card" data-cursor-label="Explore">
+          <div class="system-card__media">
+            <img src="media/apex/assets/front-three-quarter.webp" alt="Front-quarter body detail of the Apex Roadster with aero channeling" loading="lazy" decoding="async">
+          </div>
+          <div class="system-card__body">
+            <div class="system-card__top">
+              <span class="micro-label system-card__reveal">Feature</span>
+              <span class="micro-label system-card__reveal">( 01 )</span>
+            </div>
+            <div class="system-card__center">
+              <h3 class="heading-l system-card__reveal system-card__title">Aeroflow</h3>
+              <p class="body-l system-card__reveal system-card__desc">An active aerodynamic system that continuously balances cooling, stability and drag.</p>
+              <div class="system-card__action">
+                <button type="button" class="circle-action system-card__reveal" aria-label="Explore Aeroflow"><span>Read<br>More</span></button>
+              </div>
+            </div>
+            <ul class="micro-label system-card__reveal system-card__meta">
+              <li>Active Aerodynamics</li><li>Real-Time Adaptation</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="system-card" data-cursor-label="Explore">
+          <div class="system-card__media">
+            <img src="media/apex/assets/wheel-aero-channel.webp" alt="Rear wheel and aerodynamic channel of the Apex Roadster" loading="lazy" decoding="async">
+          </div>
+          <div class="system-card__body">
+            <div class="system-card__top">
+              <span class="micro-label system-card__reveal">Feature</span>
+              <span class="micro-label system-card__reveal">( 02 )</span>
+            </div>
+            <div class="system-card__center">
+              <h3 class="heading-l system-card__reveal system-card__title">Vector Drive</h3>
+              <p class="body-l system-card__reveal system-card__desc">Independent torque control delivers precise response through every phase of a corner.</p>
+              <div class="system-card__action">
+                <button type="button" class="circle-action system-card__reveal" aria-label="Explore Vector Drive"><span>Read<br>More</span></button>
+              </div>
+            </div>
+            <ul class="micro-label system-card__reveal system-card__meta">
+              <li>Dual-Motor System</li><li>Adaptive Torque</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="system-card" data-cursor-label="Explore">
+          <div class="system-card__media">
+            <img src="media/apex/assets/rear-light-macro.webp" alt="Macro of the Apex Roadster full-width rear light" loading="lazy" decoding="async">
+          </div>
+          <div class="system-card__body">
+            <div class="system-card__top">
+              <span class="micro-label system-card__reveal">Feature</span>
+              <span class="micro-label system-card__reveal">( 03 )</span>
+            </div>
+            <div class="system-card__center">
+              <h3 class="heading-l system-card__reveal system-card__title">Halo Light</h3>
+              <p class="body-l system-card__reveal system-card__desc">A continuous light signature designed as both an identity and a communication surface.</p>
+              <div class="system-card__action">
+                <button type="button" class="circle-action system-card__reveal" aria-label="Explore Halo Light"><span>Read<br>More</span></button>
+              </div>
+            </div>
+            <ul class="micro-label system-card__reveal system-card__meta">
+              <li>Intelligent Lighting</li><li>Low-Energy Optics</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="system-card" data-cursor-label="Explore">
+          <div class="system-card__media">
+            <img src="media/apex/assets/steering-detail.webp" alt="Apex Roadster steering interface and material detail" loading="lazy" decoding="async">
+          </div>
+          <div class="system-card__body">
+            <div class="system-card__top">
+              <span class="micro-label system-card__reveal">Feature</span>
+              <span class="micro-label system-card__reveal">( 04 )</span>
+            </div>
+            <div class="system-card__center">
+              <h3 class="heading-l system-card__reveal system-card__title">Quiet Cabin</h3>
+              <p class="body-l system-card__reveal system-card__desc">A minimal cockpit that surfaces information only when the driver needs it.</p>
+              <div class="system-card__action">
+                <button type="button" class="circle-action system-card__reveal" aria-label="Explore Quiet Cabin"><span>Read<br>More</span></button>
+              </div>
+            </div>
+            <ul class="micro-label system-card__reveal system-card__meta">
+              <li>Contextual Interface</li><li>Tactile Controls</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MaterialInterlude ========== -->
+  <section class="material" data-theme="dark" aria-label="Material detail">
+    <img class="material__img" src="media/apex/assets/silver-reflection.webp"
+         alt="Abstract silver reflection across the Apex Roadster bodywork" loading="lazy" decoding="async">
+  </section>
+
+  <!-- ========== PurposeSection ========== -->
+  <section class="purpose" id="experience" data-theme="dark" aria-label="Our purpose">
+    <div class="purpose__track" aria-hidden="true">
+      <figure class="purpose__card"><img src="media/apex/assets/design-studio.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="media/apex/assets/front-three-quarter.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="media/apex/assets/wheel-aero-channel.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="media/apex/assets/interior-cockpit.webp" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="media/apex/assets/silver-reflection.webp" alt="" loading="lazy" decoding="async"></figure>
+    </div>
+
+    <div class="purpose__scrim" aria-hidden="true"></div>
+
+    <div class="container-x purpose__inner">
+      <p class="micro-label purpose__label">Our Purpose / 02</p>
+      <h2 class="display-m">
+        <span class="purpose__line"><span>Create</span></span>
+        <span class="purpose__line"><span>The New</span></span>
+        <span class="purpose__line"><span>Standard</span></span>
+      </h2>
+      <p class="body-l purpose__body">Apex brings designers, engineers and drivers together to build a more direct kind of performance.</p>
+      <a href="#journal" class="btn-pill" data-cursor>Our Approach</a>
+    </div>
+  </section>
+
+  <!-- ========== JournalList ========== -->
+  <section class="journal" id="journal" data-theme="light" aria-label="Journal">
+    <div class="container-x">
+      <h2 class="display-m journal__heading">Journal</h2>
+
+      <ul>
+        <li class="journal__row">
+          <a href="#journal" class="journal__link" data-cursor>
+            <span class="small journal__date">04.08.2026</span>
+            <span class="journal__pill micro-label">Design</span>
+            <span class="journal__title body-l">Apex Roadster makes its first public appearance</span>
+            <span class="journal__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="journal__row">
+          <a href="#journal" class="journal__link" data-cursor>
+            <span class="small journal__date">28.07.2026</span>
+            <span class="journal__pill micro-label">Engineering</span>
+            <span class="journal__title body-l">Inside the aerodynamic language of Apex</span>
+            <span class="journal__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="journal__row">
+          <a href="#journal" class="journal__link" data-cursor>
+            <span class="small journal__date">17.07.2026</span>
+            <span class="journal__pill micro-label">Technology</span>
+            <span class="journal__title body-l">A new approach to driver-focused intelligence</span>
+            <span class="journal__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+        <li class="journal__row">
+          <a href="#journal" class="journal__link" data-cursor>
+            <span class="small journal__date">02.07.2026</span>
+            <span class="journal__pill micro-label">Materials</span>
+            <span class="journal__title body-l">Developing a lighter and quieter interior</span>
+            <span class="journal__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="journal__foot">
+        <a href="#journal" class="btn-pill btn-pill--dark" data-cursor>View All</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ReservationSection ========== -->
+  <section class="res" id="reserve" data-theme="light" aria-label="Request access">
+    <div class="container-x">
+      <div>
+        <h2 class="display-l res__headline">
+          <span class="res__line res__line--ghost"><span>Meet The</span></span>
+          <span class="res__line"><span>Apex Roadster</span></span>
+        </h2>
+        <p class="body-l res__body">Join the private preview list for specifications, development stories and future availability.</p>
+        <a href="#reserve" class="res__secondary micro-label" data-cursor>Configure Apex</a>
+      </div>
+
+      <div class="res__cta">
+        <a href="#reserve" class="circle-cta" data-cursor aria-label="Request Access">Request Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="apex-footer" data-theme="dark">
+    <div class="container-x">
+      <div class="footer__grid">
+        <div>
+          <span class="apex-logo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3 22 21H2L12 3Z" stroke="currentColor" stroke-width="1.6"></path>
+              <path d="M12 10.5 17 19H7L12 10.5Z" fill="currentColor"></path>
+            </svg>
+            <span class="apex-logo__word">Apex</span>
+          </span>
+          <p class="small footer__legal">Apex Motion Systems &copy; 2026</p>
+        </div>
+
+        <nav aria-label="Explore">
+          <h3 class="micro-label footer__title">Explore</h3>
+          <ul class="footer__list">
+            <li><a href="#roadster" class="footer__link small">Roadster</a></li>
+            <li><a href="#design" class="footer__link small">Design</a></li>
+            <li><a href="#technology" class="footer__link small">Technology</a></li>
+            <li><a href="#experience" class="footer__link small">Experience</a></li>
+            <li><a href="#journal" class="footer__link small">Journal</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Contact">
+          <h3 class="micro-label footer__title">Contact</h3>
+          <ul class="footer__list">
+            <li><a href="#reserve" class="footer__link small">Private Preview</a></li>
+            <li><a href="#top" class="footer__link small">Press</a></li>
+            <li><a href="#top" class="footer__link small">Partnerships</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Legal">
+          <h3 class="micro-label footer__title">Legal</h3>
+          <ul class="footer__list">
+            <li><a href="#top" class="footer__link small">Privacy</a></li>
+            <li><a href="#top" class="footer__link small">Terms</a></li>
+            <li><a href="#top" class="footer__link small">Accessibility</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="micro-label footer__title">Follow</h3>
+          <ul class="footer__socials">
+            <li><a href="#top" class="footer__social" aria-label="Instagram" data-cursor>I</a></li>
+            <li><a href="#top" class="footer__social" aria-label="X" data-cursor>X</a></li>
+            <li><a href="#top" class="footer__social" aria-label="YouTube" data-cursor>Y</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="small footer__final">Designed around motion.</p>
+        <button type="button" class="footer__top" aria-label="Back to top" data-cursor data-to-top>&uarr;</button>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- GSAP + Lenis, pinned versions. Approved 17 August 2026. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js" defer></script>
+<script src="scripts/apex.js" defer></script>
+
+</body>
+</html>

@@ -22,6 +22,11 @@ const MIME = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.pdf': 'application/pdf',
+  '.webp': 'image/webp',
+  '.avif': 'image/avif',
+  '.mp4': 'video/mp4',
+  '.m4v': 'video/mp4',
+  '.webm': 'video/webm',
 };
 
 // ── RSS cache ──────────────────────────────────────────────────────────────
@@ -243,6 +248,55 @@ http.createServer((req, res) => {
   if (!filePath) {
     res.writeHead(400);
     res.end('Bad request');
+    return;
+  }
+
+  // Video: stream with Range support. A <video> served as one 200
+  // response with no Accept-Ranges cannot be seeked, and Safari
+  // refuses to play it at all.
+  const videoExt = path.extname(filePath);
+  if (videoExt === '.mp4' || videoExt === '.m4v' || videoExt === '.webm') {
+    fs.stat(filePath, (statErr, stat) => {
+      if (statErr || !stat.isFile()) {
+        serve404(res);
+        return;
+      }
+      const type = MIME[videoExt];
+      const match = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+      if (match) {
+        let start = match[1] === '' ? null : parseInt(match[1], 10);
+        let end = match[2] === '' ? null : parseInt(match[2], 10);
+        if (start === null) {
+          // suffix range: the last N bytes
+          start = Math.max(0, stat.size - (end === null ? 0 : end));
+          end = stat.size - 1;
+        } else if (end === null) {
+          end = stat.size - 1;
+        }
+        end = Math.min(end, stat.size - 1);
+        if (isNaN(start) || isNaN(end) || start > end || start >= stat.size) {
+          res.writeHead(416, { 'Content-Range': 'bytes */' + stat.size });
+          res.end();
+          return;
+        }
+        res.writeHead(206, {
+          'Content-Type': type,
+          'Content-Length': end - start + 1,
+          'Content-Range': 'bytes ' + start + '-' + end + '/' + stat.size,
+          'Accept-Ranges': 'bytes',
+          'Cache-Control': 'public, max-age=86400',
+        });
+        fs.createReadStream(filePath, { start: start, end: end }).pipe(res);
+        return;
+      }
+      res.writeHead(200, {
+        'Content-Type': type,
+        'Content-Length': stat.size,
+        'Accept-Ranges': 'bytes',
+        'Cache-Control': 'public, max-age=86400',
+      });
+      fs.createReadStream(filePath).pipe(res);
+    });
     return;
   }
 
