@@ -1293,3 +1293,125 @@ a.row:hover { padding-inline-start: var(--s-4); }
   .why__social a, .wcard__btn { transition: none; }
   .why__social a:hover { transform: none; }
 }
+
+/* ============================================================
+   MEANS SECTION, Figma node 5209:2078
+   ------------------------------------------------------------
+   Light ground. Caption, then a stack of white expander cards.
+   The open card reveals a figure and a supporting column.
+   ============================================================ */
+
+.means { padding-block: clamp(96px, 15vw, 216px) clamp(64px, 8vw, 108px); }
+.means__list { display: flex; flex-direction: column; gap: var(--hero-card-gap); margin-top: var(--s-7); }
+
+.mrow {
+  background: var(--mono-white);
+  border-radius: var(--hero-radius);
+  padding: var(--s-6) var(--s-5);
+  border: var(--hair) solid var(--black-10);
+  transition: box-shadow var(--d-fast) var(--e-out);
+}
+.mrow:hover { box-shadow: 0 0 0 var(--hair) var(--mono-90); }
+
+.mrow__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--hero-card-gap);
+  cursor: pointer;
+  list-style: none;
+}
+.mrow__summary::-webkit-details-marker { display: none; }
+.mrow__label {
+  width: 170px;
+  flex: none;
+  font-size: var(--btn-text);
+  line-height: 1.2;
+  font-weight: var(--w-medium);
+  color: var(--black-60);
+}
+.mrow__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.mrow__title {
+  font-size: clamp(1.125rem, 1.7vw, 1.5rem);   /* 24px cap */
+  line-height: 1.4167;                          /* 34/24 */
+  letter-spacing: -0.02em;
+  font-weight: var(--w-medium);
+  color: var(--mono-90);
+}
+.mrow__icon {
+  width: var(--s-4);
+  height: var(--s-4);
+  flex: none;
+  position: relative;
+  color: var(--mono-90);
+  transition: transform var(--d-base) var(--e-expo);
+}
+.mrow__icon::before,
+.mrow__icon::after {
+  content: "";
+  position: absolute;
+  inset: 50% 15.63%;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+}
+.mrow__icon::after { transform: rotate(90deg); }
+.mrow[open] .mrow__icon { transform: rotate(135deg); }
+.mrow[open] .mrow__icon::after { opacity: 0; }
+
+.mrow__panel {
+  display: grid;
+  grid-template-columns: 395px minmax(0, 614px);
+  gap: var(--s-6);
+  align-items: start;
+  justify-content: space-between;
+  padding-top: var(--s-6);
+}
+.mrow__figure {
+  height: 239px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--mono-30), var(--mono-40));
+}
+.mrow__body { display: flex; flex-direction: column; gap: var(--s-5); }
+.mrow__text {
+  font-size: var(--btn-text);
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: var(--black-70);
+  max-width: 431px;
+}
+.mrow__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--s-3);
+  border-radius: var(--tabs-radius);
+  border: var(--hair) solid var(--black-10);
+  font-size: var(--t-small);
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  font-weight: var(--w-medium);
+  color: var(--black-70);
+  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+a.tag:hover { background: var(--mono-90); color: var(--mono-white); border-color: var(--mono-90); }
+
+@media (max-width: 1100px) {
+  .mrow__panel { grid-template-columns: minmax(0, 1fr); }
+  .mrow__figure { height: clamp(180px, 34vw, 239px); }
+}
+@media (max-width: 860px) {
+  .mrow { padding: var(--s-5) var(--s-4); }
+  .mrow__summary { flex-wrap: wrap; }
+  .mrow__label { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mrow, .mrow__icon, .tag { transition: none; }
+}
