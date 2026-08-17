@@ -4378,7 +4378,7 @@ html.js .panel--response .rise { transition-delay: var(--pair-delay); }
   line-height: var(--leading-poster);
   letter-spacing: var(--track-poster);
   font-weight: var(--weight-semi);
-  color: var(--grey-light);
+  color: var(--grey);
   margin: 0;
 }
 .stagger__text {
