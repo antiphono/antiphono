@@ -695,26 +695,58 @@
     </div>
   </section>
 
-  <!-- 1.11 Start. Treatment: display CTA with circular action. -->
-  <section class="section shell" aria-labelledby="h-start">
-    <div class="cta">
-      <p class="label" data-anim="fade">08 / Start here</p>
-      <h2 class="display lines" id="h-start">
-        <span class="line-w"><span class="line">Tell us what you</span></span>
-        <span class="line-w"><span class="line">are trying to fix.</span></span>
-      </h2>
-      <div class="split">
-        <p class="lead" data-anim="up">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem, build something you can click, and give you a plan with a number against it.</p>
-        <div class="stack" data-anim="up">
-          <p class="muted">You own all of it either way.</p>
-          <a href="/contact" class="cta__circle">Get in touch</a>
+  <!-- Contact. Figma node 5209:1725. Copy from docs/copy 8.1 and 2.8.
+       TODO Ben: copy doc question 6 is still open, form or email only.
+       This posts via mailto because server.js has no POST handler, so
+       it works today without a backend. -->
+  <section class="ct section--flush" aria-labelledby="h-ct">
+    <div class="ct__panel">
+      <div class="ct__left">
+        <p class="why__caption" style="color:var(--mono-white)" data-anim="fade">
+          <img src="/media/figma/icon-dot.svg" alt="" width="8" height="8">
+          Let us connect
+        </p>
+        <h2 class="ct__title lines" id="h-ct">
+          <span class="line-w"><span class="line">Have a project</span></span>
+          <span class="line-w"><span class="line">in mind?</span></span>
+        </h2>
+        <p class="ct__lead" data-anim="up">Tell us what you are trying to fix. If we are the right people we will say so, and if we are not we will say that instead.</p>
+        <div class="ct__facts" data-anim="up">
+          <a class="ct__fact" href="mailto:ben@antiphono.com">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 7l10 6 10-6" stroke="currentColor" stroke-width="1.6"/></svg>
+            ben@antiphono.com
+          </a>
+          <p class="ct__fact">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18" stroke="currentColor" stroke-width="1.6"/></svg>
+            Sydney, Australia. Clients anywhere
+          </p>
         </div>
       </div>
-      <div class="metrics" data-stagger style="width:100%">
-        <div class="metrics__item" data-anim="up"><span class="metrics__value">2018</span><span class="small muted">Established</span></div>
-        <div class="metrics__item" data-anim="up"><span class="metrics__value">Sydney</span><span class="small muted">Based in Australia, working worldwide</span></div>
-        <div class="metrics__item" data-anim="up"><span class="metrics__value">1</span><span class="small muted">You deal with the person doing the work</span></div>
-      </div>
+
+      <form class="ct__form" action="mailto:ben@antiphono.com" method="post" enctype="text/plain" data-anim="up">
+        <div class="field">
+          <label for="ct-email">Your email</label>
+          <input id="ct-email" name="email" type="email" required placeholder="you@company.com">
+        </div>
+        <div class="field">
+          <label for="ct-company">Your company</label>
+          <input id="ct-company" name="company" type="text" placeholder="Company name">
+        </div>
+        <div class="field">
+          <label for="ct-msg">What are you trying to fix?</label>
+          <textarea id="ct-msg" name="message" rows="3" required placeholder="A feature that is not converting, a product that needs research behind it."></textarea>
+        </div>
+        <fieldset class="field" style="border:0;padding:0;margin:0">
+          <legend style="font-size:var(--t-small);font-weight:var(--w-medium);color:var(--mono-90);padding:0">How you would like to work</legend>
+          <div class="ct__opts">
+            <label class="ct__opt"><input type="radio" name="engagement" value="Discovery"><span>Discovery</span></label>
+            <label class="ct__opt"><input type="radio" name="engagement" value="A defined piece of work"><span>A defined piece of work</span></label>
+            <label class="ct__opt"><input type="radio" name="engagement" value="Continuous work"><span>Continuous work</span></label>
+            <label class="ct__opt"><input type="radio" name="engagement" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+        <button class="ct__send" type="submit">Send message</button>
+      </form>
     </div>
   </section>
 

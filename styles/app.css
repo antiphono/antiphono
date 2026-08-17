@@ -1781,3 +1781,63 @@ a.stag:hover { background: var(--mono-white); color: var(--mono-90); }
 @media (max-width: 1100px) { .arts { padding-inline: var(--s-5); } .arts__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 860px) { .arts__top { flex-direction: column; gap: var(--s-4); } .arts__grid { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .art__media img, .art__media span, .art__title { transition: none; } .art:hover .art__media img { transform: none; } }
+
+/* ============================================================
+   CONTACT, Figma node 5209:1725
+   ============================================================ */
+.ct { padding: clamp(64px, 8vw, 108px) var(--s-2) clamp(64px, 8vw, 108px); }
+.ct__panel {
+  position: relative; border-radius: var(--hero-radius); overflow: hidden;
+  background: #151515;
+  display: grid; grid-template-columns: 546px minmax(0, 654px);
+  gap: var(--s-7); justify-content: space-between;
+  padding: clamp(32px, 5vw, 60px) clamp(24px, 4vw, 48px);
+}
+.ct__left { display: flex; flex-direction: column; gap: var(--s-6); }
+.ct__title { font-size: clamp(2.25rem, 4.4vw, 4rem); line-height: 1; letter-spacing: -0.03em; font-weight: var(--w-semi); color: var(--mono-white); text-transform: capitalize; }
+.ct__lead { max-width: 321px; font-size: var(--btn-text); line-height: 24px; font-weight: var(--w-medium); color: rgba(255,255,255,0.7); }
+.ct__facts { display: flex; flex-direction: column; gap: var(--s-3); max-width: 321px; margin-top: auto; }
+.ct__fact { display: flex; align-items: center; gap: var(--s-2); font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.02em; font-weight: var(--w-semi); color: var(--mono-white); }
+.ct__fact + .ct__fact { border-top: var(--hair) solid var(--white-10); padding-top: var(--s-3); }
+.ct__fact svg { width: 24px; height: 24px; flex: none; }
+a.ct__fact:hover { color: var(--mono-30); }
+
+.ct__form {
+  background: var(--mono-white); border-radius: var(--hero-radius);
+  padding: clamp(24px, 3vw, 44px); display: flex; flex-direction: column; gap: var(--s-7);
+}
+.field { display: flex; flex-direction: column; gap: var(--s-3); }
+.field label { font-size: var(--t-small); line-height: 20px; letter-spacing: -0.01em; font-weight: var(--w-medium); color: var(--mono-90); }
+.field input, .field textarea {
+  border: 0; border-bottom: var(--hair) solid var(--black-10); background: transparent;
+  padding: 0 0 var(--s-3);
+  font-size: 18px; line-height: 28px; letter-spacing: -0.02em; font-weight: var(--w-medium);
+  color: var(--mono-90); font-family: inherit;
+  transition: border-color var(--d-fast) var(--e-out);
+}
+.field input::placeholder, .field textarea::placeholder { color: rgba(0,0,0,0.3); }
+.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--mono-90); }
+.field textarea { resize: vertical; min-height: 96px; }
+
+.ct__opts { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.ct__opt input { position: absolute; opacity: 0; pointer-events: none; }
+.ct__opt span {
+  display: inline-flex; align-items: center; height: 44px; padding-inline: var(--s-4);
+  border-radius: var(--tabs-radius); border: var(--hair) solid var(--black-10);
+  font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.01em; color: var(--mono-black);
+  cursor: pointer; transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+.ct__opt:hover span { border-color: var(--mono-90); }
+.ct__opt input:checked + span { background: var(--mono-90); color: var(--mono-white); border-color: var(--mono-90); }
+.ct__opt input:focus-visible + span { outline: var(--s-1) solid var(--mono-90); outline-offset: 2px; }
+
+.ct__send {
+  height: 68px; border-radius: var(--btn-r); border: var(--hair) solid var(--mono-90);
+  background: var(--mono-90); color: var(--mono-white);
+  font-size: var(--btn-text); font-weight: var(--w-medium); cursor: pointer;
+  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+.ct__send:hover { background: transparent; color: var(--mono-90); }
+
+@media (max-width: 1100px) { .ct__panel { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); } }
+@media (prefers-reduced-motion: reduce) { .field input, .field textarea, .ct__opt span, .ct__send { transition: none; } }
