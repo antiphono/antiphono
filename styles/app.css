@@ -770,3 +770,85 @@ a.row:hover { padding-inline-start: var(--s-4); }
   .accordion__icon::after, .chart__bar, .card, .quote__btn { transition: none; }
   .chart__bar { transform: scaleY(1); }
 }
+
+/* ============================================================
+   TAB NAVIGATION
+   ------------------------------------------------------------
+   Figma node 5210:176. Glass pill container, white pill marks the
+   active tab. The pill is one element that slides and resizes
+   between tabs rather than one pill per tab, so the active state
+   animates from where it was to where it is going.
+   ============================================================ */
+
+.tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tabs-gap);
+  padding: var(--tabs-pad-y) var(--tabs-pad-r) var(--tabs-pad-y) var(--tabs-pad-l);
+  border-radius: var(--tabs-radius);
+  background: var(--tabs-bg);
+  border: var(--hair) solid var(--tabs-border);
+  backdrop-filter: blur(var(--tabs-blur));
+  -webkit-backdrop-filter: blur(var(--tabs-blur));
+}
+
+/* The moving indicator. Positioned and sized by script.js. */
+.tabs__pill {
+  position: absolute;
+  top: var(--tabs-pad-y);
+  left: 0;
+  height: calc(100% - (var(--tabs-pad-y) * 2));
+  border-radius: var(--tabs-radius);
+  background: var(--mono-white);
+  transform: translateX(var(--pill-x, 0)) ;
+  width: var(--pill-w, 0);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--d-base) var(--e-expo),
+    width var(--d-base) var(--e-expo),
+    opacity var(--d-fast) var(--e-out);
+}
+.tabs[data-ready="true"] .tabs__pill { opacity: 1; }
+
+.tabs__link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--tab-gap);
+  padding: var(--tab-pad-y) var(--tab-pad-x);
+  font-size: var(--tab-text);
+  line-height: 1;
+  font-weight: var(--w-medium);
+  color: var(--mono-white);
+  border-radius: var(--tabs-radius);
+  white-space: nowrap;
+  transition: color var(--d-fast) var(--e-out);
+}
+.tabs__link:hover { color: var(--mono-white); }
+
+/* The tab the pill is currently under reads as dark text. */
+.tabs__link[data-on="true"] {
+  color: var(--mono-90);
+  font-weight: var(--w-semi);
+}
+.tabs__link[data-on="true"] .tabs__count { color: var(--mono-60); }
+
+.tabs__count {
+  font-size: var(--tab-count);
+  font-weight: var(--w-medium);
+  color: var(--mono-40);
+  transition: color var(--d-fast) var(--e-out);
+}
+
+/* Below the desktop breakpoint the tab bar is replaced by the
+   full screen menu, so it is removed from the layout entirely. */
+@media (max-width: 1100px) { .tabs { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs__pill { transition: opacity var(--d-fast) linear; }
+  .tabs__link, .tabs__count { transition: none; }
+}

@@ -149,4 +149,21 @@
   --d-slow: 1.1s;
 
   --stagger: 0.07s;
+
+  /* ---- Tab navigation -----------------------------------------
+     Extracted from Figma node 5210:176 via get_design_context.
+     These are exact values from the file, not provisional. */
+  --tabs-bg:      var(--white-10);          /* rgba(255,255,255,0.1) */
+  --tabs-border:  var(--white-10);
+  --tabs-blur:    12px;
+  --tabs-gap:     56px;
+  --tabs-pad-y:   8px;
+  --tabs-pad-l:   8px;
+  --tabs-pad-r:   28px;
+  --tabs-radius:  100px;
+  --tab-pad-x:    24px;
+  --tab-pad-y:    20px;
+  --tab-text:     18px;
+  --tab-count:    12px;
+  --tab-gap:      4px;
 }

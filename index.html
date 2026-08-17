@@ -60,12 +60,13 @@
     <svg viewBox="0 0 272 237" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M165.695 0H106.605C103.829 0 101.259 1.486 99.852 3.912L74.828 47.4C71.827 52.61 75.578 59.118 81.581 59.118H131.667C134.443 59.118 137.013 60.604 138.42 63.031L197.453 165.618C200.455 170.828 196.703 177.336 190.7 177.336H149.656C143.654 177.336 139.921 183.844 142.903 189.055L167.927 232.542C169.315 234.969 171.885 236.455 174.68 236.455H233.77C236.546 236.455 239.116 234.969 240.523 232.542L270.049 181.249C271.437 178.841 271.437 175.85 270.049 173.443L172.448 3.912C171.06 1.505 168.49 0 165.695 0Z"/><path d="M30.614 121.923L1.05 173.217C-.338 175.624-.338 178.615 1.05 181.023L26.131 224.529C29.132 229.721 36.617 229.721 39.618 224.529L64.642 181.023C66.03 178.615 68.6 177.11 71.376 177.11H121.481C127.465 177.11 131.217 170.602 128.215 165.411L103.135 121.904C101.747 119.497 99.177 118.011 96.4 118.011H37.348C34.572 118.011 32.002 119.497 30.614 121.904V121.923Z"/></svg>
     <span>Antiphono</span>
   </a>
-  <nav class="nav__links" aria-label="Primary">
-    <a href="/work">Work</a>
-    <a href="/services">Services</a>
-    <a href="/how-we-work">How we work</a>
-    <a href="/articles">Thinking</a>
-    <a href="/about">About</a>
+  <nav class="tabs" id="tabs" aria-label="Primary" data-ready="false">
+    <span class="tabs__pill" aria-hidden="true"></span>
+    <a class="tabs__link" href="/work">Work<span class="tabs__count">(4)</span></a>
+    <a class="tabs__link" href="/services">Services</a>
+    <a class="tabs__link" href="/how-we-work">How we work</a>
+    <a class="tabs__link" href="/articles">Thinking</a>
+    <a class="tabs__link" href="/about">About</a>
   </nav>
   <div style="display:flex;gap:var(--s-3);align-items:center">
     <a href="/contact" class="btn">Get in touch
