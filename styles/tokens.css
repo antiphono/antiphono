@@ -1,277 +1,152 @@
 /* ============================================================
    Antiphono design tokens
    ------------------------------------------------------------
-   Colour and type values are extracted from the Figma file
-   s1Esp1dOH2iLvYhUXwLjK2 via the Figma MCP get_variable_defs tool,
-   14 August 2026. Figma variable names are given against each token
-   so the two can be reconciled.
+   Rebuilt from scratch, 17 August 2026.
 
-   Loaded before styles.css on every page. This is the only file
-   that declares raw values.
+   Every colour and type value is extracted from the Figma file
+   s1Esp1dOH2iLvYhUXwLjK2, frame "Antiphono_Landing design system",
+   via the Figma MCP get_variable_defs tool. The Figma variable name
+   is given against each token so the two can be reconciled.
+
+   Nothing here is inherited from the previous build.
+
+   This is the only file that declares raw values.
    ============================================================ */
 
 :root {
 
-  /* ---- Mono palette -------------------------------------------
-     Straight from the Figma "Mono" collection. A pure greyscale
-     ramp, no brand hue. Figma name in the comment. */
-  --mono-black:    #000000;  /* Mono/Black    */
-  --mono-black-90: #1A1A1A;  /* Mono/Black 90 */
-  --mono-90:       #111111;  /* Mono/Gray 90  */
-  --mono-80:       #282828;  /* Mono/Gray 80  */
-  --mono-70:       #494949;  /* Mono/Gray 70  */
-  --mono-60:       #666666;  /* Mono/Gray 60  */
-  --mono-50:       #707070;  /* Mono/Gray 50  */
-  --mono-40:       #999999;  /* Mono/Gray 40  */
-  --mono-30:       #BBBBBB;  /* Mono/Gray 30  */
-  --mono-10:       #EEEEEE;  /* Mono/Gray 10  */
+  /* ---- Mono ramp, Figma "Mono" collection --------------------- */
   --mono-white:    #FFFFFF;  /* Mono/White    */
+  --mono-10:       #EEEEEE;  /* Mono/Gray 10  */
+  --mono-30:       #BBBBBB;  /* Mono/Gray 30  */
+  --mono-40:       #999999;  /* Mono/Gray 40  */
+  --mono-50:       #707070;  /* Mono/Gray 50  */
+  --mono-60:       #666666;  /* Mono/Gray 60  */
+  --mono-70:       #494949;  /* Mono/Gray 70  */
+  --mono-80:       #282828;  /* Mono/Gray 80  */
+  --mono-90:       #111111;  /* Mono/Gray 90  */
+  --mono-black-90: #1A1A1A;  /* Mono/Black 90 */
+  --mono-black:    #000000;  /* Mono/Black    */
 
-  /* Alpha steps. Figma stores these as White/n% and Black/n%. */
+  /* Alpha steps, Figma White/n% and Black/n% */
   --white-60: rgba(255, 255, 255, 0.60);
   --white-50: rgba(255, 255, 255, 0.50);
   --white-20: rgba(255, 255, 255, 0.20);
+  --white-10: rgba(255, 255, 255, 0.10);
   --black-90: rgba(0, 0, 0, 0.90);
   --black-70: rgba(0, 0, 0, 0.70);
   --black-60: rgba(0, 0, 0, 0.60);
   --black-10: rgba(0, 0, 0, 0.10);
 
-  /* ---- Generator palette ---------------------------------------
-     From ui-ux-pro-max design_system.py, target "portfolio website".
-     Chosen by Ben over the Figma mono ramp on 17 August 2026.
-     This is the first non-monochrome value on the site. */
-  --gen-primary:   #18181B;  /* dark ground   */
-  --gen-secondary: #3F3F46;  /* raised surface */
-  --gen-cta:       #2563EB;  /* action         */
-  --gen-bg:        #FAFAFA;  /* light ground   */
-  --gen-text:      #09090B;  /* ink on light   */
+  /* ---- Roles --------------------------------------------------
+     Markup and app.css reference these, never the ramp directly. */
+  --ground:        var(--mono-black);
+  --ground-raised: var(--mono-90);
+  --ground-inset:  var(--mono-black-90);
+  --ink:           var(--mono-white);
+  --ink-muted:     var(--mono-40);
+  --ink-faint:     var(--mono-60);
+  --rule:          var(--white-10);
+  --rule-strong:   var(--white-20);
 
-  /* ---- Semantic roles ------------------------------------------
-     Markup references these, never the raw ramp above. */
-  --black:        var(--gen-primary);
-  --white:        var(--gen-bg);
-  --ink:          var(--gen-text);
-  --accent:       var(--gen-cta);
-  --dark-surface: var(--gen-secondary);
-  --grey:         var(--mono-40);
-  --grey-mid:     var(--mono-50);
-  --grey-light:   var(--mono-30);
+  /* Placeholder surface. No stock photography on this site. */
+  --ph-from: var(--mono-80);
+  --ph-to:   var(--mono-black-90);
 
-  --line:      var(--white-20);
-  --line-soft: rgba(255, 255, 255, 0.10);
-  --line-dark: var(--black-10);
+  /* ---- Type ---------------------------------------------------
+     Sizes, weights, tracking and leading are the Figma values.
+     Figma specifies Inter and Poppins. Neither font file exists in
+     fonts/, which holds Sora only, so --font resolves to Sora.
+     Supply Inter woff2 files and this one line is the whole switch. */
+  --font: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --surface-panel:      var(--mono-black);
-  --surface-card:       var(--mono-black-90);
-  --surface-card-light: var(--mono-white);
-  --surface-sunken:     var(--mono-10);
+  --w-regular: 400;
+  --w-medium:  500;
+  --w-semi:    600;
 
-  /* Image placeholders. No stock photography on this site. */
-  --surface-placeholder:      var(--mono-30);
-  --surface-placeholder-deep: var(--mono-40);
+  /* Figma H1 Semibold 64/72 -4%. Fluid below the 1440 frame width. */
+  --t-h1:   clamp(2.75rem, 4.4vw + 1rem, 4rem);
+  --lh-h1:  1.125;
+  --tr-h1:  -0.04em;
 
-  /* ---- Typography ----------------------------------------------
-     Sizes, weights, line heights and tracking are the Figma values.
+  /* Figma H5 32/42 -3% */
+  --t-h2:   clamp(1.75rem, 1.4vw + 1.2rem, 2rem);
+  --lh-h2:  1.3125;
+  --tr-h2:  -0.03em;
 
-     TYPEFACE IS UNRESOLVED. The Figma specifies Inter (primary) and
-     Poppins (secondary). Neither is in fonts/, and the site has an
-     earlier decision to use Sora only. --font-primary is the single
-     switch: drop Inter woff2 files into fonts/, add the @font-face
-     block, and change this one line. Nothing else needs to move. */
-  --font-primary:   'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-secondary: var(--font-primary);
-  --font: var(--font-primary);
+  /* Figma H6 24/34 -2% */
+  --t-h3:   clamp(1.375rem, 0.7vw + 1.1rem, 1.5rem);
+  --lh-h3:  1.4167;
+  --tr-h3:  -0.02em;
 
-  --weight-regular: 400;
-  --weight-medium:  500;
-  --weight-semi:    600;
+  /* Figma Sub Heading 20/30 -2% */
+  --t-sub:  1.25rem;
+  --lh-sub: 1.5;
+  --tr-sub: -0.02em;
 
-  /* Figma type ramp. Fixed sizes top out at the Figma value and
-     scale down fluidly, since the Figma frame is a fixed 1440px. */
+  /* Figma Body 1 18/28 -2% */
+  --t-lead:  1.125rem;
+  --lh-lead: 1.5556;
+  --tr-lead: -0.02em;
 
-  /* H1 Semibold: Inter 64/72 w600 -4% */
-  --text-h1:       clamp(2.5rem, 5.5vw, 4rem);
-  --leading-h1:    1.125;
-  --track-h1:      -0.04em;
+  /* Figma Body 2 16/24 -1% */
+  --t-body:  1rem;
+  --lh-body: 1.5;
+  --tr-body: -0.01em;
 
-  /* H5 Heading: Inter 32/42 w500 and w600, -3% */
-  --text-h5:       clamp(1.75rem, 3vw, 2rem);
-  --leading-h5:    1.3125;
-  --track-h5:      -0.03em;
+  /* Figma Body 3 14/20 0 */
+  --t-small:  0.875rem;
+  --lh-small: 1.4286;
+  --tr-small: 0em;
 
-  /* H6 Heading Medium: Inter 24/34 w500 -2% */
-  --text-h6:       clamp(1.375rem, 2vw, 1.5rem);
-  --leading-h6:    1.4167;
-  --track-h6:      -0.02em;
+  /* Figma Caption 12/16 0 */
+  --t-caption:  0.75rem;
+  --lh-caption: 1.3333;
+  --tr-caption: 0em;
 
-  /* Sub Heading: Inter 20/30 w500 -2%, and 20/28 w600 -1% */
-  --text-sub:      1.25rem;
-  --leading-sub:   1.5;
-  --track-sub:     -0.02em;
+  /* Uppercase eyebrow tracking is not a Figma variable. PROVISIONAL. */
+  --tr-label: 0.12em;
 
-  /* Body 1 Medium: Inter 18/28 w500 -2% */
-  --text-body1:    1.125rem;
-  --leading-body1: 1.5556;
-  --track-body1:   -0.02em;
+  /* Display scale for full-bleed headings. Not a Figma variable,
+     because the Figma frame tops out at H1. PROVISIONAL. */
+  --t-display:  clamp(3rem, 7vw, 7.5rem);
+  --lh-display: 0.94;
+  --tr-display: -0.045em;
 
-  /* Body 2: Inter 16/24, regular -1%, medium 0, semibold -2% */
-  --text-body2:    1rem;
-  --leading-body2: 1.5;
-  --track-body2:   -0.01em;
+  /* ---- Space, an 8px base ------------------------------------- */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  16px;
+  --s-4:  24px;
+  --s-5:  32px;
+  --s-6:  48px;
+  --s-7:  64px;
+  --s-8:  96px;
+  --s-9:  128px;
+  --s-10: 160px;
 
-  /* Body 3: Inter 14/20, regular 0, medium -1% */
-  --text-body3:    0.875rem;
-  --leading-body3: 1.4286;
-  --track-body3:   0em;
+  --gutter:  clamp(20px, 5vw, 80px);
+  --measure: 1440px;
+  --section-y: clamp(80px, 10vw, 180px);
 
-  /* Caption: Inter 12/16 w400 and w500, 0 */
-  --text-caption:    0.75rem;
-  --leading-caption: 1.3333;
-  --track-caption:   0em;
+  /* ---- Shape --------------------------------------------------- */
+  --r-sm:   4px;
+  --r-md:   12px;
+  --r-lg:   24px;
+  --r-xl:   40px;
+  --r-pill: 999px;
+  --hair:   1px;
 
-  /* ---- Poster scale (spec 2026-08-17) ---------------------------
-     The middle of the type ramp is deliberately unused on the home
-     page pairs. Two sizes only: poster and reading. */
-  /* Poster sizing is bound to the PANEL it sits in, not the viewport.
-     A pair panel is 42 to 58 percent of the page, so a viewport-scaled
-     value wraps every line and blows the section past one screen.
-     --text-poster suits a panel column. --text-poster-hero is larger
-     because the hero poster spans the full page width. */
-  --text-poster:      clamp(2rem, 5.2vw, 4.75rem);
-  --text-poster-hero: clamp(2.5rem, 6.8vw, 6rem);
-  --leading-poster: 0.92;
-  --track-poster:   -0.05em;
+  /* ---- Motion --------------------------------------------------
+     The Figma file carries no keyframe data, confirmed via
+     get_motion_context. These are authored, not extracted. */
+  --e-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --e-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --e-expo:  cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Label tracking is not a Figma variable. Used for uppercase
-     eyebrows, which the reference frame sets wide. PROVISIONAL. */
-  --track-label: 0.10em;
+  --d-fast: 0.35s;
+  --d-base: 0.7s;
+  --d-slow: 1.1s;
 
-  /* ---- Aliases used by the existing stylesheet ------------------
-     Mapped onto the Figma ramp so old selectors keep working. */
-  --text-xs:   var(--text-caption);
-  --text-sm:   var(--text-body3);
-  --text-base: var(--text-body2);
-  --text-lg:   var(--text-sub);
-  --text-xl:   var(--text-h6);
-  --text-2xl:  var(--text-h5);
-  --text-3xl:  var(--text-h1);
-
-  --display: var(--text-h1);
-  --section: var(--text-h5);
-  --sub:     var(--text-h6);
-  --lead:    var(--text-body1);
-
-  --track-display:   var(--track-h1);
-  --track-section:   var(--track-h5);
-  --track-body:      var(--track-body2);
-  --leading-display: var(--leading-h1);
-  --leading-heading: var(--leading-h5);
-  --leading-body:    var(--leading-body2);
-
-  --text-stat: var(--text-h1);
-
-  /* ---- Motion ---------------------------------------------------
-     Not defined in the Figma file. Retained from the style guide. */
-  --ease-expo:  cubic-bezier(0.86, 0, 0.07, 1);
-  --ease-cubic: cubic-bezier(0.65, 0.05, 0.36, 1);
-  --ease-out:   cubic-bezier(0.215, 0.61, 0.355, 1);
-  --ease-clip:  cubic-bezier(0.77, 0, 0.18, 1);
-  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
-
-  --dur-quick:  0.2s;
-  --dur-hover:  0.45s;
-  --dur-reveal: 0.9s;
-  --dur-clip:   1.3s;
-  --slow:       0.9s;
-
-  --stagger-1: 0.15s;
-  --stagger-2: 0.30s;
-  --stagger-3: 0.45s;
-
-  /* ---- Layout ---------------------------------------------------
-     PROVISIONAL. Section geometry could not be read from Figma:
-     get_design_context and get_metadata both exceed the MCP
-     transport limit on the full 1440x18358 frame. These are the
-     working values from the existing build. */
-  --gutter: clamp(24px, 4vw, 72px);
-  --maxw:   1680px;
-  --rail:   22%;
-  --rule:   3px;
-  --nav-h:  72px;
-
-  --space-2xs: 4px;
-  --space-xs:  8px;
-  --space-sm:  16px;
-  --space-md:  24px;
-  --space-lg:  clamp(28px, 4vw, 48px);
-  --space-xl:  clamp(36px, 5vw, 64px);
-  --space-2xl: clamp(48px, 6vw, 96px);
-  --space-3xl: clamp(64px, 9vw, 150px);
-
-  --radius:       2px;
-  --radius-card:  20px;
-  --radius-lift:  24px;
-  --radius-panel: 32px;
-  --radius-pill:  999px;
-
-  --panel-inset:   clamp(8px, 1vw, 16px);
-
-  /* Antiphonal pair. Ratios alternate between sections so no two
-     consecutive pairs share a split. */
-  --pair-ratio-a: 58fr 42fr;
-  --pair-ratio-b: 55fr 45fr;
-  --panel-pad:    clamp(28px, 5vw, 96px);
-  --panel-min-h:  clamp(320px, 40vw, 560px);
-  --pair-delay:   0.12s;
-  --hero-anti-min-h: min(92vh, 960px);
-
-  --hairline:      1px;
-  --control-sm:    36px;
-  --rule-short:    clamp(20px, 3vw, 44px);
-  --scroll-cue-h:  clamp(32px, 5vw, 64px);
-  --hero-panel-h:  min(84vh, 900px);
-  --hero-scroll-y: 38%;
-  --stat-card-h:   clamp(200px, 22vw, 280px);
-  --stat-card-min: 260px;
-
-  --opacity-muted: 0.5;
-  --opacity-label: 0.55;
-
-  /* Breakpoints cannot be tokens. In use: 860px, 900px. */
-
-  /* ---- Legacy aliases -------------------------------------------
-     Needed by render.js, the articles page and inner pages. */
-  --bg:        var(--gen-primary);
-  --bg-raised: var(--gen-secondary);
-  --cream:     var(--gen-bg);
-  --cream-dim: var(--mono-30);
-  
-  --grey-soft: var(--mono-70);
-  --lime:      var(--gen-cta);
-  --font-body:    var(--font-primary);
-  --font-display: var(--font-primary);
-}
-
-/* ============================================================
-   Section colour schemes
-   ============================================================ */
-
-[data-scheme="dark"] {
-  background: var(--gen-primary);
-  color: var(--gen-bg);
-  --line: var(--white-20);
-  --line-soft: rgba(255, 255, 255, 0.10);
-  --grey: var(--mono-40);          /* 7.25:1 on black, passes AA */
-  --surface-card: var(--mono-black-90);
-}
-
-[data-scheme="light"],
-.band--light {
-  background: var(--gen-bg);
-  color: var(--gen-text);
-  --line: var(--black-10);
-  --line-soft: rgba(0, 0, 0, 0.06);
-  --grey: var(--mono-60);          /* 5.74:1 on white, passes AA */
-  --surface-card: var(--mono-10);
+  --stagger: 0.07s;
 }
