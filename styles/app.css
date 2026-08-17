@@ -1924,3 +1924,27 @@ a.ct__fact:hover { color: var(--mono-30); }
 .pstep__img { position: absolute; inset: 0; z-index: 0; }
 .pstep__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pstep--lead .pstep__card::before { background: none; }
+
+/* ---- Media fills. Every one decorative, empty alt, aria-hidden. --- */
+.wk__media img, .hcard__ph img, .tst__person img, .tst__thumb img,
+.why__figure img, .reel__bg img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.reel__bg { position: absolute; inset: 0; z-index: -1; }
+.tst__person img, .tst__thumb img { position: absolute; }
+.tst__thumb { position: relative; overflow: hidden; }
+.wk__media img { transition: transform var(--d-slow) var(--e-expo); }
+.wk:hover .wk__media img { transform: scale(1.04); }
+
+.avstack { display: flex; margin-left: auto; }
+.avstack img {
+  width: 44px; height: 44px; border-radius: var(--r-pill);
+  object-fit: cover; border: 2px solid var(--mono-white);
+}
+.avstack img + img { margin-left: -14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wk__media img { transition: none; }
+  .wk:hover .wk__media img { transform: none; }
+}
