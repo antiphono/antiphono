@@ -166,4 +166,45 @@
   --tab-text:     18px;
   --tab-count:    12px;
   --tab-gap:      4px;
+
+  /* ---- Hero, Figma node 5209:2117 ------------------------------
+     Exact extracted values. The frame is a fixed 1440 wide, so
+     sizes that must scale are expressed as a clamp with the Figma
+     value as the upper bound. */
+  --hero-radius:     24px;
+  --hero-inset:      60px;   /* content inset from the frame edge  */
+  --hero-title:      clamp(3.5rem, 13.9vw, 12.5rem);  /* 200px cap */
+  --hero-title-lh:   1.16;                            /* 232/200   */
+  --hero-title-tr:   -0.03em;                         /* -6/200    */
+  --hero-reg:        clamp(1.5rem, 4.2vw, 3.75rem);   /* 60px cap  */
+  --hero-eyebrow:    18px;
+  --hero-rule-w:     31px;
+  --hero-lead:       20px;
+  --hero-lead-lh:    28px;
+  --hero-lead-tr:    -0.01em;
+  --hero-col:        441px;  /* left column width */
+  --hero-card-w:     321px;
+  --hero-card-h:     200px;
+  --hero-card-gap:   12px;
+  --hero-blur-h:     45px;
+  --hero-scroll-w:   98.937px;
+
+  /* Buttons, Figma 5209:2131 and 5209:2134 */
+  --btn-h:           48px;
+  --btn-r:           1000px;
+  --btn-pad-x:       20px;
+  --btn-text:        16px;
+  --btn-tr:          -0.02em;
+  --btn-arrow:       40px;
+  --btn-dot:         6px;
+  --btn-border:      var(--white-20);
+
+  /* Menu button, Figma 5210:184 */
+  --menu-btn-h:      56px;
+  --menu-btn-pad-x:  28px;
+
+  /* Card overlay, Figma 5209:2141 */
+  --hero-card-veil:  rgba(0, 0, 0, 0.4);
+  --hero-card-bg-a:  var(--white-20);
+  --hero-card-bg-b:  var(--white-10);
 }

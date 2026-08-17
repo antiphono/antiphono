@@ -852,3 +852,276 @@ a.row:hover { padding-inline-start: var(--s-4); }
   .tabs__pill { transition: opacity var(--d-fast) linear; }
   .tabs__link, .tabs__count { transition: none; }
 }
+
+/* ============================================================
+   HERO, Figma node 5209:2117
+   ------------------------------------------------------------
+   Rounded frame with an autoplaying background video, title in
+   mix-blend-difference over it, left copy column, right media
+   cards, edge scroll cue and a top blur strip.
+   ============================================================ */
+
+.herov {
+  position: relative;
+  border-radius: var(--hero-radius);
+  overflow: hidden;
+  margin: var(--s-2);
+  min-height: min(900px, 92svh);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--s-9) + var(--s-3)) var(--hero-inset) var(--hero-inset);
+  isolation: isolate;
+}
+
+/* ---- Background video ------------------------------------------
+   TODO Ben: supply the background clip. Drop an mp4 and a webm into
+   media/ and add <source> tags. Until then the placeholder surface
+   below shows through and nothing is fabricated. */
+.herov__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent var(--s-5),
+      var(--white-10) var(--s-5),
+      var(--white-10) calc(var(--s-5) + var(--hair))
+    ),
+    linear-gradient(160deg, var(--ph-from), var(--ph-to));
+}
+.herov__bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.herov__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-card-veil);
+}
+
+/* Top blur strip, Figma 5209:2173 */
+.herov__blur {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--hero-blur-h);
+  backdrop-filter: blur(var(--tabs-blur));
+  -webkit-backdrop-filter: blur(var(--tabs-blur));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ---- Title ------------------------------------------------------ */
+.herov__title {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  font-size: var(--hero-title);
+  line-height: var(--hero-title-lh);
+  letter-spacing: var(--hero-title-tr);
+  font-weight: var(--w-semi);
+  color: var(--mono-white);
+  mix-blend-mode: difference;
+  margin: 0;
+}
+.herov__reg {
+  font-size: var(--hero-reg);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.herov__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--hero-eyebrow);
+  line-height: 1;
+  font-weight: var(--w-semi);
+  text-transform: uppercase;
+  color: var(--mono-white);
+}
+.herov__eyebrow::before {
+  content: "";
+  width: var(--hero-rule-w);
+  height: var(--hair);
+  background: currentColor;
+  flex: none;
+}
+
+/* ---- Foot: copy left, media right ------------------------------- */
+.herov__foot {
+  display: grid;
+  grid-template-columns: var(--hero-col) minmax(0, 1fr);
+  gap: var(--s-7);
+  align-items: end;
+}
+.herov__lead {
+  font-size: var(--hero-lead);
+  line-height: var(--hero-lead-lh);
+  letter-spacing: var(--hero-lead-tr);
+  font-weight: var(--w-semi);
+  color: var(--mono-white);
+}
+.herov__lead::before { content: "/"; margin-right: var(--s-4); }
+.herov__actions { display: flex; flex-wrap: wrap; gap: var(--hero-card-gap); margin-top: var(--s-8); }
+
+/* ---- Buttons, exact Figma geometry ------------------------------ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  height: var(--btn-h);
+  padding-inline: var(--btn-pad-x);
+  border-radius: var(--btn-r);
+  border: var(--hair) solid var(--btn-border);
+  font-size: var(--btn-text);
+  font-weight: var(--w-semi);
+  letter-spacing: var(--btn-tr);
+  color: var(--mono-white);
+  transition: background-color var(--d-fast) var(--e-out),
+              color var(--d-fast) var(--e-out),
+              border-color var(--d-fast) var(--e-out);
+}
+.pill__dot {
+  width: var(--btn-dot);
+  height: var(--btn-dot);
+  border-radius: var(--r-pill);
+  background: currentColor;
+  flex: none;
+  transition: transform var(--d-base) var(--e-expo);
+}
+.pill:hover { background: var(--mono-white); color: var(--mono-90); border-color: var(--mono-white); }
+.pill:hover .pill__dot { transform: scale(1.8); }
+
+.pill--solid {
+  background: var(--mono-white);
+  color: var(--mono-90);
+  border-color: var(--mono-white);
+  padding-left: var(--btn-pad-x);
+  padding-right: var(--s-1);
+}
+.pill__arrow {
+  width: var(--btn-arrow);
+  height: var(--btn-arrow);
+  border-radius: var(--r-pill);
+  background: var(--mono-90);
+  color: var(--mono-white);
+  display: grid;
+  place-items: center;
+  flex: none;
+  transition: transform var(--d-base) var(--e-expo);
+}
+.pill--solid:hover { background: transparent; color: var(--mono-white); border-color: var(--mono-white); }
+.pill--solid:hover .pill__arrow { transform: translateX(var(--s-1)) rotate(45deg); background: var(--mono-white); color: var(--mono-90); }
+
+/* ---- Media cards ------------------------------------------------ */
+.herov__media { display: flex; flex-direction: column; gap: var(--s-4); align-items: flex-end; }
+.herov__cards { display: flex; gap: var(--hero-card-gap); }
+.hcard {
+  position: relative;
+  width: var(--hero-card-w);
+  height: var(--hero-card-h);
+  border-radius: var(--hero-radius);
+  overflow: hidden;
+  background: var(--hero-card-bg-b);
+  display: grid;
+  place-items: center;
+  transition: transform var(--d-base) var(--e-expo);
+}
+.hcard--media { background: var(--hero-card-bg-a); }
+.hcard__ph {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent var(--s-4),
+      var(--white-10) var(--s-4),
+      var(--white-10) calc(var(--s-4) + var(--hair))
+    ),
+    linear-gradient(150deg, var(--ph-from), var(--ph-to));
+}
+.hcard__veil { position: absolute; inset: 0; background: var(--hero-card-veil); }
+.hcard__go {
+  position: absolute;
+  right: var(--s-3);
+  bottom: var(--s-3);
+  width: var(--s-6);
+  height: var(--s-6);
+  border-radius: var(--r-pill);
+  border: var(--hair) solid var(--white-50);
+  display: grid;
+  place-items: center;
+  color: var(--mono-white);
+  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
+}
+.hcard:hover { transform: translateY(calc(var(--s-2) * -1)); }
+.hcard:hover .hcard__go { background: var(--mono-white); color: var(--mono-90); }
+.hcard__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--mono-white);
+  font-size: var(--t-sub);
+  font-weight: var(--w-semi);
+}
+.hcard__label svg { width: var(--s-5); height: auto; }
+
+/* Progress, Figma 5209:2166 */
+.herov__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: min(654px, 100%);
+  font-size: var(--t-small);
+  color: var(--mono-40);
+}
+.herov__progress span:nth-child(2) { flex: 1; height: var(--hair); background: var(--white-20); }
+
+/* Scroll cue, Figma 5209:2174 */
+.herov__scroll {
+  position: absolute;
+  right: var(--s-4);
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: 100% 50%;
+  display: flex;
+  align-items: center;
+  gap: var(--hero-card-gap);
+  font-size: var(--t-small);
+  color: var(--mono-30);
+  white-space: nowrap;
+}
+.herov__scroll::before {
+  content: "";
+  width: var(--hero-scroll-w);
+  height: var(--hair);
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* ---- Responsive -------------------------------------------------- */
+@media (max-width: 1100px) {
+  .herov__foot { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+  .herov__media { align-items: stretch; }
+  .herov__scroll { display: none; }
+  .herov__actions { margin-top: var(--s-5); }
+}
+@media (max-width: 860px) {
+  .herov { padding: calc(var(--s-8) + var(--s-3)) var(--s-4) var(--s-5); min-height: auto; }
+  .herov__cards { flex-direction: column; }
+  .hcard { width: 100%; }
+  .herov__lead::before { display: block; margin: 0 0 var(--s-2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill, .pill__dot, .pill__arrow, .hcard, .hcard__go { transition: none; }
+  .hcard:hover { transform: none; }
+  .pill:hover .pill__dot, .pill--solid:hover .pill__arrow { transform: none; }
+}

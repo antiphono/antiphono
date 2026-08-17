@@ -200,7 +200,18 @@
     }
   }
 
-  var boot = function () { init(); menu(); tabs(); };
+  /* ---- Background video --------------------------------------
+     Autoplay needs muted and playsinline. Reduced motion pauses it,
+     since a looping clip is motion the user asked not to see. */
+  function video() {
+    var v = document.getElementById('heroVideo');
+    if (!v) return;
+    if (reduced) { v.pause(); v.removeAttribute('autoplay'); return; }
+    var play = v.play();
+    if (play && play.catch) play.catch(function () { /* autoplay blocked, poster stands in */ });
+  }
+
+  var boot = function () { init(); menu(); tabs(); video(); };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
