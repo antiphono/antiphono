@@ -4274,3 +4274,18 @@ a.row:hover .row__go svg { transform: translateX(6px); }
   color: var(--grey);
 }
 .row__list span { padding-inline: var(--space-2xs); }
+
+/* ---- Primary action uses the generator CTA -----------------------
+   ui-ux-pro-max "portfolio website" CTA. White on #2563EB is 4.95:1,
+   passes AA for normal text. */
+.btn-lime {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--gen-bg);
+}
+.btn-lime:hover,
+.btn-lime:focus-visible {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}

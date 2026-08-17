@@ -36,11 +36,23 @@
   --black-60: rgba(0, 0, 0, 0.60);
   --black-10: rgba(0, 0, 0, 0.10);
 
+  /* ---- Generator palette ---------------------------------------
+     From ui-ux-pro-max design_system.py, target "portfolio website".
+     Chosen by Ben over the Figma mono ramp on 17 August 2026.
+     This is the first non-monochrome value on the site. */
+  --gen-primary:   #18181B;  /* dark ground   */
+  --gen-secondary: #3F3F46;  /* raised surface */
+  --gen-cta:       #2563EB;  /* action         */
+  --gen-bg:        #FAFAFA;  /* light ground   */
+  --gen-text:      #09090B;  /* ink on light   */
+
   /* ---- Semantic roles ------------------------------------------
      Markup references these, never the raw ramp above. */
-  --black:        var(--mono-black);
-  --white:        var(--mono-white);
-  --dark-surface: var(--mono-black-90);
+  --black:        var(--gen-primary);
+  --white:        var(--gen-bg);
+  --ink:          var(--gen-text);
+  --accent:       var(--gen-cta);
+  --dark-surface: var(--gen-secondary);
   --grey:         var(--mono-40);
   --grey-mid:     var(--mono-50);
   --grey-light:   var(--mono-30);
@@ -207,13 +219,13 @@
 
   /* ---- Legacy aliases -------------------------------------------
      Needed by render.js, the articles page and inner pages. */
-  --bg:        var(--mono-black);
-  --bg-raised: var(--mono-black-90);
-  --cream:     var(--mono-white);
+  --bg:        var(--gen-primary);
+  --bg-raised: var(--gen-secondary);
+  --cream:     var(--gen-bg);
   --cream-dim: var(--mono-30);
-  --ink:       var(--mono-black);
+  
   --grey-soft: var(--mono-70);
-  --lime:      var(--mono-white);
+  --lime:      var(--gen-cta);
   --font-body:    var(--font-primary);
   --font-display: var(--font-primary);
 }
@@ -223,8 +235,8 @@
    ============================================================ */
 
 [data-scheme="dark"] {
-  background: var(--mono-black);
-  color: var(--mono-white);
+  background: var(--gen-primary);
+  color: var(--gen-bg);
   --line: var(--white-20);
   --line-soft: rgba(255, 255, 255, 0.10);
   --grey: var(--mono-40);          /* 7.25:1 on black, passes AA */
@@ -233,8 +245,8 @@
 
 [data-scheme="light"],
 .band--light {
-  background: var(--mono-white);
-  color: var(--mono-black);
+  background: var(--gen-bg);
+  color: var(--gen-text);
   --line: var(--black-10);
   --line-soft: rgba(0, 0, 0, 0.06);
   --grey: var(--mono-60);          /* 5.74:1 on white, passes AA */
