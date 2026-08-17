@@ -324,7 +324,7 @@
         .catch(function () { busy = false; });
 
       if (caption) {
-        caption.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, fill: 'forwards' }).finished
+        caption.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, easing: EASE, fill: 'forwards' }).finished
           .then(function () {
             caption.textContent = labels[next] || '';
             caption.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: EASE, fill: 'forwards' });
@@ -413,7 +413,7 @@
 
     /* Parallax. Media drifts against the scroll at its own depth. */
     var layers = Array.prototype.slice.call(
-      document.querySelectorAll('.wk__media img, .why__figure img, .ft__figure img, .mrow__figure img')
+      document.querySelectorAll('.wk__media, .why__figure img, .ft__figure img, .mrow__figure img')
     );
     layers.forEach(function (el, i) { el.dataset.depth = (0.06 + (i % 3) * 0.04).toFixed(2); });
     function parallax() {
@@ -423,7 +423,10 @@
         if (box.bottom < 0 || box.top > vh) return;
         var mid = box.top + box.height / 2;
         var offset = (mid - vh / 2) * parseFloat(el.dataset.depth);
-        el.style.transform = 'translate3d(0,' + (-offset).toFixed(2) + 'px,0) scale(1.12)';
+        // Wrappers only translate. Scale stays on the child so hover
+        // transforms are not overwritten by this inline style.
+        var scale = el.classList.contains('wk__media') ? '' : ' scale(1.12)';
+        el.style.transform = 'translate3d(0,' + (-offset).toFixed(2) + 'px,0)' + scale;
       });
     }
     jobs.push(parallax);
@@ -434,7 +437,7 @@
 
     /* Magnetic pointer. Buttons lean toward the cursor and spring back. */
     var magnets = Array.prototype.slice.call(
-      document.querySelectorAll('.pill, .btn, .cta__circle, .tst__btn, .srow__icon, .why__social a')
+      document.querySelectorAll('.pill, .btn, .cta__circle')
     );
     magnets.forEach(function (el) {
       var strength = el.classList.contains('cta__circle') ? 0.34 : 0.22;

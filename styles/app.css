@@ -2035,3 +2035,41 @@ a.ct__fact:hover { color: var(--mono-30); }
 .wk, .bento__cell { transform-style: preserve-3d; }
 .pill, .btn, .cta__circle, .tst__btn, .srow__icon, .why__social a { will-change: transform; }
 @media (prefers-reduced-motion: reduce) { .progress { display: none; } }
+
+/* ============================================================
+   MOTION REVIEW FIXES
+   ============================================================ */
+
+/* Press feedback. Hover is not available on touch, so :active was the
+   only missing channel for tactile response. */
+.btn:active, .pill:active, .cta__circle:active, .wcard__btn:active,
+.ct__send:active, .tst__btn:active, .reel__play:active, .tabs__link:active {
+  transform: scale(0.97);
+  transition: transform 160ms var(--e-out);
+}
+
+/* Hover transforms gated to real pointers, so a tap does not leave a
+   card stuck in its hover state on touch. */
+@media (hover: none) {
+  .bento__cell:hover, .card:hover, .hcard:hover, .wk:hover .wk__go,
+  .pstep:hover .pstep__card, .why__social a:hover { transform: none; }
+}
+
+/* Work card zoom was on --d-slow (1.1s), far too slow for a hover on a
+   grid the eye scans repeatedly. */
+.wk__media img { transition: transform 350ms var(--e-out); }
+
+/* Parallax now translates the wrapper, so the child keeps its own
+   resting scale and the hover zoom composes on top of it. */
+.wk__media img { transform: scale(1.06); }
+.wk:hover .wk__media img { transform: scale(1.12); }
+
+/* Drawer was 700ms, over the 200 to 500ms budget for an action
+   repeated several times a session. */
+.menu { transition: transform 440ms var(--e-expo); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active, .pill:active, .cta__circle:active, .wcard__btn:active,
+  .ct__send:active, .tst__btn:active, .reel__play:active, .tabs__link:active { transform: none; }
+  .wk__media img, .wk:hover .wk__media img { transition: none; transform: scale(1.06); }
+}
