@@ -4257,3 +4257,20 @@ a.row:hover .row__go svg { transform: translateX(6px); }
   .hero-card__go { transition: none; }
   .hero-card:hover { transform: none; }
 }
+
+/* ---- Service group rows (home 1.5) -------------------------------
+   Four groups. One line, then a bare list. No group gets a paragraph. */
+.row--group .row__title {
+  font-size: var(--text-h6);
+  line-height: var(--leading-h6);
+  letter-spacing: var(--track-h6);
+  margin-bottom: var(--space-xs);
+}
+.row__list {
+  margin-top: var(--space-md);
+  font-size: var(--text-body3);
+  line-height: var(--leading-body3);
+  letter-spacing: var(--track-body3);
+  color: var(--grey);
+}
+.row__list span { padding-inline: var(--space-2xs); }

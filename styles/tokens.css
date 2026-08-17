@@ -1,91 +1,158 @@
 /* ============================================================
    Antiphono design tokens
    ------------------------------------------------------------
-   Every value used in styles.css and in page markup resolves to
-   a token declared here. Nothing else declares a literal colour,
-   radius, duration or type size.
+   Colour and type values are extracted from the Figma file
+   s1Esp1dOH2iLvYhUXwLjK2 via the Figma MCP get_variable_defs tool,
+   14 August 2026. Figma variable names are given against each token
+   so the two can be reconciled.
 
-   Loaded before styles.css on every page.
-
-   Provisional values are marked PROVISIONAL. There is no approved
-   visual identity yet, so anything marked that way is a working
-   value for the staging build, not a brand decision.
+   Loaded before styles.css on every page. This is the only file
+   that declares raw values.
    ============================================================ */
 
 :root {
 
-  /* ---- Palette -------------------------------------------------
-     Black and white only. Colour comes from client work imagery.
-     Do not introduce a brand palette here without Ben's sign off. */
-  --black:        #0A0A0A;
-  --white:        #F2F1EC;
-  --dark-surface: #141413;
-  --grey:         #87877F;
-  --grey-mid:     #6A6A62;
-  --grey-light:   #BDBDB5;
+  /* ---- Mono palette -------------------------------------------
+     Straight from the Figma "Mono" collection. A pure greyscale
+     ramp, no brand hue. Figma name in the comment. */
+  --mono-black:    #000000;  /* Mono/Black    */
+  --mono-black-90: #1A1A1A;  /* Mono/Black 90 */
+  --mono-90:       #111111;  /* Mono/Gray 90  */
+  --mono-80:       #282828;  /* Mono/Gray 80  */
+  --mono-70:       #494949;  /* Mono/Gray 70  */
+  --mono-60:       #666666;  /* Mono/Gray 60  */
+  --mono-50:       #707070;  /* Mono/Gray 50  */
+  --mono-40:       #999999;  /* Mono/Gray 40  */
+  --mono-30:       #BBBBBB;  /* Mono/Gray 30  */
+  --mono-10:       #EEEEEE;  /* Mono/Gray 10  */
+  --mono-white:    #FFFFFF;  /* Mono/White    */
 
-  /* Rules and hairlines, expressed against the dark ground */
-  --line:      rgba(242, 241, 236, 0.10);
-  --line-soft: rgba(242, 241, 236, 0.06);
-  --line-dark: rgba(10, 10, 10, 0.10);
+  /* Alpha steps. Figma stores these as White/n% and Black/n%. */
+  --white-60: rgba(255, 255, 255, 0.60);
+  --white-50: rgba(255, 255, 255, 0.50);
+  --white-20: rgba(255, 255, 255, 0.20);
+  --black-90: rgba(0, 0, 0, 0.90);
+  --black-70: rgba(0, 0, 0, 0.70);
+  --black-60: rgba(0, 0, 0, 0.60);
+  --black-10: rgba(0, 0, 0, 0.10);
 
-  /* ---- Surfaces ------------------------------------------------
-     PROVISIONAL. Borrowed from the Ezendo reference frame, which
-     insets panels and cards on a light ground. */
-  --surface-panel:       var(--black);
-  --surface-card:        var(--dark-surface);
-  --surface-card-light:  #FFFFFF;
-  --surface-sunken:      #E8E7E1;
+  /* ---- Semantic roles ------------------------------------------
+     Markup references these, never the raw ramp above. */
+  --black:        var(--mono-black);
+  --white:        var(--mono-white);
+  --dark-surface: var(--mono-black-90);
+  --grey:         var(--mono-40);
+  --grey-mid:     var(--mono-50);
+  --grey-light:   var(--mono-30);
 
-  /* Image placeholders. No stock photography on this site, so every
-     image space renders as a flat token surface until real work
-     imagery exists. */
-  --surface-placeholder:      #C4C3BD;
-  --surface-placeholder-deep: #9E9D97;
+  --line:      var(--white-20);
+  --line-soft: rgba(255, 255, 255, 0.10);
+  --line-dark: var(--black-10);
+
+  --surface-panel:      var(--mono-black);
+  --surface-card:       var(--mono-black-90);
+  --surface-card-light: var(--mono-white);
+  --surface-sunken:     var(--mono-10);
+
+  /* Image placeholders. No stock photography on this site. */
+  --surface-placeholder:      var(--mono-30);
+  --surface-placeholder-deep: var(--mono-40);
 
   /* ---- Typography ----------------------------------------------
-     One typeface. Hierarchy comes from scale, weight and tracking.
-     Fraunces and Space Mono were removed and must not return. */
-  --font: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+     Sizes, weights, line heights and tracking are the Figma values.
 
-  --weight-light:  300;
-  --weight-medium: 500;
-  --weight-semi:   600;
+     TYPEFACE IS UNRESOLVED. The Figma specifies Inter (primary) and
+     Poppins (secondary). Neither is in fonts/, and the site has an
+     earlier decision to use Sora only. --font-primary is the single
+     switch: drop Inter woff2 files into fonts/, add the @font-face
+     block, and change this one line. Nothing else needs to move. */
+  --font-primary:   'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: var(--font-primary);
+  --font: var(--font-primary);
 
-  /* Utility scale */
-  --text-xs:   0.6875rem;  /* 11px, labels and eyebrows */
-  --text-sm:   0.8125rem;  /* 13px */
-  --text-base: 1rem;
-  --text-lg:   1.25rem;
-  --text-xl:   clamp(1.25rem, 2vw, 1.75rem);
-  --text-2xl:  clamp(1.75rem, 3.5vw, 3rem);
-  --text-3xl:  clamp(2.5rem, 6vw, 5rem);
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
 
-  /* Display ramp, style guide section 02 */
-  --display: clamp(3rem, 8vw, 7rem);
-  --section: clamp(2rem, 5vw, 4.25rem);
-  --sub:     clamp(1.375rem, 2.4vw, 2rem);
-  --lead:    clamp(1.0625rem, 1.5vw, 1.375rem);
+  /* Figma type ramp. Fixed sizes top out at the Figma value and
+     scale down fluidly, since the Figma frame is a fixed 1440px. */
 
-  /* Tracking, tightens as size increases */
-  --track-display: -0.05em;
-  --track-section: -0.04em;
-  --track-sub:     -0.03em;
-  --track-lead:    -0.015em;
-  --track-body:    normal;
-  --track-label:   0.10em;
+  /* H1 Semibold: Inter 64/72 w600 -4% */
+  --text-h1:       clamp(2.5rem, 5.5vw, 4rem);
+  --leading-h1:    1.125;
+  --track-h1:      -0.04em;
 
-  /* Line height */
-  --leading-display: 0.9;
-  --leading-heading: 1.05;
-  --leading-body:    1.5;
+  /* H5 Heading: Inter 32/42 w500 and w600, -3% */
+  --text-h5:       clamp(1.75rem, 3vw, 2rem);
+  --leading-h5:    1.3125;
+  --track-h5:      -0.03em;
 
-  /* ---- Motion --------------------------------------------------
-     NLC / Obys easing signature, style guide section 05. */
-  --ease-expo:  cubic-bezier(0.86, 0, 0.07, 1);      /* primary reveals */
-  --ease-cubic: cubic-bezier(0.65, 0.05, 0.36, 1);   /* overlays, menus */
-  --ease-out:   cubic-bezier(0.215, 0.61, 0.355, 1); /* hover */
-  --ease-clip:  cubic-bezier(0.77, 0, 0.18, 1);      /* image wipes */
+  /* H6 Heading Medium: Inter 24/34 w500 -2% */
+  --text-h6:       clamp(1.375rem, 2vw, 1.5rem);
+  --leading-h6:    1.4167;
+  --track-h6:      -0.02em;
+
+  /* Sub Heading: Inter 20/30 w500 -2%, and 20/28 w600 -1% */
+  --text-sub:      1.25rem;
+  --leading-sub:   1.5;
+  --track-sub:     -0.02em;
+
+  /* Body 1 Medium: Inter 18/28 w500 -2% */
+  --text-body1:    1.125rem;
+  --leading-body1: 1.5556;
+  --track-body1:   -0.02em;
+
+  /* Body 2: Inter 16/24, regular -1%, medium 0, semibold -2% */
+  --text-body2:    1rem;
+  --leading-body2: 1.5;
+  --track-body2:   -0.01em;
+
+  /* Body 3: Inter 14/20, regular 0, medium -1% */
+  --text-body3:    0.875rem;
+  --leading-body3: 1.4286;
+  --track-body3:   0em;
+
+  /* Caption: Inter 12/16 w400 and w500, 0 */
+  --text-caption:    0.75rem;
+  --leading-caption: 1.3333;
+  --track-caption:   0em;
+
+  /* Label tracking is not a Figma variable. Used for uppercase
+     eyebrows, which the reference frame sets wide. PROVISIONAL. */
+  --track-label: 0.10em;
+
+  /* ---- Aliases used by the existing stylesheet ------------------
+     Mapped onto the Figma ramp so old selectors keep working. */
+  --text-xs:   var(--text-caption);
+  --text-sm:   var(--text-body3);
+  --text-base: var(--text-body2);
+  --text-lg:   var(--text-sub);
+  --text-xl:   var(--text-h6);
+  --text-2xl:  var(--text-h5);
+  --text-3xl:  var(--text-h1);
+
+  --display: var(--text-h1);
+  --section: var(--text-h5);
+  --sub:     var(--text-h6);
+  --lead:    var(--text-body1);
+
+  --track-display:   var(--track-h1);
+  --track-section:   var(--track-h5);
+  --track-body:      var(--track-body2);
+  --leading-display: var(--leading-h1);
+  --leading-heading: var(--leading-h5);
+  --leading-body:    var(--leading-body2);
+
+  --text-stat: var(--text-h1);
+
+  /* ---- Motion ---------------------------------------------------
+     Not defined in the Figma file. Retained from the style guide. */
+  --ease-expo:  cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-cubic: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --ease-out:   cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-clip:  cubic-bezier(0.77, 0, 0.18, 1);
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
 
   --dur-quick:  0.2s;
   --dur-hover:  0.45s;
@@ -97,14 +164,17 @@
   --stagger-2: 0.30s;
   --stagger-3: 0.45s;
 
-  /* ---- Layout --------------------------------------------------- */
+  /* ---- Layout ---------------------------------------------------
+     PROVISIONAL. Section geometry could not be read from Figma:
+     get_design_context and get_metadata both exceed the MCP
+     transport limit on the full 1440x18358 frame. These are the
+     working values from the existing build. */
   --gutter: clamp(24px, 4vw, 72px);
   --maxw:   1680px;
-  --rail:   22%;    /* sticky label column */
-  --rule:   3px;    /* heavy section separator */
+  --rail:   22%;
+  --rule:   3px;
   --nav-h:  72px;
 
-  /* Vertical rhythm */
   --space-2xs: 4px;
   --space-xs:  8px;
   --space-sm:  16px;
@@ -114,83 +184,59 @@
   --space-2xl: clamp(48px, 6vw, 96px);
   --space-3xl: clamp(64px, 9vw, 150px);
 
-  /* ---- Radii ----------------------------------------------------
-     PROVISIONAL. The reference frame uses generous radii on panels
-     and cards against otherwise square section rules. */
   --radius:       2px;
   --radius-card:  20px;
   --radius-lift:  24px;
   --radius-panel: 32px;
   --radius-pill:  999px;
 
-  /* Inset for the hero panel, which floats off the page edge */
-  --panel-inset: clamp(8px, 1vw, 16px);
+  --panel-inset:   clamp(8px, 1vw, 16px);
+  --hairline:      1px;
+  --control-sm:    36px;
+  --rule-short:    clamp(20px, 3vw, 44px);
+  --scroll-cue-h:  clamp(32px, 5vw, 64px);
+  --hero-panel-h:  min(84vh, 900px);
+  --hero-scroll-y: 38%;
+  --stat-card-h:   clamp(200px, 22vw, 280px);
+  --stat-card-min: 260px;
 
-  /* ---- Component sizing -----------------------------------------
-     PROVISIONAL. Derived from the Ezendo reference frame. */
-  --hairline:       1px;
-  --control-sm:     36px;                        /* circular icon button */
-  --rule-short:     clamp(20px, 3vw, 44px);      /* kicker rule */
-  --scroll-cue-h:   clamp(32px, 5vw, 64px);
-  --hero-panel-h:   min(84vh, 900px);
-  --hero-scroll-y:  38%;                         /* scroll cue vertical anchor */
-  --stat-card-h:    clamp(200px, 22vw, 280px);
-  --stat-card-min:  260px;
-  --text-stat:      clamp(2.5rem, 5vw, 4rem);
+  --opacity-muted: 0.5;
+  --opacity-label: 0.55;
 
-  /* Opacity steps */
-  --opacity-muted:  0.5;
-  --opacity-label:  0.55;
-
-  /* Breakpoints cannot be tokens (media queries do not read custom
-     properties), so they are written literally and listed here:
-     860px  spread collapses
-     900px  hero foot and cards stack */
+  /* Breakpoints cannot be tokens. In use: 860px, 900px. */
 
   /* ---- Legacy aliases -------------------------------------------
-     Needed by render.js, the articles page and inner pages. Do not
-     remove without checking those first. */
-  --bg:           #0A0A0A;
-  --bg-raised:    #141413;
-  --cream:        #F2F1EC;
-  --cream-dim:    #B8B7B0;
-  --ink:          #0A0A0A;
-  --grey-soft:    #5C5C54;
-  --lime:         #C8FF47;
-  --font-body:    'Sora', -apple-system, sans-serif;
-  --font-display: 'Sora', -apple-system, sans-serif;
-  --ease:         cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out:  cubic-bezier(0.87, 0, 0.13, 1);
+     Needed by render.js, the articles page and inner pages. */
+  --bg:        var(--mono-black);
+  --bg-raised: var(--mono-black-90);
+  --cream:     var(--mono-white);
+  --cream-dim: var(--mono-30);
+  --ink:       var(--mono-black);
+  --grey-soft: var(--mono-70);
+  --lime:      var(--mono-white);
+  --font-body:    var(--font-primary);
+  --font-display: var(--font-primary);
 }
 
 /* ============================================================
    Section colour schemes
-   ------------------------------------------------------------
-   A section declares its ground with data-scheme. Descendants read
-   the local tokens rather than hard-coding a colour, so a section
-   can be flipped from dark to light by changing one attribute.
-
-   data-scheme="dark"   default. White text on black.
-   data-scheme="light"  black text on the off-white ground.
-
-   .band--light is kept as an alias so existing pages keep working.
    ============================================================ */
 
 [data-scheme="dark"] {
-  background: var(--black);
-  color: var(--white);
-  --line: rgba(242, 241, 236, 0.10);
-  --line-soft: rgba(242, 241, 236, 0.06);
-  --grey: #87877F;
-  --surface-card: var(--dark-surface);
+  background: var(--mono-black);
+  color: var(--mono-white);
+  --line: var(--white-20);
+  --line-soft: rgba(255, 255, 255, 0.10);
+  --grey: var(--mono-40);          /* 7.25:1 on black, passes AA */
+  --surface-card: var(--mono-black-90);
 }
 
 [data-scheme="light"],
 .band--light {
-  background: var(--white);
-  color: var(--black);
-  --line: rgba(10, 10, 10, 0.14);
-  --line-soft: rgba(10, 10, 10, 0.07);
-  --grey: #55554E;          /* 7.1:1 on --white, passes AA body text */
-  --surface-card: var(--surface-card-light);
+  background: var(--mono-white);
+  color: var(--mono-black);
+  --line: var(--black-10);
+  --line-soft: rgba(0, 0, 0, 0.06);
+  --grey: var(--mono-60);          /* 5.74:1 on white, passes AA */
+  --surface-card: var(--mono-10);
 }
