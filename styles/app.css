@@ -1915,3 +1915,12 @@ a.ct__fact:hover { color: var(--mono-30); }
 }
 .book__alt a { color: var(--mono-90); font-weight: var(--w-medium); text-decoration: underline; }
 .book__alt a:hover { color: var(--mono-50); }
+
+/* ---- Figure images. Decorative only, so alt is empty and the
+   element is hidden from assistive technology. --------------------- */
+.ft__figure img, .mrow__figure img, .srow__figure img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.pstep__img { position: absolute; inset: 0; z-index: 0; }
+.pstep__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pstep--lead .pstep__card::before { background: none; }
