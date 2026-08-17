@@ -125,28 +125,8 @@ body {
 }
 .nav__mark { display: flex; align-items: center; gap: var(--s-2); font-weight: var(--w-semi); letter-spacing: var(--tr-h3); }
 .nav__mark svg { width: var(--s-5); height: auto; }
-.nav__links { display: flex; gap: var(--s-5); }
-.nav__links a {
-  font-size: var(--t-small);
-  color: var(--ink-muted);
-  position: relative;
-  padding-block: var(--s-1);
-  transition: color var(--d-fast) var(--e-out);
-}
-.nav__links a::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: var(--hair);
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: 100% 50%;
-  transition: transform var(--d-fast) var(--e-out);
-}
-.nav__links a:hover { color: var(--ink); }
-.nav__links a:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
+/* .nav__links removed: the header uses .tabs now. */
 
-@media (max-width: 860px) { .nav__links { display: none; } }
 
 /* ---- Buttons ------------------------------------------------- */
 .btn {
@@ -614,8 +594,10 @@ a.row:hover { padding-inline-start: var(--s-4); }
   letter-spacing: var(--tr-h1);
   font-weight: var(--w-semi);
 }
-@media (max-width: 860px) { .nav__toggle { display: block; } }
-@media (min-width: 861px) { .menu { display: none; } }
+/* Must match the .tabs breakpoint exactly, or there is a range
+   with no navigation at all. */
+@media (max-width: 1100px) { .nav__toggle { display: block; } }
+@media (min-width: 1101px) { .menu { display: none; } }
 
 /* ---- Card ------------------------------------------------------ */
 .card {
