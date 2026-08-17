@@ -213,7 +213,56 @@
     });
   }
 
-  var boot = function () { init(); menu(); tabs(); video(); };
+  /* ---- Articles ----------------------------------------------
+     Three most recent items from the RSS proxy. If the feed fails
+     the section stays empty rather than showing invented posts. */
+  function articles() {
+    var grid = document.getElementById('homeArticles');
+    if (!grid || !window.fetch) return;
+
+    var esc = function (t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    };
+    var when = function (d) {
+      if (!d) return '';
+      var t = new Date(d);
+      if (isNaN(t)) return '';
+      return t.toLocaleDateString('en-AU', { month: 'long', year: 'numeric' });
+    };
+
+    fetch('/api/articles')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        var items = Array.isArray(d) ? d : (d.articles || d.items || []);
+        if (!items.length) return;
+
+        grid.innerHTML = items.slice(0, 3).map(function (a) {
+          var media = a.image
+            ? '<img src="' + esc(a.image) + '" alt="" loading="lazy" width="424" height="270">'
+            : '<span aria-hidden="true"></span>';
+          return '<a class="art" href="/article?slug=' + encodeURIComponent(a.slug || '') + '" data-anim="up">' +
+            '<span class="art__head">' +
+              '<span class="art__by">' +
+                '<span class="art__avatar" aria-hidden="true">A</span>' +
+                '<span class="art__byline"><b>Antiphono</b><span>' + esc(a.category || 'Article') + '</span></span>' +
+              '</span>' +
+              '<span class="art__time">' + esc(when(a.date)) + '</span>' +
+            '</span>' +
+            '<span class="art__media">' + media + '</span>' +
+            '<span class="art__title">' + esc(a.title || '') + '</span>' +
+          '</a>';
+        }).join('');
+
+        index(grid);
+        grid.querySelectorAll('[data-anim]').forEach(show);
+      })
+      .catch(function () { /* feed down, section stays empty */ });
+  }
+
+  var boot = function () { init(); menu(); tabs(); video(); articles(); };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

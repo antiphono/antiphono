@@ -660,6 +660,25 @@
     </div>
   </section>
 
+  <!-- Articles. Figma node 5209:1359. Rendered from /api/articles.
+       Three most recent items. Static fallback shows nothing rather
+       than fabricating posts if the feed fails. -->
+  <section class="arts section--flush" data-scheme="light" aria-labelledby="h-arts">
+    <div class="arts__top">
+      <p class="why__caption" data-anim="fade">
+        <img src="/media/figma/icon-dot.svg" alt="" width="8" height="8">
+        Thinking
+      </p>
+      <div class="arts__intro">
+        <h2 class="arts__title lines" id="h-arts">
+          <span class="line-w"><span class="line">From the studio.</span></span>
+        </h2>
+        <p class="arts__sub" data-anim="up">Notes on how the work gets made, written as it happens.</p>
+      </div>
+    </div>
+    <div class="arts__grid" id="homeArticles" data-stagger></div>
+  </section>
+
   <!-- 1.10 Data and IP. Treatment: centred and quiet. -->
   <section class="section shell" aria-labelledby="h-data">
     <div class="centred">
