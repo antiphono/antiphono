@@ -132,7 +132,13 @@
   /* ---- Poster scale (spec 2026-08-17) ---------------------------
      The middle of the type ramp is deliberately unused on the home
      page pairs. Two sizes only: poster and reading. */
-  --text-poster:    clamp(3rem, 11vw, 9rem);
+  /* Poster sizing is bound to the PANEL it sits in, not the viewport.
+     A pair panel is 42 to 58 percent of the page, so a viewport-scaled
+     value wraps every line and blows the section past one screen.
+     --text-poster suits a panel column. --text-poster-hero is larger
+     because the hero poster spans the full page width. */
+  --text-poster:      clamp(2rem, 5.2vw, 4.75rem);
+  --text-poster-hero: clamp(2.5rem, 6.8vw, 6rem);
   --leading-poster: 0.92;
   --track-poster:   -0.05em;
 
@@ -216,7 +222,7 @@
   --pair-ratio-a: 58fr 42fr;
   --pair-ratio-b: 55fr 45fr;
   --panel-pad:    clamp(28px, 5vw, 96px);
-  --panel-min-h:  clamp(360px, 52vw, 720px);
+  --panel-min-h:  clamp(320px, 40vw, 560px);
   --pair-delay:   0.12s;
   --hero-anti-min-h: min(92vh, 960px);
 
