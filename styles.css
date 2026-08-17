@@ -4393,3 +4393,39 @@ html.js .panel--response .rise { transition-delay: var(--pair-delay); }
   .stagger__item:nth-child(even) { grid-template-columns: minmax(0, 1fr); }
   .stagger__item:nth-child(even) .stagger__num { order: 0; }
 }
+
+/* ---- Hero (home 1.1) ---------------------------------------------
+   Full-bleed dark ground with a light panel cutting in from the
+   lower right. The cut edge is the same hard boundary as a .pair. */
+.hero-anti {
+  position: relative;
+  min-height: var(--hero-anti-min-h);
+  padding: calc(var(--nav-h) + var(--panel-pad)) var(--panel-pad) var(--panel-pad);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--space-xl);
+  overflow: hidden;
+}
+.hero-anti__poster {
+  font-size: var(--text-poster);
+  line-height: var(--leading-poster);
+  letter-spacing: var(--track-poster);
+  font-weight: var(--weight-semi);
+  max-width: 18ch;
+  margin: 0;
+}
+.hero-anti__cut {
+  justify-self: end;
+  align-self: end;
+  max-width: min(46ch, 100%);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+.hero-anti__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
+@media (max-width: 900px) {
+  .hero-anti { min-height: auto; }
+  .hero-anti__cut { justify-self: stretch; max-width: none; }
+}

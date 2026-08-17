@@ -218,6 +218,7 @@
   --panel-pad:    clamp(28px, 5vw, 96px);
   --panel-min-h:  clamp(360px, 52vw, 720px);
   --pair-delay:   0.12s;
+  --hero-anti-min-h: min(92vh, 960px);
 
   --hairline:      1px;
   --control-sm:    36px;
