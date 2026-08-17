@@ -1553,3 +1553,71 @@ a.stag:hover { background: var(--mono-white); color: var(--mono-90); }
   .svc__head { flex-direction: column; gap: var(--s-3); }
 }
 @media (prefers-reduced-motion: reduce) { .srow, .srow__num, .srow__body, .srow__icon, .stag { transition: none; } }
+
+/* ============================================================
+   OUR PROCESS, Figma node 5209:1435
+   ============================================================ */
+.proc { padding: clamp(64px, 8vw, 108px) var(--hero-inset) clamp(96px, 15vw, 216px); }
+.proc__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-6); }
+.proc__intro { max-width: 654px; display: flex; flex-direction: column; gap: var(--s-5); }
+.proc__title {
+  font-size: clamp(2.25rem, 4.4vw, 4rem); line-height: 1; letter-spacing: -0.03em;
+  font-weight: var(--w-semi); color: var(--black-90); text-transform: capitalize;
+}
+.proc__sub { max-width: 426px; font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.01em; color: var(--mono-70); }
+
+.proc__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--hero-card-gap); margin-top: var(--s-8); }
+.pstep { display: flex; flex-direction: column; gap: 21px; }
+.pstep--lead { grid-column: span 2; }
+.pstep__card {
+  position: relative; height: clamp(360px, 39vw, 557px);
+  border-radius: var(--hero-radius); overflow: hidden;
+  background: var(--mono-white); border: var(--hair) solid var(--black-10);
+  padding: 28px; display: flex; flex-direction: column; gap: var(--s-4);
+  transition: transform var(--d-base) var(--e-expo);
+}
+.pstep:hover .pstep__card { transform: translateY(calc(var(--s-2) * -1)); }
+.pstep--lead .pstep__card { border: 0; justify-content: flex-end; padding: 48px; }
+.pstep--lead .pstep__card::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(150deg, var(--mono-70), var(--mono-black-90));
+}
+.pstep--lead .pstep__card::after { content: ""; position: absolute; inset: 0; background: var(--black-60); }
+.pstep--lead .pstep__label, .pstep--lead .pstep__name, .pstep--lead .pstep__num { position: relative; z-index: 1; }
+.pstep__label { font-size: var(--t-small); line-height: 1.4; font-weight: var(--w-medium); color: rgba(17,17,17,0.7); }
+.pstep--lead .pstep__label { color: rgba(255,255,255,0.7); }
+.pstep__name {
+  font-size: clamp(1.375rem, 1.9vw, 1.75rem); line-height: 32px; letter-spacing: -0.03em;
+  font-weight: var(--w-semi); color: var(--black-90); max-width: 272px;
+}
+.pstep--lead .pstep__name { color: var(--mono-white); max-width: 253px; }
+.pstep__num {
+  position: absolute; left: 28px; bottom: 0;
+  font-size: clamp(4rem, 8.9vw, 8rem); line-height: 30px; letter-spacing: -0.04em;
+  font-weight: var(--w-medium); color: rgba(17,17,17,0.1); pointer-events: none;
+}
+.pstep--lead .pstep__num { color: var(--mono-white); left: auto; right: 48px; bottom: 12px; }
+.pstep__bar { height: 3px; border-radius: var(--btn-r); background: var(--black-10); overflow: hidden; }
+.pstep__bar::before {
+  content: ""; display: block; height: 100%; width: 100%; background: var(--mono-black);
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform var(--d-slow) var(--e-expo);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
+}
+.pstep.in .pstep__bar::before { transform: scaleX(1); }
+
+@media (max-width: 1100px) {
+  .proc { padding-inline: var(--s-5); }
+  .proc__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pstep--lead { grid-column: span 2; }
+}
+@media (max-width: 860px) {
+  .proc__top { flex-direction: column; gap: var(--s-4); }
+  .proc__grid { grid-template-columns: minmax(0, 1fr); }
+  .pstep--lead { grid-column: span 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pstep__card, .pstep__bar::before { transition: none; }
+  .pstep:hover .pstep__card { transform: none; }
+  .pstep__bar::before { transform: scaleX(1); }
+}
