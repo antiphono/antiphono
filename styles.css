@@ -4359,3 +4359,37 @@ html.js .panel--response .rise { transition-delay: var(--pair-delay); }
   html.js .panel--response .reveal .line,
   html.js .panel--response .rise { transition-delay: 0s; }
 }
+
+/* ---- Staggered numeral pairs (home 1.3) --------------------------
+   Not a .pair. Contrast comes from scale alone, on one ground. */
+.stagger { display: flex; flex-direction: column; gap: var(--space-3xl); }
+.stagger__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: baseline;
+}
+.stagger__item:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.stagger__item:nth-child(even) .stagger__num { order: 2; }
+.stagger__num {
+  font-size: var(--text-poster);
+  line-height: var(--leading-poster);
+  letter-spacing: var(--track-poster);
+  font-weight: var(--weight-semi);
+  color: var(--grey-light);
+  margin: 0;
+}
+.stagger__text {
+  font-size: var(--text-body2);
+  line-height: var(--leading-body2);
+  letter-spacing: var(--track-body2);
+  max-width: 40ch;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .stagger__item,
+  .stagger__item:nth-child(even) { grid-template-columns: minmax(0, 1fr); }
+  .stagger__item:nth-child(even) .stagger__num { order: 0; }
+}
