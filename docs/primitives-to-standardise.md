@@ -27,11 +27,11 @@ Usage counts are how many pages reference each class today.
 | `.stack` / `.stack-lg` | — | ✅ | ✅ | | Flex column with a gap. Trivial, low risk. |
 | `.footer` | `.apex-footer` | `.ft` | `.footer` | | Three footers. Only one should survive. |
 | `.line` / `.line-w` | `.reveal-line` | ✅ | ✅ | | Text reveal wrapper. Behaviour differs, check both before choosing. |
-| `.ph` | — | ✅ placeholder | ✅ | | Image placeholder surface. |
+| `.ph` | — | ✅ placeholder | ✅ | **index** | 18 Aug, done. Genuine duplicate, both placeholder image surfaces. 2 legacy rules deleted, no markup change needed since the name is shared. |
 | `.panel` | — | ✅ inset panel | ✅ | | Index's version was already removed once for colliding. |
 | `.mobile-menu` | ✅ | `.menu` | ✅ | | `scripts/apex.js` now resolves any of them, so markup can standardise without touching JS. |
 | `.skip-link` / `.apex-skip` | ✅ | ✅ | ✅ | **`.apex-skip`** | Decided 18 Aug. Keyboard test required on every page after the swap: this is the one primitive where a silent failure is an accessibility defect. |
-| `.statement` | — | ✅ | ✅ | | |
+| `.statement` | — | ✅ grid layout | ✅ type treatment | **NEITHER, rename one** | 18 Aug. Not a duplicate. Index's is `display: grid` with a 1.25fr/1fr split. Legacy's is a font-size clamp. Same name, different components. Deleting either breaks pages. Rename one before touching it. |
 | `.metrics` / `.stat-card` | — | ✅ both | ✅ | | Index has two of these itself. |
 | `.small` | ✅ (18 uses) | ✅ (1 use) | ✅ | Apex | Already decided on usage, kept here for the record. |
 
@@ -80,6 +80,21 @@ which is page work, not a find and replace.
 
 Buttons, heroes, footers, rows, metrics and the mobile menu are all in
 the second group.
+
+## Third category: name collisions
+
+`.statement` turned this from a two-way split into a three-way one.
+
+- **Reclassable** — same job, different name. Swap markup, delete the loser.
+- **Rebuild required** — composed component with internal layout. Wait for the page.
+- **Name collision** — *different* components that happen to share a name.
+  Neither is a duplicate. Deleting either breaks something. One must be
+  renamed before it can be reasoned about at all.
+
+Before deleting any remaining legacy rule, read both definitions. If they
+do different jobs, it belongs in the third group. `.line`, `.panel`,
+`.row` and `.metrics` are the likely candidates, since all four exist in
+both systems and index redefined several of them from scratch.
 
 ## Note on the container swap
 
