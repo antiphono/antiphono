@@ -7,11 +7,14 @@ The full build specification is at `docs/site-build-spec.md`. Read it before sta
 ## Stack, and what not to add
 
 - HTML: static `.html` files served directly.
-- CSS: one custom `styles.css`. No Tailwind, no Bootstrap, no CSS framework.
-- JavaScript: vanilla only. `script.js`, `render.js`, `data.js`.
+- CSS: one stylesheet, `styles/system.css`. No Tailwind, no Bootstrap, no CSS framework.
+- JavaScript: one behaviour file, `scripts/apex.js`, plus `render.js` and `data.js`.
+- Libraries: GSAP with ScrollTrigger, and Lenis, loaded from a CDN. Approved 17 August 2026.
 - Node: a light `server.js` serving static files and proxying an RSS feed.
 
-Never add a framework, a bundler, a build step or an npm dependency beyond what `server.js` already uses.
+Never add a bundler, a build step or an npm dependency beyond what `server.js` already uses. Libraries load from a CDN as plain script tags, so the site stays static files served directly.
+
+Frameworks were prohibited until 17 August 2026, when GSAP and Lenis were approved. That reversal, and the move to `styles/system.css`, are recorded in `knowledge/decisions/`. Read those before assuming a rule still holds.
 
 Page body content lives in the HTML. JavaScript handles the gallery, the counters, navigation and interaction only. Every page must be readable with JavaScript disabled.
 
@@ -56,6 +59,7 @@ The rebrand has not been announced. **Every page ships with `<meta name="robots"
 | Topic | File |
 |---|---|
 | Full build specification | `docs/site-build-spec.md` |
+| Duplicate primitives, what to keep | `docs/primitives-to-standardise.md` |
 | Approved page copy | `docs/copy/` |
 | Navigation, footer, states, 404 | `docs/copy/navigation-and-states.md` |
 | SEO and AEO requirements | `.claude/rules/seo-aeo.md` |
@@ -85,7 +89,7 @@ When a decision is made or changed during a session, write it to `knowledge/deci
 
 ## Do not
 
-- Do not add a framework, bundler or npm dependency.
+- Do not add a bundler, build step or npm dependency. CDN script tags only.
 - Do not render body content with JavaScript.
 - Do not invent statistics, client quotes, outcomes or case study figures.
 - Do not ship the placeholder counter values. See `.claude/rules/counters.md`.
@@ -95,5 +99,6 @@ When a decision is made or changed during a session, write it to `knowledge/deci
 - Do not imply Antiphono deploys to client production environments.
 - Do not name GroupTogether or Future Women outside a case study.
 - Do not use em dashes.
-- Do not apply a colour palette or brand typeface. There is no approved visual identity yet. The retired navy, teal and slate palette must not be used.
+- The retired navy, teal and slate palette must not be used.
+- Typefaces as at 18 August 2026: Helvetica Neue for headlines, Inter for body on Apex pages, Sora for body on pages still using the older components. Helvetica Neue is a system face, so it renders differently on Windows and Android. Self-hosting a display face is still an open decision.
 - Do not remove `noindex` without Ben's explicit instruction.
