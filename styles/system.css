@@ -3256,8 +3256,7 @@ a.ct__fact:hover { color: var(--mono-30); }
    ------------------------------------------------------------
    styles.css wrapped under .legacy on 18 August 2026 so the site
    runs on one stylesheet without the two systems colliding.
-   Thirty class names are shared, including .hero, .btn, .section,
-   .shell, .row, .stack, .footer and .line, so a flat merge would
+   Thirty class names are shared, including .hero, .btn, .section, .shell, .row, .stack, .footer and .line, so a flat merge would
    have broken both sides.
 
    Pages still on the old markup carry class="legacy" on the body
@@ -4263,7 +4262,6 @@ body.legacy {
   color: var(--black);
   padding: 80px var(--gutter);
 }
-.legacy .section { position: relative; background: var(--black); }
 .legacy .section--light { background: var(--white); color: var(--black); }
 .legacy .section__inner { width: 100%; padding: 80px var(--gutter); }
 .legacy .section__inner--flush-bottom { padding-bottom: 40px; }
@@ -4971,20 +4969,6 @@ body.legacy {
 .legacy .footer__top, .legacy .footer-top { grid-template-columns: 1fr; gap: 32px; }
 
 }
-.legacy .skip-link {
-  position: absolute;
-  top: -100%;
-  left: 16px;
-  z-index: 9999;
-  padding: 10px 16px;
-  background: var(--white);
-  color: var(--black);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  border-radius: 4px;
-  text-decoration: none;
-}
-.legacy .skip-link:focus { top: 16px; }
 .legacy .error-page {
   min-height: 100svh;
   display: flex;
@@ -5657,10 +5641,8 @@ body.legacy {
 }
 .legacy .section--light .aid-quicklinks a { color: var(--grey-mid); border-bottom-color: var(--line-dark); }
 .legacy .aid-quicklinks a:hover { color: var(--black); border-bottom-color: var(--black); }
-.legacy .section--dark .aid-quicklinks a, .legacy .section:not(.section--light) .aid-quicklinks a { color: var(--grey); border-bottom-color: var(--line); }
-.legacy .section:not(.section--light) .aid-quicklinks a:hover { color: var(--white); border-bottom-color: var(--white); }
+.legacy .section--dark .aid-quicklinks a { color: var(--grey); border-bottom-color: var(--line); }
 .legacy .benefit-icon { width: 26px; height: 26px; display: block; margin-bottom: 14px; color: var(--grey-mid); }
-.legacy .section:not(.section--light) .benefit-icon { color: var(--grey); }
 .legacy .benefit-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .legacy .benefit-icon svg.is-filled { fill: currentColor; stroke: none; }
 .legacy .tool-logo__icon { width: 14px; height: 14px; flex: 0 0 auto; }
@@ -5670,7 +5652,6 @@ body.legacy {
   font-size: 12px; letter-spacing: 0.02em; color: var(--grey-mid);
   border: 1px solid var(--line-dark); padding: 7px 12px 7px 10px; border-radius: var(--radius);
 }
-.legacy .section:not(.section--light) .tool-chip { color: var(--grey-light); border-color: var(--line); }
 .legacy .tool-chip--bare { border: none; padding: 0; }
 .legacy .tool-mark { display: inline-flex; width: 15px; height: 15px; vertical-align: -3px; margin-right: 6px; color: inherit; }
 .legacy .tool-mark .tool-logo__icon { width: 100%; height: 100%; }
@@ -5684,29 +5665,23 @@ body.legacy {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
   padding: 18px 20px; border: 1px solid var(--line-dark); margin-top: 16px;
 }
-.legacy .section:not(.section--light) .aid-loop-strip { border-color: var(--line); }
 .legacy .aid-loop-strip .aid-loop-arrow { color: var(--grey); font-size: 16px; flex: 0 0 auto; }
 .legacy .aid-loop-strip .aid-loop-node { display: flex; flex-direction: column; gap: 8px; flex: 1 1 0; min-width: 0; }
 .legacy .aid-loop-strip .aid-loop-node span.lbl { font-family: var(--font); font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey); }
 .legacy .aid-loop-strip .aid-loop-node .tool-mark { flex: 0 0 auto; }
 .legacy .aid-folder-block + .aid-folder-block { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line-dark); }
-.legacy .section:not(.section--light) .aid-folder-block + .aid-folder-block { border-top-color: var(--line); }
 .legacy .aid-org-diagram { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; border: 1px solid var(--line-dark); }
-.legacy .section:not(.section--light) .aid-org-diagram { border-color: var(--line); }
 .legacy .aid-org-diagram__cell { flex: 1 1 200px; padding: 18px 20px; border-left: 1px solid var(--line-dark); }
-.legacy .section:not(.section--light) .aid-org-diagram__cell { border-left-color: var(--line); }
 .legacy .aid-org-diagram__cell:first-child { border-left: none; }
 .legacy .aid-org-diagram__cell .aid-note { display: block; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
 .legacy .aid-org-diagram__cell h4 { font-size: 0.95rem; margin: 0 0 6px; }
 .legacy .aid-org-diagram__cell p { font-size: 12.5px; line-height: 1.55; color: var(--grey-mid); margin: 0; }
-.legacy .section:not(.section--light) .aid-org-diagram__cell p { color: var(--grey); }
 .legacy .aid-org-diagram__cell--emph { background: var(--dark-surface); }
 .legacy .aid-org-diagram__cell--emph .aid-note, .legacy .aid-org-diagram__cell--emph h4, .legacy .aid-org-diagram__cell--emph p { color: var(--white) !important; }
 .legacy .aid-org-diagram__cell--emph p { color: var(--cream-dim) !important; }
 @media (max-width: 760px) {
 .legacy .aid-org-diagram { flex-direction: column; }
 .legacy .aid-org-diagram__cell { border-left: none; border-top: 1px solid var(--line-dark); }
-.legacy .section:not(.section--light) .aid-org-diagram__cell { border-top-color: var(--line); }
 .legacy .aid-org-diagram__cell:first-child { border-top: none; }
 
 }
@@ -5778,12 +5753,6 @@ body.legacy {
 .legacy .nav-toggle.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
 .legacy .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
 .legacy .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-.legacy .shell {
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
 .legacy .shell--tight { max-width: 1180px; }
 .legacy .band {
   position: relative;

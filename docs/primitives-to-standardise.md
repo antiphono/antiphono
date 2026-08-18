@@ -41,10 +41,10 @@ Four settled on 18 August. Twenty-six still open.
 
 | Primitive | Keep | Retire |
 |---|---|---|
-| Container | `.container-x` | `.shell` |
-| Section | index `.section` | legacy `.section` |
-| Button | `.btn-pill` | `.btn`, `.btn-lime` |
-| Skip link | `.apex-skip` | `.skip-link` |
+| Container | `.container-x` | ~~`.shell`~~ **done** |
+| Section | index `.section` | ~~legacy `.section`~~ **done** |
+| Button | `.btn-pill` | `.btn`, `.btn-lime` — **blocked**, needs page rebuild |
+| Skip link | `.apex-skip` | ~~`.skip-link`~~ **done** |
 
 Rough surface for these four: `.shell` appears on 20 pages, `.skip-link` on 19, `.btn` and `.btn-lime` across most. None is difficult, all are wide, so each wants its own commit.
 
@@ -80,6 +80,14 @@ which is page work, not a find and replace.
 
 Buttons, heroes, footers, rows, metrics and the mobile menu are all in
 the second group.
+
+## Note on the container swap
+
+`.shell` had no max-width, so index's sections ran edge to edge.
+`.container-x` caps at 1800px. Below that width nothing changes, and at
+1440 the two are identical, but on a very wide display index's sections
+now stop at 1800px rather than filling. If full bleed was deliberate,
+drop the max-width from `.container-x` or add a `.container-x--full`.
 
 ## Suggested order
 
