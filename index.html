@@ -732,6 +732,68 @@
     </div>
   </section>
 
+
+  <!-- ============================================================
+       Apex components, populated with Antiphono copy.
+       cine, mani, material and purpose have no index equivalent.
+       vision, driver, systems and journal were not added because
+       index already carries those sections and it would duplicate
+       the content, not the component.
+       ============================================================ -->
+
+  <!-- Cinematic interlude. Full bleed film between arguments. -->
+  <section class="cine" data-theme="dark" aria-label="Studio film">
+    <div class="cine__media">
+      <!-- PLACEHOLDER FOOTAGE, the Apex clip. Swap for the showreel. -->
+      <video src="/media/apex/video/apex-hero-video.mp4"
+             poster="/media/apex/assets/rear-three-quarter.webp"
+             autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+  </section>
+
+  <!-- Manifesto. The studio's position, set large. -->
+  <section class="mani" data-theme="dark" aria-labelledby="h-mani">
+    <div class="container-x mani__inner">
+      <p class="micro-label mani__label">Position / Antiphono</p>
+
+      <h2 class="display-l mani__headline" id="h-mani">
+        <span class="mani__line"><span>Judgement</span></span>
+        <span class="mani__line"><span>Is The Only</span></span>
+        <span class="mani__line"><span>Constraint</span></span>
+      </h2>
+
+      <div class="mani__copy">
+        <p class="body-l mani__body">Making things used to be the expensive part. Drawing every screen, writing every summary, rebuilding every option somebody wanted to compare. That cost has mostly gone.</p>
+        <p class="heading-m mani__statement">You are no longer limited by how much you can produce. You are limited by how well you decide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Material interlude. A visual break, no copy. -->
+  <section class="material" data-theme="dark" aria-label="Detail">
+    <!-- TODO Ben: replace with real work imagery. -->
+    <img class="material__img" src="/media/apex/assets/silver-reflection.webp"
+         alt="" loading="lazy" decoding="async">
+  </section>
+
+  <!-- Purpose. Horizontal card track, scroll driven. -->
+  <section class="purpose" id="approach" data-theme="dark" aria-labelledby="h-purpose">
+    <div class="purpose__track" aria-hidden="true">
+      <figure class="purpose__card"><img src="/media/figma/means-panel.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="/media/figma/services-panel.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="/media/figma/process-kickoff.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="purpose__card"><img src="/media/figma/footer-studio.jpg" alt="" loading="lazy" decoding="async"></figure>
+    </div>
+    <div class="purpose__scrim" aria-hidden="true"></div>
+    <div class="container-x purpose__inner">
+      <p class="micro-label purpose__label">How the work runs</p>
+      <h2 class="display-m" id="h-purpose">
+        <span class="purpose__line"><span>One process, from the</span></span>
+        <span class="purpose__line"><span>problem to the live result.</span></span>
+      </h2>
+    </div>
+  </section>
+
 </main>
 
 <footer class="ft" role="contentinfo">
