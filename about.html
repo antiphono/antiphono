@@ -131,7 +131,41 @@
   <section class="driver" id="founder" data-theme="light" aria-labelledby="h-founder">
     <div class="container-x driver__grid">
       <!-- TODO Ben: replace with a real photograph. No stock imagery. -->
-      <figure class="driver__media media-mask" aria-hidden="true"></figure>
+      <!-- 3D screen deck, moved here from index. Six screens rotate on
+           the Y axis, one facing the camera at a time. Each has a
+           data-slot for a real screenshot. Driven by deck() in
+           scripts/apex.js. -->
+      <figure class="driver__media media-mask" aria-hidden="true">
+<div class="stage">
+        <div class="deck" id="deck" data-captions="Research | Prototypes | Design systems | Front end build | Measurement | The record">
+        <figure class="screen" data-slot="screen-1">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-2">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-3">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-4">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-5">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+        <figure class="screen" data-slot="screen-6">
+          <span class="screen__bar"><i></i><i></i><i></i></span>
+          <span class="screen__view"></span>
+        </figure>
+          <figcaption class="deck__caption" id="deckCaption"></figcaption>
+        </div>
+      </div>
+      </figure>
 
       <div class="driver__copy">
         <p class="micro-label driver__label">02 / Founder</p>

@@ -5491,3 +5491,7 @@ body.legacy {
 .legacy .stagger { display: flex; flex-direction: column; gap: var(--space-3xl); }
 
 }
+/* The deck sits inside a driver media frame on /about rather than
+   filling a hero, so it needs a height and its own stacking context. */
+.driver__media .stage { position: relative; inset: auto; z-index: 0; min-height: clamp(320px, 42vw, 560px); }
+.driver__media .deck { width: min(88%, 620px); }
