@@ -89,20 +89,24 @@
 
   <div class="header-actions">
     <a href="/contact" class="btn-pill header-cta" data-cursor>Get in touch</a>
-    <button class="header-burger" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+    <button type="button" class="header-burger" aria-label="Open menu" aria-expanded="false" aria-controls="apex-mobile-menu" data-menu-open>
       <span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
-  <button class="mobile-menu__close" aria-label="Close menu">Close</button>
-  <a class="mobile-menu__link" href="/work">Work</a>
-  <a class="mobile-menu__link" href="/services">Services</a>
-  <a class="mobile-menu__link" href="/how-we-work">How we work</a>
-  <a class="mobile-menu__link" href="/articles">Thinking</a>
-  <a class="mobile-menu__link" href="/about">About</a>
-  <a class="mobile-menu__link" href="/contact">Get in touch</a>
+<div class="mobile-menu" id="apex-mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <button type="button" class="mobile-menu__close" data-menu-close>Close</button>
+  <nav aria-label="Mobile">
+    <ul style="display:grid;gap:0.2em">
+      <li><a class="mobile-menu__link" href="/work"><span>Work</span></a></li>
+      <li><a class="mobile-menu__link" href="/services"><span>Services</span></a></li>
+      <li><a class="mobile-menu__link" href="/how-we-work"><span>How we work</span></a></li>
+      <li><a class="mobile-menu__link" href="/articles"><span>Thinking</span></a></li>
+      <li><a class="mobile-menu__link" href="/about"><span>About</span></a></li>
+      <li><a class="mobile-menu__link" href="/contact"><span>Get in touch</span></a></li>
+    </ul>
+  </nav>
 </div>
 
 <main id="top">

@@ -202,6 +202,20 @@
 
     menu.inert = true;
 
+    // accessibility.md requires focus trapped while the menu is open.
+    // The panel is a modal dialog, so Tab must cycle inside it rather
+    // than walking out into the page behind.
+    document.addEventListener('keydown', function (e) {
+      if (!open || e.key !== 'Tab') return;
+      var f = Array.prototype.slice.call(
+        menu.querySelectorAll('a[href], button:not([disabled])')
+      ).filter(function (el) { return el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
     function setOpen(next) {
       if (next === open) return;
       open = next;
@@ -678,8 +692,14 @@
       panel.setAttribute('data-open', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
       if (open) {
-        var f = focusable();
-        if (f.length) f[0].focus();
+        // The panel is visibility:hidden until [data-open] applies, and a
+        // browser refuses focus on a hidden element. Wait one frame so the
+        // attribute has taken effect, otherwise focus silently stays on body
+        // and the trap below has nothing to trap.
+        requestAnimationFrame(function () {
+          var f = focusable();
+          if (f.length) f[0].focus();
+        });
       } else {
         toggle.focus();
       }
