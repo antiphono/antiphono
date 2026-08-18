@@ -25,8 +25,9 @@
 <meta name="twitter:description" content="The technical detail behind our process. Repository conventions, environments, deployment, measurement, and how the project record is structured.">
 <meta name="twitter:image" content="https://antiphono.com/images/og-how-we-run-a-project.jpg">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="/styles/tokens.css">
-<link rel="stylesheet" href="/styles.css">
+<!-- One shared system. This page still uses the legacy markup, so
+     the body element carries class="legacy". Drop it when rebuilt. -->
+<link rel="stylesheet" href="/styles/system.css">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {
@@ -50,7 +51,7 @@
 }
 </script>
 </head>
-<body>
+<body class="legacy">
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="cursor" id="cursor"></div>
