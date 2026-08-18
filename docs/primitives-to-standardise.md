@@ -20,9 +20,9 @@ Usage counts are how many pages reference each class today.
 | Primitive | Apex | Index | Legacy | Keep | Why |
 |---|---|---|---|---|---|
 | `.hero` | ✅ full-bleed video | `.herov` | ✅ old home hero | | Three heroes. Apex is the richest, index's deck is the most distinctive. |
-| `.btn` | ✅ pill | ✅ `.btn` | ✅ `.btn-lime` | | Apex `.btn-pill` and index `.btn` are near identical. `.btn-lime` is the odd one. |
-| `.section` | ✅ | ✅ | ✅ | | Pure spacing wrapper. Cheapest to standardise, do this first. |
-| `.shell` / `.container-x` | `.container-x` | `.shell` | `.shell` | | Same job: max width plus gutter. Two names for one thing. |
+| `.btn` | ✅ pill | ✅ `.btn` | ✅ `.btn-lime` | **`.btn-pill`** | Decided 18 Aug. Most complete of the three, with arrow disc and dot variants. `.btn` and `.btn-lime` both retire. |
+| `.section` | ✅ | ✅ | ✅ | **index** | Decided 18 Aug. Pads on `--section-y` so rhythm stays tunable in one place. Apex components own their padding, so little is lost. |
+| `.shell` / `.container-x` | `.container-x` | `.shell` | `.shell` | **`.container-x`** | Decided 18 Aug. Apex is the standard, so its pages need no change. Cost: index's 14 sections and 18 legacy pages swap `.shell` to `.container-x`. |
 | `.row` / `.rows` | — | ✅ ruled list | ✅ | | Index's is the newer, with hover wipe. |
 | `.stack` / `.stack-lg` | — | ✅ | ✅ | | Flex column with a gap. Trivial, low risk. |
 | `.footer` | `.apex-footer` | `.ft` | `.footer` | | Three footers. Only one should survive. |
@@ -30,10 +30,56 @@ Usage counts are how many pages reference each class today.
 | `.ph` | — | ✅ placeholder | ✅ | | Image placeholder surface. |
 | `.panel` | — | ✅ inset panel | ✅ | | Index's version was already removed once for colliding. |
 | `.mobile-menu` | ✅ | `.menu` | ✅ | | `scripts/apex.js` now resolves any of them, so markup can standardise without touching JS. |
-| `.skip-link` / `.apex-skip` | ✅ | ✅ | ✅ | | Accessibility requirement, must survive in exactly one form. |
+| `.skip-link` / `.apex-skip` | ✅ | ✅ | ✅ | **`.apex-skip`** | Decided 18 Aug. Keyboard test required on every page after the swap: this is the one primitive where a silent failure is an accessibility defect. |
 | `.statement` | — | ✅ | ✅ | | |
 | `.metrics` / `.stat-card` | — | ✅ both | ✅ | | Index has two of these itself. |
 | `.small` | ✅ (18 uses) | ✅ (1 use) | ✅ | Apex | Already decided on usage, kept here for the record. |
+
+## Decided so far
+
+Four settled on 18 August. Twenty-six still open.
+
+| Primitive | Keep | Retire |
+|---|---|---|
+| Container | `.container-x` | `.shell` |
+| Section | index `.section` | legacy `.section` |
+| Button | `.btn-pill` | `.btn`, `.btn-lime` |
+| Skip link | `.apex-skip` | `.skip-link` |
+
+Rough surface for these four: `.shell` appears on 20 pages, `.skip-link` on 19, `.btn` and `.btn-lime` across most. None is difficult, all are wide, so each wants its own commit.
+
+## Attempted 18 August, reverted
+
+The four decided primitives were swapped across all pages and their
+legacy rules deleted. Reverted before commit.
+
+**What worked.** `.skip-link` to `.apex-skip` on 17 pages, `.shell` to
+`.container-x` on 7, and the legacy `.section` rules removed. All
+verified fine on /contact: skip link positioned correctly, body ground
+and text correct, no overflow.
+
+**What broke.** `.btn-lime` to `.btn-pill`, 22 occurrences. On legacy
+pages the button rendered 18.5px tall with a transparent fill, so it
+lost its box entirely. `.btn-pill` assumes `display: inline-flex` plus
+its own padding, and something in the legacy cascade overrides
+`display`, leaving it as inline text.
+
+**The lesson.** A class swap is only safe when the two primitives make
+the same layout assumptions. `.skip-link` and `.container-x` are
+positioning and width wrappers, so they transplanted cleanly.
+`.btn-lime` is a composed component with internal layout, so it cannot
+be reclassed. Its pages need the markup rebuilt around `.btn-pill`,
+which is page work, not a find and replace.
+
+**Revised approach.** Split the list in two:
+
+- **Reclassable**, safe to swap and delete: wrappers and utilities that
+  only set position, width, spacing or colour.
+- **Rebuild required**, only retire when the page is rebuilt: anything
+  with internal structure, child elements or its own display mode.
+
+Buttons, heroes, footers, rows, metrics and the mobile menu are all in
+the second group.
 
 ## Suggested order
 
