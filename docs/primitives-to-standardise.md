@@ -101,7 +101,25 @@ that the 3D deck replaced.
 **The test to apply:** is this unused because nothing needs it yet, or
 unused because something replaced it? Only the second is dead.
 
-## Third category: name collisions
+## Correction: the collisions are already solved
+
+An earlier version of this doc called `.hero`, `.panel`, `.mobile-menu`,
+`.metrics__item` and `.statement` name collisions needing a rename
+decision. That was wrong, and it would have cost five decisions and a
+round of renaming for nothing.
+
+The `.legacy` scope already isolates them. Verified in the browser: on
+index, which has no `.legacy` on the body, a `.hero` element resolves to
+the Apex rule and the legacy rule cannot reach it. On a legacy page,
+`.legacy .hero` at specificity 0,2,0 beats `.hero` at 0,1,0.
+
+They coexist correctly as they are. The only thing that cannot happen is
+deleting the legacy version while a page still uses it, which puts them
+in the same bucket as `.btn-lime`: **retire when the page is rebuilt.**
+
+There is no decision to make on any of them.
+
+## Superseded framing, kept for the record: name collisions
 
 `.statement` turned this from a two-way split into a three-way one.
 
