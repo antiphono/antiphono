@@ -16,6 +16,8 @@
    ============================================================ */
 
 
+
+
 /* ---------- Tokens (scoped, was :root) ---------- */
 :root {
   /* Color */
@@ -63,6 +65,8 @@
 
   /* Font stack: neo-grotesk */
   --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Headline face. Body stays on --font-sans. */
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* ---------- Reset (scoped) ---------- */
@@ -867,3 +871,25 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
   .res__cta { width: 100%; display: flex; justify-content: flex-start; }
   .circle-cta { width: min(220px, 64vw); height: min(220px, 64vw); }
 }
+
+/* ============================================================
+   Headline typeface: Helvetica, 18 August 2026
+   ------------------------------------------------------------
+   Sora on display and heading levels only. Every other Apex rule
+   is untouched: sizes, tracking, line heights, colour and motion
+   all still come from the Apex system.
+
+   Headline face is Helvetica Neue, a system font, so nothing is
+   downloaded. Helvetica sets tighter than Sora and slightly tighter
+   than Inter at display sizes, so the tracking is eased back out.
+   Remove this block to revert to the Apex face.
+   ============================================================ */
+.display-xl, .display-l, .display-m,
+.heading-l, .heading-m {
+  font-family: var(--font-display);
+}
+.display-xl { letter-spacing: -0.035em; }
+.display-l  { letter-spacing: -0.032em; }
+.display-m  { letter-spacing: -0.028em; }
+.heading-l  { letter-spacing: -0.024em; }
+.heading-m  { letter-spacing: -0.02em; }
