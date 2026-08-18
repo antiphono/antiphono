@@ -81,6 +81,26 @@ which is page work, not a find and replace.
 Buttons, heroes, footers, rows, metrics and the mobile menu are all in
 the second group.
 
+## Unused is not the same as dead
+
+The dead-code pass worked on the legacy block because that CSS is
+abandoned. Running the same test on the new components gave 60 hits,
+and deleting them would have been wrong.
+
+Fifty-four of the sixty are the **component library**: accordion, bento,
+card, chart, figure-split, logos, quote, rating, offset-grid. They are
+unused because no page has been built from them yet, which is the
+entire reason they exist. Deleting them removes the thing that makes
+duplicating sections across pages possible.
+
+Six were genuinely superseded and were removed: `ct__opt`, `ct__opts`
+and `ct__send` from the contact form that the cal.com embed replaced,
+and `hero__actions`, `hero__foot`, `hero__title` from the index hero
+that the 3D deck replaced.
+
+**The test to apply:** is this unused because nothing needs it yet, or
+unused because something replaced it? Only the second is dead.
+
 ## Third category: name collisions
 
 `.statement` turned this from a two-way split into a three-way one.

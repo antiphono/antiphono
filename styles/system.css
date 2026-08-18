@@ -75,8 +75,7 @@ body, *, *::before, *::after { box-sizing: border-box; }
 /* Lenis needs these on the root element. Guarded so they only
    apply on the Apex page and cannot affect any other page. */
 html { scroll-behavior: auto; }
-html.lenis,
-html.lenis body { height: auto; }
+html.lenis, html.lenis body { height: auto; }
 html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 body {
@@ -234,9 +233,7 @@ h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
   .apex-cursor { display: none; }
 }
 @media (hover: hover) and (pointer: fine) {
-  body.has-custom-cursor,
-  body.has-custom-cursor a,
-  body.has-custom-cursor button { cursor: none; }
+  body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: none; }
 }
 
 /* ---------- Header ---------- */
@@ -344,8 +341,7 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
 .btn-pill:hover { transform: translateY(-2px); }
 .btn-pill--dark { background: var(--apex-black); color: var(--text-on-dark); border-color: var(--apex-black); }
 .btn-pill--dark:hover { background: transparent; color: var(--text-on-light); }
-.hero .btn-pill,
-[data-theme="dark"] .btn-pill { border-color: rgba(255,255,255,0.6); color: var(--text-on-dark); }
+.hero .btn-pill, [data-theme="dark"] .btn-pill { border-color: rgba(255,255,255,0.6); color: var(--text-on-dark); }
 [data-theme="dark"] .btn-pill:hover { background: #fff; color: #111; }
 
 /* circular outline action (feature cards) */
@@ -884,8 +880,7 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
    than Inter at display sizes, so the tracking is eased back out.
    Remove this block to revert to the Apex face.
    ============================================================ */
-.display-xl, .display-l, .display-m,
-.heading-l, .heading-m {
+.display-xl, .display-l, .display-m, .heading-l, .heading-m {
   font-family: var(--font-display);
 }
 .display-xl { letter-spacing: -0.035em; }
@@ -919,8 +914,7 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
    Rebuilt from scratch, 17 August 2026.
 
    Every colour and type value is extracted from the Figma file
-   s1Esp1dOH2iLvYhUXwLjK2, frame "Antiphono_Landing design system",
-   via the Figma MCP get_variable_defs tool. The Figma variable name
+   s1Esp1dOH2iLvYhUXwLjK2, frame "Antiphono_Landing design system", via the Figma MCP get_variable_defs tool. The Figma variable name
    is given against each token so the two can be reconciled.
 
    Nothing here is inherited from the previous build.
@@ -1325,19 +1319,6 @@ body {
   padding-top: calc(var(--s-9));
   padding-bottom: var(--s-6);
 }
-.hero__title { max-width: 20ch; }
-.hero__foot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--s-6);
-  align-items: end;
-  padding-top: var(--s-7);
-  border-top: var(--hair) solid var(--rule);
-}
-.hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
-@media (max-width: 860px) {
-  .hero__foot { grid-template-columns: minmax(0, 1fr); }
-}
 
 /* ---- Marquee -------------------------------------------------- */
 .marquee {
@@ -1404,9 +1385,7 @@ body {
   color: var(--ink-faint);
 }
 @media (max-width: 860px) {
-  .bento__cell,
-  .bento__cell--wide,
-  .bento__cell--half { grid-column: span 12; }
+  .bento__cell, .bento__cell--wide, .bento__cell--half { grid-column: span 12; }
 }
 
 /* ---- Ruled list ----------------------------------------------- */
@@ -1509,14 +1488,10 @@ a.row:hover { padding-inline-start: var(--s-4); }
 .lines.in .line { transform: translateY(0); }
 
 /* No JavaScript: everything is visible and static. */
-.no-js [data-anim],
-.no-js .line { opacity: 1; transform: none; clip-path: none; transition: none; }
+.no-js [data-anim], .no-js .line { opacity: 1; transform: none; clip-path: none; transition: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-anim],
-  [data-anim].in,
-  .line,
-  .lines.in .line {
+  [data-anim], [data-anim].in, .line, .lines.in .line {
     opacity: 1;
     transform: none;
     clip-path: none;
@@ -1531,8 +1506,7 @@ a.row:hover { padding-inline-start: var(--s-4); }
    SECTION TREATMENTS
    ------------------------------------------------------------
    One distinct treatment per content section, so no two read the
-   same. Derived from the Figma design language: generous radii,
-   inset panels, oversized numerals, ground flips.
+   same. Derived from the Figma design language: generous radii, inset panels, oversized numerals, ground flips.
    ============================================================ */
 
 /* Ground flip. A section declares its own ground and the tokens
@@ -1772,8 +1746,7 @@ a.row:hover { padding-inline-start: var(--s-4); }
   position: relative;
   transition: transform var(--d-base) var(--e-expo), background-color var(--d-fast) var(--e-out);
 }
-.accordion__icon::before,
-.accordion__icon::after {
+.accordion__icon::before, .accordion__icon::after {
   content: "";
   position: absolute;
   inset: 50% 25%;
@@ -1875,8 +1848,7 @@ a.row:hover { padding-inline-start: var(--s-4); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .menu, .nav__toggle span, .accordion__icon, .accordion__icon::before,
-  .accordion__icon::after, .chart__bar, .card, .quote__btn { transition: none; }
+  .menu, .nav__toggle span, .accordion__icon, .accordion__icon::before, .accordion__icon::after, .chart__bar, .card, .quote__btn { transition: none; }
   .chart__bar { transform: scaleY(1); }
 }
 
@@ -2461,8 +2433,7 @@ a.row:hover { padding-inline-start: var(--s-4); }
   color: var(--mono-90);
   transition: transform var(--d-base) var(--e-expo);
 }
-.mrow__icon::before,
-.mrow__icon::after {
+.mrow__icon::before, .mrow__icon::after {
   content: "";
   position: absolute;
   inset: 50% 15.63%;
@@ -2931,28 +2902,8 @@ a.ct__fact:hover { color: var(--mono-30); }
 .field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--mono-90); }
 .field textarea { resize: vertical; min-height: 96px; }
 
-.ct__opts { display: flex; flex-wrap: wrap; gap: var(--s-3); }
-.ct__opt input { position: absolute; opacity: 0; pointer-events: none; }
-.ct__opt span {
-  display: inline-flex; align-items: center; height: 44px; padding-inline: var(--s-4);
-  border-radius: var(--tabs-radius); border: var(--hair) solid var(--black-10);
-  font-size: var(--btn-text); line-height: 24px; letter-spacing: -0.01em; color: var(--mono-black);
-  cursor: pointer; transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
-}
-.ct__opt:hover span { border-color: var(--mono-90); }
-.ct__opt input:checked + span { background: var(--mono-90); color: var(--mono-white); border-color: var(--mono-90); }
-.ct__opt input:focus-visible + span { outline: var(--s-1) solid var(--mono-90); outline-offset: 2px; }
-
-.ct__send {
-  height: 68px; border-radius: var(--btn-r); border: var(--hair) solid var(--mono-90);
-  background: var(--mono-90); color: var(--mono-white);
-  font-size: var(--btn-text); font-weight: var(--w-medium); cursor: pointer;
-  transition: background-color var(--d-fast) var(--e-out), color var(--d-fast) var(--e-out);
-}
-.ct__send:hover { background: transparent; color: var(--mono-90); }
-
 @media (max-width: 1100px) { .ct__panel { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); } }
-@media (prefers-reduced-motion: reduce) { .field input, .field textarea, .ct__opt span, .ct__send { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .field input, .field textarea { transition: none; } }
 
 /* ============================================================
    FOOTER, Figma node 5209:1684
@@ -3038,8 +2989,7 @@ a.ct__fact:hover { color: var(--mono-30); }
 .pstep--lead .pstep__card::before { background: none; }
 
 /* ---- Media fills. Every one decorative, empty alt, aria-hidden. --- */
-.wk__media img, .hcard__ph img, .tst__person img, .tst__thumb img,
-.why__figure img, .reel__bg img {
+.wk__media img, .hcard__ph img, .tst__person img, .tst__thumb img, .why__figure img, .reel__bg img {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; display: block;
 }
@@ -3151,8 +3101,7 @@ a.ct__fact:hover { color: var(--mono-30); }
 
 /* Press feedback. Hover is not available on touch, so :active was the
    only missing channel for tactile response. */
-.btn:active, .pill:active, .cta__circle:active, .wcard__btn:active,
-.ct__send:active, .tst__btn:active, .reel__play:active, .tabs__link:active {
+.btn:active, .pill:active, .cta__circle:active, .wcard__btn:active, .tst__btn:active, .reel__play:active, .tabs__link:active {
   transform: scale(0.97);
   transition: transform 160ms var(--e-out);
 }
@@ -3178,8 +3127,7 @@ a.ct__fact:hover { color: var(--mono-30); }
 .menu { transition: transform 440ms var(--e-expo); }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn:active, .pill:active, .cta__circle:active, .wcard__btn:active,
-  .ct__send:active, .tst__btn:active, .reel__play:active, .tabs__link:active { transform: none; }
+  .btn:active, .pill:active, .cta__circle:active, .wcard__btn:active, .tst__btn:active, .reel__play:active, .tabs__link:active { transform: none; }
   .wk__media img, .wk:hover .wk__media img { transition: none; transform: scale(1.06); }
 }
 
@@ -3191,16 +3139,7 @@ a.ct__fact:hover { color: var(--mono-30); }
    own, so they are listed here too. Body copy is untouched and
    still resolves through --font.
    ============================================================ */
-.display, .h1, .h2, .h3,
-.herov__title, .herov__reg,
-.why__title, .why__statement,
-.proc__title, .work__title, .work__count,
-.svc__title, .svc__count, .srow__name, .srow__num,
-.mrow__title, .arts__title, .tst__title, .ct__title,
-.wcard__lede, .wcard__big, .stat-card__value,
-.bento__num, .pstep__num, .pstep__name,
-.wk__label, .ft__word, .art__title,
-.hcard__label, .deck__caption {
+.display, .h1, .h2, .h3, .herov__title, .herov__reg, .why__title, .why__statement, .proc__title, .work__title, .work__count, .svc__title, .svc__count, .srow__name, .srow__num, .mrow__title, .arts__title, .tst__title, .ct__title, .wcard__lede, .wcard__big, .stat-card__value, .bento__num, .pstep__num, .pstep__name, .wk__label, .ft__word, .art__title, .hcard__label, .deck__caption {
   font-family: var(--font-display);
 }
 
@@ -3216,8 +3155,7 @@ a.ct__fact:hover { color: var(--mono-30); }
 
 /* The legacy sheet was written against the older token names. The
    rebuilt tokens no longer define them, so they resolved to nothing
-   and every legacy rule using one silently did nothing. Aliased here,
-   inside the legacy scope, so they cannot leak into the new system. */
+   and every legacy rule using one silently did nothing. Aliased here, inside the legacy scope, so they cannot leak into the new system. */
 .legacy {
   --black: #0A0A0A;
   --white: #F2F1EC;
