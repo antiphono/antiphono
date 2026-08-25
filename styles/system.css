@@ -76,6 +76,16 @@
   --elev-2: 0 24px 64px rgba(0, 0, 0, 0.5);
   --elev-3: 0 60px 140px rgba(0, 0, 0, 0.65);
 
+  /* ---- Highlight --------------------------------------------
+     The text selection block. It used to be declared three times:
+     near-black on the Apex set, white on the index set and white
+     again under .legacy. The index rule won, so selecting text on
+     a light section painted a white block on a near-white ground
+     and the selection was invisible. One rule now, in the signal
+     red, which reads on both grounds. */
+  --highlight: var(--signal-red);
+  --highlight-ink: var(--pure-white);
+
   /* ---- Focus ------------------------------------------------ */
   --focus-ring: 2px;
   --focus-offset: 3px;
@@ -166,7 +176,7 @@ p { font-weight: 400; }
    win where they set their own weight. */
 h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
-::selection { background: var(--apex-black); color: var(--apex-white); }
+::selection { background: var(--highlight); color: var(--highlight-ink); }
 
 /* ---------- Typography utilities ---------- */
 .display-xl {
@@ -427,7 +437,7 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
   will-change: transform;
 }
 .btn-pill:hover { transform: translateY(-2px); }
-.btn-pill--dark { background: var(--apex-black); color: var(--text-on-dark); border-color: var(--apex-black); }
+.btn-pill--dark { background: var(--apex-black); color: var(--pure-white); border-color: var(--apex-black); }
 .btn-pill--dark:hover { background: transparent; color: var(--text-on-light); }
 .hero .btn-pill, [data-theme="dark"] .btn-pill { border-color: rgba(255,255,255,0.6); color: var(--text-on-dark); }
 [data-theme="dark"] .btn-pill:hover { background: #fff; color: #111; }
@@ -1260,7 +1270,7 @@ body {
   overflow-x: hidden;
 }
 
-::selection { background: var(--ink); color: var(--ground); }
+/* The selection highlight is declared once, in the token layer above. */
 
 :focus-visible {
   outline: var(--s-1) solid var(--ink);
@@ -3326,7 +3336,7 @@ a.ct__fact:hover { color: var(--mono-30); }
 .legacy button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
 .legacy img, .legacy video { display: block; max-width: 100%; }
 .legacy svg { display: inline-block; }
-.legacy ::selection { background: var(--white); color: var(--black); }
+/* .legacy ::selection removed. The one highlight reads on both grounds. */
 @media (max-width: 900px) {
 /* --nav-h is the top offset legacy pages reserve for the header. Raised
    from 56px to 64px to match .apex-header, which now sits on every page. */

@@ -16,7 +16,7 @@
    below uses the real production classes from that stylesheet.
    ============================================================ */
 .ds { background: var(--apex-white); color: var(--text-on-light); font-family: var(--font-sans); }
-.ds a { color: inherit; }
+.ds a:not([class]) { color: inherit; }  /* unclassed only, so component demos keep their own colour */
 .ds__wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
 
 .ds__bar {
@@ -150,7 +150,11 @@
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-on-dark)"></div><dl><dt>Ink on dark</dt><dd><code>--text-on-dark</code></dd><dd data-token="--text-on-dark"></dd></dl></div>
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-secondary-dark)"></div><dl><dt>Secondary on dark</dt><dd><code>--text-secondary-dark</code></dd><dd data-token="--text-secondary-dark"></dd></dl></div>
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--signal-red)"></div><dl><dt>Signal</dt><dd><code>--signal-red</code></dd><dd data-token="--signal-red"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--highlight);color:var(--highlight-ink);display:grid;place-items:center;font-size:var(--small)">Selected text</div><dl><dt>Highlight</dt><dd><code>--highlight</code></dd><dd data-token="--highlight"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--highlight-ink);border-bottom:1px solid var(--hairline-light)"></div><dl><dt>Highlight ink</dt><dd><code>--highlight-ink</code></dd><dd data-token="--highlight-ink"></dd></dl></div>
     </div>
+
+    <p class="ds__note" style="margin-top:16px"><strong>The highlight.</strong> This is the block behind selected text. It used to be declared three times, near-black on one component set and white on the other two, and the white one won: selecting text on a light section painted a white block on a near-white ground and the selection disappeared. There is one rule now, in the signal red with white text. Measured: white on the red reads at 4.69:1, and the red block sits between 4.0:1 and 4.69:1 against every ground in the system, so it is visible on black and on white. Try selecting this paragraph, then select something in the dark demo further down.</p>
 
     <h3 style="font-size:var(--body-l);margin-top:36px">Hairlines</h3>
     <p class="ds__note">The system rules lines rather than boxing things in. Two hairlines, one per ground.</p>

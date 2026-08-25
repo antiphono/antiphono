@@ -39,8 +39,12 @@ Everything below is declared in the token layer at the top of `styles/system.css
 | `--hairline-light` | `rgba(17,18,20,0.16)` | Rules on a light ground |
 | `--hairline-dark` | `rgba(255,255,255,0.18)` | Rules on a dark ground |
 | `--signal-red` | `#D7372F` | The single accent. One use at a time |
+| `--highlight` | `var(--signal-red)` | The block behind selected text |
+| `--highlight-ink` | `var(--pure-white)` | Text inside the selection block |
 
 There is also a mono ramp, `--mono-10` through `--mono-90`, used by the index components for tints and fills. Prefer the named tokens above in new work.
+
+**The highlight.** The selection block used to be declared three times, near-black on one component set and white on the other two. The white one won, so selecting text on a light section painted a white block on a near-white ground and the selection disappeared. One rule now, in the signal red with white text: white on the red reads at 4.69:1, and the red block sits between 4.0:1 and 4.69:1 against every ground in the system, so it is visible on black and on white.
 
 **Contrast.** Body text at 4.5:1, large text and interface components at 3:1. Never use colour alone to carry meaning.
 
@@ -167,7 +171,7 @@ A pill that borders in `currentColor`, so it works on both grounds without a var
 | Focus visible | 2px outline, 3px offset, in the current text colour | Never remove without an equally visible replacement |
 | Disabled | Reduced opacity | Set the real `disabled` attribute, not just a class |
 
-Variant: `.btn-pill--dark` fills solid for a primary action on a light ground.
+Variant: `.btn-pill--dark` fills solid with `--apex-black` and sets its label in `--pure-white` for a primary action on a light ground. It takes pure white rather than the off-white `--text-on-dark` so the label is at full strength against the fill.
 
 ### Label, `.micro-label`
 
