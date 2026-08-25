@@ -18,6 +18,9 @@
 <meta name="twitter:description" content="Product design, research and prototyping for technology businesses without an in-house design team. Sydney based, working worldwide.">
 <meta name="twitter:image" content="https://antiphono.com/media/figma/showreel-poster.jpg">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/styles/system.css">
 <script>document.documentElement.classList.add("js")</script>
 
@@ -51,7 +54,7 @@
 }
 </script>
 </head>
-<body>
+<body class="theme-h">
 
 <a href="#main" class="apex-skip">Skip to main content</a>
 
@@ -97,6 +100,7 @@
   <button type="button" class="mobile-menu__close" data-menu-close>Close menu</button>
   <nav aria-label="Mobile">
     <ul style="display:grid;gap:0.2em">
+      <li><a class="mobile-menu__link" href="#work" data-menu-close><span>Work</span></a></li>
       <li><a class="mobile-menu__link" href="#what-we-do" data-menu-close><span>What we do</span></a></li>
       <li><a class="mobile-menu__link" href="#why-us" data-menu-close><span>Why us</span></a></li>
       <li><a class="mobile-menu__link" href="#how-we-work" data-menu-close><span>How we work</span></a></li>
@@ -141,6 +145,7 @@
   <div class="container-x">
     <ul class="secnav__list">
       <li><a href="#clients">Clients</a></li>
+      <li><a href="#work">Work</a></li>
       <li><a href="#what-we-do">What we do</a></li>
       <li><a href="#why-us">Why us</a></li>
       <li><a href="#how-we-work">How we work</a></li>
@@ -197,6 +202,113 @@
     <div style="display:grid;gap:18px" data-stagger>
       <p class="body-l" data-anim="up">You might be a founder who needs senior product thinking and cannot justify a salary yet. A head of product with a roadmap and no one to design it. A technology director who needs design that arrives ready to ship. A marketing director who needs work out the door without quality slipping. Or a design director with a team who want to work this way and no time to work out how.</p>
       <p data-anim="up">Antiphono has been doing this since 2018.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================ WORK WALL
+     A display grid, not a gallery of links. The brief was explicit
+     that these do not go anywhere, so they are figures rather than
+     anchors and nothing here has a hover state: a hover response on
+     something that cannot be clicked promises an interaction that is
+     not coming.
+
+     TODO: Ben. Every tile is a placeholder sized to show the asset
+     shape needed. Real imagery and real project names both wait on
+     the same thing the clients section waits on, which is written
+     permission from each client. No client is named here for the
+     same reason. See the note on section 2.
+     ============================ -->
+<section class="section" id="work" data-theme="light" aria-labelledby="h-work">
+  <div class="container-x">
+    <p class="micro-label">Selected work</p>
+    <h2 class="display-m" style="margin-top:14px;max-width:18ch" id="h-work">A wall of the work, not a list of links</h2>
+    <div class="wall" data-stagger style="margin-top:clamp(36px,5vw,72px)">
+        <figure class="wall__tile wall__tile--portrait" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 01</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--portrait" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 02</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--portrait" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 03</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--wide" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="4:3 landscape"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 04</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--portrait" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 05</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--banner" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="16:9 banner"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 06</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--square" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="1:1 square"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 07</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--square" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="1:1 square"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 08</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--square" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="1:1 square"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 09</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--wide" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="4:3 landscape"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 10</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--portrait" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 11</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
+        <figure class="wall__tile wall__tile--portrait" data-anim="up">
+          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
+          <figcaption class="wall__meta">
+            <span class="wall__name">Project 12</span>
+            <span class="wall__sector">Sector</span>
+          </figcaption>
+        </figure>
     </div>
   </div>
 </section>
