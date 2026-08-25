@@ -5797,7 +5797,6 @@ body.legacy {
 }
 
 /* ---- The one shared display scale, driven by viewport ---- */
-.theme-x .x-huge { font-size: clamp(3.25rem, 11.5vw, 15rem); }
 .theme-x .x-big  { font-size: clamp(2.5rem, 7vw, 8rem); }
 .theme-x .x-mid  { font-size: clamp(1.75rem, 3.4vw, 3.75rem); }
 
@@ -5864,72 +5863,6 @@ body.legacy {
 }
 .x-clients__name:hover { color: var(--x-ink); }
 
-/* ---- Work: pinned horizontal pan ---- */
-.x-work { padding-block: 0 var(--x-pad); overflow: hidden; position: relative; }
-.x-work__viewport { min-height: 76vh; display: flex; align-items: center; }
-.x-work__track { display: flex; gap: clamp(20px, 2.6vw, 56px); padding-inline: var(--gutter); will-change: transform; }
-.x-work__panel { flex: none; display: grid; gap: 16px; align-content: center; }
-.x-work__panel--wide { width: min(78vw, 1180px); }
-.x-work__panel--sq { width: min(42vw, 620px); }
-.x-work__media { overflow: hidden; background: var(--x-raised); }
-.x-work__panel--wide .x-work__media { aspect-ratio: 1920 / 882; }
-.x-work__panel--sq .x-work__media { aspect-ratio: 959 / 880; }
-.x-work__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.x-work__meta { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
-.x-work__name { font-family: var(--x-display); font-weight: 700; font-size: clamp(1.125rem, 1.5vw, 1.625rem); letter-spacing: -0.02em; }
-.x-work__sector { font-size: 0.875rem; color: var(--x-ink-soft); }
-/* No JavaScript, or reduced motion: the track scrolls sideways by hand. */
-.x-work__viewport { overflow-x: auto; scrollbar-width: none; }
-.x-work__viewport::-webkit-scrollbar { display: none; }
-.js .x-work__viewport[data-panned="true"] { overflow-x: hidden; }
-
-/* ---- Sticky stack ---- */
-.x-stack__card {
-  position: sticky; top: 0; min-height: 100dvh;
-  display: grid; align-content: center; gap: clamp(16px, 2vw, 28px);
-  background: var(--x-ground);
-  border-top: 1px solid var(--x-line);
-  padding-block: clamp(48px, 8vh, 110px);
-  will-change: transform;
-}
-.x-stack__idx { color: var(--x-accent-ink); }
-.x-stack__list { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--x-ink-soft); font-size: 0.9375rem; }
-
-/* ---- Bento, six cells for six items ---- */
-.x-bento { display: grid; gap: 1px; background: var(--x-line-soft); grid-template-columns: repeat(6, 1fr); }
-.x-bento__cell { background: var(--x-ground); padding: clamp(24px, 2.6vw, 48px); display: grid; gap: 14px; align-content: start; grid-column: span 6; }
-.x-bento__cell--tint { background: var(--x-raised); }
-.x-bento__cell--accent { background: var(--x-accent); color: #fff; }
-/* Pure white, not a soft alpha: white on #D7372F measures 4.69:1, which
-   clears AA for body text. Any alpha under it does not. Scoped with
-   .theme-x so it outranks the theme's own soft ink rule. */
-.theme-x .x-bento__cell--accent p,
-.theme-x .x-bento__cell--accent h3,
-.theme-x .x-bento__cell--accent .x-bento__num { color: #fff; }
-.x-bento__cell--media { padding: 0; position: relative; min-height: 260px; overflow: hidden; }
-.x-bento__cell--media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.x-bento__num { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--x-accent-ink); }
-.x-bento__cell p { color: var(--x-ink-soft); max-width: 42ch; }
-@media (min-width: 900px) {
-  .x-bento__cell { grid-column: span 2; }
-  .x-bento__cell--w3 { grid-column: span 3; }
-  .x-bento__cell--w4 { grid-column: span 4; }
-}
-
-/* ---- Marquee, the only one on the page ---- */
-.x-marquee { overflow: hidden; border-block: 1px solid var(--x-line); padding-block: clamp(20px, 2.4vw, 40px); }
-.x-marquee__track { display: flex; gap: 0.4em; white-space: nowrap; width: max-content; animation: x-slide 38s linear infinite; }
-.x-marquee__track span { font-family: var(--x-display); font-weight: 700; font-size: clamp(2.25rem, 6vw, 6.5rem); letter-spacing: -0.03em; }
-.x-marquee__track span:nth-child(even) { color: transparent; -webkit-text-stroke: 1px var(--x-line); }
-@keyframes x-slide { to { transform: translateX(-50%); } }
-
-/* ---- Process: scroll progress path ---- */
-.x-steps { display: grid; gap: 0; position: relative; }
-.x-steps::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--x-line-soft); }
-.x-steps__fill { position: absolute; left: 0; top: 0; width: 1px; background: var(--x-accent); transform-origin: 50% 0; transform: scaleY(0); }
-.x-step { padding: clamp(28px, 4vw, 64px) 0 clamp(28px, 4vw, 64px) clamp(24px, 4vw, 72px); border-bottom: 1px solid var(--x-line-soft); display: grid; gap: 12px; }
-.x-step p { color: var(--x-ink-soft); max-width: 56ch; }
-
 /* ---- Split screen ---- */
 .x-split { display: grid; gap: 1px; background: var(--x-line-soft); grid-template-columns: 1fr; }
 @media (min-width: 860px) { .x-split { grid-template-columns: 1fr 1fr; } }
@@ -5938,18 +5871,6 @@ body.legacy {
 .x-split__list { display: grid; gap: 12px; }
 .x-split__list li { font-size: clamp(1.0625rem, 1.5vw, 1.5rem); line-height: 1.25; font-family: var(--x-display); font-weight: 700; letter-spacing: -0.02em; }
 .x-split__half--b .x-split__list li { font-family: var(--x-body); font-weight: 400; letter-spacing: 0; }
-
-/* ---- About: the page's one image and text split ---- */
-.x-about { display: grid; gap: clamp(28px, 4vw, 72px); grid-template-columns: 1fr; align-items: end; }
-@media (min-width: 900px) { .x-about { grid-template-columns: 5fr 7fr; } }
-.x-about__media { overflow: hidden; aspect-ratio: 4 / 5; background: var(--x-raised); }
-.x-about__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.x-about__copy { display: grid; gap: 18px; }
-.x-about__copy p { color: var(--x-ink-soft); max-width: 54ch; }
-.x-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--x-line-soft); margin-top: clamp(28px, 3vw, 48px); }
-.x-fact { background: var(--x-ground); padding: 22px 0 22px 22px; }
-.x-fact b { display: block; font-family: var(--x-display); font-weight: 700; font-size: clamp(1.5rem, 2.4vw, 2.5rem); letter-spacing: -0.03em; }
-.x-fact span { font-size: 0.8125rem; color: var(--x-ink-soft); }
 
 /* ---- Thinking feed ----
    The feed renders through the shared journal component, which was
@@ -5992,12 +5913,153 @@ body.legacy {
   .theme-x [data-anim], .theme-x [data-anim].in {
     transition: none; transform: none; opacity: 1; clip-path: none;
   }
-  .x-marquee__track { animation: none; }
-  .x-stack__card { position: static; min-height: 0; }
-  .x-work__viewport { min-height: 0; overflow-x: auto; }
 }
 @media (max-width: 860px) {
   .x-work__panel--wide { width: 86vw; }
   .x-work__panel--sq { width: 70vw; }
-  .x-stack__card { position: static; min-height: 0; }
 }
+
+/* ============================================================
+   THEME-X: retinting the components adopted from index.
+
+   index's work grid, expander rows, process cards, article cards
+   and contact panel carry real layout design, which is why they
+   were adopted. They also carry index's own colouring: white card
+   grounds, near black ink, and radii from 12px to 1000px. Dropped
+   onto #0B0B0C that broke all three of this page's locks at once,
+   and put .art__title at 1.04:1, which is invisible.
+
+   This block re-skins them without touching their layout. Nothing
+   here changes a grid, a span or a flow: only ground, ink, border
+   and radius.
+   ============================================================ */
+
+/* ---- Shape lock, reasserted over the adopted components ---- */
+.theme-x .wk__media, .theme-x .wk__meta, .theme-x .srow, .theme-x .srow__figure,
+.theme-x .mrow, .theme-x .mrow__figure, .theme-x .pstep__card, .theme-x .pstep__bar,
+.theme-x .art, .theme-x .art__media, .theme-x .wcard, .theme-x .wcard__inner,
+.theme-x .ct__panel, .theme-x .ct__form, .theme-x .stag, .theme-x .pill,
+.theme-x .why__figure, .theme-x .srow__icon, .theme-x .mrow__icon,
+.theme-x .booking__frame { border-radius: 0; }
+
+/* ---- Work grid ---- */
+.theme-x .wk__media { background: var(--x-raised); }
+.theme-x .wk__meta {
+  background: transparent;
+  color: var(--x-ink);
+  padding-top: 16px;
+  border-top: 1px solid var(--x-line-soft);
+}
+.theme-x .wk:hover .wk__meta { background: transparent; color: var(--x-ink); }
+.theme-x .wk__num { color: var(--x-accent-ink); }
+.theme-x .wk__label { color: var(--x-ink); }
+.theme-x .wk__year, .theme-x .wk:hover .wk__year { color: var(--x-ink-soft); }
+.theme-x .wk:hover .wk__name { color: var(--x-ink); }
+.theme-x .wk__media::after { background: rgba(11, 11, 12, 0.28); }
+.theme-x .work__title, .theme-x .work__sub { color: inherit; }
+.theme-x .work__sub { color: var(--x-ink-soft); }
+
+/* ---- Expander rows, services and benefits ---- */
+.theme-x .srow, .theme-x .mrow {
+  border-top: 1px solid var(--x-line-soft);
+  background: transparent;
+}
+.theme-x .srow__summary, .theme-x .mrow__summary { cursor: pointer; }
+.theme-x .srow__num { color: var(--x-accent-ink); }
+.theme-x .srow__name, .theme-x .mrow__title {
+  color: var(--x-ink);
+  font-family: var(--x-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.theme-x .mrow__label { color: var(--x-ink-soft); }
+.theme-x .srow__text, .theme-x .mrow__text { color: var(--x-ink-soft); }
+.theme-x .srow__panel, .theme-x .mrow__panel { background: transparent; }
+.theme-x .srow__figure, .theme-x .mrow__figure { background: var(--x-raised); }
+.theme-x .stag {
+  background: transparent;
+  color: var(--x-ink-soft);
+  border: 1px solid var(--x-line);
+  padding: 6px 12px;
+}
+.theme-x .srow__icon, .theme-x .mrow__icon { color: var(--x-ink-soft); }
+.theme-x details[open] .srow__icon, .theme-x details[open] .mrow__icon { color: var(--x-accent-ink); }
+
+/* ---- Process cards ---- */
+.theme-x .pstep__card {
+  background: var(--x-raised);
+  border: 1px solid var(--x-line-soft);
+}
+.theme-x .pstep--lead .pstep__card { border: 0; }
+.theme-x .pstep__label { color: var(--x-ink-soft); }
+.theme-x .pstep--lead .pstep__label { color: rgba(246, 246, 244, 0.78); }
+.theme-x .pstep__name { color: var(--x-ink); }
+.theme-x .pstep--lead .pstep__name { color: var(--x-ink); }
+.theme-x .pstep__num { color: rgba(246, 246, 244, 0.14); }
+.theme-x .pstep__bar { background: var(--x-line-soft); }
+.theme-x .proc__title { color: var(--x-ink); }
+.theme-x .proc__sub { color: var(--x-ink-soft); }
+
+/* ---- Article cards ---- */
+.theme-x .art {
+  background: transparent;
+  border-top: 1px solid var(--x-line-soft);
+  padding-top: 18px;
+}
+.theme-x .art__media { background: var(--x-raised); }
+.theme-x .art__title { color: var(--x-ink); font-family: var(--x-display); font-weight: 700; letter-spacing: -0.02em; }
+.theme-x .art:hover .art__title { color: var(--x-accent-ink); }
+.theme-x .art__byline b, .theme-x .art__by { color: var(--x-ink); }
+.theme-x .art__byline span, .theme-x .art__time { color: var(--x-ink-soft); }
+.theme-x .art__avatar { background: var(--x-raised); color: var(--x-ink); border-radius: 0; }
+/* .art__head is the card's own white strip with a 12px top radius. It was
+   the last light ground on the page and it put the byline at 1.08:1. */
+.theme-x .art__head { background: transparent; border-radius: 0; padding-inline: 0; }
+.theme-x .arts__title { color: var(--x-ink); }
+.theme-x .arts__sub { color: var(--x-ink-soft); }
+
+/* ---- Fact cards ---- */
+.theme-x .wcard, .theme-x .wcard__inner { background: transparent; }
+.theme-x .wcard { border-top: 1px solid var(--x-line-soft); padding-top: 20px; }
+.theme-x .wcard::after { display: none; }
+.theme-x .wcard__lede {
+  color: var(--x-ink);
+  font-family: var(--x-display); font-weight: 700; letter-spacing: -0.03em;
+}
+.theme-x .wcard__note { color: var(--x-ink-soft); }
+
+/* ---- Why split ---- */
+.theme-x .why__title { color: var(--x-ink); }
+.theme-x .why__figure { background: var(--x-raised); }
+.theme-x .svc__title { color: var(--x-ink); }
+.theme-x .svc__count { color: var(--x-accent-ink); }
+
+/* ---- Contact panel ---- */
+.theme-x .ct__panel { background: var(--x-raised); }
+.theme-x .ct__title { color: var(--x-ink); }
+.theme-x .ct__lead { color: var(--x-ink-soft); }
+.theme-x .ct__fact { color: var(--x-ink); }
+.theme-x a.ct__fact:hover { color: var(--x-accent-ink); }
+.theme-x .ct__form { background: transparent; }
+
+/* ---- Footer ---- */
+.theme-x .x-fcol { display: grid; gap: 12px; align-content: start; }
+.theme-x .x-fcol h3 {
+  color: var(--x-ink-soft);
+  font-family: var(--x-body); font-weight: 500;
+  font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.theme-x .x-fcol a { color: var(--x-ink); display: block; }
+.theme-x .x-fcol a:hover { color: var(--x-accent-ink); }
+.theme-x .x-flegal { color: var(--x-ink-soft); }
+
+/* ---- Capability marquee ---- */
+.theme-x .marquee { border-block: 1px solid var(--x-line-soft); background: transparent; }
+.theme-x .marquee__track { color: var(--x-ink-soft); }
+
+/* ---- Any stray light ground from the adopted set ----
+   A backstop, not a substitute for the rules above. If a component
+   arrives later still painting white, this keeps the theme lock
+   rather than letting a light card appear mid page. */
+.theme-x .pill--solid { background: var(--x-ink); color: var(--x-ground); }
+.theme-x .pill--solid:hover { background: var(--x-accent); color: #fff; }

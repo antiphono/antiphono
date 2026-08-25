@@ -114,13 +114,9 @@
 <main id="main">
 
 <!-- ============================================================
-     1. HERO. Layout family: kinetic display type, bottom aligned.
-
-     The headline is the approved v5 copy, set across the three
-     written lines the copy spec asks for. That is one line more
-     than the taste skill allows in a hero. The approved copy wins,
-     and the scale is measured so the three lines and everything
-     under them still fit one viewport.
+     HERO. Kept from the previous build: it fits one viewport at
+     every width tested and the written line breaks hold from
+     768px up. Nothing on index improves on it.
      ============================================================ -->
 <section class="x-hero" id="top" data-theme="dark" aria-labelledby="h-hero">
   <div class="container-x">
@@ -140,7 +136,6 @@
   </div>
 </section>
 
-<!-- Section navigation -->
 <nav class="secnav" id="secnav" data-theme="dark" aria-label="Sections of this page" data-secnav-hidden="true">
   <div class="container-x">
     <ul class="secnav__list">
@@ -155,14 +150,17 @@
   </div>
 </nav>
 
-<!-- ============================================================
-     2. CLIENTS. Layout family: type wall.
+<!-- Capability strip, index's marquee component. -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>User research &middot; Product strategy &middot; Prototypes you can click &middot; Design systems &middot; Live measurement &middot;&nbsp;</span>
+    <span>User research &middot; Product strategy &middot; Prototypes you can click &middot; Design systems &middot; Live measurement &middot;&nbsp;</span>
+  </div>
+</div>
 
-     Set as names rather than logos. Logos are trademarks and the
-     official asset packs have not been requested yet, so a name
-     set in the studio's own face is both honest and stronger than
-     six mismatched SVGs. TODO: Ben, written permission is still
-     outstanding for every name below.
+<!-- ============================================================
+     CLIENTS. TODO: Ben, written permission is outstanding for
+     every name below, and logo files have not been requested.
      ============================================================ -->
 <section id="clients" data-theme="dark" aria-labelledby="h-clients">
   <div class="container-x">
@@ -181,224 +179,372 @@
 </section>
 
 <!-- ============================================================
-     3. WORK. Layout family: pinned horizontal pan.
+     WORK. index's .work grid, six columns, one wide tile and
+     seven standard, which tiles three full rows exactly.
 
-     Real project imagery, supplied by Ben. Panels are figures, not
-     links: there are no case study pages yet, so a click would go
-     nowhere. Without JavaScript or under reduced motion the track
-     is a normal horizontal scroller, so the work is always
-     reachable.
+     Tiles are figures rather than anchors and carry no arrow
+     affordance, because there are no case study pages yet and a
+     click would go nowhere. The hover zoom is kept: it reads as
+     the image responding, not as a promise of navigation.
      ============================================================ -->
-<section class="x-work" id="work" data-theme="dark" aria-labelledby="h-work">
-  <div class="container-x" style="padding-top:var(--x-pad);padding-bottom:clamp(24px,3vw,48px)">
-    <p class="micro-label" data-anim="up">Selected work</p>
-    <h2 class="x-huge" id="h-work" data-anim="up">Work</h2>
-  </div>
-  <div class="x-work__viewport" data-work-viewport>
-    <div class="x-work__track" data-work-track>
-        <figure class="x-work__panel x-work__panel--sq" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/policyfly-sq.jpg" alt="The PolicyFly underwriting platform home screen, showing policy documents and task lists" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">PolicyFly</span>
-            <span class="x-work__sector">Insurance platform</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/hearsay.jpg" alt="The Hearsay workspace dashboard, showing recent activity and upcoming conversations" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">Hearsay</span>
-            <span class="x-work__sector">Meetings product</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/editor-group.jpg" alt="The Editor Group website on desktop and mobile, showing the rebuilt homepage" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">Editor Group</span>
-            <span class="x-work__sector">Content studio</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/beautycrew.jpg" alt="The BeautyCrew editorial site, showing the article feed and review layouts" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">BeautyCrew</span>
-            <span class="x-work__sector">Beauty publishing</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--sq" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/7travel-sq.jpg" alt="The 7travel key visual, showing destination browsing on mobile" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">7travel</span>
-            <span class="x-work__sector">Travel platform</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/winter-games.jpg" alt="The Winter Games on 7 streaming app across tablet, phone and desktop" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">Winter Games on 7</span>
-            <span class="x-work__sector">Live sport streaming</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/commonwealth-games.jpg" alt="Key screens from the Commonwealth Games on 7 streaming product" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">Commonwealth Games on 7</span>
-            <span class="x-work__sector">Live sport streaming</span>
-          </figcaption>
-        </figure>
-        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
-          <div class="x-work__media"><img src="/media/work/oscar-winter.jpg" alt="Design principles and interface work for the Oscar Winter jewellery store" loading="lazy" decoding="async"></div>
-          <figcaption class="x-work__meta">
-            <span class="x-work__name">Oscar Winter</span>
-            <span class="x-work__sector">Jewellery ecommerce</span>
-          </figcaption>
-        </figure>
+<section class="work" id="work" data-theme="dark" aria-labelledby="h-work">
+  <div class="container-x">
+    <div class="work__top">
+      <div>
+        <p class="micro-label" data-anim="up">Selected work</p>
+        <h2 class="work__title" id="h-work" data-anim="up">Selected work</h2>
+      </div>
+      <div class="work__right">
+        <p class="work__sub" data-anim="up">Eight products, built for technology businesses and media platforms since 2018.</p>
+      </div>
+    </div>
+    <div class="work__grid" data-stagger>
+      <figure class="wk wk--wide" data-anim="up">
+        <span class="wk__media"><img src="/media/work/policyfly.jpg" alt="The PolicyFly underwriting platform, showing policy documents and task management" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">01.</span><span class="wk__label">PolicyFly</span></span>
+          <span class="wk__year">2018 to present</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/hearsay.jpg" alt="The Hearsay workspace dashboard, showing recent activity and upcoming conversations" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">02.</span><span class="wk__label">Hearsay</span></span>
+          <span class="wk__year">2022</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/editor-group.jpg" alt="The Editor Group website on desktop and mobile, showing the rebuilt homepage" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">03.</span><span class="wk__label">Editor Group</span></span>
+          <span class="wk__year">2023</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/beautycrew.jpg" alt="The BeautyCrew editorial site, showing the article feed and review layouts" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">04.</span><span class="wk__label">BeautyCrew</span></span>
+          <span class="wk__year">2018</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/7travel.jpg" alt="The 7travel platform, showing destination browsing and editorial feeds" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">05.</span><span class="wk__label">7travel</span></span>
+          <span class="wk__year">2018</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/winter-games.jpg" alt="The Winter Games on 7 streaming product across tablet, phone and desktop" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">06.</span><span class="wk__label">Winter Games on 7</span></span>
+          <span class="wk__year">2018</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/commonwealth-games.jpg" alt="Key screens from the Commonwealth Games on 7 streaming product" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">07.</span><span class="wk__label">Commonwealth Games on 7</span></span>
+          <span class="wk__year">2018</span>
+        </figcaption>
+      </figure>
+      <figure class="wk " data-anim="up">
+        <span class="wk__media"><img src="/media/work/oscar-winter.jpg" alt="Design principles and interface work for the Oscar Winter jewellery store" loading="lazy" width="1600" height="735"></span>
+        <figcaption class="wk__meta">
+          <span class="wk__name"><span class="wk__num">08.</span><span class="wk__label">Oscar Winter</span></span>
+          <span class="wk__year">2021</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     4. WHO WE WORK WITH. Layout family: full width statement.
+     WHO WE WORK WITH. index's .why split: statement on the left,
+     supporting copy and a portrait on the right.
      ============================================================ -->
-<section id="who" data-theme="dark" aria-labelledby="h-who">
+<section class="why" id="who" data-theme="dark" aria-labelledby="h-who">
   <div class="container-x">
-    <h2 class="x-big" id="h-who" data-anim="clip" style="max-width:16ch">
-      Technology businesses with a product in market and no design team of their own.
+    <div class="why__head">
+      <h2 class="why__title" id="h-who" data-anim="up">Technology businesses with a product in market and no design team of their own.</h2>
+    </div>
+    <div class="why__body">
+      <div class="why__col">
+        <p class="body-l" data-anim="up" style="color:var(--x-ink-soft)">You might be a founder who needs senior product thinking and cannot justify a salary yet. A head of product with a roadmap and no one to design it. A technology director who needs design that arrives ready to ship. A marketing director who needs work out the door without quality slipping. Or a design director with a team who want to work this way and no time to work out how.</p>
+        <p data-anim="up" style="color:var(--x-ink-soft);margin-top:18px">Antiphono has been doing this since 2018.</p>
+      </div>
+      <figure class="why__figure" data-anim="scale">
+        <img src="/media/figma/why-portrait.jpg" alt="Ben Tweedie working at the studio" loading="lazy" width="1600" height="1067">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHAT WE DO. index's .svc expander rows. Native details and
+     summary, so every panel opens with JavaScript disabled.
+     ============================================================ -->
+<section class="svc" id="what-we-do" data-theme="dark" aria-labelledby="h-what">
+  <div class="container-x">
+    <div class="svc__head">
+      <h2 class="svc__title" id="h-what" data-anim="up">What we do</h2>
+      <span class="svc__count" data-anim="up">Four</span>
+    </div>
+    <div class="svc__list" data-stagger>
+      <details class="srow" open data-anim="up">
+        <summary class="srow__summary">
+          <span class="srow__num">01.</span>
+          <span class="srow__main">
+            <span class="srow__body">
+              <span class="srow__name">Know what to build</span>
+              <span class="srow__tags"><span class="stag">User research</span><span class="stag">Product strategy</span><span class="stag">Behavioural analysis</span></span>
+            </span>
+            <span class="srow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="srow__panel">
+          <span class="srow__figure" aria-hidden="true"><img src="/media/figma/services-panel.jpg" alt="" loading="lazy" width="1600" height="1067"></span>
+          <div class="stack">
+            <p class="srow__text">We talk to your users and work out what is worth building. People run the sessions and make the calls. AI compresses the synthesis, which is why we can afford to run more of them.</p>
+          </div>
+        </div>
+      </details>
+      <details class="srow" data-anim="up">
+        <summary class="srow__summary">
+          <span class="srow__num">02.</span>
+          <span class="srow__main">
+            <span class="srow__body">
+              <span class="srow__name">Design and build it</span>
+              <span class="srow__tags"><span class="stag">Product design</span><span class="stag">UX and UI design</span><span class="stag">AI feature design</span><span class="stag">Prototyping</span><span class="stag">Design systems</span><span class="stag">Accessibility</span><span class="stag">Front end build</span></span>
+            </span>
+            <span class="srow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="srow__panel">
+          <span class="srow__figure" aria-hidden="true"><img src="/media/figma/means-panel.jpg" alt="" loading="lazy" width="1600" height="1067"></span>
+          <div class="stack">
+            <p class="srow__text">Working software, not pictures of it. Built from a real component library, on a real URL, so what you review is what ships.</p>
+          </div>
+        </div>
+      </details>
+      <details class="srow" data-anim="up">
+        <summary class="srow__summary">
+          <span class="srow__num">03.</span>
+          <span class="srow__main">
+            <span class="srow__body">
+              <span class="srow__name">Find out if it worked</span>
+              <span class="srow__tags"><span class="stag">Analytics and measurement</span><span class="stag">Testing and QA</span><span class="stag">Live variant testing</span></span>
+            </span>
+            <span class="srow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="srow__panel">
+          <span class="srow__figure" aria-hidden="true"><img src="/media/figma/why-fact.jpg" alt="" loading="lazy" width="1600" height="1067"></span>
+          <div class="stack">
+            <p class="srow__text">We find out whether it worked, instead of arguing about it. Tracking goes in at the prototype stage, so a feature is measurable from its first session.</p>
+          </div>
+        </div>
+      </details>
+      <details class="srow" data-anim="up">
+        <summary class="srow__summary">
+          <span class="srow__num">04.</span>
+          <span class="srow__main">
+            <span class="srow__body">
+              <span class="srow__name">Take it in house</span>
+              <span class="srow__tags"><span class="stag">AI workflow setup</span><span class="stag">The project record</span><span class="stag">Design system governance</span><span class="stag">Training</span></span>
+            </span>
+            <span class="srow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="srow__panel">
+          <span class="srow__figure" aria-hidden="true"><img src="/media/figma/footer-studio.jpg" alt="" loading="lazy" width="1600" height="1067"></span>
+          <div class="stack">
+            <p class="srow__text">We hand the method over so your team can run it without us. Most clients eventually want some of this running in house, and we build towards that from the start.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+    <p class="body-l" data-anim="up" style="max-width:52ch;margin-top:clamp(32px,4vw,56px)">Most people come to us with one specific thing. A feature that is not converting. A product that needs research behind it. A design system that has drifted. That is the right place to start.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY US. index's .means expander rows, six of them.
+     ============================================================ -->
+<section class="means" id="why-us" data-theme="dark" aria-labelledby="h-why">
+  <div class="container-x">
+    <h2 class="x-big" id="h-why" data-anim="up" style="max-width:14ch;margin-bottom:clamp(32px,4vw,56px)">Why companies work with us</h2>
+    <div class="means__list" data-stagger>
+      <details class="mrow" open data-anim="up">
+        <summary class="mrow__summary">
+          <span class="mrow__label">Your team</span>
+          <span class="mrow__main">
+            <span class="mrow__title">(01) You get a design team without hiring one.</span>
+            <span class="mrow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="mrow__panel">
+          <span class="mrow__figure" aria-hidden="true"><img src="/media/work/policyfly.jpg" alt="" loading="lazy" width="1600" height="735"></span>
+          <div class="mrow__body">
+            <p class="mrow__text">Senior product design, research and front end capability, available when you need it and not on your payroll. No recruitment, no ramp up, no salary commitment before you know what the work is worth.</p>
+          </div>
+        </div>
+      </details>
+      <details class="mrow" data-anim="up">
+        <summary class="mrow__summary">
+          <span class="mrow__label">The AI part</span>
+          <span class="mrow__main">
+            <span class="mrow__title">(02) We have already worked out the AI part.</span>
+            <span class="mrow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="mrow__panel">
+          <span class="mrow__figure" aria-hidden="true"><img src="/media/work/hearsay.jpg" alt="" loading="lazy" width="1600" height="735"></span>
+          <div class="mrow__body">
+            <p class="mrow__text">Most teams know AI should be changing how they design and build, and have not had time to work out how. We have spent two years on it. You get the method, the guardrails and the tooling decisions without doing that work yourself.</p>
+          </div>
+        </div>
+      </details>
+      <details class="mrow" data-anim="up">
+        <summary class="mrow__summary">
+          <span class="mrow__label">Speed</span>
+          <span class="mrow__main">
+            <span class="mrow__title">(03) You see working prototypes in days.</span>
+            <span class="mrow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="mrow__panel">
+          <span class="mrow__figure" aria-hidden="true"><img src="/media/work/editor-group.jpg" alt="" loading="lazy" width="1600" height="735"></span>
+          <div class="mrow__body">
+            <p class="mrow__text">Real, clickable software built from real components, usually more than one direction at a time. Feedback stops being an event you schedule and becomes something you can repeat.</p>
+          </div>
+        </div>
+      </details>
+      <details class="mrow" data-anim="up">
+        <summary class="mrow__summary">
+          <span class="mrow__label">Budget</span>
+          <span class="mrow__main">
+            <span class="mrow__title">(04) Your budget covers more.</span>
+            <span class="mrow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="mrow__panel">
+          <span class="mrow__figure" aria-hidden="true"><img src="/media/work/beautycrew.jpg" alt="" loading="lazy" width="1600" height="735"></span>
+          <div class="mrow__body">
+            <p class="mrow__text">Production and synthesis used to absorb most of a design budget. They no longer do. Our rates have not dropped. What you get for them has changed.</p>
+          </div>
+        </div>
+      </details>
+      <details class="mrow" data-anim="up">
+        <summary class="mrow__summary">
+          <span class="mrow__label">Your developers</span>
+          <span class="mrow__main">
+            <span class="mrow__title">(05) Your developers stay in control.</span>
+            <span class="mrow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="mrow__panel">
+          <span class="mrow__figure" aria-hidden="true"><img src="/media/work/7travel.jpg" alt="" loading="lazy" width="1600" height="735"></span>
+          <div class="mrow__body">
+            <p class="mrow__text">We build front end code and components, then hand them over. Your team reviews, merges and ships through your own pipeline. We do not deploy to your production environment and we do not own your release process.</p>
+          </div>
+        </div>
+      </details>
+      <details class="mrow" data-anim="up">
+        <summary class="mrow__summary">
+          <span class="mrow__label">Ownership</span>
+          <span class="mrow__main">
+            <span class="mrow__title">(06) You own everything, including the reasoning.</span>
+            <span class="mrow__icon" aria-hidden="true"></span>
+          </span>
+        </summary>
+        <div class="mrow__panel">
+          <span class="mrow__figure" aria-hidden="true"><img src="/media/work/oscar-winter.jpg" alt="" loading="lazy" width="1600" height="735"></span>
+          <div class="mrow__body">
+            <p class="mrow__text">Code, designs, research, the design system, and a written record of why every decision was made. All of it in your repositories and your accounts. Nothing is held back to keep you dependent.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY NOW. Statement, index's .mani treatment.
+     ============================================================ -->
+<section class="mani" id="why-now" data-theme="dark" aria-labelledby="h-now">
+  <div class="container-x mani__inner">
+    <h2 class="display-l mani__headline" id="h-now">
+      <span class="mani__line"><span>You are limited</span></span>
+      <span class="mani__line"><span>by how well</span></span>
+      <span class="mani__line"><span>you decide.</span></span>
     </h2>
-    <div style="display:grid;gap:18px;max-width:60ch;margin-top:clamp(28px,4vw,56px)" data-stagger>
-      <p class="body-l" data-anim="up" style="color:var(--x-ink-soft)">You might be a founder who needs senior product thinking and cannot justify a salary yet. A head of product with a roadmap and no one to design it. A technology director who needs design that arrives ready to ship. A marketing director who needs work out the door without quality slipping. Or a design director with a team who want to work this way and no time to work out how.</p>
-      <p data-anim="up" style="color:var(--x-ink-soft)">Antiphono has been doing this since 2018.</p>
+    <div class="mani__copy">
+      <p class="mani__body">Making things used to be the expensive part. That cost has mostly gone. Judgement has not, so the constraint moved.</p>
+      <p class="mani__body">Most teams are still working around a constraint that disappeared, which is why the design process at a lot of companies still looks like it did in 2019.</p>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     5. WHAT WE DO. Layout family: sticky card stack.
-     Each service group pins at the top of the viewport and the one
-     behind it recedes, so the four groups read as one sequence
-     rather than four boxes. Falls back to a plain stack under
-     reduced motion and below 860px.
+     HOW WE WORK. index's .proc grid: a lead card carrying the
+     photograph, then three standard cards.
      ============================================================ -->
-<section id="what-we-do" data-theme="dark" aria-labelledby="h-what" style="padding-block:0">
-  <div class="container-x" style="padding-top:var(--x-pad)">
-    <p class="micro-label" data-anim="up">What we do</p>
-    <h2 class="x-huge" id="h-what" data-anim="up">Four things.</h2>
-  </div>
-  <div data-stack>
-      <article class="x-stack__card container-x">
-        <h3 class="x-big">Research and strategy</h3>
-        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">We talk to your users and work out what is worth building.</p>
-        <ul class="x-stack__list"><li>User research</li><li>Product strategy</li><li>Behavioural analysis</li></ul>
-      </article>
-      <article class="x-stack__card container-x">
-        <h3 class="x-big">Design and build</h3>
-        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">Working software, not pictures of it.</p>
-        <ul class="x-stack__list"><li>Product design</li><li>UX and UI design</li><li>AI feature design</li><li>Prototyping</li><li>Design systems</li><li>Accessibility</li><li>Front end build</li></ul>
-      </article>
-      <article class="x-stack__card container-x">
-        <h3 class="x-big">Testing and measurement</h3>
-        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">We find out whether it worked, instead of arguing about it.</p>
-        <ul class="x-stack__list"><li>Analytics and measurement</li><li>Testing and QA</li><li>Live variant testing</li></ul>
-      </article>
-      <article class="x-stack__card container-x">
-        <h3 class="x-big">Setting your team up</h3>
-        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">We hand the method over so your team can run it without us.</p>
-        <ul class="x-stack__list"><li>AI workflow setup</li><li>The project record</li><li>Design system governance</li><li>Training</li></ul>
-      </article>
-  </div>
-</section>
-
-<!-- ============================================================
-     6. WHY US. Layout family: asymmetric bento.
-     Six items, six cells, no empty tiles. One accent cell and two
-     tinted cells carry the visual variation.
-     ============================================================ -->
-<section id="why-us" data-theme="dark" aria-labelledby="h-why">
+<section class="proc" id="how-we-work" data-theme="dark" aria-labelledby="h-how">
   <div class="container-x">
-    <h2 class="x-big" id="h-why" data-anim="up" style="margin-bottom:clamp(32px,4vw,64px);max-width:14ch">Why companies work with us</h2>
-  </div>
-  <div class="container-x">
-    <div class="x-bento" data-stagger>
-        <div class="x-bento__cell x-bento__cell--w3 " data-anim="up">
-          <h3 class="x-mid">You get a design team without hiring one</h3>
-          <p>Senior product design, research and front end capability, available when you need it and not on your payroll. No recruitment, no ramp up, no salary commitment before you know what the work is worth.</p>
-        </div>
-        <div class="x-bento__cell x-bento__cell--w3 x-bento__cell--accent" data-anim="up">
-          <h3 class="x-mid">We have already worked out the AI part</h3>
-          <p>Most teams know AI should be changing how they design and build, and have not had time to work out how. We have spent two years on it. You get the method, the guardrails and the tooling decisions without doing that work yourself.</p>
-        </div>
-        <div class="x-bento__cell x-bento__cell--w4 " data-anim="up">
-          <h3 class="x-mid">You see working prototypes in days</h3>
-          <p>Real, clickable software built from real components, usually more than one direction at a time. Feedback stops being an event you schedule and becomes something you can repeat.</p>
-        </div>
-        <div class="x-bento__cell  x-bento__cell--tint" data-anim="up">
-          <h3 class="x-mid">Your budget covers more</h3>
-          <p>Production and synthesis used to absorb most of a design budget. They no longer do. Our rates have not dropped. What you get for them has changed.</p>
-        </div>
-        <div class="x-bento__cell  " data-anim="up">
-          <h3 class="x-mid">Your developers stay in control</h3>
-          <p>We build front end code and components, then hand them over. Your team reviews, merges and ships through your own pipeline. We do not deploy to your production environment.</p>
-        </div>
-        <div class="x-bento__cell x-bento__cell--w4 x-bento__cell--tint" data-anim="up">
-          <h3 class="x-mid">You own everything, including the reasoning</h3>
-          <p>Code, designs, research, the design system, and a written record of why every decision was made. All of it in your repositories and your accounts.</p>
-        </div>
+    <div class="proc__top">
+      <div class="proc__intro">
+        <h2 class="proc__title" id="h-how" data-anim="up">One process, from the problem to the live result</h2>
+        <p class="proc__sub" data-anim="up">Most organisations run a design process and a development process that meet awkwardly in the middle. The gap between them is where the money goes. Antiphono runs one process instead.</p>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     7. WHY NOW. Layout family: kinetic marquee plus statement.
-     The only marquee on the page.
-     ============================================================ -->
-<section id="why-now" data-theme="dark" aria-labelledby="h-now" style="padding-block:0">
-  <div class="x-marquee" aria-hidden="true">
-    <div class="x-marquee__track"><span>Research</span><span aria-hidden="true">/</span><span>Design</span><span aria-hidden="true">/</span><span>Prototype</span><span aria-hidden="true">/</span><span>Measure</span><span aria-hidden="true">/</span><span>Hand over</span><span aria-hidden="true">/</span><span>Research</span><span aria-hidden="true">/</span><span>Design</span><span aria-hidden="true">/</span><span>Prototype</span><span aria-hidden="true">/</span><span>Measure</span><span aria-hidden="true">/</span><span>Hand over</span><span aria-hidden="true">/</span></div>
-  </div>
-  <div class="container-x" style="padding-block:var(--x-pad)">
-    <h2 class="x-big" id="h-now" data-anim="clip" style="max-width:15ch">You are no longer limited by how much you can produce. You are limited by how well you decide.</h2>
-    <p class="body-l" data-anim="up" style="color:var(--x-ink-soft);max-width:56ch;margin-top:clamp(24px,3vw,44px)">Making things used to be the expensive part. That cost has mostly gone. Judgement has not, so the constraint moved. Most teams are still working around a constraint that disappeared, which is why the design process at a lot of companies still looks like it did in 2019.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     8. HOW WE WORK. Layout family: scroll progress path.
-     The rule down the left fills as you read, which is the only
-     job that animation has here: showing how far through the
-     process you are.
-     ============================================================ -->
-<section id="how-we-work" data-theme="dark" aria-labelledby="h-how">
-  <div class="container-x">
-    <h2 class="x-big" id="h-how" data-anim="up" style="max-width:16ch">One process, from the problem to the live result</h2>
-    <p class="body-l" data-anim="up" style="color:var(--x-ink-soft);max-width:56ch;margin:clamp(20px,2.5vw,36px) 0 clamp(32px,4vw,64px)">Most organisations run a design process and a development process that meet awkwardly in the middle. The gap between them is where the money goes. Antiphono runs one process instead.</p>
-    <div class="x-steps" data-steps>
-      <span class="x-steps__fill" data-steps-fill aria-hidden="true"></span>
-        <div class="x-step" data-anim="up">
-          <h3 class="x-mid">Design</h3>
-          <p>A problem to solve, not a solution to build. We research it, then build several directions from live components rather than drawing them. One sign off before engineering effort is committed.</p>
+    <div class="proc__grid" data-stagger>
+      <article class="pstep pstep--lead" data-anim="up">
+        <div class="pstep__card">
+          <span class="pstep__img" aria-hidden="true"><img src="/media/figma/process-kickoff.jpg" alt="" loading="lazy" width="1600" height="1067"></span>
+          <p class="pstep__label">Record</p>
+          <p class="pstep__name">Every stage writes down what it learned, in your repository, next to the code it describes. Month twelve costs less and delivers more than month one, and that is why relationships here run for years.</p>
+          <span class="pstep__num" aria-hidden="true">.01</span>
         </div>
-        <div class="x-step" data-anim="up">
-          <h3 class="x-mid">Build</h3>
-          <p>Working front end code, with measurement wired in as it is written. Built on a branch, following your conventions.</p>
+        <span class="pstep__bar" aria-hidden="true"></span>
+      </article>
+      <article class="pstep" data-anim="up">
+        <div class="pstep__card">
+          <p class="pstep__label">Design</p>
+          <p class="pstep__name">A problem to solve, not a solution to build. We research it, then build several directions from live components rather than drawing them. One sign off before engineering effort is committed.</p>
+          <span class="pstep__num" aria-hidden="true">.02</span>
         </div>
-        <div class="x-step" data-anim="up">
-          <h3 class="x-mid">Test</h3>
-          <p>Internal review on a real URL, then QA and participant testing, then variants running against real traffic. Producing a variant is cheap now, so testing stops being the first thing cut when the timeline tightens.</p>
+        <span class="pstep__bar" aria-hidden="true"></span>
+      </article>
+      <article class="pstep" data-anim="up">
+        <div class="pstep__card">
+          <p class="pstep__label">Build</p>
+          <p class="pstep__name">Working front end code, with measurement wired in as it is written. Built on a branch, following your conventions.</p>
+          <span class="pstep__num" aria-hidden="true">.03</span>
         </div>
-        <div class="x-step" data-anim="up">
-          <h3 class="x-mid">Record</h3>
-          <p>Every stage writes down what it learned, in your repository, next to the code it describes. Month twelve costs less and delivers more than month one, and that is the reason relationships here run for years.</p>
+        <span class="pstep__bar" aria-hidden="true"></span>
+      </article>
+      <article class="pstep" data-anim="up">
+        <div class="pstep__card">
+          <p class="pstep__label">Test</p>
+          <p class="pstep__name">Internal review on a real URL, then QA and participant testing, then variants running against real traffic.</p>
+          <span class="pstep__num" aria-hidden="true">.04</span>
         </div>
+        <span class="pstep__bar" aria-hidden="true"></span>
+      </article>
     </div>
-    <p class="body-l" data-anim="up" style="max-width:44ch;margin-top:clamp(28px,3.5vw,52px)">Someone reviews and signs off before anything moves forward. Moving quickly does not cost you control.</p>
+    <p class="body-l" data-anim="up" style="max-width:46ch;margin-top:clamp(32px,4vw,56px)">Someone reviews and signs off before anything moves forward. Moving quickly does not cost you control.</p>
   </div>
 </section>
 
 <!-- ============================================================
-     9. AI AND PEOPLE. Layout family: split screen.
+     AI AND PEOPLE. Split screen, kept: no component on index
+     carries a two column comparison, and the two faces doing the
+     distinguishing is the point of the section.
      ============================================================ -->
 <section id="ai-and-people" data-theme="dark" aria-labelledby="h-ai" style="padding-block:0">
   <div class="container-x" style="padding-block:var(--x-pad) 0">
-    <h2 class="x-big" id="h-ai" data-anim="up" style="max-width:18ch;margin-bottom:clamp(32px,4vw,64px)">We think you should know exactly where AI sits in this</h2>
+    <h2 class="x-big" id="h-ai" data-anim="up" style="max-width:18ch;margin-bottom:clamp(32px,4vw,56px)">We think you should know exactly where AI sits in this</h2>
   </div>
   <div class="x-split">
     <div class="x-split__half x-split__half--b" data-anim="up">
@@ -416,17 +562,25 @@
       </ul>
     </div>
   </div>
-  <div class="container-x" style="padding-block:clamp(32px,4vw,64px) var(--x-pad)">
+  <div class="container-x" style="padding-block:clamp(32px,4vw,56px) var(--x-pad)">
     <p class="body-l" data-anim="up" style="max-width:44ch">Everything that reaches you has been looked at by a person who is answerable for it.</p>
   </div>
 </section>
 
-<!-- Thinking. Hidden until four articles exist, per the v5 spec. -->
-<section id="thinking" data-theme="dark" aria-labelledby="h-thinking" hidden data-feed-min="4">
+<!-- ============================================================
+     THINKING. index's .arts grid. The feed module already targets
+     #homeArticles, so this needed no new JavaScript.
+     ============================================================ -->
+<section class="arts" id="thinking" data-theme="dark" aria-labelledby="h-arts">
   <div class="container-x">
-    <h2 class="x-big" id="h-thinking">Thinking</h2>
-    <ul id="homeFeed" style="margin-top:clamp(32px,4vw,56px)"></ul>
-    <p style="margin-top:clamp(28px,3.5vw,48px)"><a href="/articles" class="btn-pill" data-cursor><span>Read all articles</span></a></p>
+    <div class="arts__top">
+      <div class="arts__intro">
+        <h2 class="arts__title" id="h-arts" data-anim="up">Thinking</h2>
+        <p class="arts__sub" data-anim="up">How product design is changing, what it means if you run a small technology team, and how to tell whether a change is worth making.</p>
+      </div>
+    </div>
+    <div class="arts__grid" id="homeArticles" data-stagger></div>
+    <p style="margin-top:clamp(28px,3.5vw,48px)"><a href="/articles" class="btn-pill" data-cursor data-magnetic><span>Read all articles</span></a></p>
   </div>
 </section>
 
@@ -435,36 +589,49 @@
 <section id="testimonials" data-theme="dark" hidden aria-label="What clients say"></section>
 
 <!-- ============================================================
-     10. ABOUT. Layout family: asymmetric image and text split.
-     The only image plus text split on the page.
+     ABOUT. index's .why card treatment for the three facts.
      ============================================================ -->
-<section id="about" data-theme="dark" aria-labelledby="h-about">
-  <div class="container-x x-about">
-    <figure class="x-about__media" data-anim="scale">
-      <img src="/media/figma/why-portrait.jpg" alt="Ben Tweedie, founder and product lead at Antiphono" loading="lazy" decoding="async">
-    </figure>
-    <div class="x-about__copy">
-      <h2 class="x-big" id="h-about" data-anim="up" style="max-width:15ch">Small, senior, and the person you meet is the person who does the work</h2>
-      <!-- The entity definition is worded identically here, in the footer and
-           in the meta description. Answer engines need it that way. -->
-      <p class="body-l" data-anim="up">Antiphono is a product design and research studio in Sydney, Australia, working with clients anywhere. Operating since 2018.</p>
-      <p data-anim="up">There is no junior layer absorbing volume and no margin taken on it. Ben Tweedie leads strategy and creative direction, and does the design and prototyping himself.</p>
-      <p data-anim="up">Antiphony is a musical term for call and response. Two voices in dialogue, each shaping the other. That is the relationship between human judgement and AI, and it is why the name changed.</p>
-      <!-- TODO: Ben. Two or three sentences on your background. -->
-    </div>
-  </div>
+<section class="why" id="about" data-theme="dark" aria-labelledby="h-about">
   <div class="container-x">
-    <!-- TODO: Ben. Confirm the eight year figure before this is public. -->
-    <div class="x-facts" data-stagger>
-      <div class="x-fact" data-anim="up"><b>2018</b><span>Working with technology businesses since</span></div>
-      <div class="x-fact" data-anim="up"><b>8 years</b><span>Our longest client relationship, still running</span></div>
-      <div class="x-fact" data-anim="up"><b>Senior only</b><span>No junior layer, no account layer</span></div>
+    <div class="why__head">
+      <h2 class="why__title" id="h-about" data-anim="up">Small, senior, and the person you meet is the person who does the work.</h2>
+    </div>
+    <div class="why__body">
+      <div class="why__col">
+        <!-- The entity definition is worded identically here, in the footer
+             and in the meta description. Do not paraphrase it. -->
+        <p class="body-l" data-anim="up">Antiphono is a product design and research studio in Sydney, Australia, working with clients anywhere. Operating since 2018.</p>
+        <p data-anim="up" style="color:var(--x-ink-soft);margin-top:18px">There is no junior layer absorbing volume and no margin taken on it. Ben Tweedie leads strategy and creative direction, and does the design and prototyping himself.</p>
+        <p data-anim="up" style="color:var(--x-ink-soft);margin-top:18px">Antiphony is a musical term for call and response. Two voices in dialogue, each shaping the other. That is the relationship between human judgement and AI, and it is why the name changed.</p>
+        <!-- TODO: Ben. Two or three sentences on your background. -->
+      </div>
+      <div class="why__cards" data-stagger>
+        <!-- TODO: Ben. Confirm the eight year figure before this is public. -->
+        <div class="wcard" data-anim="up">
+          <div class="wcard__inner">
+            <p class="wcard__lede">2018</p>
+            <p class="wcard__note">Working with technology businesses since</p>
+          </div>
+        </div>
+        <div class="wcard" data-anim="up">
+          <div class="wcard__inner">
+            <p class="wcard__lede">8 years</p>
+            <p class="wcard__note">Our longest client relationship, still running</p>
+          </div>
+        </div>
+        <div class="wcard" data-anim="up">
+          <div class="wcard__inner">
+            <p class="wcard__lede">Senior only</p>
+            <p class="wcard__note">No junior layer, no account layer</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     11. STANDARDS. Layout family: inline band.
+     STANDARDS.
      ============================================================ -->
 <section id="standards" data-theme="dark" aria-labelledby="h-std">
   <div class="container-x" style="display:grid;gap:20px;max-width:70ch">
@@ -476,20 +643,25 @@
 </section>
 
 <!-- ============================================================
-     12. CONTACT. Layout family: display type plus booking.
+     CONTACT. index's .ct panel: statement and facts on the left,
+     the booking frame on the right.
      ============================================================ -->
-<section id="contact" data-theme="dark" aria-labelledby="h-contact">
-  <div class="container-x">
-    <p class="micro-label" data-anim="up">Next step</p>
-    <!-- TODO: Ben. Headline choice, this is the v5 author's pick. -->
-    <h2 class="x-huge" id="h-contact" data-anim="up" style="max-width:12ch">Let's make something worth measuring.</h2>
-    <div style="display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:clamp(36px,5vw,72px)">
-      <div style="display:grid;gap:18px;align-content:start">
-        <p class="body-l" data-anim="up">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem properly, build something you can click, and give you a plan with a number against it.</p>
-        <p data-anim="up" style="color:var(--x-ink-soft)">You own everything it produces, whether or not we do the work that follows. Tell us what you are trying to fix. If we are the right people we will say so, and if we are not we will say that instead.</p>
-        <!-- TODO: Ben. Is two to three weeks realistic? -->
+<section class="ct" id="contact" data-theme="dark" aria-labelledby="h-ct">
+  <div class="ct__panel">
+    <div class="ct__left">
+      <p class="micro-label" data-anim="up">Next step</p>
+      <!-- TODO: Ben. Headline choice, this is the v5 author's pick. -->
+      <h2 class="ct__title" id="h-ct" data-anim="up">Let's make something worth measuring.</h2>
+      <p class="ct__lead" data-anim="up">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem properly, build something you can click, and give you a plan with a number against it.</p>
+      <p class="ct__lead" data-anim="up">Tell us what you are trying to fix. If we are the right people we will say so, and if we are not we will say that instead.</p>
+      <!-- TODO: Ben. Is two to three weeks realistic? -->
+      <div class="ct__facts" data-anim="up">
+        <a class="ct__fact" href="mailto:ben@antiphono.com">ben@antiphono.com</a>
+        <p class="ct__fact">Sydney, Australia. Working worldwide.</p>
       </div>
-      <div class="booking" data-anim="up">
+    </div>
+    <div class="ct__form book" data-anim="up">
+      <div class="booking">
         <div class="booking__frame" id="cal-booking" data-booking data-booking-state="idle"
              data-cal-link="https://cal.com/ben-tweedie-v96yxs/discovery-call"
              aria-label="Book a call with Antiphono">
@@ -505,32 +677,39 @@
 
 </main>
 
+<!-- Plain footer, deliberately not index's .ft.
+
+     .ft is an 8px shell whose design lives in .ft__panel, a white rounded
+     card this page never used, and .ft__cols carries flex: 0 1 547px which
+     forced the containing block to 460px at a 375px viewport. Adopting a
+     component means adopting its layout assumptions, and these two did not
+     survive contact with a dark page and a narrow screen. The work grid,
+     the expanders, the process cards, the article cards and the contact
+     panel all did. -->
 <footer data-theme="dark" aria-labelledby="h-foot">
   <div class="container-x">
-    <p class="x-mid" id="h-foot" style="max-width:22ch">Antiphono is a product design and research studio in Sydney, Australia.</p>
+    <p class="body-l" id="h-foot" style="max-width:34ch">Antiphono is a product design and research studio in Sydney, Australia.</p>
     <div style="display:grid;gap:clamp(24px,3vw,48px);margin-top:clamp(40px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
-      <div>
-        <p class="micro-label" style="margin-bottom:14px;color:var(--x-ink-soft)">Navigate</p>
-        <ul style="display:grid;gap:8px"><li><a href="#thinking">Thinking</a></li><li><a href="#contact">Contact</a></li></ul>
+      <div class="x-fcol">
+        <h3>Navigate</h3>
+        <a href="#thinking">Thinking</a>
+        <a href="#contact">Contact</a>
       </div>
-      <div>
-        <p class="micro-label" style="margin-bottom:14px;color:var(--x-ink-soft)">Position</p>
-        <ul style="display:grid;gap:8px">
-          <li><a href="/ai-data-and-ip">AI, data and your IP</a></li>
-          <li><a href="/how-we-run-a-project">How we run a project</a></li>
-          <!-- TODO: /accessibility does not exist yet. Site wide issue. -->
-          <li><a href="/accessibility">Accessibility</a></li>
-        </ul>
+      <div class="x-fcol">
+        <h3>Position</h3>
+        <!-- TODO: destination for the AI and data page is unconfirmed. -->
+        <a href="/ai-data-and-ip">AI, data and your IP</a>
+        <a href="/how-we-run-a-project">How we run a project</a>
+        <!-- TODO: /accessibility does not exist yet. Site wide issue. -->
+        <a href="/accessibility">Accessibility</a>
       </div>
-      <div>
-        <p class="micro-label" style="margin-bottom:14px;color:var(--x-ink-soft)">Contact</p>
-        <ul style="display:grid;gap:8px">
-          <li><a href="mailto:ben@antiphono.com">ben@antiphono.com</a></li>
-          <li><a href="https://www.linkedin.com/in/bentweedie" rel="noopener">Ben Tweedie on LinkedIn</a></li>
-        </ul>
+      <div class="x-fcol">
+        <h3>Contact</h3>
+        <a href="mailto:ben@antiphono.com">ben@antiphono.com</a>
+        <a href="https://www.linkedin.com/in/bentweedie" rel="noopener">Ben Tweedie on LinkedIn</a>
       </div>
     </div>
-    <p class="small" style="margin-top:clamp(40px,5vw,80px);color:var(--x-ink-soft)">&copy; 2026 Antiphono Pty Ltd. Sydney, Australia.</p>
+    <p class="small x-flegal" style="margin-top:clamp(40px,5vw,80px);color:var(--x-ink-soft)">&copy; 2026 Antiphono Pty Ltd. Sydney, Australia.</p>
   </div>
 </footer>
 
