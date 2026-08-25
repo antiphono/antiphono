@@ -76,6 +76,26 @@
   --elev-2: 0 24px 64px rgba(0, 0, 0, 0.5);
   --elev-3: 0 60px 140px rgba(0, 0, 0, 0.65);
 
+  /* ---- Signal red at small sizes -----------------------------
+     --signal-red is #D7372F. Measured against the grounds it is
+     used on: 4.26:1 on light, 4.00:1 on dark. That clears the 3:1
+     a large heading or a UI element needs, and misses the 4.5:1
+     body text needs on both.
+
+     No single red clears 4.5:1 on both grounds. Darken it enough
+     for the light ground and it fails on the dark one, and the
+     reverse. So the accent takes a per-ground pair, exactly the
+     way the ink tokens do.
+
+       --signal-red        #D7372F  large text and UI only
+       --signal-ink-light  #C2322A  5.04:1 on the light ground
+       --signal-ink-dark   #DB4B44  4.55:1 on dark, 4.84:1 on deep
+
+     Use --signal-red for a heading, a rule or an icon. Use the ink
+     pair for anything at body size or smaller. */
+  --signal-ink-light: #C2322A;
+  --signal-ink-dark: #DB4B44;
+
   /* ---- Highlight --------------------------------------------
      The text selection block. It used to be declared three times:
      near-black on the Apex set, white on the index set and white

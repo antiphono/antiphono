@@ -38,11 +38,15 @@ Everything below is declared in the token layer at the top of `styles/system.css
 | `--text-secondary-dark` | `#A4A6A8` | Supporting copy on a dark ground |
 | `--hairline-light` | `rgba(17,18,20,0.16)` | Rules on a light ground |
 | `--hairline-dark` | `rgba(255,255,255,0.18)` | Rules on a dark ground |
-| `--signal-red` | `#D7372F` | The single accent. One use at a time |
+| `--signal-red` | `#D7372F` | The single accent. **Large text and UI only**, see below |
+| `--signal-ink-light` | `#C2322A` | The accent at body size or smaller, on a light ground |
+| `--signal-ink-dark` | `#DB4B44` | The accent at body size or smaller, on a dark ground |
 | `--highlight` | `var(--signal-red)` | The block behind selected text |
 | `--highlight-ink` | `var(--pure-white)` | Text inside the selection block |
 
 There is also a mono ramp, `--mono-10` through `--mono-90`, used by the index components for tints and fills. Prefer the named tokens above in new work.
+
+**The accent does not pass at body size.** `--signal-red` measures 4.26:1 on the light ground and 4.00:1 on the dark one. That clears the 3:1 a large heading or a UI element needs and misses the 4.5:1 body text needs, on both. No single red clears 4.5:1 on both grounds: darken it enough for light and it fails on dark, and the reverse. So the accent takes a per-ground pair the way the ink tokens do. Use `--signal-red` for a heading, a rule or an icon, and the ink pair for anything at body size or smaller.
 
 **The highlight.** The selection block used to be declared three times, near-black on one component set and white on the other two. The white one won, so selecting text on a light section painted a white block on a near-white ground and the selection disappeared. One rule now, in the signal red with white text: white on the red reads at 4.69:1, and the red block sits between 4.0:1 and 4.69:1 against every ground in the system, so it is visible on black and on white.
 

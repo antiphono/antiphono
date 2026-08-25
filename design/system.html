@@ -73,7 +73,7 @@
 .ds__do ul { padding-left: 18px; display: grid; gap: 6px; }
 
 .ds__val { font-variant-numeric: tabular-nums; }
-.ds__live { font-size: var(--micro); color: var(--signal-red); }
+.ds__live { font-size: var(--micro); color: var(--signal-ink-light); }  /* not --signal-red: that is 4.26:1 here, below AA at this size */
 </style>
 </head>
 <body class="ds">
@@ -151,9 +151,13 @@
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-on-dark)"></div><dl><dt>Ink on dark</dt><dd><code>--text-on-dark</code></dd><dd data-token="--text-on-dark"></dd></dl></div>
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-secondary-dark)"></div><dl><dt>Secondary on dark</dt><dd><code>--text-secondary-dark</code></dd><dd data-token="--text-secondary-dark"></dd></dl></div>
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--signal-red)"></div><dl><dt>Signal</dt><dd><code>--signal-red</code></dd><dd data-token="--signal-red"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--signal-ink-light)"></div><dl><dt>Signal ink, light ground</dt><dd><code>--signal-ink-light</code></dd><dd data-token="--signal-ink-light"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--signal-ink-dark)"></div><dl><dt>Signal ink, dark ground</dt><dd><code>--signal-ink-dark</code></dd><dd data-token="--signal-ink-dark"></dd></dl></div>
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--highlight);color:var(--highlight-ink);display:grid;place-items:center;font-size:var(--small)">Selected text</div><dl><dt>Highlight</dt><dd><code>--highlight</code></dd><dd data-token="--highlight"></dd></dl></div>
       <div class="ds__swatch"><div class="ds__chip" style="background:var(--highlight-ink);border-bottom:1px solid var(--hairline-light)"></div><dl><dt>Highlight ink</dt><dd><code>--highlight-ink</code></dd><dd data-token="--highlight-ink"></dd></dl></div>
     </div>
+
+    <p class="ds__note" style="margin-top:16px"><strong>The accent does not pass at body size.</strong> <code>--signal-red</code> measures 4.26:1 on the light ground and 4.00:1 on the dark one. That clears the 3:1 a large heading or a UI element needs, and misses the 4.5:1 body text needs, on both. No single red clears 4.5:1 on both grounds: darken it enough for light and it fails on dark, and the reverse. So the accent takes a per-ground pair the way the ink tokens do. Use <code>--signal-red</code> for a heading, a rule or an icon, and the ink pair for anything at body size or smaller. The red numbers on this page use <code>--signal-ink-light</code> for exactly this reason.</p>
 
     <p class="ds__note" style="margin-top:16px"><strong>The highlight.</strong> This is the block behind selected text. It used to be declared three times, near-black on one component set and white on the other two, and the white one won: selecting text on a light section painted a white block on a near-white ground and the selection disappeared. There is one rule now, in the signal red with white text. Measured: white on the red reads at 4.69:1, and the red block sits between 4.0:1 and 4.69:1 against every ground in the system, so it is visible on black and on white. Try selecting this paragraph, then select something in the dark demo further down.</p>
 
