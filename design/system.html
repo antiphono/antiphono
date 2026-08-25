@@ -94,6 +94,7 @@
       <a href="#motion">Motion</a>
       <a href="#primitives">Primitives</a>
       <a href="#behaviour">Behaviour</a>
+      <a href="#page-components">Components</a>
       <a href="#library">Section library</a>
       <a href="#newpage">New page</a>
     </nav>
@@ -476,7 +477,7 @@
     <table class="ds__table">
       <thead><tr><th style="width:20%">Attribute</th><th style="width:20%">Goes on</th><th>What it does</th></tr></thead>
       <tbody>
-        <tr><td><code>data-theme</code></td><td><code>section</code></td><td><code>"light"</code> or <code>"dark"</code>. Sets the section's text colour and tells the fixed header what ground it is passing over so it can invert. Required on every section. This is the single most important attribute in the system.</td></tr>
+        <tr><td><code>data-theme</code></td><td><code>section</code>, <code>footer</code></td><td><code>"light"</code> or <code>"dark"</code>. Sets the section's <strong>ground and its ink</strong>, and tells the fixed header what it is passing over so it can invert. Required on every section. This is the single most important attribute in the system.<br><br>The ground rule is wrapped in <code>:where()</code> so it adds no specificity: any component that paints its own ground keeps it, and this only fills in sections that would otherwise have painted nothing. Until 25 August it set the ink alone, which meant a section could declare itself dark, take light text, and sit on whatever the page background happened to be.</td></tr>
         <tr><td><code>data-anim</code></td><td>any element</td><td>Reveals on scroll. Values: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code>, <code>fade</code>, <code>scale</code>, <code>clip</code>. Starts at opacity 0 and gains <code>.in</code> when it enters the viewport, once.</td></tr>
         <tr><td><code>data-stagger</code></td><td>a parent</td><td>Numbers its <code>data-anim</code> children through <code>--i</code> so they arrive in sequence, <code>--stagger</code> apart.</td></tr>
         <tr><td><code>data-cursor</code></td><td>interactive elements</td><td>Grows the custom cursor over the element. Pointer devices only.</td></tr>
@@ -495,10 +496,39 @@
   </div>
 </section>
 
+
+<!-- ============================ PAGE COMPONENTS -->
+<section class="ds__sec" id="page-components">
+  <div class="ds__wrap">
+    <p class="ds__kicker">11</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Page components</h2>
+    <p class="ds__lede">Section patterns the library did not already cover, added while building the single page homepage. All unscoped and tokenised, so any page can use them.</p>
+
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th style="width:20%">Class</th><th>What it is, and what to watch</th></tr></thead>
+      <tbody>
+        <tr><td><code>.secnav</code></td><td>Sticky section navigation. Real anchors to real ids, so with JavaScript off it is simply always visible and every link works. The script adds the appear-after-hero behaviour, the current-section highlight and mirrors the header's ground. The current item is marked with a rule as well as a colour, because colour alone must not carry state.</td></tr>
+        <tr><td><code>.logo-grid</code></td><td>Client logos. Monochrome by filter so mixed source files still read as one set, optically sized rather than mathematically equal, static with no carousel. Every logo needs alt text with the company name.</td></tr>
+        <tr><td><code>.svc-group</code></td><td>A named service group: heading, one line on what it is, then a dot separated list.</td></tr>
+        <tr><td><code>.gain</code></td><td>A numbered benefit block. Rule on top, <code>( 01 )</code> label, heading, one paragraph.</td></tr>
+        <tr><td><code>.phase</code></td><td>A process stage. Same shape as <code>.gain</code> without the number.</td></tr>
+        <tr><td><code>.duo</code></td><td>Two column comparison. <code>.duo__col--machine</code> sets in the interface face and <code>.duo__col--human</code> in the display face, so the difference reads before the words do.</td></tr>
+        <tr><td><code>.facts</code></td><td>A row of two to four figures with a qualifier under each. Never put an unattributed number in one.</td></tr>
+        <tr><td><code>.booking</code></td><td>Third party booking embed. Never loads on page load: it loads when someone asks for it, which keeps the script and its cookies off the page until there is consent, and keeps a heavy embed out of the performance budget. It times out after eight seconds into a real link rather than a spinner, and the email beside it is always present rather than a fallback that appears on failure.</td></tr>
+        <tr><td><code>.vision__headline--wide</code></td><td>A hero whose line breaks are written rather than wrapped. Its size is derived from the longest written line rather than taken from the scale. <strong>If the copy changes, remeasure.</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="ds__note" style="margin-top:24px"><strong>On sizing type from copy.</strong> <code>.vision__headline--wide</code> breaks the usual rule that type comes from the scale. The hero has three written lines and the break points are part of the design, so the size has to be whatever holds the longest of them. Measured: the line fills the measure at 6.0vw at every viewport, so the rule is set at 5.9vw with a floor and a cap. Below about 470px the floor takes over and the first line wraps, which is the right trade because 22px is not display size. This is a deliberate exception, not a pattern to copy.</p>
+  </div>
+</section>
+
 <!-- ============================ SECTION LIBRARY -->
 <section class="ds__sec" id="library">
   <div class="ds__wrap">
-    <p class="ds__kicker">11</p>
+    <p class="ds__kicker">12</p>
     <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Section library</h2>
     <p class="ds__lede">Responsive sections, ready to paste into a page. Each one is complete markup: it needs no new CSS and no new JavaScript, only <code>/styles/system.css</code> and <code>/scripts/apex.js</code>, which every page already loads. Swap the copy and the images and it works.</p>
     <p class="ds__note">Every section carries <code>data-theme</code>. Alternate light and dark down a page and the header inverts as it passes over each one, with no further work. Each snippet also carries an <code>aria-labelledby</code> or <code>aria-label</code>, which is not decoration: a section landmark with no name is not much use to a screen reader.</p>
@@ -510,7 +540,7 @@
 <!-- ============================ NEW PAGE -->
 <section class="ds__sec" id="newpage">
   <div class="ds__wrap">
-    <p class="ds__kicker">12</p>
+    <p class="ds__kicker">13</p>
     <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Building a new page</h2>
     <p class="ds__lede">Six steps. Follow them in order and the page will match the rest of the site without anyone reviewing it for consistency.</p>
 
@@ -821,6 +851,76 @@
 '    </div>\n' +
 '  </div>\n' +
 '</section>'
+    },
+    {
+      name: 'Numbered benefit grid',
+      note: 'A set of numbered blocks, each a rule, a number, a heading and one paragraph. Reflows from three columns to one. Use for the reasons someone should act, in the order those reasons matter to them.',
+      code:
+'<section class="section" data-theme="dark" aria-labelledby="s-gains">\n' +
+'  <div class="container-x">\n' +
+'    <p class="micro-label">Section label</p>\n' +
+'    <h2 class="display-m" style="margin-top:14px;max-width:16ch" id="s-gains">Section heading</h2>\n' +
+'    <div data-stagger style="display:grid;gap:clamp(28px,3.5vw,48px);margin-top:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">\n' +
+'      <div class="gain" data-anim="up">\n' +
+'        <span class="micro-label gain__num">( 01 )</span>\n' +
+'        <h3 class="heading-m gain__title">The benefit, stated plainly</h3>\n' +
+'        <p class="gain__body">Three to five sentences. One idea. Answer the heading in the first one.</p>\n' +
+'      </div>\n' +
+'      <!-- Repeat, incrementing ( 02 ), ( 03 ) -->\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Two column comparison',
+      note: 'Two lists side by side, set in the two different faces so the distinction reads before the words do. Use where the point is the difference between the columns rather than the contents of either.',
+      code:
+'<section class="section" data-theme="dark" aria-labelledby="s-duo">\n' +
+'  <div class="container-x">\n' +
+'    <p class="micro-label">Section label</p>\n' +
+'    <h2 class="display-m" style="margin-top:14px;max-width:18ch" id="s-duo">Section heading</h2>\n' +
+'    <div class="duo" style="margin-top:clamp(36px,5vw,72px)">\n' +
+'      <div class="duo__col duo__col--machine">\n' +
+'        <p class="micro-label duo__label">Left column</p>\n' +
+'        <ul class="duo__list"><li>One item per line</li><li>Short noun phrases</li></ul>\n' +
+'      </div>\n' +
+'      <div class="duo__col duo__col--human">\n' +
+'        <p class="micro-label duo__label">Right column</p>\n' +
+'        <ul class="duo__list"><li>One item per line</li><li>Short noun phrases</li></ul>\n' +
+'      </div>\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Facts row',
+      note: 'Two to four figures with a qualifier under each. Every number needs a source you can point at. Never put an unattributed figure in one of these.',
+      code:
+'<section class="section" data-theme="dark" aria-label="Key facts">\n' +
+'  <div class="container-x">\n' +
+'    <div class="facts" data-stagger>\n' +
+'      <div class="facts__item" data-anim="up">\n' +
+'        <span class="heading-m facts__value">2018</span>\n' +
+'        <p class="facts__label">What the number counts, in a few words</p>\n' +
+'      </div>\n' +
+'      <!-- Repeat for each fact -->\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Section navigation',
+      note: 'Sticky strip that appears once the hero has passed and marks the section you are in. Paste it directly after the hero. Real anchors to real ids, so it works with JavaScript off, where it is simply always visible.',
+      code:
+'<nav class="secnav" data-theme="light" aria-label="Sections of this page" data-secnav-hidden="true">\n' +
+'  <div class="container-x">\n' +
+'    <ul class="secnav__list">\n' +
+'      <li><a href="#first-section">First section</a></li>\n' +
+'      <li><a href="#second-section">Second section</a></li>\n' +
+'      <!-- One per section you want reachable -->\n' +
+'    </ul>\n' +
+'  </div>\n' +
+'</nav>'
     },
     {
       name: 'Call to action band',

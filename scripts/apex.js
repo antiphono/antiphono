@@ -1096,6 +1096,213 @@
   }
 
 
+  /* ---------------------------------------------------------
+     Section navigation
+     Shows once the hero has passed, and marks the section
+     currently under the header. The markup is real anchors to
+     real ids, so with this disabled the strip is simply always
+     visible and every link still works.
+     --------------------------------------------------------- */
+  function secnav() {
+    var nav = document.querySelector('.secnav');
+    if (!nav) return;
+
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+    if (!links.length) return;
+
+    var targets = links.map(function (a) {
+      return { link: a, el: document.getElementById(a.getAttribute('href').slice(1)) };
+    }).filter(function (t) { return t.el; });
+
+    // Reveal the strip once the first section has scrolled past.
+    var hero = document.querySelector('main > section');
+    function reveal() {
+      if (!hero) return;
+      var past = hero.getBoundingClientRect().bottom <= 120;
+      nav.setAttribute('data-secnav-hidden', past ? 'false' : 'true');
+    }
+
+    var current = null;
+    function mark() {
+      var probeY = 160;             // below the header and the strip
+      var found = null;
+      for (var i = 0; i < targets.length; i++) {
+        var r = targets[i].el.getBoundingClientRect();
+        if (r.top <= probeY && r.bottom > probeY) found = targets[i];
+      }
+      if (found === current) return;
+      if (current) current.link.removeAttribute('aria-current');
+      current = found;
+      if (current) current.link.setAttribute('aria-current', 'true');
+    }
+
+    // The strip is sticky, so it passes over grounds just as the
+    // header does. Mirror whatever the header has worked out rather
+    // than probing a second time and risking the two disagreeing.
+    var header = document.querySelector('.apex-header');
+    function mirror() {
+      if (!header) return;
+      var t = header.getAttribute('data-header-theme');
+      if (t && nav.getAttribute('data-theme') !== t) nav.setAttribute('data-theme', t);
+    }
+
+    function update() { reveal(); mark(); mirror(); }
+    update();
+
+    // Same ticker approach as the header, and for the same reason:
+    // Lenis, native scrolling and anchor jumps move the page by
+    // different routes and only the ticker sees all of them.
+    var lastY = -1;
+    function tick() {
+      var y = window.scrollY;
+      if (y === lastY) return;
+      lastY = y;
+      update();
+    }
+    if (hasGsap) {
+      gsap.ticker.add(tick);
+    } else {
+      window.addEventListener('scroll', update, { passive: true });
+    }
+    window.addEventListener('resize', function () { lastY = -1; update(); });
+  }
+
+  /* ---------------------------------------------------------
+     Article feed, list form
+     Renders into #homeFeed and reveals its section only when
+     the feed has enough entries to be worth showing. Below the
+     threshold the section stays hidden rather than running thin.
+     --------------------------------------------------------- */
+  function feed() {
+    var list = document.getElementById('homeFeed');
+    if (!list || !window.fetch) return;
+
+    var section = list.closest('section');
+    var min = section ? parseInt(section.getAttribute('data-feed-min'), 10) || 0 : 0;
+
+    var esc = function (t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    };
+    var when = function (d) {
+      if (!d) return '';
+      var t = new Date(d);
+      if (isNaN(t)) return '';
+      return t.toLocaleDateString('en-AU', { day: '2-digit', month: 'short', year: 'numeric' });
+    };
+
+    fetch('/api/articles')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        var items = Array.isArray(d) ? d : (d.articles || d.items || []);
+        // An undated feed reads as abandoned, so an entry with no
+        // date is not shown rather than shown without one.
+        items = items.filter(function (a) { return when(a.date); });
+        if (items.length < min) return;
+
+        list.innerHTML = items.slice(0, 6).map(function (a) {
+          return '<li class="journal__row">' +
+            '<a href="/article?slug=' + encodeURIComponent(a.slug || '') + '" class="journal__link" data-cursor>' +
+              '<span class="small journal__date">' + esc(when(a.date)) + '</span>' +
+              '<span class="journal__pill micro-label">' + esc(a.category || 'Article') + '</span>' +
+              '<span class="journal__title body-l">' + esc(a.title || '') + '</span>' +
+              '<span class="journal__arrow" aria-hidden="true">&rarr;</span>' +
+            '</a></li>';
+        }).join('');
+
+        if (section) section.removeAttribute('hidden');
+      })
+      .catch(function () { /* section stays hidden, which is the safe state */ });
+  }
+
+  /* ---------------------------------------------------------
+     Booking embed
+     Loaded on request rather than on page load. That keeps a
+     third party script and its cookies off the page until
+     someone asks for the calendar, and keeps a heavy embed out
+     of the page's performance budget. The email beside it is
+     always present, so this failing costs nothing.
+     --------------------------------------------------------- */
+  function booking() {
+    var frame = document.querySelector('[data-booking]');
+    if (!frame) return;
+
+    var btn = frame.querySelector('[data-booking-load]');
+    if (!btn) return;
+
+    var link = frame.getAttribute('data-cal-link');
+    if (!link) return;
+
+    function fail(message) {
+      frame.setAttribute('data-booking-state', 'failed');
+      frame.innerHTML = '';
+      var p = document.createElement('p');
+      p.className = 'booking__note';
+      p.textContent = message;
+      var a = document.createElement('a');
+      a.className = 'btn-pill btn-pill--dark';
+      a.href = link;
+      a.rel = 'noopener';
+      a.target = '_blank';
+      a.textContent = 'Open the booking page';
+      frame.appendChild(p);
+      frame.appendChild(a);
+    }
+
+    btn.addEventListener('click', function () {
+      if (frame.getAttribute('data-booking-state') !== 'idle') return;
+      frame.setAttribute('data-booking-state', 'loading');
+      btn.disabled = true;
+      btn.textContent = 'Loading the calendar';
+
+      var iframe = document.createElement('iframe');
+      iframe.src = link + '?embed=true';
+      iframe.title = 'Book a call with Antiphono';
+      iframe.loading = 'lazy';
+      iframe.setAttribute('allow', 'fullscreen');
+
+      // Never let it fail silently. If the calendar has not loaded in
+      // eight seconds, hand over a real link instead of a spinner.
+      var settled = false;
+      var timer = setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        fail('The booking calendar is taking too long to load. Open it in a new tab, or email ben@antiphono.com.');
+      }, 8000);
+
+      iframe.addEventListener('load', function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        frame.setAttribute('data-booking-state', 'loaded');
+        frame.innerHTML = '';
+        frame.appendChild(iframe);
+        iframe.focus();
+      });
+
+      iframe.addEventListener('error', function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        fail('The booking calendar could not be loaded. Open it in a new tab, or email ben@antiphono.com.');
+      });
+
+      // Off-screen until it loads, so a half drawn embed is never shown.
+      iframe.style.position = 'absolute';
+      iframe.style.opacity = '0';
+      iframe.style.pointerEvents = 'none';
+      frame.appendChild(iframe);
+      iframe.addEventListener('load', function () {
+        iframe.style.position = '';
+        iframe.style.opacity = '';
+        iframe.style.pointerEvents = '';
+      });
+    });
+  }
+
+
   function boot() {
     initMotionProvider();
     initAnchors();
@@ -1122,6 +1329,11 @@
     articles();
     deck();
     dynamics();
+
+    // Single page homepage modules. No-ops without their markup.
+    secnav();
+    feed();
+    booking();
 
     // Pinned sections change document height as media decodes.
     if (hasST) {

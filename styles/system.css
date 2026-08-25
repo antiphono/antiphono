@@ -330,6 +330,21 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
    <main>, and their own colour rules should keep running there. */
 section[data-theme="light"] { color: var(--text-on-light); }
 section[data-theme="dark"]  { color: var(--text-on-dark); }
+footer[data-theme="light"] { color: var(--text-on-light); }
+footer[data-theme="dark"]  { color: var(--text-on-dark); }
+
+/* data-theme sets the GROUND as well as the ink. Setting only the ink
+   was half a contract: a section declaring itself dark got light text
+   and whatever background the page happened to have behind it, which
+   on a page with no component backgrounds meant light text on a light
+   body. Declaring a ground is the whole point of the attribute.
+
+   Wrapped in :where() so it contributes no specificity. Any component
+   that paints its own ground, .vision, .mani, .purpose and the rest,
+   still wins on its own single class. This only fills in sections that
+   would otherwise have painted nothing. */
+:where(section, footer)[data-theme="light"] { background-color: var(--apex-white); }
+:where(section, footer)[data-theme="dark"]  { background-color: var(--apex-black); }
 
 /* ---------- Header ---------- */
 .header-nav { display: none; }
@@ -381,6 +396,190 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
 .header-burger span {
   width: 22px; height: 1.5px; background: currentColor; display: block;
 }
+
+/* ============================================================
+   PAGE COMPONENTS added for the single page homepage, /index2.
+   Each one is a section pattern the section library did not
+   already cover. They are unscoped and tokenised like everything
+   else, so any page can use them.
+   ============================================================ */
+
+/* ---------- Section navigation ----------
+   Sticky strip that appears once the hero has scrolled past.
+   Real anchors to real ids, so it works with JavaScript off:
+   the script only adds the current-section highlight and the
+   show-on-scroll behaviour. */
+.secnav {
+  position: sticky;
+  top: 64px;                 /* clears .apex-header */
+  z-index: 45;
+  border-block: 1px solid var(--hairline-light);
+  background: color-mix(in srgb, var(--apex-white) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: opacity var(--t-button) var(--ease-soft),
+              transform var(--t-button) var(--ease-soft);
+}
+@supports not (background: color-mix(in srgb, red 50%, transparent)) {
+  .secnav { background: rgba(244, 244, 242, 0.94); }
+}
+.secnav[data-theme="dark"] {
+  border-color: var(--hairline-dark);
+  background: rgba(17, 18, 20, 0.92);
+}
+/* Hidden until the hero passes, but only when the script is running.
+   Without JavaScript it is simply always visible. */
+.js .secnav[data-secnav-hidden="true"] {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+.secnav__list {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 36px);
+  align-items: center;
+  height: 52px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.secnav__list::-webkit-scrollbar { display: none; }
+.secnav__list a {
+  font-size: var(--micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  color: var(--text-secondary-light);
+  transition: color var(--t-hover) var(--ease-soft);
+}
+.secnav[data-theme="dark"] .secnav__list a { color: var(--text-secondary-dark); }
+.secnav__list a:hover,
+.secnav__list a[aria-current="true"] { color: currentColor; }
+.secnav[data-theme="light"] .secnav__list a:hover,
+.secnav[data-theme="light"] .secnav__list a[aria-current="true"] { color: var(--text-on-light); }
+.secnav[data-theme="dark"] .secnav__list a:hover,
+.secnav[data-theme="dark"] .secnav__list a[aria-current="true"] { color: var(--text-on-dark); }
+/* Colour alone must not carry the current state, so it also gets a rule. */
+.secnav__list a[aria-current="true"] { box-shadow: inset 0 -1px 0 currentColor; }
+
+/* ---------- Client logo grid ----------
+   Monochrome, optically sized, static. No carousel. */
+.logo-grid {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px) clamp(32px, 5vw, 72px);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  align-items: center;
+}
+.logo-grid__item {
+  display: grid;
+  place-items: center;
+  min-height: 56px;
+}
+.logo-grid__item img {
+  max-width: 100%;
+  height: auto;
+  /* Single colour, matching the ground it sits on. */
+  filter: grayscale(1) contrast(0) brightness(0);
+  opacity: 0.7;
+  transition: opacity var(--t-hover) var(--ease-soft);
+}
+[data-theme="dark"] .logo-grid__item img { filter: grayscale(1) contrast(0) brightness(3); }
+.logo-grid__item:hover img { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .logo-grid__item img { transition: none; }
+}
+
+/* ---------- Service group ----------
+   A named group, one line on what it is, then the list. */
+.svc-group { border-top: 1px solid var(--hairline-light); padding-top: clamp(20px, 2.5vw, 32px); }
+[data-theme="dark"] .svc-group { border-top-color: var(--hairline-dark); }
+.svc-group__name { margin-bottom: 10px; }
+.svc-group__line { margin-bottom: 16px; max-width: 40ch; }
+.svc-group__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: var(--small);
+  color: var(--text-secondary-light);
+}
+[data-theme="dark"] .svc-group__list { color: var(--text-secondary-dark); }
+.svc-group__list li { display: flex; align-items: center; gap: 14px; }
+.svc-group__list li + li::before {
+  content: '';
+  width: 3px; height: 3px; border-radius: 50%;
+  background: currentColor; opacity: 0.5;
+  margin-left: -8px;
+}
+
+/* ---------- Numbered benefit block ---------- */
+.gain { border-top: 1px solid var(--hairline-light); padding-top: clamp(20px, 2.5vw, 32px); }
+[data-theme="dark"] .gain { border-top-color: var(--hairline-dark); }
+.gain__num { display: block; margin-bottom: 14px; opacity: 0.6; }
+.gain__title { margin-bottom: 12px; }
+.gain__body { max-width: 46ch; }
+
+/* ---------- Process phase ---------- */
+.phase { border-top: 1px solid var(--hairline-light); padding-top: clamp(20px, 2.5vw, 32px); }
+[data-theme="dark"] .phase { border-top-color: var(--hairline-dark); }
+.phase__name { margin-bottom: 10px; }
+.phase__body { max-width: 52ch; }
+
+/* ---------- Two column comparison ----------
+   Deliberately unequal in treatment so the difference between the
+   two columns reads before the words do. */
+.duo {
+  display: grid;
+  gap: clamp(28px, 5vw, 80px);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.duo__col { border-top: 1px solid var(--hairline-light); padding-top: clamp(20px, 2.5vw, 32px); }
+[data-theme="dark"] .duo__col { border-top-color: var(--hairline-dark); }
+.duo__label { margin-bottom: 18px; }
+.duo__list { display: grid; gap: 10px; }
+.duo__list li { font-size: var(--body-l); line-height: 1.35; }
+/* The machine column sets in the interface face, the human column in
+   the display face. Same two faces the rest of the site uses. */
+.duo__col--machine .duo__list { font-family: var(--font-sans); }
+.duo__col--human .duo__list { font-family: var(--font-display); letter-spacing: -0.015em; }
+
+/* ---------- Facts ---------- */
+.facts {
+  display: grid;
+  gap: clamp(20px, 3vw, 48px);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+.facts__item { border-top: 1px solid var(--hairline-light); padding-top: 18px; }
+[data-theme="dark"] .facts__item { border-top-color: var(--hairline-dark); }
+.facts__value { display: block; margin-bottom: 8px; }
+.facts__label { font-size: var(--small); color: var(--text-secondary-light); max-width: 26ch; }
+[data-theme="dark"] .facts__label { color: var(--text-secondary-dark); }
+
+/* ---------- Booking ----------
+   The embed is never loaded on page load. See scripts/apex.js. */
+.booking { display: grid; gap: 20px; }
+.booking__frame {
+  border: 1px solid var(--hairline-light);
+  border-radius: var(--r-md);
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 4vw, 48px);
+  text-align: center;
+  gap: 16px;
+}
+[data-theme="dark"] .booking__frame { border-color: var(--hairline-dark); }
+.booking__frame iframe { width: 100%; min-height: 640px; border: 0; }
+.booking__frame[data-booking-state="loaded"] { padding: 0; border: 0; text-align: left; display: block; }
+.booking__note { font-size: var(--small); color: var(--text-secondary-light); max-width: 46ch; }
+[data-theme="dark"] .booking__note { color: var(--text-secondary-dark); }
+.booking__direct { font-size: var(--body-l); }
+
+/* ---------- Section navigation offset ----------
+   Anchor targets must clear the fixed header and the sticky strip. */
+:target { scroll-margin-top: 128px; }
+section[id] { scroll-margin-top: 128px; }
 
 /* ---------- Mobile menu ---------- */
 .mobile-menu {
@@ -694,6 +893,29 @@ header .header-cta:hover { background: #fff; color: #111; mix-blend-mode: differ
 .vision__inner { position: relative; width: 100%; }
 .vision__label { color: var(--text-secondary-light); margin-bottom: 40px; }
 .vision__headline { max-width: 9ch; }
+/* A hero whose lines are written rather than wrapped needs a wider
+   measure than 9ch. Each .vision__line is still its own block, so on
+   a narrow screen a written line may take two visual lines. That is
+   the right trade: the break points matter at display size, which is
+   where this holds. */
+.vision__headline--wide {
+  max-width: none;
+  /* Sized from the copy rather than from the scale. The longest written
+     line, "Designing exceptional products", measures 1511px at 100px in
+     Helvetica Neue 600, and the container gives it (min(1800,vw) - 2
+     gutters). Solving those against each other gives 6.0vw as the size
+     at which the line exactly fills the measure, at any viewport. 5.9vw
+     holds it on one line with a hair to spare.
+
+     Below about 470px the floor takes over and the first line wraps to
+     two. That is the right trade: the written breaks matter at display
+     size, and 22px is not display size.
+
+     If the headline copy changes, remeasure. This number is derived
+     from that specific string. */
+  font-size: clamp(2.75rem, 5.9vw, 6.5rem);
+  line-height: 0.95;
+}
 .vision__line { display: block; overflow: hidden; }
 .vision__line > span { display: block; }
 .vision__body { color: var(--text-secondary-light); max-width: 40ch; margin-top: 48px; }

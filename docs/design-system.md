@@ -144,13 +144,15 @@ The system is driven by data attributes rather than by classes wired to JavaScri
 
 | Attribute | Goes on | What it does |
 |---|---|---|
-| `data-theme` | `section` | `"light"` or `"dark"`. Sets the section's text colour and tells the fixed header what ground it is passing over. **Required on every section.** The most important attribute in the system |
+| `data-theme` | `section`, `footer` | `"light"` or `"dark"`. Sets the section's **ground and its ink**, and tells the fixed header what it is passing over. **Required on every section.** The most important attribute in the system |
 | `data-anim` | any element | Reveals on scroll. `up`, `down`, `left`, `right`, `fade`, `scale`, `clip`. Starts at opacity 0, gains `.in` on entry, once |
 | `data-stagger` | a parent | Numbers its `data-anim` children through `--i` so they arrive in sequence |
 | `data-cursor` | interactive elements | Grows the custom cursor. Pointer devices only |
 | `data-cursor-label` | any element | Puts a word inside the cursor |
 | `data-header-theme` | `.apex-header` | Written by JavaScript. Set the initial value to match the first section |
 | `data-menu-open` / `data-menu-close` | buttons and links | Opens and closes `#apex-mobile-menu` |
+
+**The ground rule.** `data-theme` sets `background-color` as well as `color`, wrapped in `:where()` so it adds no specificity. Any component that paints its own ground keeps it; this only fills in sections that would otherwise have painted nothing. Until 25 August it set the ink alone, so a section could declare itself dark, take light text, and sit on whatever background the page happened to have. Building a page entirely from `.section` rather than from components is what exposed it.
 
 **Behaviour hooks that carry no styles.** Some classes exist only so JavaScript can find an element. `system-card__reveal` is the current example: it appears 16 times in `index.html` and once in `apex.js`, and nowhere in the stylesheet. It is not dead code. Check `scripts/apex.js` before deleting any class that a dead-CSS pass flags.
 
@@ -193,9 +195,27 @@ The standing-in surface for media that does not exist yet. Deliberately obvious.
 
 The first focusable element on every page, targeting the page's `main`. The one primitive where a silent failure is an accessibility defect: test it with the keyboard after any header change.
 
+## Page components
+
+Section patterns the library did not already cover. All unscoped and tokenised, so any page can use them.
+
+| Class | What it is, and what to watch |
+|---|---|
+| `.secnav` | Sticky section navigation. Real anchors to real ids, so with JavaScript off it is always visible and every link works. The script adds the appear-after-hero behaviour, the current-section highlight and mirrors the header's ground. The current item is marked with a rule as well as a colour |
+| `.logo-grid` | Client logos. Monochrome by filter so mixed source files read as one set, optically sized, static with no carousel |
+| `.svc-group` | A named service group: heading, one line, dot separated list |
+| `.gain` | A numbered benefit block. Rule, `( 01 )`, heading, one paragraph |
+| `.phase` | A process stage. Same shape without the number |
+| `.duo` | Two column comparison. `--machine` sets in the interface face, `--human` in the display face |
+| `.facts` | Two to four figures with a qualifier under each. Never an unattributed number |
+| `.booking` | Third party booking embed, loaded on request rather than on page load. Times out after eight seconds into a real link rather than a spinner. The email beside it is always present |
+| `.vision__headline--wide` | A hero whose line breaks are written rather than wrapped. Sized from the longest written line rather than from the scale. **If the copy changes, remeasure** |
+
+**On sizing type from copy.** `.vision__headline--wide` breaks the usual rule that type comes from the scale. The hero has three written lines and the break points are part of the design, so the size has to be whatever holds the longest of them. Measured: that line fills the measure at 6.0vw at every viewport, so the rule is 5.9vw with a floor and a cap. Below about 470px the floor takes over and the first line wraps, which is the right trade because 22px is not display size. A deliberate exception, not a pattern to copy.
+
 ## Section library
 
-Ten responsive sections, ready to paste. Each is complete markup needing no new CSS and no new JavaScript. The live page at `/design/system.html#library` has each one in a code block with a copy button.
+Fourteen responsive sections, ready to paste. Each is complete markup needing no new CSS and no new JavaScript. The live page at `/design/system.html#library` has each one in a code block with a copy button.
 
 | Section | Use for |
 |---|---|
@@ -208,6 +228,10 @@ Ten responsive sections, ready to paste. Each is complete markup needing no new 
 | **Horizontal card track** | Four to six short items moving sideways as the page scrolls |
 | **Two column prose** | Heading left, copy right. Generic, works on any page |
 | **Staggered card grid** | A responsive grid where each card reveals a beat after the one before |
+| **Numbered benefit grid** | Numbered blocks, each a rule, a number, a heading and a paragraph |
+| **Two column comparison** | Two lists in the two different faces, where the point is the difference between them |
+| **Facts row** | Two to four figures with a qualifier under each |
+| **Section navigation** | Sticky strip that appears after the hero and marks the section you are in |
 | **Call to action band** | One heading, one sentence, one button. The end of a page |
 
 Every section carries `data-theme`. Alternate light and dark down a page and the header inverts as it passes over each one with no further work. Every section also carries `aria-labelledby` or `aria-label`: a section landmark with no name is not much use to a screen reader.
