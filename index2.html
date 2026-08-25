@@ -20,7 +20,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap">
 <link rel="stylesheet" href="/styles/system.css">
 <script>document.documentElement.classList.add("js")</script>
 
@@ -54,7 +54,7 @@
 }
 </script>
 </head>
-<body class="theme-h">
+<body class="theme-x">
 
 <a href="#main" class="apex-skip">Skip to main content</a>
 
@@ -113,35 +113,35 @@
 
 <main id="main">
 
-<!-- ============================ 1. HERO -->
-<section class="vision" id="top" data-theme="light" aria-labelledby="h-hero">
-  <div class="container-x vision__inner">
-    <p class="micro-label vision__label">Product design and research studio, Sydney</p>
-    <h1 class="display-l vision__headline vision__headline--wide" id="h-hero">
-      <span class="vision__line"><span>Designing exceptional products</span></span>
-      <span class="vision__line"><span>for ambitious</span></span>
-      <span class="vision__line"><span>technology companies.</span></span>
+<!-- ============================================================
+     1. HERO. Layout family: kinetic display type, bottom aligned.
+
+     The headline is the approved v5 copy, set across the three
+     written lines the copy spec asks for. That is one line more
+     than the taste skill allows in a hero. The approved copy wins,
+     and the scale is measured so the three lines and everything
+     under them still fit one viewport.
+     ============================================================ -->
+<section class="x-hero" id="top" data-theme="dark" aria-labelledby="h-hero">
+  <div class="container-x">
+    <p class="micro-label" data-anim="up">Product design and research studio, Sydney</p>
+    <h1 id="h-hero" style="font-size:clamp(2.6rem,6.2vw,7.5rem);margin-top:clamp(20px,3vh,40px)">
+      <span class="x-hero__line"><span data-hero-line>Designing exceptional products</span></span>
+      <span class="x-hero__line"><span data-hero-line>for ambitious</span></span>
+      <span class="x-hero__line"><span data-hero-line>technology companies.</span></span>
     </h1>
-    <p class="body-l vision__body">Research, design, working code, testing and measurement, all run inside your own systems, so your team can take it over whenever you are ready.</p>
-    <p style="display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(24px,3vw,40px)">
-      <a href="#contact" class="btn-pill" data-cursor>Get in touch</a>
-      <a href="#what-we-do" class="btn-pill" data-cursor>See what we do</a>
-    </p>
+    <div class="x-hero__foot">
+      <p class="body-l x-hero__lede" data-anim="up">Research, design, working code, testing and measurement, all run inside your own systems.</p>
+      <div class="x-hero__actions" data-anim="up">
+        <a href="#contact" class="btn-pill" data-cursor data-magnetic><span>Get in touch</span></a>
+        <a href="#work" class="btn-pill btn-pill--ghost" data-cursor data-magnetic><span>See the work</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============================ SECTION NAVIGATION
-     Real anchors to real ids. Works with JavaScript off, where it is
-     simply always visible rather than appearing after the hero.
-
-     Deviation from .claude/rules/internal-linking.md, flagged for Ben:
-     the rule says this collapses to a dropdown on narrow viewports.
-     This is a horizontally scrolling strip instead. It needs no
-     JavaScript, keeps every destination visible rather than hiding
-     seven links behind a control, and is operable by keyboard as a
-     plain list of links. Say the word and it becomes a dropdown.
-     ============================ -->
-<nav class="secnav" id="secnav" data-theme="light" aria-label="Sections of this page" data-secnav-hidden="true">
+<!-- Section navigation -->
+<nav class="secnav" id="secnav" data-theme="dark" aria-label="Sections of this page" data-secnav-hidden="true">
   <div class="container-x">
     <ul class="secnav__list">
       <li><a href="#clients">Clients</a></li>
@@ -149,535 +149,388 @@
       <li><a href="#what-we-do">What we do</a></li>
       <li><a href="#why-us">Why us</a></li>
       <li><a href="#how-we-work">How we work</a></li>
-      <li><a href="#thinking">Thinking</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ============================ 2. CLIENTS
-     TODO: Ben. This section cannot ship as designed until three
-     things happen, all recorded in the v5 spec as outstanding
-     items 1 and 2.
+<!-- ============================================================
+     2. CLIENTS. Layout family: type wall.
 
-     1. The client naming rule in CLAUDE.md currently reads
-        "Do not name GroupTogether or Future Women outside a case
-        study". The single page structure removed case studies, so
-        that carve-out now points at nothing and the rule bans
-        client names from the site entirely. It needs rewriting
-        before any name appears here.
-     2. Written permission from each client. Logos are trademarks.
-     3. Official logo files from each client, not scraped from
-        their websites. Seven Network needs particular care:
-        Olympic marks are protected under their own Australian
-        legislation, so use Seven's own logo with Seven's
-        permission and describe the engagement in words.
-
-     Until then the grid holds six placeholders so the layout can be
-     reviewed. No client is named anywhere on this page.
-     ============================ -->
-<section class="section" id="clients" data-theme="light" aria-labelledby="h-clients">
+     Set as names rather than logos. Logos are trademarks and the
+     official asset packs have not been requested yet, so a name
+     set in the studio's own face is both honest and stronger than
+     six mismatched SVGs. TODO: Ben, written permission is still
+     outstanding for every name below.
+     ============================================================ -->
+<section id="clients" data-theme="dark" aria-labelledby="h-clients">
   <div class="container-x">
-    <p class="micro-label" id="h-clients">Selected clients</p>
-    <div class="logo-grid" data-stagger style="margin-top:clamp(28px,4vw,56px)">
-      <div class="logo-grid__item" data-anim="fade"><div class="ph" style="width:100%;height:56px"></div></div>
-      <div class="logo-grid__item" data-anim="fade"><div class="ph" style="width:100%;height:56px"></div></div>
-      <div class="logo-grid__item" data-anim="fade"><div class="ph" style="width:100%;height:56px"></div></div>
-      <div class="logo-grid__item" data-anim="fade"><div class="ph" style="width:100%;height:56px"></div></div>
-      <div class="logo-grid__item" data-anim="fade"><div class="ph" style="width:100%;height:56px"></div></div>
-      <div class="logo-grid__item" data-anim="fade"><div class="ph" style="width:100%;height:56px"></div></div>
-    </div>
-    <p class="small" style="margin-top:clamp(24px,3vw,40px);opacity:0.75">Working with technology businesses, media platforms and marketplaces since 2018.</p>
-  </div>
-</section>
-
-<!-- ============================ 3. WHO WE WORK WITH -->
-<section class="section" id="who" data-theme="dark" aria-labelledby="h-who">
-  <div class="container-x" style="display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-    <div>
-      <p class="micro-label">Who we work with</p>
-      <h2 class="heading-m" style="margin-top:14px;max-width:18ch" id="h-who">Technology businesses with a product in market and no design team of their own</h2>
-    </div>
-    <div style="display:grid;gap:18px" data-stagger>
-      <p class="body-l" data-anim="up">You might be a founder who needs senior product thinking and cannot justify a salary yet. A head of product with a roadmap and no one to design it. A technology director who needs design that arrives ready to ship. A marketing director who needs work out the door without quality slipping. Or a design director with a team who want to work this way and no time to work out how.</p>
-      <p data-anim="up">Antiphono has been doing this since 2018.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================ WORK WALL
-     A display grid, not a gallery of links. The brief was explicit
-     that these do not go anywhere, so they are figures rather than
-     anchors and nothing here has a hover state: a hover response on
-     something that cannot be clicked promises an interaction that is
-     not coming.
-
-     TODO: Ben. Every tile is a placeholder sized to show the asset
-     shape needed. Real imagery and real project names both wait on
-     the same thing the clients section waits on, which is written
-     permission from each client. No client is named here for the
-     same reason. See the note on section 2.
-     ============================ -->
-<section class="section" id="work" data-theme="light" aria-labelledby="h-work">
-  <div class="container-x">
-    <p class="micro-label">Selected work</p>
-    <h2 class="display-m" style="margin-top:14px;max-width:18ch" id="h-work">A wall of the work, not a list of links</h2>
-    <div class="wall" data-stagger style="margin-top:clamp(36px,5vw,72px)">
-        <figure class="wall__tile wall__tile--portrait" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 01</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--portrait" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 02</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--portrait" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 03</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--wide" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="4:3 landscape"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 04</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--portrait" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 05</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--banner" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="16:9 banner"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 06</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--square" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="1:1 square"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 07</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--square" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="1:1 square"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 08</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--square" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="1:1 square"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 09</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--wide" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="4:3 landscape"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 10</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--portrait" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 11</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-        <figure class="wall__tile wall__tile--portrait" data-anim="up">
-          <div class="wall__media"><div class="ph" data-ph="3:4 portrait"></div></div>
-          <figcaption class="wall__meta">
-            <span class="wall__name">Project 12</span>
-            <span class="wall__sector">Sector</span>
-          </figcaption>
-        </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ 4. WHAT WE DO -->
-<section class="section" id="what-we-do" data-theme="dark" aria-labelledby="h-what">
-  <div class="container-x">
-    <p class="micro-label">What we do</p>
-    <h2 class="display-m" style="margin-top:14px;max-width:16ch" id="h-what">Four things, and you can start with one</h2>
-
-    <div data-stagger style="display:grid;gap:clamp(28px,3.5vw,48px);margin-top:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-
-      <div class="svc-group" data-anim="up">
-        <h3 class="heading-m svc-group__name">Research and strategy</h3>
-        <p class="svc-group__line">We talk to your users and work out what is worth building.</p>
-        <ul class="svc-group__list">
-          <li>User research</li><li>Product strategy</li><li>Behavioural analysis</li>
-        </ul>
-      </div>
-
-      <div class="svc-group" data-anim="up">
-        <h3 class="heading-m svc-group__name">Design and build</h3>
-        <p class="svc-group__line">Working software, not pictures of it.</p>
-        <ul class="svc-group__list">
-          <li>Product design</li><li>UX and UI design</li><li>AI feature design</li><li>Prototyping</li><li>Design systems</li><li>Accessibility</li><li>Front end build</li>
-        </ul>
-      </div>
-
-      <div class="svc-group" data-anim="up">
-        <h3 class="heading-m svc-group__name">Testing and measurement</h3>
-        <p class="svc-group__line">We find out whether it worked, instead of arguing about it.</p>
-        <ul class="svc-group__list">
-          <li>Analytics and measurement</li><li>Testing and QA</li><li>Live variant testing</li>
-        </ul>
-      </div>
-
-      <div class="svc-group" data-anim="up">
-        <h3 class="heading-m svc-group__name">Setting your team up</h3>
-        <p class="svc-group__line">We hand the method over so your team can run it without us.</p>
-        <ul class="svc-group__list">
-          <li>AI workflow setup</li><li>The project record</li><li>Design system governance</li><li>Training</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <p class="body-l" style="margin-top:clamp(36px,4vw,64px);max-width:52ch">Most people come to us with one specific thing. A feature that is not converting. A product that needs research behind it. A design system that has drifted. That is the right place to start.</p>
-  </div>
-</section>
-
-<!-- ============================ 5. WHY COMPANIES WORK WITH US -->
-<section class="section" id="why-us" data-theme="light" aria-labelledby="h-why">
-  <div class="container-x">
-    <p class="micro-label">Why companies work with us</p>
-    <h2 class="display-m" style="margin-top:14px;max-width:16ch" id="h-why">Six reasons, in the order they usually matter</h2>
-
-    <div data-stagger style="display:grid;gap:clamp(28px,3.5vw,48px);margin-top:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-
-      <div class="gain" data-anim="up">
-        <span class="micro-label gain__num">( 01 )</span>
-        <h3 class="heading-m gain__title">You get a design team without hiring one</h3>
-        <p class="gain__body">Senior product design, research and front end capability, available when you need it and not on your payroll. No recruitment, no ramp up, no salary commitment before you know what the work is worth.</p>
-      </div>
-
-      <div class="gain" data-anim="up">
-        <span class="micro-label gain__num">( 02 )</span>
-        <h3 class="heading-m gain__title">We have already worked out the AI part</h3>
-        <p class="gain__body">Most teams know AI should be changing how they design and build, and have not had time to work out how. We have spent two years on it. You get the method, the guardrails and the tooling decisions without doing that work yourself, and if you want your own team running it, we hand it over.</p>
-      </div>
-
-      <div class="gain" data-anim="up">
-        <span class="micro-label gain__num">( 03 )</span>
-        <h3 class="heading-m gain__title">You see working prototypes in days</h3>
-        <p class="gain__body">Real, clickable software built from real components, usually more than one direction at a time. That means you can put something in front of your team on Tuesday and in front of users the following week, then do it again. Feedback stops being an event you schedule and becomes something you can repeat.</p>
-      </div>
-
-      <div class="gain" data-anim="up">
-        <span class="micro-label gain__num">( 04 )</span>
-        <h3 class="heading-m gain__title">Your budget covers more</h3>
-        <p class="gain__body">Production and synthesis used to absorb most of a design budget. They no longer do. The same money now buys more research, more directions tested and more evidence behind what ships. Our rates have not dropped. What you get for them has changed.</p>
-      </div>
-
-      <div class="gain" data-anim="up">
-        <span class="micro-label gain__num">( 05 )</span>
-        <h3 class="heading-m gain__title">Your developers stay in control</h3>
-        <p class="gain__body">We are not a replacement for your engineering team and we do not bid against one. We build front end code and components, then hand them over. Your team reviews, merges and ships through your own pipeline. We do not deploy to your production environment and we do not own your release process.</p>
-      </div>
-
-      <div class="gain" data-anim="up">
-        <span class="micro-label gain__num">( 06 )</span>
-        <h3 class="heading-m gain__title">You own everything, including the reasoning</h3>
-        <p class="gain__body">Code, designs, research, the design system, and a written record of why every decision was made. All of it in your repositories and your accounts. Nothing is held back to keep you dependent, and if we stop working together there is nothing to hand over because it was always yours.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================ 6. WHY THIS IS POSSIBLE NOW -->
-<section class="mani" id="why-now" data-theme="dark" aria-labelledby="h-now">
-  <div class="container-x mani__inner">
-    <p class="micro-label mani__label">Why this is possible now</p>
-    <h2 class="display-l mani__headline" id="h-now">
-      <span class="mani__line"><span>You are limited</span></span>
-      <span class="mani__line"><span>by how well</span></span>
-      <span class="mani__line"><span>you decide.</span></span>
+    <h2 class="x-mid" id="h-clients" data-anim="up" style="margin-bottom:clamp(28px,4vw,56px);max-width:20ch">
+      Working with technology businesses, media platforms and marketplaces since 2018.
     </h2>
-    <div class="mani__copy">
-      <p class="mani__body">Making things used to be the expensive part. Drawing every screen. Writing every summary. Rebuilding every option somebody wanted to compare.</p>
-      <p class="mani__body">That cost has mostly gone. Judgement has not. So the constraint moved. You are no longer limited by how much you can produce. Most teams are still working around a constraint that disappeared, which is why the design process at a lot of companies still looks like it did in 2019.</p>
+    <div class="x-clients" data-stagger>
+      <span class="x-clients__name" data-anim="up">PolicyFly</span>
+      <span class="x-clients__name" data-anim="up">Future Women</span>
+      <span class="x-clients__name" data-anim="up">GroupTogether</span>
+      <span class="x-clients__name" data-anim="up">Hearsay</span>
+      <span class="x-clients__name" data-anim="up">BeautyCrew</span>
+      <span class="x-clients__name" data-anim="up">Seven Network</span>
     </div>
   </div>
 </section>
 
-<!-- ============================ 7. HOW WE WORK -->
-<section class="section" id="how-we-work" data-theme="light" aria-labelledby="h-how">
-  <div class="container-x">
-    <p class="micro-label">How we work</p>
-    <h2 class="display-m" style="margin-top:14px;max-width:18ch" id="h-how">One process, from the problem to the live result</h2>
-    <p class="body-l" style="margin-top:clamp(20px,2.5vw,32px);max-width:56ch">Most organisations run a design process and a development process that meet awkwardly in the middle. The gap between them is where the money goes. Antiphono runs one process instead.</p>
+<!-- ============================================================
+     3. WORK. Layout family: pinned horizontal pan.
 
-    <div data-stagger style="display:grid;gap:clamp(28px,3.5vw,48px);margin-top:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-
-      <div class="phase" data-anim="up">
-        <h3 class="heading-m phase__name">Design</h3>
-        <p class="phase__body">A problem to solve, not a solution to build. We research it, then build several directions from live components rather than drawing them. One sign off before engineering effort is committed.</p>
-      </div>
-
-      <div class="phase" data-anim="up">
-        <h3 class="heading-m phase__name">Build</h3>
-        <p class="phase__body">Working front end code, with measurement wired in as it is written. Built on a branch, following your conventions.</p>
-      </div>
-
-      <div class="phase" data-anim="up">
-        <h3 class="heading-m phase__name">Test</h3>
-        <p class="phase__body">Internal review on a real URL, then QA and participant testing, then variants running against real traffic. Producing a variant is cheap now, so testing stops being the first thing cut when the timeline tightens.</p>
-      </div>
-
-      <div class="phase" data-anim="up">
-        <h3 class="heading-m phase__name">Record</h3>
-        <p class="phase__body">Every stage writes down what it learned, in your repository, next to the code it describes. What was decided, what was rejected, what the behaviour showed. Month twelve costs less and delivers more than month one, and that is the reason relationships here run for years.</p>
-      </div>
-
+     Real project imagery, supplied by Ben. Panels are figures, not
+     links: there are no case study pages yet, so a click would go
+     nowhere. Without JavaScript or under reduced motion the track
+     is a normal horizontal scroller, so the work is always
+     reachable.
+     ============================================================ -->
+<section class="x-work" id="work" data-theme="dark" aria-labelledby="h-work">
+  <div class="container-x" style="padding-top:var(--x-pad);padding-bottom:clamp(24px,3vw,48px)">
+    <p class="micro-label" data-anim="up">Selected work</p>
+    <h2 class="x-huge" id="h-work" data-anim="up">Work</h2>
+  </div>
+  <div class="x-work__viewport" data-work-viewport>
+    <div class="x-work__track" data-work-track>
+        <figure class="x-work__panel x-work__panel--sq" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/policyfly-sq.jpg" alt="The PolicyFly underwriting platform home screen, showing policy documents and task lists" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">PolicyFly</span>
+            <span class="x-work__sector">Insurance platform</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/hearsay.jpg" alt="The Hearsay workspace dashboard, showing recent activity and upcoming conversations" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">Hearsay</span>
+            <span class="x-work__sector">Meetings product</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/editor-group.jpg" alt="The Editor Group website on desktop and mobile, showing the rebuilt homepage" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">Editor Group</span>
+            <span class="x-work__sector">Content studio</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/beautycrew.jpg" alt="The BeautyCrew editorial site, showing the article feed and review layouts" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">BeautyCrew</span>
+            <span class="x-work__sector">Beauty publishing</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--sq" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/7travel-sq.jpg" alt="The 7travel key visual, showing destination browsing on mobile" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">7travel</span>
+            <span class="x-work__sector">Travel platform</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/winter-games.jpg" alt="The Winter Games on 7 streaming app across tablet, phone and desktop" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">Winter Games on 7</span>
+            <span class="x-work__sector">Live sport streaming</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/commonwealth-games.jpg" alt="Key screens from the Commonwealth Games on 7 streaming product" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">Commonwealth Games on 7</span>
+            <span class="x-work__sector">Live sport streaming</span>
+          </figcaption>
+        </figure>
+        <figure class="x-work__panel x-work__panel--wide" data-anim="scale">
+          <div class="x-work__media"><img src="/media/work/oscar-winter.jpg" alt="Design principles and interface work for the Oscar Winter jewellery store" loading="lazy" decoding="async"></div>
+          <figcaption class="x-work__meta">
+            <span class="x-work__name">Oscar Winter</span>
+            <span class="x-work__sector">Jewellery ecommerce</span>
+          </figcaption>
+        </figure>
     </div>
-
-    <p class="body-l" style="margin-top:clamp(36px,4vw,64px);max-width:48ch">Someone reviews and signs off before anything moves forward. Moving quickly does not cost you control.</p>
   </div>
 </section>
 
-<!-- ============================ 8. WHERE AI DOES THE WORK
-     DESIGN SYSTEM CONFLICT, flagged rather than resolved.
-
-     The spec asks for the people column in serif and the AI column
-     in sans, so the page makes its point typographically before
-     anyone reads it. The system has two faces and no serif, and
-     adding one would break the two-face rule and mean self-hosting
-     a third webfont.
-
-     Built here with the two faces the system already has: the AI
-     column in the interface face, the people column in the display
-     face. The distinction reads, but it is quieter than a serif
-     would be. Ben's call whether a serif is worth the exception.
-     ============================ -->
-<section class="section" id="ai-and-people" data-theme="dark" aria-labelledby="h-ai">
+<!-- ============================================================
+     4. WHO WE WORK WITH. Layout family: full width statement.
+     ============================================================ -->
+<section id="who" data-theme="dark" aria-labelledby="h-who">
   <div class="container-x">
-    <p class="micro-label">Where AI does the work, and where people do</p>
-    <h2 class="display-m" style="margin-top:14px;max-width:18ch" id="h-ai">We think you should know exactly where AI sits in this</h2>
-
-    <div class="duo" style="margin-top:clamp(36px,5vw,72px)">
-      <div class="duo__col duo__col--machine">
-        <p class="micro-label duo__label">AI does</p>
-        <ul class="duo__list">
-          <li>Synthesis</li>
-          <li>Producing design and code</li>
-          <li>Generating options</li>
-          <li>Documentation</li>
-          <li>Analysing behavioural data</li>
-          <li>Keeping the record current</li>
-        </ul>
-      </div>
-      <div class="duo__col duo__col--human">
-        <p class="micro-label duo__label">People do</p>
-        <ul class="duo__list">
-          <li>Deciding what problem is worth solving</li>
-          <li>Talking to your users</li>
-          <li>Judging which direction is right</li>
-          <li>Being accountable for what ships</li>
-        </ul>
-      </div>
+    <h2 class="x-big" id="h-who" data-anim="clip" style="max-width:16ch">
+      Technology businesses with a product in market and no design team of their own.
+    </h2>
+    <div style="display:grid;gap:18px;max-width:60ch;margin-top:clamp(28px,4vw,56px)" data-stagger>
+      <p class="body-l" data-anim="up" style="color:var(--x-ink-soft)">You might be a founder who needs senior product thinking and cannot justify a salary yet. A head of product with a roadmap and no one to design it. A technology director who needs design that arrives ready to ship. A marketing director who needs work out the door without quality slipping. Or a design director with a team who want to work this way and no time to work out how.</p>
+      <p data-anim="up" style="color:var(--x-ink-soft)">Antiphono has been doing this since 2018.</p>
     </div>
-
-    <p class="body-l" style="margin-top:clamp(32px,4vw,56px);max-width:48ch">Everything that reaches you has been looked at by a person who is answerable for it.</p>
   </div>
 </section>
 
-<!-- ============================ 9. THINKING
-     The feed hides itself below four articles, per the spec, rather
-     than running thin. The RSS proxy currently returns nothing, so
-     as it stands this section does not appear at all. It will appear
-     on its own once four articles are published.
-     ============================ -->
-<section class="section" id="thinking" data-theme="light" aria-labelledby="h-thinking" hidden data-feed-min="4">
+<!-- ============================================================
+     5. WHAT WE DO. Layout family: sticky card stack.
+     Each service group pins at the top of the viewport and the one
+     behind it recedes, so the four groups read as one sequence
+     rather than four boxes. Falls back to a plain stack under
+     reduced motion and below 860px.
+     ============================================================ -->
+<section id="what-we-do" data-theme="dark" aria-labelledby="h-what" style="padding-block:0">
+  <div class="container-x" style="padding-top:var(--x-pad)">
+    <p class="micro-label" data-anim="up">What we do</p>
+    <h2 class="x-huge" id="h-what" data-anim="up">Four things.</h2>
+  </div>
+  <div data-stack>
+      <article class="x-stack__card container-x">
+        <h3 class="x-big">Research and strategy</h3>
+        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">We talk to your users and work out what is worth building.</p>
+        <ul class="x-stack__list"><li>User research</li><li>Product strategy</li><li>Behavioural analysis</li></ul>
+      </article>
+      <article class="x-stack__card container-x">
+        <h3 class="x-big">Design and build</h3>
+        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">Working software, not pictures of it.</p>
+        <ul class="x-stack__list"><li>Product design</li><li>UX and UI design</li><li>AI feature design</li><li>Prototyping</li><li>Design systems</li><li>Accessibility</li><li>Front end build</li></ul>
+      </article>
+      <article class="x-stack__card container-x">
+        <h3 class="x-big">Testing and measurement</h3>
+        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">We find out whether it worked, instead of arguing about it.</p>
+        <ul class="x-stack__list"><li>Analytics and measurement</li><li>Testing and QA</li><li>Live variant testing</li></ul>
+      </article>
+      <article class="x-stack__card container-x">
+        <h3 class="x-big">Setting your team up</h3>
+        <p class="body-l" style="max-width:44ch;color:var(--x-ink-soft)">We hand the method over so your team can run it without us.</p>
+        <ul class="x-stack__list"><li>AI workflow setup</li><li>The project record</li><li>Design system governance</li><li>Training</li></ul>
+      </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. WHY US. Layout family: asymmetric bento.
+     Six items, six cells, no empty tiles. One accent cell and two
+     tinted cells carry the visual variation.
+     ============================================================ -->
+<section id="why-us" data-theme="dark" aria-labelledby="h-why">
   <div class="container-x">
-    <p class="micro-label">Thinking</p>
-    <h2 class="display-m" style="margin-top:14px;max-width:16ch" id="h-thinking">Thinking</h2>
-    <p class="body-l" style="margin-top:clamp(20px,2.5vw,32px);max-width:56ch">How product design is changing, what it means if you run a small technology team, and how to tell whether a change is worth making.</p>
+    <h2 class="x-big" id="h-why" data-anim="up" style="margin-bottom:clamp(32px,4vw,64px);max-width:14ch">Why companies work with us</h2>
+  </div>
+  <div class="container-x">
+    <div class="x-bento" data-stagger>
+        <div class="x-bento__cell x-bento__cell--w3 " data-anim="up">
+          <h3 class="x-mid">You get a design team without hiring one</h3>
+          <p>Senior product design, research and front end capability, available when you need it and not on your payroll. No recruitment, no ramp up, no salary commitment before you know what the work is worth.</p>
+        </div>
+        <div class="x-bento__cell x-bento__cell--w3 x-bento__cell--accent" data-anim="up">
+          <h3 class="x-mid">We have already worked out the AI part</h3>
+          <p>Most teams know AI should be changing how they design and build, and have not had time to work out how. We have spent two years on it. You get the method, the guardrails and the tooling decisions without doing that work yourself.</p>
+        </div>
+        <div class="x-bento__cell x-bento__cell--w4 " data-anim="up">
+          <h3 class="x-mid">You see working prototypes in days</h3>
+          <p>Real, clickable software built from real components, usually more than one direction at a time. Feedback stops being an event you schedule and becomes something you can repeat.</p>
+        </div>
+        <div class="x-bento__cell  x-bento__cell--tint" data-anim="up">
+          <h3 class="x-mid">Your budget covers more</h3>
+          <p>Production and synthesis used to absorb most of a design budget. They no longer do. Our rates have not dropped. What you get for them has changed.</p>
+        </div>
+        <div class="x-bento__cell  " data-anim="up">
+          <h3 class="x-mid">Your developers stay in control</h3>
+          <p>We build front end code and components, then hand them over. Your team reviews, merges and ships through your own pipeline. We do not deploy to your production environment.</p>
+        </div>
+        <div class="x-bento__cell x-bento__cell--w4 x-bento__cell--tint" data-anim="up">
+          <h3 class="x-mid">You own everything, including the reasoning</h3>
+          <p>Code, designs, research, the design system, and a written record of why every decision was made. All of it in your repositories and your accounts.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. WHY NOW. Layout family: kinetic marquee plus statement.
+     The only marquee on the page.
+     ============================================================ -->
+<section id="why-now" data-theme="dark" aria-labelledby="h-now" style="padding-block:0">
+  <div class="x-marquee" aria-hidden="true">
+    <div class="x-marquee__track"><span>Research</span><span aria-hidden="true">/</span><span>Design</span><span aria-hidden="true">/</span><span>Prototype</span><span aria-hidden="true">/</span><span>Measure</span><span aria-hidden="true">/</span><span>Hand over</span><span aria-hidden="true">/</span><span>Research</span><span aria-hidden="true">/</span><span>Design</span><span aria-hidden="true">/</span><span>Prototype</span><span aria-hidden="true">/</span><span>Measure</span><span aria-hidden="true">/</span><span>Hand over</span><span aria-hidden="true">/</span></div>
+  </div>
+  <div class="container-x" style="padding-block:var(--x-pad)">
+    <h2 class="x-big" id="h-now" data-anim="clip" style="max-width:15ch">You are no longer limited by how much you can produce. You are limited by how well you decide.</h2>
+    <p class="body-l" data-anim="up" style="color:var(--x-ink-soft);max-width:56ch;margin-top:clamp(24px,3vw,44px)">Making things used to be the expensive part. That cost has mostly gone. Judgement has not, so the constraint moved. Most teams are still working around a constraint that disappeared, which is why the design process at a lot of companies still looks like it did in 2019.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. HOW WE WORK. Layout family: scroll progress path.
+     The rule down the left fills as you read, which is the only
+     job that animation has here: showing how far through the
+     process you are.
+     ============================================================ -->
+<section id="how-we-work" data-theme="dark" aria-labelledby="h-how">
+  <div class="container-x">
+    <h2 class="x-big" id="h-how" data-anim="up" style="max-width:16ch">One process, from the problem to the live result</h2>
+    <p class="body-l" data-anim="up" style="color:var(--x-ink-soft);max-width:56ch;margin:clamp(20px,2.5vw,36px) 0 clamp(32px,4vw,64px)">Most organisations run a design process and a development process that meet awkwardly in the middle. The gap between them is where the money goes. Antiphono runs one process instead.</p>
+    <div class="x-steps" data-steps>
+      <span class="x-steps__fill" data-steps-fill aria-hidden="true"></span>
+        <div class="x-step" data-anim="up">
+          <h3 class="x-mid">Design</h3>
+          <p>A problem to solve, not a solution to build. We research it, then build several directions from live components rather than drawing them. One sign off before engineering effort is committed.</p>
+        </div>
+        <div class="x-step" data-anim="up">
+          <h3 class="x-mid">Build</h3>
+          <p>Working front end code, with measurement wired in as it is written. Built on a branch, following your conventions.</p>
+        </div>
+        <div class="x-step" data-anim="up">
+          <h3 class="x-mid">Test</h3>
+          <p>Internal review on a real URL, then QA and participant testing, then variants running against real traffic. Producing a variant is cheap now, so testing stops being the first thing cut when the timeline tightens.</p>
+        </div>
+        <div class="x-step" data-anim="up">
+          <h3 class="x-mid">Record</h3>
+          <p>Every stage writes down what it learned, in your repository, next to the code it describes. Month twelve costs less and delivers more than month one, and that is the reason relationships here run for years.</p>
+        </div>
+    </div>
+    <p class="body-l" data-anim="up" style="max-width:44ch;margin-top:clamp(28px,3.5vw,52px)">Someone reviews and signs off before anything moves forward. Moving quickly does not cost you control.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. AI AND PEOPLE. Layout family: split screen.
+     ============================================================ -->
+<section id="ai-and-people" data-theme="dark" aria-labelledby="h-ai" style="padding-block:0">
+  <div class="container-x" style="padding-block:var(--x-pad) 0">
+    <h2 class="x-big" id="h-ai" data-anim="up" style="max-width:18ch;margin-bottom:clamp(32px,4vw,64px)">We think you should know exactly where AI sits in this</h2>
+  </div>
+  <div class="x-split">
+    <div class="x-split__half x-split__half--b" data-anim="up">
+      <p class="micro-label" style="color:var(--x-ink-soft)">AI does</p>
+      <ul class="x-split__list">
+        <li>Synthesis</li><li>Producing design and code</li><li>Generating options</li>
+        <li>Documentation</li><li>Analysing behavioural data</li><li>Keeping the record current</li>
+      </ul>
+    </div>
+    <div class="x-split__half" data-anim="up">
+      <p class="micro-label">People do</p>
+      <ul class="x-split__list">
+        <li>Deciding what problem is worth solving</li><li>Talking to your users</li>
+        <li>Judging which direction is right</li><li>Being accountable for what ships</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-x" style="padding-block:clamp(32px,4vw,64px) var(--x-pad)">
+    <p class="body-l" data-anim="up" style="max-width:44ch">Everything that reaches you has been looked at by a person who is answerable for it.</p>
+  </div>
+</section>
+
+<!-- Thinking. Hidden until four articles exist, per the v5 spec. -->
+<section id="thinking" data-theme="dark" aria-labelledby="h-thinking" hidden data-feed-min="4">
+  <div class="container-x">
+    <h2 class="x-big" id="h-thinking">Thinking</h2>
     <ul id="homeFeed" style="margin-top:clamp(32px,4vw,56px)"></ul>
-    <p style="margin-top:clamp(28px,3.5vw,48px)">
-      <a href="/articles" class="btn-pill btn-pill--dark" data-cursor>Read all articles</a>
-    </p>
+    <p style="margin-top:clamp(28px,3.5vw,48px)"><a href="/articles" class="btn-pill" data-cursor><span>Read all articles</span></a></p>
   </div>
 </section>
 
-<!-- ============================ 10. WHAT CLIENTS SAY
-     Hidden until real, attributed quotes exist. An unattributed
-     quote reads as invented, and inventing one is not an option.
-     TODO: Ben. Ask Future Women and GroupTogether first. They are
-     the only two who have worked with us the way this page
-     describes. Full name, role and company on every quote.
-     ============================ -->
-<section class="section" id="testimonials" data-theme="light" aria-labelledby="h-tst" hidden>
-  <div class="container-x">
-    <p class="micro-label" id="h-tst">What clients say</p>
-    <!-- TODO: two testimonials, each with full name, role and company. -->
-  </div>
-</section>
+<!-- Testimonials. Hidden until real attributed quotes exist.
+     TODO: Ben. Ask Future Women and GroupTogether first. -->
+<section id="testimonials" data-theme="dark" hidden aria-label="What clients say"></section>
 
-<!-- ============================ 11. ABOUT -->
-<section class="section" id="about" data-theme="dark" aria-labelledby="h-about">
-  <div class="container-x" style="display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-    <div>
-      <p class="micro-label">About Antiphono</p>
-      <h2 class="heading-l" style="margin-top:14px;max-width:20ch" id="h-about">Small, senior, and the person you meet is the person who does the work</h2>
-    </div>
-    <div style="display:grid;gap:18px" data-stagger>
-      <!-- The entity definition is worded identically here, in the footer
-           and in the meta description. Answer engines need it that way.
-           Do not paraphrase it. -->
+<!-- ============================================================
+     10. ABOUT. Layout family: asymmetric image and text split.
+     The only image plus text split on the page.
+     ============================================================ -->
+<section id="about" data-theme="dark" aria-labelledby="h-about">
+  <div class="container-x x-about">
+    <figure class="x-about__media" data-anim="scale">
+      <img src="/media/figma/why-portrait.jpg" alt="Ben Tweedie, founder and product lead at Antiphono" loading="lazy" decoding="async">
+    </figure>
+    <div class="x-about__copy">
+      <h2 class="x-big" id="h-about" data-anim="up" style="max-width:15ch">Small, senior, and the person you meet is the person who does the work</h2>
+      <!-- The entity definition is worded identically here, in the footer and
+           in the meta description. Answer engines need it that way. -->
       <p class="body-l" data-anim="up">Antiphono is a product design and research studio in Sydney, Australia, working with clients anywhere. Operating since 2018.</p>
       <p data-anim="up">There is no junior layer absorbing volume and no margin taken on it. Ben Tweedie leads strategy and creative direction, and does the design and prototyping himself.</p>
       <p data-anim="up">Antiphony is a musical term for call and response. Two voices in dialogue, each shaping the other. That is the relationship between human judgement and AI, and it is why the name changed.</p>
-      <!-- TODO: Ben. Two or three sentences on your background. Where you
-           worked, what you have shipped. Nothing invented in the meantime. -->
+      <!-- TODO: Ben. Two or three sentences on your background. -->
     </div>
   </div>
-
-  <div class="container-x" style="margin-top:clamp(40px,5vw,80px)">
-    <!-- TODO: Ben. Confirm the eight year figure before this is public.
-         It is the only number on the page and the spec records it as an
-         assumption rather than a checked fact. -->
-    <div class="facts" data-stagger>
-      <div class="facts__item" data-anim="up">
-        <span class="heading-m facts__value">2018</span>
-        <p class="facts__label">Working with technology businesses since</p>
-      </div>
-      <div class="facts__item" data-anim="up">
-        <span class="heading-m facts__value">8 years</span>
-        <p class="facts__label">Our longest client relationship, still running</p>
-      </div>
-      <div class="facts__item" data-anim="up">
-        <span class="heading-m facts__value">Senior only</span>
-        <p class="facts__label">No junior layer, no account layer</p>
-      </div>
+  <div class="container-x">
+    <!-- TODO: Ben. Confirm the eight year figure before this is public. -->
+    <div class="x-facts" data-stagger>
+      <div class="x-fact" data-anim="up"><b>2018</b><span>Working with technology businesses since</span></div>
+      <div class="x-fact" data-anim="up"><b>8 years</b><span>Our longest client relationship, still running</span></div>
+      <div class="x-fact" data-anim="up"><b>Senior only</b><span>No junior layer, no account layer</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============================ 12. STANDARDS, DATA AND YOUR IP -->
-<section class="section" id="standards" data-theme="dark" aria-labelledby="h-std">
-  <div class="container-x" style="display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-    <div>
-      <p class="micro-label">Standards, data and your IP</p>
-      <h2 class="heading-m" style="margin-top:14px;max-width:20ch" id="h-std">What we hold ourselves to, and where your material lives</h2>
-    </div>
-    <div style="display:grid;gap:18px" data-stagger>
-      <p class="body-l" data-anim="up">WCAG 2.1 AA on everything Antiphono designs or builds. The Australian Privacy Act. GDPR where you operate in or serve the EU.</p>
-      <p data-anim="up">We work inside your own AI accounts, under your subscription and your settings. Your material stays in your environment and nothing of yours sits in our systems.</p>
-      <!-- TODO: Ben. This link needs a confirmed destination. The v5 spec
-           records the full AI and data position as still needing a
-           permanent URL. /ai-data-and-ip is the only existing candidate,
-           and CLAUDE.md currently says it must not be published or linked
-           from the main navigation. This is a body link rather than main
-           navigation, but confirm before this page goes live. -->
-      <p data-anim="up">
-        <a href="/ai-data-and-ip" class="btn-pill" data-cursor>How we use AI, and what happens to your data</a>
-      </p>
-    </div>
+<!-- ============================================================
+     11. STANDARDS. Layout family: inline band.
+     ============================================================ -->
+<section id="standards" data-theme="dark" aria-labelledby="h-std">
+  <div class="container-x" style="display:grid;gap:20px;max-width:70ch">
+    <h2 class="x-mid" id="h-std" data-anim="up">What we hold ourselves to, and where your material lives</h2>
+    <p class="body-l" data-anim="up" style="color:var(--x-ink-soft)">WCAG 2.1 AA on everything Antiphono designs or builds. The Australian Privacy Act. GDPR where you operate in or serve the EU. We work inside your own AI accounts, under your subscription and your settings, so your material stays in your environment.</p>
+    <!-- TODO: Ben. This link needs a confirmed destination. -->
+    <p data-anim="up"><a href="/ai-data-and-ip" class="btn-pill btn-pill--ghost" data-cursor data-magnetic><span>How we use AI, and what happens to your data</span></a></p>
   </div>
 </section>
 
-<!-- ============================ 13. CONTACT -->
-<section class="section" id="contact" data-theme="light" aria-labelledby="h-contact">
-  <div class="container-x" style="display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-
-    <div style="display:grid;gap:20px;align-content:start">
-      <!-- TODO: Ben. Headline choice. This is the spec author's pick.
-           The alternatives were: "Tell us what you are trying to fix.",
-           "What are you trying to fix?" and "Let's find out what works." -->
-      <h2 class="display-m" id="h-contact">Let's make something worth measuring.</h2>
-      <p class="body-l">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem properly, build something you can click, and give you a plan with a number against it.</p>
-      <p>You own everything it produces, whether or not we do the work that follows.</p>
-      <p>Tell us what you are trying to fix. If we are the right people we will say so, and if we are not we will say that instead.</p>
-      <!-- TODO: Ben. Is two to three weeks realistic? The spec records it
-           as untested against a real scope. -->
-    </div>
-
-    <!-- The booking embed is never loaded on page load. It loads when
-         someone asks for it, which keeps a third party script and its
-         cookies off the page until there is consent to load them, and
-         keeps a heavy embed out of every performance metric. The email
-         below is always present, not a fallback that appears on
-         failure, so the page converts whether or not the embed works. -->
-    <div class="booking">
-      <p class="micro-label">Book a call</p>
-      <div class="booking__frame"
-           id="cal-booking"
-           data-booking
-           data-booking-state="idle"
-           data-cal-link="https://cal.com/ben-tweedie-v96yxs/discovery-call"
-           aria-label="Book a call with Antiphono">
-        <p class="booking__note">The booking calendar is a third party embed. It loads when you ask for it, so nothing is loaded into your browser until then.</p>
-        <button type="button" class="btn-pill btn-pill--dark" data-booking-load data-cursor>Show available times</button>
+<!-- ============================================================
+     12. CONTACT. Layout family: display type plus booking.
+     ============================================================ -->
+<section id="contact" data-theme="dark" aria-labelledby="h-contact">
+  <div class="container-x">
+    <p class="micro-label" data-anim="up">Next step</p>
+    <!-- TODO: Ben. Headline choice, this is the v5 author's pick. -->
+    <h2 class="x-huge" id="h-contact" data-anim="up" style="max-width:12ch">Let's make something worth measuring.</h2>
+    <div style="display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:clamp(36px,5vw,72px)">
+      <div style="display:grid;gap:18px;align-content:start">
+        <p class="body-l" data-anim="up">Most people start with a discovery. Two to three weeks, quoted up front. We define the problem properly, build something you can click, and give you a plan with a number against it.</p>
+        <p data-anim="up" style="color:var(--x-ink-soft)">You own everything it produces, whether or not we do the work that follows. Tell us what you are trying to fix. If we are the right people we will say so, and if we are not we will say that instead.</p>
+        <!-- TODO: Ben. Is two to three weeks realistic? -->
       </div>
-      <p class="booking__direct">Prefer email? <a href="mailto:ben@antiphono.com" style="text-decoration:underline;text-underline-offset:3px">ben@antiphono.com</a></p>
-      <!-- TODO: Ben. Confirm the Cal.com link, and name the event.
-           "Intro call, 30 minutes" rather than "30 Min Meeting", since
-           the name is visible to whoever is booking. -->
+      <div class="booking" data-anim="up">
+        <div class="booking__frame" id="cal-booking" data-booking data-booking-state="idle"
+             data-cal-link="https://cal.com/ben-tweedie-v96yxs/discovery-call"
+             aria-label="Book a call with Antiphono">
+          <p class="booking__note">The booking calendar is a third party embed. It loads when you ask for it, so nothing is loaded into your browser until then.</p>
+          <button type="button" class="btn-pill" data-booking-load data-cursor><span>Show available times</span></button>
+        </div>
+        <p class="booking__direct">Prefer email? <a href="mailto:ben@antiphono.com" style="text-decoration:underline;text-underline-offset:4px">ben@antiphono.com</a></p>
+        <!-- TODO: Ben. Confirm the Cal.com link and name the event. -->
+      </div>
     </div>
-
   </div>
 </section>
 
 </main>
 
-<!-- ============================ FOOTER -->
-<footer class="section" data-theme="dark" aria-labelledby="h-foot">
+<footer data-theme="dark" aria-labelledby="h-foot">
   <div class="container-x">
-    <p class="body-l" id="h-foot" style="max-width:34ch">Antiphono is a product design and research studio in Sydney, Australia.</p>
-
-    <div style="display:grid;gap:clamp(24px,3vw,48px);margin-top:clamp(36px,5vw,72px);grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+    <p class="x-mid" id="h-foot" style="max-width:22ch">Antiphono is a product design and research studio in Sydney, Australia.</p>
+    <div style="display:grid;gap:clamp(24px,3vw,48px);margin-top:clamp(40px,5vw,80px);grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
       <div>
-        <p class="micro-label" style="opacity:0.6;margin-bottom:14px">Navigate</p>
-        <ul style="display:grid;gap:8px">
-          <li><a href="#thinking">Thinking</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <p class="micro-label" style="margin-bottom:14px;color:var(--x-ink-soft)">Navigate</p>
+        <ul style="display:grid;gap:8px"><li><a href="#thinking">Thinking</a></li><li><a href="#contact">Contact</a></li></ul>
       </div>
       <div>
-        <p class="micro-label" style="opacity:0.6;margin-bottom:14px">Position</p>
+        <p class="micro-label" style="margin-bottom:14px;color:var(--x-ink-soft)">Position</p>
         <ul style="display:grid;gap:8px">
-          <!-- TODO: same destination question as section 12. -->
           <li><a href="/ai-data-and-ip">AI, data and your IP</a></li>
           <li><a href="/how-we-run-a-project">How we run a project</a></li>
-          <!-- TODO: /accessibility does not exist yet. It is linked from
-               the footer on every other page too, so it is a site wide
-               broken link rather than one this page introduced. -->
+          <!-- TODO: /accessibility does not exist yet. Site wide issue. -->
           <li><a href="/accessibility">Accessibility</a></li>
         </ul>
       </div>
       <div>
-        <p class="micro-label" style="opacity:0.6;margin-bottom:14px">Contact</p>
+        <p class="micro-label" style="margin-bottom:14px;color:var(--x-ink-soft)">Contact</p>
         <ul style="display:grid;gap:8px">
           <li><a href="mailto:ben@antiphono.com">ben@antiphono.com</a></li>
           <li><a href="https://www.linkedin.com/in/bentweedie" rel="noopener">Ben Tweedie on LinkedIn</a></li>
         </ul>
       </div>
     </div>
-
-    <p class="small" style="margin-top:clamp(36px,5vw,72px);opacity:0.6">&copy; 2026 Antiphono Pty Ltd. Sydney, Australia.</p>
+    <p class="small" style="margin-top:clamp(40px,5vw,80px);color:var(--x-ink-soft)">&copy; 2026 Antiphono Pty Ltd. Sydney, Australia.</p>
   </div>
 </footer>
 

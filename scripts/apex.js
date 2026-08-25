@@ -1303,6 +1303,151 @@
   }
 
 
+  /* =========================================================
+     /index2 choreography. Every one of these is a no-op on a
+     page without its markup, and every one collapses under
+     prefers-reduced-motion. Nothing here listens to the scroll
+     event: ScrollTrigger and pointer events only.
+     ========================================================= */
+
+  /* Hero lines rise out of their own overflow on load. Communicates
+     hierarchy: the headline arrives before anything under it. */
+  function heroLines() {
+    var lines = document.querySelectorAll('[data-hero-line]');
+    if (!lines.length) return;
+    if (reduced || !hasGsap) {
+      Array.prototype.forEach.call(lines, function (l) { l.style.transform = 'none'; });
+      return;
+    }
+    gsap.set(lines, { yPercent: 108 });
+    gsap.to(lines, {
+      yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.075, delay: 0.15
+    });
+  }
+
+  /* Work: the section pins and the track pans sideways as you scroll.
+     Storytelling. The wall reads as one continuous body of work
+     rather than a grid of thumbnails. Without this the track is a
+     normal horizontal scroller, which is why the markup keeps
+     overflow-x auto until the pin actually takes. */
+  function workPan() {
+    var viewport = document.querySelector('[data-work-viewport]');
+    var track = document.querySelector('[data-work-track]');
+    if (!viewport || !track) return;
+    if (reduced || !hasST) return;          // stays a manual scroller
+
+    var section = viewport.closest('section');
+
+    ScrollTrigger.matchMedia ? null : null;  // no-op guard for older builds
+
+    var mm = gsap.matchMedia ? gsap.matchMedia() : null;
+    var build = function () {
+      var distance = track.scrollWidth - viewport.clientWidth;
+      if (distance <= 0) return;
+      viewport.setAttribute('data-panned', 'true');
+      gsap.to(track, {
+        x: -distance,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: function () { return '+=' + (track.scrollWidth - viewport.clientWidth); },
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    };
+
+    if (mm) {
+      mm.add('(min-width: 861px)', build);
+    } else {
+      if (window.innerWidth > 860) build();
+    }
+  }
+
+  /* Services: each card pins and the one behind it recedes, so four
+     groups read as one sequence. State transition, not decoration. */
+  function stackCards() {
+    var wrap = document.querySelector('[data-stack]');
+    if (!wrap) return;
+    if (reduced || !hasST) return;
+
+    var cards = Array.prototype.slice.call(wrap.querySelectorAll('.x-stack__card'));
+    if (cards.length < 2) return;
+    if (window.innerWidth <= 860) return;
+
+    cards.forEach(function (card, i) {
+      if (i === cards.length - 1) return;
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top top',
+        endTrigger: cards[cards.length - 1],
+        end: 'top top',
+        pin: true,
+        pinSpacing: false
+      });
+      gsap.to(card, {
+        scale: 0.94,
+        opacity: 0.45,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: cards[i + 1],
+          start: 'top bottom',
+          end: 'top top',
+          scrub: true
+        }
+      });
+    });
+  }
+
+  /* Process: the rule down the left fills as you read. Its only job
+     is showing how far through the four stages you are. */
+  function stepsProgress() {
+    var wrap = document.querySelector('[data-steps]');
+    var fill = document.querySelector('[data-steps-fill]');
+    if (!wrap || !fill) return;
+    if (reduced || !hasST) { fill.style.transform = 'scaleY(1)'; return; }
+
+    gsap.fromTo(fill, { scaleY: 0 }, {
+      scaleY: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: wrap,
+        start: 'top 72%',
+        end: 'bottom 60%',
+        scrub: 0.4
+      }
+    });
+  }
+
+  /* Buttons lean towards the cursor. Feedback: the control
+     acknowledges the pointer before it is clicked. Written straight
+     to the transform, never through state, and pointer devices
+     only. */
+  function magnetic() {
+    var targets = document.querySelectorAll('[data-magnetic]');
+    if (!targets.length) return;
+    if (reduced) return;
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+    Array.prototype.forEach.call(targets, function (el) {
+      var raf = null, tx = 0, ty = 0;
+      function apply() { raf = null; el.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'; }
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width - 0.5) * 14;
+        ty = ((e.clientY - r.top) / r.height - 0.5) * 10;
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+      el.addEventListener('pointerleave', function () {
+        tx = 0; ty = 0;
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+    });
+  }
+
+
   function boot() {
     initMotionProvider();
     initAnchors();
@@ -1334,6 +1479,13 @@
     secnav();
     feed();
     booking();
+
+    // /index2 choreography.
+    heroLines();
+    workPan();
+    stackCards();
+    stepsProgress();
+    magnetic();
 
     // Pinned sections change document height as media decodes.
     if (hasST) {
