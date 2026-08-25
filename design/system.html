@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Design system | Antiphono</title>
+<meta name="description" content="The Antiphono design system: tokens, primitives, components, motion and a library of responsive sections to build new pages from.">
+<link rel="stylesheet" href="/styles/system.css">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+/* ============================================================
+   Documentation chrome only. These styles exist to lay out this
+   one page and ship to nothing else, which is why they are here
+   rather than in styles/system.css. Everything being documented
+   below uses the real production classes from that stylesheet.
+   ============================================================ */
+.ds { background: var(--apex-white); color: var(--text-on-light); font-family: var(--font-sans); }
+.ds a { color: inherit; }
+.ds__wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
+
+.ds__bar {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(244,244,242,0.92);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hairline-light);
+}
+.ds__bar-inner { display: flex; align-items: center; gap: 24px; height: 60px; flex-wrap: wrap; }
+.ds__bar nav { display: flex; gap: 18px; flex-wrap: wrap; overflow-x: auto; }
+.ds__bar nav a { font-size: var(--micro); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; color: var(--text-secondary-light); }
+.ds__bar nav a:hover, .ds__bar nav a:focus-visible { color: var(--text-on-light); }
+
+.ds__hero { padding: clamp(64px, 10vw, 140px) 0 clamp(40px, 6vw, 72px); }
+.ds__sec { padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--hairline-light); }
+.ds__sec > * + * { margin-top: 28px; }
+.ds__lede { max-width: 62ch; font-size: var(--body-l); line-height: 1.5; color: var(--text-secondary-light); }
+.ds__note { max-width: 68ch; font-size: var(--small); line-height: 1.6; color: var(--text-secondary-light); }
+.ds__kicker { font-size: var(--micro); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-secondary-light); }
+
+.ds__grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.ds__grid--wide { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
+.ds__swatch { border: 1px solid var(--hairline-light); border-radius: 10px; overflow: hidden; background: #fff; }
+.ds__chip { height: 84px; }
+.ds__swatch dl { padding: 12px 14px; display: grid; gap: 2px; }
+.ds__swatch dt { font-size: var(--small); font-weight: 600; }
+.ds__swatch dd { margin: 0; font-size: var(--micro); color: var(--text-secondary-light); font-variant-numeric: tabular-nums; }
+
+.ds__table { width: 100%; border-collapse: collapse; font-size: var(--small); }
+.ds__scroll { overflow-x: auto; }
+.ds__table th, .ds__table td { text-align: left; padding: 10px 14px 10px 0; border-bottom: 1px solid var(--hairline-light); vertical-align: top; }
+.ds__table th { font-size: var(--micro); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary-light); font-weight: 500; }
+.ds__table code, .ds code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.86em; background: rgba(17,18,20,0.05); padding: 2px 5px; border-radius: 4px; }
+
+.ds__demo { border: 1px solid var(--hairline-light); border-radius: 12px; padding: clamp(20px, 3vw, 36px); background: #fff; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+.ds__demo--dark { background: var(--deep-black); color: var(--text-on-dark); border-color: var(--hairline-dark); }
+.ds__demo--stack { display: block; }
+
+.ds__ruler { background: var(--signal-red); height: 14px; border-radius: 2px; }
+
+.ds__snippet { border: 1px solid var(--hairline-light); border-radius: 12px; overflow: hidden; background: #fff; }
+.ds__snippet-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--hairline-light); }
+.ds__snippet-top h3 { font-size: var(--small); font-weight: 600; }
+.ds__snippet-top p { font-size: var(--micro); color: var(--text-secondary-light); margin-top: 2px; max-width: 60ch; }
+.ds__copy { font-size: var(--micro); letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 7px 14px; background: none; cursor: pointer; flex: none; }
+.ds__copy[data-copied="true"] { background: var(--text-on-light); color: var(--apex-white); }
+.ds__snippet pre { margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.6; background: #fbfbfa; }
+.ds__snippet pre code { background: none; padding: 0; }
+
+.ds__do { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.ds__do > div { border: 1px solid var(--hairline-light); border-radius: 10px; padding: 16px; font-size: var(--small); line-height: 1.6; }
+.ds__do-label { font-size: var(--micro); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; margin-bottom: 8px; }
+.ds__do ul { padding-left: 18px; display: grid; gap: 6px; }
+
+.ds__val { font-variant-numeric: tabular-nums; }
+.ds__live { font-size: var(--micro); color: var(--signal-red); }
+</style>
+</head>
+<body class="ds">
+
+<a href="#main" class="apex-skip">Skip to main content</a>
+
+<div class="ds__bar">
+  <div class="ds__wrap ds__bar-inner">
+    <strong style="font-size:var(--micro);letter-spacing:0.2em;text-transform:uppercase">Antiphono system</strong>
+    <nav aria-label="Design system sections">
+      <a href="#principles">Principles</a>
+      <a href="#colour">Colour</a>
+      <a href="#type">Type</a>
+      <a href="#space">Space</a>
+      <a href="#layout">Layout</a>
+      <a href="#shape">Shape</a>
+      <a href="#elevation">Elevation</a>
+      <a href="#motion">Motion</a>
+      <a href="#primitives">Primitives</a>
+      <a href="#behaviour">Behaviour</a>
+      <a href="#library">Section library</a>
+      <a href="#newpage">New page</a>
+    </nav>
+  </div>
+</div>
+
+<main id="main">
+
+<header class="ds__wrap ds__hero">
+  <p class="ds__kicker">Version 1.0, 18 August 2026</p>
+  <h1 style="font-size:var(--display-m);line-height:0.96;letter-spacing:-0.028em;margin:16px 0 20px">Antiphono design system</h1>
+  <p class="ds__lede">Everything the site is built from: the tokens, the primitives, the components, the motion and a library of responsive sections you can paste into a new page. This page loads <code>/styles/system.css</code>, the same stylesheet the site loads, so what you see below is the live system rather than a picture of it.</p>
+  <p class="ds__note" style="margin-top:20px">Values marked in red are read from the running stylesheet when this page loads. If a token changes, the number here changes with it. Everything else is written down, and the written-down parts are the ones that can go stale, so treat the red numbers as the truth.</p>
+</header>
+
+<!-- ============================ PRINCIPLES -->
+<section class="ds__sec" id="principles">
+  <div class="ds__wrap">
+    <p class="ds__kicker">01</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Principles</h2>
+    <p class="ds__lede">Five rules that decide most arguments before they start.</p>
+
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th style="width:22%">Principle</th><th>What it means in practice</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ground first</strong></td><td>Every section declares whether it sits on a light or a dark ground with <code>data-theme</code>. Text colour, header colour and button colour all follow from that one attribute. Never set a text colour to fix a contrast problem: set the ground.</td></tr>
+        <tr><td><strong>Flat by default</strong></td><td>Depth comes from ground colour and hairlines. A shadow is reserved for something that genuinely floats, which on this site is a modal, a pinned card and the deck. Three shadows exist and that is the whole set.</td></tr>
+        <tr><td><strong>Type carries the design</strong></td><td>One face for headlines, one for body, one weight for every heading. The visual interest comes from scale and space, not from weight, colour or decoration.</td></tr>
+        <tr><td><strong>Motion is a reveal, not a performance</strong></td><td>Content enters once as you reach it and then stays put. Nothing loops, nothing bounces, nothing moves on hover except by a couple of pixels. Every animation has a reduced-motion answer.</td></tr>
+        <tr><td><strong>Readable with JavaScript off</strong></td><td>Body content lives in the HTML. JavaScript adds reveals, the menu, the cursor and the gallery. A page with scripts blocked is plain but complete.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ COLOUR -->
+<section class="ds__sec" id="colour">
+  <div class="ds__wrap">
+    <p class="ds__kicker">02</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Colour</h2>
+    <p class="ds__lede">A monochrome system with a single accent. There is no brand palette beyond this, and the retired navy, teal and slate must not come back.</p>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Ground and ink</h3>
+    <p class="ds__note">These are the only colours a section should reach for. Pair them by row: light ground takes light-ground ink, dark ground takes dark-ground ink.</p>
+    <div class="ds__grid" data-swatches>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--apex-white)"></div><dl><dt>Light ground</dt><dd><code>--apex-white</code></dd><dd data-token="--apex-white"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--apex-black)"></div><dl><dt>Dark ground</dt><dd><code>--apex-black</code></dd><dd data-token="--apex-black"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--deep-black)"></div><dl><dt>Deepest ground</dt><dd><code>--deep-black</code></dd><dd data-token="--deep-black"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--pure-white)"></div><dl><dt>Pure white</dt><dd><code>--pure-white</code></dd><dd data-token="--pure-white"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-on-light)"></div><dl><dt>Ink on light</dt><dd><code>--text-on-light</code></dd><dd data-token="--text-on-light"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-secondary-light)"></div><dl><dt>Secondary on light</dt><dd><code>--text-secondary-light</code></dd><dd data-token="--text-secondary-light"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-on-dark)"></div><dl><dt>Ink on dark</dt><dd><code>--text-on-dark</code></dd><dd data-token="--text-on-dark"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--text-secondary-dark)"></div><dl><dt>Secondary on dark</dt><dd><code>--text-secondary-dark</code></dd><dd data-token="--text-secondary-dark"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--signal-red)"></div><dl><dt>Signal</dt><dd><code>--signal-red</code></dd><dd data-token="--signal-red"></dd></dl></div>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Hairlines</h3>
+    <p class="ds__note">The system rules lines rather than boxing things in. Two hairlines, one per ground.</p>
+    <div class="ds__grid">
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--apex-white);border-bottom:1px solid var(--hairline-light)"></div><dl><dt>On light</dt><dd><code>--hairline-light</code></dd><dd data-token="--hairline-light"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--deep-black);border-bottom:1px solid var(--hairline-dark)"></div><dl><dt>On dark</dt><dd><code>--hairline-dark</code></dd><dd data-token="--hairline-dark"></dd></dl></div>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">The mono ramp</h3>
+    <p class="ds__note">Used by the index components for tints and fills. Prefer the named ground and ink tokens above in new work: reach into the ramp only when you need a specific step.</p>
+    <div class="ds__grid">
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-10)"></div><dl><dt>mono-10</dt><dd data-token="--mono-10"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-30)"></div><dl><dt>mono-30</dt><dd data-token="--mono-30"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-40)"></div><dl><dt>mono-40</dt><dd data-token="--mono-40"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-50)"></div><dl><dt>mono-50</dt><dd data-token="--mono-50"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-60)"></div><dl><dt>mono-60</dt><dd data-token="--mono-60"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-70)"></div><dl><dt>mono-70</dt><dd data-token="--mono-70"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-80)"></div><dl><dt>mono-80</dt><dd data-token="--mono-80"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-90)"></div><dl><dt>mono-90</dt><dd data-token="--mono-90"></dd></dl></div>
+    </div>
+
+    <div class="ds__do" style="margin-top:32px">
+      <div><p class="ds__do-label">Do</p><ul>
+        <li>Set <code>data-theme</code> on the section and let colour inherit.</li>
+        <li>Use the signal red for one thing at a time, never as a decorative fill.</li>
+        <li>Check body text at 4.5:1 and large text at 3:1 before calling a section finished.</li>
+      </ul></div>
+      <div><p class="ds__do-label">Do not</p><ul>
+        <li>Hardcode a hex. If the colour is not in this section, it is not in the system.</li>
+        <li>Use colour alone to carry meaning, including in filter and tab states.</li>
+        <li>Introduce a second accent. One is the point.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TYPE -->
+<section class="ds__sec" id="type">
+  <div class="ds__wrap">
+    <p class="ds__kicker">03</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Typography</h2>
+    <p class="ds__lede">Two faces. Helvetica Neue sets every heading, Inter sets body on the current components and Sora still sets body on the pages waiting to be rebuilt. Every heading is 600 and sentence case, on every page, with no exceptions.</p>
+
+    <p class="ds__note"><strong>Known limit.</strong> Helvetica Neue has no semibold on macOS, only Medium 500 and Bold 700, so a 600 request resolves to Bold. The stylesheet says 600 and the type renders Bold. It is also a system face, so it renders differently on Windows and Android. Self-hosting a display face is an open decision.</p>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Display and heading scale</h3>
+    <div class="ds__demo ds__demo--stack">
+      <p class="display-xl" style="margin:0">Display xl</p>
+      <p class="display-l" style="margin:18px 0 0">Display l</p>
+      <p class="display-m" style="margin:18px 0 0">Display m</p>
+      <p class="heading-l" style="margin:18px 0 0">Heading l</p>
+      <p class="heading-m" style="margin:18px 0 0">Heading m</p>
+    </div>
+
+    <div class="ds__scroll" style="margin-top:20px">
+    <table class="ds__table">
+      <thead><tr><th>Class</th><th>Token</th><th>Computed here</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td><code>.display-xl</code></td><td><code>--display-xl</code></td><td class="ds__val" data-size=".display-xl"></td><td>One per page at most. The hero statement.</td></tr>
+        <tr><td><code>.display-l</code></td><td><code>--display-l</code></td><td class="ds__val" data-size=".display-l"></td><td>Section statements that carry a whole screen.</td></tr>
+        <tr><td><code>.display-m</code></td><td><code>--display-m</code></td><td class="ds__val" data-size=".display-m"></td><td>Standard section heading.</td></tr>
+        <tr><td><code>.heading-l</code></td><td><code>--heading-l</code></td><td class="ds__val" data-size=".heading-l"></td><td>Card titles and sub-sections.</td></tr>
+        <tr><td><code>.heading-m</code></td><td><code>--heading-m</code></td><td class="ds__val" data-size=".heading-m"></td><td>The smallest thing that still reads as a heading.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Body and support</h3>
+    <div class="ds__demo ds__demo--stack">
+      <p class="body-l" style="margin:0">Body l. The default paragraph size for lead copy and anything that has to be read at a distance from the screen.</p>
+      <p style="font-size:var(--body);line-height:1.55;margin:16px 0 0">Body. The working size for most paragraphs.</p>
+      <p class="small" style="margin:16px 0 0">Small. Meta, captions, dates and secondary detail.</p>
+      <p class="micro-label" style="margin:16px 0 0">Micro label</p>
+    </div>
+
+    <div class="ds__scroll" style="margin-top:20px">
+    <table class="ds__table">
+      <thead><tr><th>Class</th><th>Token</th><th>Computed</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>.body-l</code></td><td><code>--body-l</code></td><td class="ds__val" data-size=".body-l"></td><td>Line height 1.45.</td></tr>
+        <tr><td>none</td><td><code>--body</code></td><td class="ds__val" data-token="--body"></td><td>The default. Set on <code>body</code>.</td></tr>
+        <tr><td><code>.small</code></td><td><code>--small</code></td><td class="ds__val" data-size=".small"></td><td>Meta and captions.</td></tr>
+        <tr><td><code>.micro-label</code></td><td><code>--micro</code></td><td class="ds__val" data-size=".micro-label"></td><td>Uppercase, 0.14em tracking. This is a label, not a heading: never mark one up as <code>h1</code> to <code>h6</code>.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="ds__do" style="margin-top:32px">
+      <div><p class="ds__do-label">Do</p><ul>
+        <li>Write headings sentence case in the markup. No <code>text-transform</code> on a heading.</li>
+        <li>Keep one <code>h1</code> per page and never skip a level.</li>
+        <li>Let headings describe structure. If you want something to look big, pick a bigger class, do not promote it to <code>h2</code>.</li>
+      </ul></div>
+      <div><p class="ds__do-label">Do not</p><ul>
+        <li>Introduce a third weight. Everything is 400 body, 600 heading, 500 labels.</li>
+        <li>Use Title Case anywhere except proper nouns.</li>
+        <li>Set a font size in pixels. Use a token.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SPACE -->
+<section class="ds__sec" id="space">
+  <div class="ds__wrap">
+    <p class="ds__kicker">04</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Space</h2>
+    <p class="ds__lede">One ramp, ten steps, roughly geometric. Pick a step, never a number in between.</p>
+
+    <div class="ds__demo ds__demo--stack" data-ruler></div>
+
+    <p class="ds__note" style="margin-top:20px"><strong>Read this before using the small steps.</strong> Two token blocks used to declare <code>--s-4</code> and <code>--s-8</code> with different values and the second silently won, so <code>--s-4</code> is 24px and <code>--s-8</code> is 96px, not 4px and 8px as the names suggest. The 4px and 8px steps are <code>--s-1</code> and <code>--s-2</code>. The names are misleading and are kept because changing them would move spacing on every page. Read the computed column, not the name.</p>
+
+    <div class="ds__do" style="margin-top:32px">
+      <div><p class="ds__do-label">Do</p><ul>
+        <li>Use <code>--section-y</code> for the space above and below a section.</li>
+        <li>Use <code>--gutter</code> for the page edge, never a fixed padding.</li>
+        <li>Space with the ramp, then stop. Most layouts need three steps, not eight.</li>
+      </ul></div>
+      <div><p class="ds__do-label">Do not</p><ul>
+        <li>Write <code>margin: 37px</code>. If the ramp cannot do it, the layout is wrong.</li>
+        <li>Assume a token's name matches its value. Check the table.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ LAYOUT -->
+<section class="ds__sec" id="layout">
+  <div class="ds__wrap">
+    <p class="ds__kicker">05</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Layout and breakpoints</h2>
+
+    <h3 style="font-size:var(--body-l)">Containers</h3>
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th>Class</th><th>Max width</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td><code>.container-x</code></td><td class="ds__val" data-token="--content-max"></td><td>The standard page container. Pads by <code>--gutter</code>. Use this in new work.</td></tr>
+        <tr><td><code>.section</code></td><td>none</td><td>Vertical rhythm only. Pads block by <code>--section-y</code>.</td></tr>
+        <tr><td>full bleed</td><td>none</td><td>Media that runs edge to edge. Put the container inside, not around.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Breakpoints</h3>
+    <p class="ds__note">The system is fluid first: <code>clamp()</code> handles most of the range and breakpoints handle the moments where a layout has to change shape rather than size. Four matter.</p>
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th>Width</th><th>Name</th><th>What changes</th></tr></thead>
+      <tbody>
+        <tr><td><code>1100px</code></td><td>Navigation</td><td>Desktop nav gives way to the burger. Both sides of this switch are aligned to the same number so there is never a gap where neither is reachable.</td></tr>
+        <tr><td><code>900px</code></td><td>Two to one column</td><td>Split layouts stack. Header nav and CTA hide, burger shows.</td></tr>
+        <tr><td><code>860px</code></td><td>Component reflow</td><td>The busiest breakpoint. Cards, rows and grids drop to one column.</td></tr>
+        <tr><td><code>700px</code> and <code>560px</code></td><td>Fine tuning</td><td>Type steps down and padding tightens. Avoid adding new rules here: prefer widening a <code>clamp()</code>.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="ds__note" style="margin-top:16px">Test at 360, 768, 1024, 1280 and 1800. The last one matters because <code>.container-x</code> caps and the page stops filling.</p>
+  </div>
+</section>
+
+<!-- ============================ SHAPE -->
+<section class="ds__sec" id="shape">
+  <div class="ds__wrap">
+    <p class="ds__kicker">06</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Shape</h2>
+    <p class="ds__lede">Corners are either barely there or fully round. Nothing in between reads as intentional at this scale.</p>
+    <div class="ds__grid">
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-10);border-radius:var(--r-sm)"></div><dl><dt>Small</dt><dd><code>--r-sm</code></dd><dd data-token="--r-sm"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-10);border-radius:var(--r-md)"></div><dl><dt>Medium</dt><dd><code>--r-md</code></dd><dd data-token="--r-md"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-10);border-radius:var(--r-lg)"></div><dl><dt>Large</dt><dd><code>--r-lg</code></dd><dd data-token="--r-lg"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-10);border-radius:var(--r-xl)"></div><dl><dt>Extra large</dt><dd><code>--r-xl</code></dd><dd data-token="--r-xl"></dd></dl></div>
+      <div class="ds__swatch"><div class="ds__chip" style="background:var(--mono-10);border-radius:var(--r-pill)"></div><dl><dt>Pill</dt><dd><code>--r-pill</code></dd><dd data-token="--r-pill"></dd></dl></div>
+    </div>
+    <p class="ds__note" style="margin-top:16px">Buttons and chips are always pill. Media and panels are large. Small is for inline chips and bars. Extra large is for the hero frame and should stay rare.</p>
+  </div>
+</section>
+
+<!-- ============================ ELEVATION -->
+<section class="ds__sec" id="elevation">
+  <div class="ds__wrap">
+    <p class="ds__kicker">07</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Elevation</h2>
+    <p class="ds__lede">Four levels, and level 0 is the answer most of the time. This system separates things with ground colour and hairlines, so a shadow means the element genuinely floats above the page.</p>
+
+    <div class="ds__grid ds__grid--wide" style="margin-top:8px">
+      <div class="ds__swatch" style="padding:24px;background:var(--apex-white)"><div style="height:70px;background:#fff;border:1px solid var(--hairline-light);border-radius:12px"></div><dl><dt>0. Flat</dt><dd><code>--elev-0</code></dd><dd>The default. Separate with a hairline or a change of ground.</dd></dl></div>
+      <div class="ds__swatch" style="padding:24px;background:var(--apex-white)"><div style="height:70px;background:#fff;box-shadow:var(--elev-1);border-radius:12px"></div><dl><dt>1. Inset rule</dt><dd><code>--elev-1</code></dd><dd>A hairline drawn as a shadow so it does not affect layout. Cards and cells.</dd></dl></div>
+      <div class="ds__swatch" style="padding:24px;background:var(--apex-white)"><div style="height:70px;background:#fff;box-shadow:var(--elev-2);border-radius:12px"></div><dl><dt>2. Lifted</dt><dd><code>--elev-2</code></dd><dd>Something that sits over content: a pinned panel or a sticky card.</dd></dl></div>
+      <div class="ds__swatch" style="padding:24px;background:var(--apex-white)"><div style="height:70px;background:#fff;box-shadow:var(--elev-3);border-radius:12px"></div><dl><dt>3. Floating</dt><dd><code>--elev-3</code></dd><dd>The deck and the modal. One per screen, never two.</dd></dl></div>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Glass</h3>
+    <p class="ds__note">Backdrop blur is used sparingly and only where content passes behind a control: the sticky bar on this page, the mobile menu ground and the tab pill. It is never applied to a full width bar, which was a deliberate call. Blur radius sits between 12px and 20px. Always pair it with a translucent fill, because blur alone fails on browsers that do not support it.</p>
+  </div>
+</section>
+
+<!-- ============================ MOTION -->
+<section class="ds__sec" id="motion">
+  <div class="ds__wrap">
+    <p class="ds__kicker">08</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Motion</h2>
+    <p class="ds__lede">Content reveals once as you reach it, then stays still. Hover moves a couple of pixels. Nothing loops except the marquee, and that stops under reduced motion like everything else.</p>
+
+    <h3 style="font-size:var(--body-l);margin-top:32px">Durations</h3>
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th>Token</th><th>Value</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td><code>--t-hover</code></td><td class="ds__val" data-token="--t-hover"></td><td>Hover and focus states. Anything the pointer causes directly.</td></tr>
+        <tr><td><code>--t-button</code></td><td class="ds__val" data-token="--t-button"></td><td>A control changing state: fill, border, label roll.</td></tr>
+        <tr><td><code>--t-text</code></td><td class="ds__val" data-token="--t-text"></td><td>A line of type revealing.</td></tr>
+        <tr><td><code>--t-media</code></td><td class="ds__val" data-token="--t-media"></td><td>An image or video mask opening.</td></tr>
+        <tr><td><code>--t-section</code></td><td class="ds__val" data-token="--t-section"></td><td>A whole section arriving. Use rarely.</td></tr>
+        <tr><td><code>--d-fast</code> / <code>--d-base</code> / <code>--d-slow</code></td><td class="ds__val" data-token="--d-base"></td><td>The index components' equivalent ramp. <code>--d-base</code> drives every <code>data-anim</code> reveal.</td></tr>
+        <tr><td><code>--stagger</code></td><td class="ds__val" data-token="--stagger"></td><td>Delay between siblings in a staggered group.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Easings</h3>
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th>Token</th><th>Curve</th><th>Character</th></tr></thead>
+      <tbody>
+        <tr><td><code>--ease-soft</code> / <code>--e-out</code></td><td class="ds__val" data-token="--ease-soft"></td><td>The default. Fast out, long settle. Use unless you have a reason.</td></tr>
+        <tr><td><code>--ease-editorial</code></td><td class="ds__val" data-token="--ease-editorial"></td><td>Slow in and slow out. For type and masks that should feel deliberate.</td></tr>
+        <tr><td><code>--e-expo</code></td><td class="ds__val" data-token="--e-expo"></td><td>The most aggressive settle. Clip paths and reveals.</td></tr>
+        <tr><td><code>--ease-mechanical</code> / <code>--e-inout</code></td><td class="ds__val" data-token="--e-inout"></td><td>Symmetrical. Things that move and come back.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="ds__do" style="margin-top:32px">
+      <div><p class="ds__do-label">Do</p><ul>
+        <li>Animate <code>transform</code> and <code>opacity</code>. Nothing else is cheap.</li>
+        <li>Reveal once. Use <code>unobserve</code> so a section does not re-animate on the way back up.</li>
+        <li>Give every animation a reduced-motion branch that shows the final state immediately.</li>
+      </ul></div>
+      <div><p class="ds__do-label">Do not</p><ul>
+        <li>Animate width, height, top or left.</li>
+        <li>Add motion to something that already moves. One idea per section.</li>
+        <li>Leave <code>will-change</code> on after the animation is done.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================ PRIMITIVES -->
+<section class="ds__sec" id="primitives">
+  <div class="ds__wrap">
+    <p class="ds__kicker">09</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Primitives</h2>
+    <p class="ds__lede">The small parts that appear on every page. These are the ones to learn: the sections in the library below are mostly arrangements of these.</p>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Button</h3>
+    <p class="ds__note"><code>.btn-pill</code> is the button. It is a pill, it borders in the current text colour, and it lifts 2px on hover. Because it borders in <code>currentColor</code> it works on both grounds without a variant.</p>
+    <div class="ds__demo">
+      <a href="#primitives" class="btn-pill">Default</a>
+      <a href="#primitives" class="btn-pill btn-pill--dark">Dark fill</a>
+      <button type="button" class="btn-pill" disabled style="opacity:.4;cursor:not-allowed">Disabled</button>
+    </div>
+    <div class="ds__demo ds__demo--dark" data-theme="dark" style="margin-top:12px">
+      <a href="#primitives" class="btn-pill">On a dark ground</a>
+      <span class="small" style="opacity:.7">Same class. The border and hover invert from <code>data-theme</code>.</span>
+    </div>
+    <div class="ds__scroll" style="margin-top:16px">
+    <table class="ds__table">
+      <thead><tr><th>State</th><th>Visual</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td>Default</td><td>Transparent fill, 1px border in <code>currentColor</code>, pill radius</td><td>Cursor label appears if <code>data-cursor</code> is set</td></tr>
+        <tr><td>Hover</td><td>Lifts 2px. On a dark ground the fill inverts to white with near-black text</td><td><code>--t-hover</code> on transform, <code>--t-button</code> on colour</td></tr>
+        <tr><td>Focus visible</td><td>2px outline, 3px offset, in the current text colour</td><td>Never remove without an equally visible replacement</td></tr>
+        <tr><td>Disabled</td><td>Reduced opacity</td><td>Set the real <code>disabled</code> attribute, not just a class</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Label</h3>
+    <p class="ds__note"><code>.micro-label</code> is the eyebrow used above almost every section heading, and for section numbering in the <code>( 01 )</code> form. It is uppercase by design. It is a label, not a heading, so it must not be marked up as <code>h1</code> to <code>h6</code>.</p>
+    <div class="ds__demo">
+      <span class="micro-label">Section label</span>
+      <span class="micro-label">( 01 )</span>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Circle action</h3>
+    <p class="ds__note">The round outline control used inside feature cards. Reserved for a card's single action.</p>
+    <div class="ds__demo">
+      <button type="button" class="circle-action"><span>Read<br>more</span></button>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Media mask</h3>
+    <p class="ds__note"><code>.media-mask</code> clips an image and opens it on scroll. Wrap the figure, never the <code>img</code> itself: transforms applied straight to an image fight the hover zoom on work cards, which is a bug this system has already had once.</p>
+    <div class="ds__demo ds__demo--stack">
+      <figure class="media-mask" style="margin:0;max-width:420px;aspect-ratio:16/10;background:var(--mono-10);border-radius:var(--r-md)"></figure>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Placeholder</h3>
+    <p class="ds__note"><code>.ph</code> is the standing-in surface for media that does not exist yet. It is deliberately obvious. Never ship a page with one still in it, and never replace one with stock photography.</p>
+    <div class="ds__demo ds__demo--stack">
+      <div class="ph" style="max-width:420px;aspect-ratio:16/10"></div>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Skip link</h3>
+    <p class="ds__note"><code>.apex-skip</code> is the first focusable element on every page and targets the page's <code>main</code>. Tab into this page to see it. It is the one primitive where a silent failure is an accessibility defect, so test it with the keyboard after any header change.</p>
+  </div>
+</section>
+
+<!-- ============================ BEHAVIOUR -->
+<section class="ds__sec" id="behaviour">
+  <div class="ds__wrap">
+    <p class="ds__kicker">10</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Behaviour contracts</h2>
+    <p class="ds__lede">The system is driven by data attributes rather than by classes wired to JavaScript. Set the attribute in the markup and <code>/scripts/apex.js</code> picks it up. Nothing here renders content: every one of these is an enhancement over markup that already reads.</p>
+
+    <div class="ds__scroll">
+    <table class="ds__table">
+      <thead><tr><th style="width:20%">Attribute</th><th style="width:20%">Goes on</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>data-theme</code></td><td><code>section</code></td><td><code>"light"</code> or <code>"dark"</code>. Sets the section's text colour and tells the fixed header what ground it is passing over so it can invert. Required on every section. This is the single most important attribute in the system.</td></tr>
+        <tr><td><code>data-anim</code></td><td>any element</td><td>Reveals on scroll. Values: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code>, <code>fade</code>, <code>scale</code>, <code>clip</code>. Starts at opacity 0 and gains <code>.in</code> when it enters the viewport, once.</td></tr>
+        <tr><td><code>data-stagger</code></td><td>a parent</td><td>Numbers its <code>data-anim</code> children through <code>--i</code> so they arrive in sequence, <code>--stagger</code> apart.</td></tr>
+        <tr><td><code>data-cursor</code></td><td>interactive elements</td><td>Grows the custom cursor over the element. Pointer devices only.</td></tr>
+        <tr><td><code>data-cursor-label</code></td><td>any element</td><td>Puts a word inside the cursor, for example <code>Explore</code> or <code>Play</code>.</td></tr>
+        <tr><td><code>data-header-theme</code></td><td><code>.apex-header</code></td><td>Written by JavaScript, not by you. Set the initial value to match the first section so the header is right before the first frame.</td></tr>
+        <tr><td><code>data-menu-open</code> / <code>data-menu-close</code></td><td>buttons and links</td><td>Opens and closes <code>#apex-mobile-menu</code>. Put <code>data-menu-close</code> on every link inside the panel.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">What JavaScript is responsible for</h3>
+    <p class="ds__note">One file, <code>/scripts/apex.js</code>, running one module per component. Every module is a no-op on a page without its markup, so a page only pays for what it uses. GSAP with ScrollTrigger and Lenis load from a CDN ahead of it. If any of the three fails to load the page still reads, the menu still opens and the header still inverts, because the header falls back to a scroll listener.</p>
+
+    <h3 style="font-size:var(--body-l);margin-top:36px">Reduced motion</h3>
+    <p class="ds__note">Under <code>prefers-reduced-motion: reduce</code>, Lenis does not initialise, every <code>data-anim</code> element renders in its final state, the marquee stops and transitions are removed. This is not optional and it is not a later pass. Test it by turning on Reduce Motion in the operating system and reloading.</p>
+  </div>
+</section>
+
+<!-- ============================ SECTION LIBRARY -->
+<section class="ds__sec" id="library">
+  <div class="ds__wrap">
+    <p class="ds__kicker">11</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Section library</h2>
+    <p class="ds__lede">Responsive sections, ready to paste into a page. Each one is complete markup: it needs no new CSS and no new JavaScript, only <code>/styles/system.css</code> and <code>/scripts/apex.js</code>, which every page already loads. Swap the copy and the images and it works.</p>
+    <p class="ds__note">Every section carries <code>data-theme</code>. Alternate light and dark down a page and the header inverts as it passes over each one, with no further work. Each snippet also carries an <code>aria-labelledby</code> or <code>aria-label</code>, which is not decoration: a section landmark with no name is not much use to a screen reader.</p>
+    <div id="ds-library" style="display:grid;gap:24px;margin-top:32px"></div>
+    <noscript><p class="ds__note" style="margin-top:24px">The section library needs JavaScript to render its code blocks with copy buttons. The markup it produces is in <code>docs/design-system.md</code>, which needs nothing.</p></noscript>
+  </div>
+</section>
+
+<!-- ============================ NEW PAGE -->
+<section class="ds__sec" id="newpage">
+  <div class="ds__wrap">
+    <p class="ds__kicker">12</p>
+    <h2 style="font-size:var(--heading-m);margin:10px 0 18px">Building a new page</h2>
+    <p class="ds__lede">Six steps. Follow them in order and the page will match the rest of the site without anyone reviewing it for consistency.</p>
+
+    <ol class="ds__note" style="padding-left:20px;display:grid;gap:12px;max-width:70ch;font-size:var(--small)">
+      <li><strong>Start from the skeleton below.</strong> It has the head, the noindex, the header, the mobile menu, the footer and the scripts in the right order.</li>
+      <li><strong>Paste sections from the library.</strong> Alternate <code>data-theme</code> so the page has rhythm and the header has something to respond to.</li>
+      <li><strong>Set the initial <code>data-header-theme</code></strong> on the header to match your first section, so the header is correct before JavaScript runs.</li>
+      <li><strong>Write the copy in sentence case</strong>, Australian English, no em dashes. Read every heading and ask whether a technically literate client with no design background would know what it means on first read.</li>
+      <li><strong>Check the page</strong>: one <code>h1</code>, no skipped heading levels, alt text on content images, <code>alt=""</code> on decorative ones, and the skip link reaching <code>main</code> by keyboard.</li>
+      <li><strong>Check it at 360, 768, 1024 and 1800</strong>, then with Reduce Motion on, then with JavaScript disabled.</li>
+    </ol>
+
+    <div class="ds__snippet" style="margin-top:32px">
+      <div class="ds__snippet-top">
+        <div><h3>Page skeleton</h3><p>Everything a new page needs before its first section.</p></div>
+        <button type="button" class="ds__copy" data-copy-target="skeleton">Copy</button>
+      </div>
+      <pre><code id="skeleton">&lt;!DOCTYPE html&gt;
+&lt;html lang="en-AU"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;meta name="robots" content="noindex, nofollow"&gt;
+&lt;title&gt;Primary term | Antiphono&lt;/title&gt;
+&lt;meta name="description" content="140 to 160 characters, written as a sentence, containing the primary term."&gt;
+&lt;link rel="canonical" href="https://antiphono.com/your-path"&gt;
+&lt;link rel="stylesheet" href="/styles/system.css"&gt;
+&lt;script&gt;document.documentElement.classList.add("js")&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;a href="#main" class="apex-skip"&gt;Skip to main content&lt;/a&gt;
+
+&lt;!-- Paste the header and #apex-mobile-menu from any existing page.
+     They are identical on all of them and must stay that way. --&gt;
+
+&lt;main id="main"&gt;
+  &lt;!-- Sections from the library go here --&gt;
+&lt;/main&gt;
+
+&lt;!-- Paste the footer from any existing page --&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js" defer&gt;&lt;/script&gt;
+&lt;script src="/scripts/apex.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <h3 style="font-size:var(--body-l);margin-top:40px">Rules that are not negotiable</h3>
+    <div class="ds__do" style="margin-top:16px">
+      <div><p class="ds__do-label">Every page</p><ul>
+        <li>Keeps <code>noindex, nofollow</code> until Ben removes it at launch.</li>
+        <li>Has one <code>h1</code> and no skipped heading levels.</li>
+        <li>Reads with JavaScript disabled.</li>
+        <li>Never links to <code>/reports</code>.</li>
+      </ul></div>
+      <div><p class="ds__do-label">Never</p><ul>
+        <li>Add a bundler, a build step or an npm dependency.</li>
+        <li>Render body content with JavaScript.</li>
+        <li>Invent a statistic, a client quote or a case study figure.</li>
+        <li>Use stock photography to fill space.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="ds__sec" style="padding-block:48px">
+  <div class="ds__wrap">
+    <p class="ds__note">Antiphono design system, version 1.0. The source of truth is <code>/styles/system.css</code> and <code>/scripts/apex.js</code>. The written companion to this page is <code>docs/design-system.md</code>. Changes to the system are recorded in <code>knowledge/decisions/</code>.</p>
+  </div>
+</footer>
+
+</main>
+
+<script>
+/* ============================================================
+   Documentation behaviour. Two jobs only:
+   1. read real values out of the running stylesheet, so this
+      page cannot describe a system that no longer exists
+   2. render the section library with copy buttons
+   Everything else on this page is in the HTML and reads without
+   any of this running.
+   ============================================================ */
+(function () {
+  'use strict';
+  var root = getComputedStyle(document.documentElement);
+
+  /* ---- live token readouts ---- */
+  document.querySelectorAll('[data-token]').forEach(function (el) {
+    var v = root.getPropertyValue(el.getAttribute('data-token')).trim();
+    el.textContent = v || 'not defined';
+    el.classList.add('ds__live');
+  });
+
+  /* ---- computed font sizes, resolved from a real element ---- */
+  document.querySelectorAll('[data-size]').forEach(function (el) {
+    var probe = document.createElement('p');
+    probe.className = el.getAttribute('data-size').replace(/^\./, '');
+    probe.style.position = 'absolute';
+    probe.style.visibility = 'hidden';
+    probe.textContent = 'x';
+    document.body.appendChild(probe);
+    var cs = getComputedStyle(probe);
+    el.textContent = Math.round(parseFloat(cs.fontSize) * 10) / 10 + 'px at this width';
+    el.classList.add('ds__live');
+    probe.remove();
+  });
+
+  /* ---- spacing ramp, measured rather than listed ---- */
+  var ruler = document.querySelector('[data-ruler]');
+  if (ruler) {
+    var probe = document.createElement('div');
+    probe.style.position = 'absolute';
+    probe.style.visibility = 'hidden';
+    document.body.appendChild(probe);
+    var steps = ['--s-1','--s-2','--s-3','--s-4','--s-5','--s-6','--s-7','--s-8','--s-9','--s-10','--gutter','--section-y'];
+    var rows = steps.map(function (name) {
+      probe.style.width = 'var(' + name + ')';
+      probe.style.setProperty('width', 'var(' + name + ')');
+      var px = Math.round(probe.getBoundingClientRect().width);
+      return '<div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">' +
+        '<code style="min-width:104px;display:inline-block">' + name + '</code>' +
+        '<span class="ds__ruler" style="width:' + Math.min(px, 700) + 'px"></span>' +
+        '<span class="ds__live ds__val">' + px + 'px</span></div>';
+    });
+    probe.remove();
+    ruler.innerHTML = rows.join('') +
+      '<p class="ds__note" style="margin-top:14px">Measured in this browser at this window width. The last two are fluid, so they change as you resize.</p>';
+  }
+
+  /* ---- section library ---- */
+  var SECTIONS = [
+    {
+      name: 'Statement',
+      note: 'A single idea at display size, with a supporting paragraph and one optional image bleeding in from the side. Use it to open a page or to mark a turn in the argument. The lines are separate spans so they reveal in sequence.',
+      code:
+'<section class="vision" data-theme="light" aria-labelledby="s-statement">\n' +
+'  <div class="container-x vision__inner">\n' +
+'    <p class="micro-label vision__label">Label</p>\n' +
+'    <h2 class="display-l vision__headline" id="s-statement">\n' +
+'      <span class="vision__line"><span>First line</span></span>\n' +
+'      <span class="vision__line"><span>second line</span></span>\n' +
+'      <span class="vision__line"><span>third line.</span></span>\n' +
+'    </h2>\n' +
+'    <p class="body-l vision__body">One paragraph that explains the statement above without repeating it. Three to five sentences.</p>\n' +
+'    <figure class="vision__float">\n' +
+'      <img src="/media/your-image.jpg" alt="Describe what the image shows" loading="lazy" decoding="async">\n' +
+'    </figure>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Split with media',
+      note: 'Image on one side, copy and one action on the other. Two columns above 860px, stacked below with the image first. The workhorse section: most explanatory content fits here.',
+      code:
+'<section class="driver" data-theme="light" aria-labelledby="s-split">\n' +
+'  <div class="container-x driver__grid">\n' +
+'    <figure class="driver__media media-mask">\n' +
+'      <img src="/media/your-image.jpg" alt="Describe what the image shows" loading="lazy" decoding="async">\n' +
+'    </figure>\n' +
+'    <div class="driver__copy">\n' +
+'      <p class="micro-label driver__label">Label</p>\n' +
+'      <h2 class="heading-m driver__heading" id="s-split">A heading that says what this is</h2>\n' +
+'      <p class="body-l driver__body">The lead sentence answers the heading rather than building towards it.</p>\n' +
+'      <p class="driver__secondary">A second paragraph for the detail that follows from it.</p>\n' +
+'      <a href="/your-path" class="btn-pill btn-pill--dark" data-cursor>Call to action</a>\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Feature cards',
+      note: 'A run of large cards, each with media, a number, a title, a paragraph and one action. Horizontal on wide screens and stacked on narrow. Use for a set of three to five things of equal weight, such as services or capabilities.',
+      code:
+'<section class="systems" data-theme="light" aria-label="What we do">\n' +
+'  <div class="container-x">\n' +
+'    <p class="micro-label systems__label">Section label</p>\n' +
+'    <div class="systems__list">\n' +
+'\n' +
+'      <article class="system-card" data-cursor-label="Explore">\n' +
+'        <div class="system-card__media">\n' +
+'          <img src="/media/your-image.jpg" alt="" loading="lazy" decoding="async">\n' +
+'        </div>\n' +
+'        <div class="system-card__body">\n' +
+'          <div class="system-card__top">\n' +
+'            <span class="micro-label system-card__reveal">Category</span>\n' +
+'            <span class="micro-label system-card__reveal">( 01 )</span>\n' +
+'          </div>\n' +
+'          <div class="system-card__center">\n' +
+'            <h3 class="heading-l system-card__reveal system-card__title">Card title</h3>\n' +
+'            <p class="body-l system-card__reveal system-card__desc">Two sentences on what this is and when it applies.</p>\n' +
+'            <div class="system-card__action">\n' +
+'              <a href="/your-path" class="btn-pill btn-pill--dark" data-cursor>Find out more</a>\n' +
+'            </div>\n' +
+'          </div>\n' +
+'        </div>\n' +
+'      </article>\n' +
+'\n' +
+'      <!-- Repeat the article for each card, incrementing ( 02 ), ( 03 ) -->\n' +
+'\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Ruled list',
+      note: 'Rows separated by hairlines, each a link with a date, a tag, a title and an arrow. Collapses to two lines per row on narrow screens. Use for work, articles, reports or anything that is a list of destinations.',
+      code:
+'<section class="journal" data-theme="light" aria-labelledby="s-list">\n' +
+'  <div class="container-x">\n' +
+'    <h2 class="display-m journal__heading" id="s-list">Section heading</h2>\n' +
+'    <ul>\n' +
+'      <li class="journal__row">\n' +
+'        <a href="/your-path" class="journal__link" data-cursor>\n' +
+'          <span class="small journal__date">2026</span>\n' +
+'          <span class="journal__pill micro-label">Category</span>\n' +
+'          <span class="journal__title body-l">The name of the thing</span>\n' +
+'          <span class="journal__arrow" aria-hidden="true">&rarr;</span>\n' +
+'        </a>\n' +
+'      </li>\n' +
+'      <!-- Repeat the li for each row -->\n' +
+'    </ul>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Manifesto',
+      note: 'A short, strong statement broken across lines, on a dark ground, with a small paragraph beneath. One per page at most: the effect comes from being the only thing that shouts.',
+      code:
+'<section class="mani" data-theme="dark" aria-labelledby="s-mani">\n' +
+'  <div class="container-x mani__inner">\n' +
+'    <p class="micro-label mani__label">Label</p>\n' +
+'    <h2 class="display-l mani__headline" id="s-mani">\n' +
+'      <span class="mani__line"><span>A short claim</span></span>\n' +
+'      <span class="mani__line"><span>broken across</span></span>\n' +
+'      <span class="mani__line"><span>three lines.</span></span>\n' +
+'    </h2>\n' +
+'    <div class="mani__copy">\n' +
+'      <p class="mani__body">The paragraph that earns the claim above. Say the specific thing, not the impressive thing.</p>\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Full bleed media',
+      note: 'An image or video running the full width, used as a pause between two dense sections. Give it a real alt or mark it decorative. If you use video, it must be muted, looping and playsinline, and it must not be the only way a point is made.',
+      code:
+'<section class="cine" data-theme="dark" aria-label="Describe the media">\n' +
+'  <div class="cine__media">\n' +
+'    <img src="/media/your-wide-image.jpg" alt="" loading="lazy" decoding="async">\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Horizontal card track',
+      note: 'A row of cards that moves sideways as the page scrolls, pinned while it does. Best for four to six short items. It degrades to a normal scrolling row without JavaScript and under reduced motion.',
+      code:
+'<section class="purpose" data-theme="dark" aria-labelledby="s-track">\n' +
+'  <div class="purpose__inner">\n' +
+'    <p class="micro-label purpose__label">Label</p>\n' +
+'    <h2 class="display-m" id="s-track">\n' +
+'      <span class="purpose__line"><span>Section</span></span>\n' +
+'      <span class="purpose__line"><span>heading</span></span>\n' +
+'    </h2>\n' +
+'    <div class="purpose__track">\n' +
+'      <article class="purpose__card">\n' +
+'        <h3 class="heading-m">Card title</h3>\n' +
+'        <p class="body-l">One or two sentences.</p>\n' +
+'      </article>\n' +
+'      <!-- Repeat for each card -->\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Two column prose',
+      note: 'Plain, generic and useful. A heading on the left and copy on the right above 860px, stacked below. No component classes beyond the container, so it works on any page and never fights an existing layout.',
+      code:
+'<section class="section" data-theme="light" aria-labelledby="s-prose">\n' +
+'  <div class="container-x" style="display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">\n' +
+'    <div>\n' +
+'      <p class="micro-label">Label</p>\n' +
+'      <h2 class="heading-m" style="margin-top:12px" id="s-prose">The heading</h2>\n' +
+'    </div>\n' +
+'    <div style="display:grid;gap:16px">\n' +
+'      <p class="body-l">The first paragraph answers the heading in its first sentence.</p>\n' +
+'      <p>Following paragraphs carry the detail. One idea each, three to five sentences.</p>\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Staggered card grid',
+      note: 'A responsive grid that fits as many cards per row as the width allows, with each card revealing a beat after the one before it. The stagger is the whole reason to use data-stagger rather than repeating data-anim.',
+      code:
+'<section class="section" data-theme="light" aria-labelledby="s-grid">\n' +
+'  <div class="container-x">\n' +
+'    <h2 class="heading-m" id="s-grid">Section heading</h2>\n' +
+'    <div data-stagger style="display:grid;gap:24px;margin-top:clamp(24px,4vw,48px);grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">\n' +
+'      <article data-anim="up" style="border-top:1px solid var(--hairline-light);padding-top:20px">\n' +
+'        <p class="micro-label">( 01 )</p>\n' +
+'        <h3 class="heading-m" style="margin:12px 0 8px">Card title</h3>\n' +
+'        <p>One or two sentences.</p>\n' +
+'      </article>\n' +
+'      <!-- Repeat the article for each card -->\n' +
+'    </div>\n' +
+'  </div>\n' +
+'</section>'
+    },
+    {
+      name: 'Call to action band',
+      note: 'The end of a page. One heading, one sentence, one button. Resist adding a second button: a section with two equal actions has no primary action.',
+      code:
+'<section class="section" data-theme="dark" aria-labelledby="s-cta">\n' +
+'  <div class="container-x" style="display:grid;gap:24px;justify-items:start;max-width:60ch">\n' +
+'    <p class="micro-label">Next step</p>\n' +
+'    <h2 class="display-m" id="s-cta">Start with a conversation</h2>\n' +
+'    <p class="body-l">One sentence on what happens when someone gets in touch, so the button is not a leap.</p>\n' +
+'    <a href="/contact" class="btn-pill" data-cursor>Get in touch</a>\n' +
+'  </div>\n' +
+'</section>'
+    }
+  ];
+
+  var lib = document.getElementById('ds-library');
+  if (lib) {
+    SECTIONS.forEach(function (sec, i) {
+      var id = 'snip-' + i;
+      var wrap = document.createElement('div');
+      wrap.className = 'ds__snippet';
+
+      var top = document.createElement('div');
+      top.className = 'ds__snippet-top';
+      var meta = document.createElement('div');
+      var h = document.createElement('h3');
+      h.textContent = sec.name;
+      var note = document.createElement('p');
+      note.textContent = sec.note;
+      meta.appendChild(h); meta.appendChild(note);
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ds__copy';
+      btn.setAttribute('data-copy-target', id);
+      btn.textContent = 'Copy';
+      top.appendChild(meta); top.appendChild(btn);
+
+      var pre = document.createElement('pre');
+      var code = document.createElement('code');
+      code.id = id;
+      code.textContent = sec.code;   // textContent, so the markup is never parsed
+      pre.appendChild(code);
+
+      wrap.appendChild(top); wrap.appendChild(pre);
+      lib.appendChild(wrap);
+    });
+  }
+
+  /* ---- copy buttons ---- */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-copy-target]');
+    if (!btn) return;
+    var src = document.getElementById(btn.getAttribute('data-copy-target'));
+    if (!src) return;
+    var text = src.textContent;
+    var done = function () {
+      btn.textContent = 'Copied';
+      btn.setAttribute('data-copied', 'true');
+      setTimeout(function () {
+        btn.textContent = 'Copy';
+        btn.removeAttribute('data-copied');
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else {
+      fallback(text, done);
+    }
+  });
+
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (err) { /* leave the button alone */ }
+    ta.remove();
+  }
+})();
+</script>
+</body>
+</html>

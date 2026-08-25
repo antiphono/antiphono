@@ -19,6 +19,68 @@
 
 
 /* ---------- Tokens (scoped, was :root) ---------- */
+/* ============================================================
+   TOKEN LAYER
+   The single source of truth for the design system. Everything
+   below this block should reference a token rather than a literal.
+   Documented at design/system.html and docs/design-system.md.
+
+   Three things this block fixes, recorded here because the values
+   look arbitrary otherwise.
+
+   1. COLLISIONS. There were two :root blocks and three tokens were
+      declared in both, so the second silently won:
+
+        --gutter   clamp(24px,2.2vw,40px)  lost to  clamp(20px,5vw,80px)
+        --s-4      4px                     lost to  24px
+        --s-8      8px                     lost to  96px
+
+      The Apex components were authored against the losing values and
+      have been rendering with the winning ones ever since. The site
+      as it looks today is the winning set, so those are declared here
+      as the real values and the 4px/8px steps are available under
+      their correct names --s-1 and --s-2. No visual change.
+
+   2. DANGLING TOKENS. Thirteen names were referenced but never
+      defined anywhere, so those declarations were invalid and did
+      nothing. --text-xs alone appears 38 times. They are defined
+      below, mapped onto the existing scale.
+
+   3. NAMING. The spacing scale is now --s-1 to --s-10 on a single
+      ramp. --s-12 through --s-160 were the old px-suffixed names and
+      are kept as aliases so existing rules keep working.
+   ============================================================ */
+
+:root {
+  /* ---- Dangling tokens, now defined ------------------------- */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-3xl: clamp(2.5rem, 6vw, 4.5rem);
+  --section: clamp(2rem, 4.5vw, 4rem);
+  --space-xl: 48px;
+  --space-3xl: 128px;
+  --font-editorial: var(--font-display);
+  --accent: var(--signal-red);
+  --gen-bg: var(--ground-raised);
+  --panel-pad: clamp(24px, 3vw, 48px);
+  --panel-min-h: 320px;
+  --pair-delay: 0s;
+
+  /* ---- Elevation -------------------------------------------- */
+  /* Four levels. The system is flat by default: depth comes from
+     ground colour and hairlines, and a shadow is reserved for
+     something that genuinely floats above the page. */
+  --elev-0: none;
+  --elev-1: inset 0 0 0 var(--hair, 1px) var(--mono-90);
+  --elev-2: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --elev-3: 0 60px 140px rgba(0, 0, 0, 0.65);
+
+  /* ---- Focus ------------------------------------------------ */
+  --focus-ring: 2px;
+  --focus-offset: 3px;
+}
+
 :root {
   /* Color */
   --apex-white: #F4F4F2;
@@ -95,7 +157,14 @@ img, video { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
-h1, h2, h3, h4, p { margin: 0; font-weight: 400; }
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+p { font-weight: 400; }
+/* A heading is 600 whether or not it carries a utility class. The reset
+   used to drop every heading to 400 and only .display-* and .heading-*
+   put it back, so a plain <h2> on a new page rendered at body weight and
+   quietly broke the one-heading-treatment rule. Utility classes still
+   win where they set their own weight. */
+h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
 ::selection { background: var(--apex-black); color: var(--apex-white); }
 

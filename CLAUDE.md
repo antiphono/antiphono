@@ -59,6 +59,7 @@ The rebrand has not been announced. **Every page ships with `<meta name="robots"
 | Topic | File |
 |---|---|
 | Full build specification | `docs/site-build-spec.md` |
+| Design system, tokens and section library | `docs/design-system.md`, live at `/design/system.html` |
 | Duplicate primitives, what to keep | `docs/primitives-to-standardise.md` |
 | Approved page copy | `docs/copy/` |
 | Navigation, footer, states, 404 | `docs/copy/navigation-and-states.md` |
